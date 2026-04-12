@@ -1,7 +1,7 @@
 # CR-XXXX: <title>
 
 Base: <base branch or commit>
-Head or Range: <topic branch or commit range>
+Head or Range: <topic branch, tip commit, or commit range>
 Title: <CR title>
 
 ## Summary

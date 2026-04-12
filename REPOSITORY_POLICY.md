@@ -88,6 +88,10 @@ GitHub mapping for the CR minimum field set.
 For off-platform or archive-friendly flows, this repository stores equivalent
 CR records under `cr/`.
 
+Equivalent CR-based integration into `main` MUST have a matching record under
+`cr/` whose `Head or Range` identifies the topic branch, tip commit, or commit
+range being integrated.
+
 GitHub-hosted enforcement SHOULD additionally enable:
 
 - required status checks including `ugs-validate`

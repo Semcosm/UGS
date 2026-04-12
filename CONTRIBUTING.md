@@ -69,6 +69,9 @@ The PR body must include:
 to be duplicated in the body.
 
 When not using a GitHub PR, record the CR under `cr/` using `cr/TEMPLATE.md`.
+Equivalent CR integrations into `main` must have a matching `cr/CR-*.md`
+record whose `Head or Range` identifies the topic branch, tip commit, or
+commit range being integrated.
 
 ## Review Expectations
 
@@ -84,6 +87,7 @@ Run the repository checks before pushing:
 ```bash
 scripts/validate_repo.sh
 scripts/validate_commit_range.sh main..HEAD
+scripts/validate_cr_record.sh cr/CR-0003-record-equivalent-crs.md
 ```
 
 The managed hooks run the same checks automatically during commit and push.

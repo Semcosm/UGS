@@ -21,6 +21,7 @@ required_files=(
   ".githooks/pre-push"
   "scripts/validate_commit_message.sh"
   "scripts/validate_commit_range.sh"
+  "scripts/validate_cr_record.sh"
   "scripts/validate_repo.sh"
 )
 
@@ -33,6 +34,7 @@ executable_files=(
   ".githooks/pre-push"
   "scripts/validate_commit_message.sh"
   "scripts/validate_commit_range.sh"
+  "scripts/validate_cr_record.sh"
   "scripts/validate_repo.sh"
 )
 
@@ -58,3 +60,10 @@ grep -Fq "## Risk" .github/pull_request_template.md || fail "PR template must in
 grep -Fq "## Rollback" .github/pull_request_template.md || fail "PR template must include Rollback"
 grep -Fq "## Breaking Change" .github/pull_request_template.md || fail "PR template must include Breaking Change"
 grep -Fq "## Backport Target" .github/pull_request_template.md || fail "PR template must include Backport Target"
+
+cr_records=(cr/CR-*.md)
+if [ -e "${cr_records[0]}" ]; then
+  for file in "${cr_records[@]}"; do
+    scripts/validate_cr_record.sh "$file"
+  done
+fi

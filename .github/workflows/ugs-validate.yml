@@ -29,6 +29,15 @@ jobs:
       - name: Validate repository policy files
         run: scripts/validate_repo.sh
 
+      - name: Validate equivalent CR records
+        run: |
+          set -euo pipefail
+          if compgen -G 'cr/CR-*.md' > /dev/null; then
+            for file in cr/CR-*.md; do
+              scripts/validate_cr_record.sh "$file"
+            done
+          fi
+
       - name: Validate commit messages
         run: |
           set -euo pipefail
