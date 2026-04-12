@@ -45,6 +45,7 @@ Repository-local governance is declared in:
 - [RELEASE.md](RELEASE.md)
 - [.github/pull_request_template.md](.github/pull_request_template.md)
 - [.github/workflows/ugs-validate.yml](.github/workflows/ugs-validate.yml)
+- [cr/README.md](cr/README.md)
 
 ## Repository Layout
 
@@ -52,5 +53,6 @@ Repository-local governance is declared in:
 docs/git/     core specification documents
 .githooks/    managed hooks directory for repository enforcement
 .github/      hosting-platform workflow and PR template mapping
+cr/           equivalent change request records for off-platform review flows
 scripts/      reusable repository validation scripts
 ```

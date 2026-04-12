@@ -85,6 +85,9 @@ letter, request-pull text, or equivalent review medium.
 The default PR template in `.github/pull_request_template.md` is the canonical
 GitHub mapping for the CR minimum field set.
 
+For off-platform or archive-friendly flows, this repository stores equivalent
+CR records under `cr/`.
+
 GitHub-hosted enforcement SHOULD additionally enable:
 
 - required status checks including `ugs-validate`

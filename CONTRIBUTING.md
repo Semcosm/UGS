@@ -68,6 +68,8 @@ The PR body must include:
 `base`, `head`, and `title` are provided by GitHub PR metadata and do not need
 to be duplicated in the body.
 
+When not using a GitHub PR, record the CR under `cr/` using `cr/TEMPLATE.md`.
+
 ## Review Expectations
 
 - Maintainer-authored changes may self-integrate.
