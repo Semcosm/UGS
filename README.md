@@ -43,6 +43,7 @@ Repository-local governance is declared in:
 - [REPOSITORY_POLICY.md](REPOSITORY_POLICY.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [RELEASE.md](RELEASE.md)
+- [keys/README.md](keys/README.md)
 - [.github/pull_request_template.md](.github/pull_request_template.md)
 - [.github/workflows/ugs-validate.yml](.github/workflows/ugs-validate.yml)
 - [cr/README.md](cr/README.md)
@@ -54,5 +55,6 @@ docs/git/     core specification documents
 .githooks/    managed hooks directory for repository enforcement
 .github/      hosting-platform workflow and PR template mapping
 cr/           equivalent change request records for off-platform review flows
+keys/         trusted SSH signer registry and revocation data
 scripts/      reusable repository validation scripts
 ```

@@ -19,11 +19,13 @@ Before creating a release tag, ensure:
 
 ## Signing
 
-- Release signers are repository maintainers.
-- Trusted release keys are published through the maintainer's GitHub account or
-  other repository-linked maintainer key publication channel.
+- Release signers are repository maintainers whose SSH signing keys are trusted
+  in `keys/allowed_signers`.
+- Revoked or compromised signing keys are recorded in `keys/revoked_signers`.
 - Key rotation and revocation events must be documented in release notes or a
   repository notice before the next formal release.
+- The same trust registry is used to verify protected-branch commits and formal
+  release tags.
 
 ## Create A Release
 
@@ -38,12 +40,15 @@ git push origin vX.Y.Z
 
 ```bash
 git fetch --tags origin
-git tag -v vX.Y.Z
+git -c gpg.format=ssh \
+  -c gpg.ssh.allowedSignersFile=keys/allowed_signers \
+  -c gpg.ssh.revocationFile=keys/revoked_signers \
+  tag -v vX.Y.Z
 ```
 
 If verification fails:
 
 - do not consume the release
-- confirm you have the expected maintainer public key
-- check for a published revocation or key-rotation notice
+- confirm the signer is present in `keys/allowed_signers`
+- check `keys/revoked_signers` and any published key-rotation notice
 - report the failure before proceeding

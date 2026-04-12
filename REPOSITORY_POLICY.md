@@ -14,13 +14,20 @@ exception used only to install the enforcement layer.
 Earlier bootstrap commits are preserved for traceability but are outside the
 repository's conformance claim.
 
+The repository's high-trust commit-signing claim begins with the first change
+integrated on `main` after the trusted signer registry and signature
+verification are adopted.
+
+Earlier unsigned commits remain for traceability but are outside that higher
+signing claim.
+
 ## Repository Declaration
 
 ```text
 UGS Profile: continuous
 Merge Strategy: rebase-ff
 Versioning: semver
-Signing Level: release-tags-signed
+Signing Level: high-trust-commits-signed
 Core Commit Types: feat, fix, refactor, docs, test, build, ci, chore, perf, revert
 Extended Commit Types: <none>
 Review Model: change-level
@@ -56,10 +63,26 @@ Emergency Path: defined
 - Emergency direct pushes require `UGS_ALLOW_MAIN_PUSH=emergency` and a non-empty
   `UGS_EMERGENCY_REASON`, and MUST receive post-merge review.
 
+## Trusted Signer Registry
+
+- The canonical SSH signer registry is `keys/allowed_signers`.
+- The canonical SSH revocation file is `keys/revoked_signers`.
+- Signer additions and removals MUST be proposed on a topic branch and
+  integrated through a CR.
+- No bot signer is trusted by default. Automation MAY sign commits only when
+  its key is explicitly registered and a human maintainer owns that identity.
+- Maintainers SHOULD keep at least one standby signing key. If all trusted
+  signing keys are unavailable, the emergency path MAY be used once to rotate
+  trust material and restore signed normal operation, and the incident MUST be
+  documented in the recovery CR or repository notice.
+
 ## Commit Policy
 
 - Commits MUST use the UGS commit format.
 - Commits in this repository MUST end with at least one trailer.
+- Commits proposed for integration in this repository MUST be SSH-signed and
+  verifiable against `keys/allowed_signers`, and MUST NOT match
+  `keys/revoked_signers`.
 - Accepted core types are the UGS core types only; this repository does not
   define any extended commit type.
 - Recommended trailers are `Signed-off-by:`, `Refs:`, `Fixes:`, `Reviewed-by:`,
@@ -118,6 +141,7 @@ Sensitive paths:
 - `docs/git/release-policy.md`
 - `.githooks/*`
 - `.github/workflows/*`
+- `keys/*`
 - `scripts/validate_*`
 - `REPOSITORY_POLICY.md`
 - `CONTRIBUTING.md`
@@ -149,6 +173,8 @@ Compatibility rules:
 ## Release Policy
 
 - Formal releases are represented by signed annotated tags.
+- Formal release tags MUST be signed by a key currently trusted in
+  `keys/allowed_signers` and not listed in `keys/revoked_signers`.
 - Release tag names SHOULD use `v<major>.<minor>.<patch>`.
 - Release notes are required for every formal release.
 - Release signers are repository maintainers.

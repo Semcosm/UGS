@@ -97,8 +97,11 @@ while read -r local_ref local_sha remote_ref remote_sha; do
     refs/tags/v*)
       object_type="$(git cat-file -t "$local_sha")"
       [ "$object_type" = "tag" ] || fail "formal release tags must be annotated"
-      tag_payload="$(git cat-file -p "$local_sha")"
-      printf '%s\n' "$tag_payload" | grep -Eq 'BEGIN (PGP|SSH) SIGNATURE' || fail "formal release tags must be signed"
+      git -c gpg.format=ssh \
+        -c gpg.ssh.allowedSignersFile="$repo_root/keys/allowed_signers" \
+        -c gpg.ssh.revocationFile="$repo_root/keys/revoked_signers" \
+        verify-tag "$local_sha" >/dev/null 2>&1 \
+        || fail "formal release tags must be signed by a trusted signer"
       ;;
   esac
 
@@ -108,10 +111,12 @@ while read -r local_ref local_sha remote_ref remote_sha; do
       trap 'rm -f "$tmp_file"' EXIT
       git log -1 --format=%B "$commit" > "$tmp_file"
       scripts/validate_commit_message.sh "$tmp_file"
+      scripts/validate_commit_signatures.sh "$commit"
       rm -f "$tmp_file"
       trap - EXIT
     done < <(git rev-list --reverse "$local_sha" --not --remotes="${remote_name}")
   else
     scripts/validate_commit_range.sh "$remote_sha..$local_sha"
+    scripts/validate_commit_signatures.sh "$remote_sha..$local_sha"
   fi
 done

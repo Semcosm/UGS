@@ -50,6 +50,18 @@ jobs:
           fi
           scripts/validate_commit_range.sh "$range"
 
+      - name: Validate commit signatures
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+          elif [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            range="${{ github.sha }}"
+          else
+            range="${{ github.event.before }}..${{ github.sha }}"
+          fi
+          scripts/validate_commit_signatures.sh "$range"
+
       - name: Validate pull request body
         if: github.event_name == 'pull_request'
         run: |

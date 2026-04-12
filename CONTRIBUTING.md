@@ -8,7 +8,25 @@ Configure the managed hooks path after cloning:
 
 ```bash
 git config core.hooksPath .githooks
+git config gpg.format ssh
+git config user.signingkey ~/.ssh/id_ed25519
+git config commit.gpgsign true
+git config tag.gpgsign true
+git config gpg.ssh.allowedSignersFile keys/allowed_signers
+git config gpg.ssh.revocationFile keys/revoked_signers
 ```
+
+The signing key you use locally must correspond to an entry in
+`keys/allowed_signers`.
+
+## Commit Signing
+
+- All commits proposed for integration must be SSH-signed.
+- The trusted signer registry is `keys/allowed_signers`; revoked or compromised
+  keys are recorded in `keys/revoked_signers`.
+- No bot signer is trusted by default.
+- If a signing key is lost and no trusted backup remains, use the documented
+  emergency path only to rotate trust material and restore signed operation.
 
 ## Branching
 
@@ -38,6 +56,7 @@ Minimum expectation for this repository:
 - use one of the UGS core types
 - keep the second line blank
 - end the message with at least one trailer
+- sign the commit with a key trusted in `keys/allowed_signers`
 
 Example:
 
@@ -87,6 +106,7 @@ Run the repository checks before pushing:
 ```bash
 scripts/validate_repo.sh
 scripts/validate_commit_range.sh main..HEAD
+scripts/validate_commit_signatures.sh main..HEAD
 scripts/validate_cr_record.sh cr/CR-0003-record-equivalent-crs.md
 ```
 
@@ -96,6 +116,8 @@ The managed hooks run the same checks automatically during commit and push.
 
 - Do not push directly to `main` during normal operation.
 - Push your topic branch and merge through a PR or equivalent CR.
+- Unsigned or untrusted commits are rejected by local hooks and by the GitHub
+  validation workflow.
 - When integrating without the GitHub web UI, first push the topic branch and
   then fast-forward `main` with `UGS_ALLOW_MAIN_PUSH=cr`.
 - The only normal bypass is the one-time bootstrap push that adopts this policy.

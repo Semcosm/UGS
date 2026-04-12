@@ -7,8 +7,10 @@
 /docs/git/release-policy.md @Semcosm
 /.githooks/ @Semcosm
 /.github/workflows/ @Semcosm
+/keys/ @Semcosm
 /scripts/validate_commit_message.sh @Semcosm
 /scripts/validate_commit_range.sh @Semcosm
+/scripts/validate_commit_signatures.sh @Semcosm
 /scripts/validate_repo.sh @Semcosm
 /REPOSITORY_POLICY.md @Semcosm
 /CONTRIBUTING.md @Semcosm
