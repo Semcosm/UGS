@@ -1,0 +1,64 @@
+name: ugs-validate
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+  push:
+    branches:
+      - main
+      - 'feat/**'
+      - 'fix/**'
+      - 'docs/**'
+      - 'chore/**'
+      - 'refactor/**'
+      - 'test/**'
+      - 'build/**'
+      - 'ci/**'
+      - 'perf/**'
+
+jobs:
+  validate:
+    name: ugs-validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate repository policy files
+        run: scripts/validate_repo.sh
+
+      - name: Validate commit messages
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+          elif [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+            range="${{ github.sha }}"
+          else
+            range="${{ github.event.before }}..${{ github.sha }}"
+          fi
+          scripts/validate_commit_range.sh "$range"
+
+      - name: Validate pull request body
+        if: github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          body="$(jq -r '.pull_request.body // ""' "$GITHUB_EVENT_PATH")"
+          headers=(
+            "## Summary"
+            "## Motivation"
+            "## Test Evidence"
+            "## Risk"
+            "## Rollback"
+            "## Breaking Change"
+            "## Backport Target"
+          )
+
+          for header in "${headers[@]}"; do
+            if ! printf '%s\n' "$body" | grep -Fq "$header"; then
+              echo "missing PR section: $header" >&2
+              exit 1
+            fi
+          done

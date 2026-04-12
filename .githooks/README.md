@@ -1,11 +1,23 @@
 # Managed Hooks Directory
 
-该目录是 UGS 仓库的受管理 hooks 目录。
+该目录是本仓库的受管理 hooks 目录。
 
-推荐最小 hooks 集：
+当前已实现：
 
-- `commit-msg`：校验 commit message 结构与 trailers
-- `pre-push`：阻止不允许的目标分支推送或脏状态推送
-- `pre-receive` 或 `update`：在服务端保护长期分支与发布标签
+- `commit-msg`：校验 UGS commit message 结构与 trailer block
+- `pre-push`：校验仓库治理文件、阻止脏工作区推送、阻止直接推送 `main`、校验新提交消息、校验正式 release tag 形态
 
-仓库应通过 `core.hooksPath` 指向该目录。
+推荐的本地启用方式：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+`pre-push` 的默认规则：
+
+- 正常情况下拒绝直接推送 `main`
+- 允许 `UGS_ALLOW_MAIN_PUSH=bootstrap` 执行一次治理落地引导推送
+- 允许 `UGS_ALLOW_MAIN_PUSH=emergency` 且设置 `UGS_EMERGENCY_REASON` 时执行紧急直推
+
+GitHub 不支持自定义 `pre-receive`，因此本仓库同时使用
+`.github/workflows/ugs-validate.yml` 作为远端映射层校验。

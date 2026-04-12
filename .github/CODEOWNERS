@@ -1,0 +1,15 @@
+* @Semcosm
+
+/docs/git/ugs-core.md @Semcosm
+/docs/git/ugs-branch-profiles.md @Semcosm
+/docs/git/commit-convention.md @Semcosm
+/docs/git/review-policy.md @Semcosm
+/docs/git/release-policy.md @Semcosm
+/.githooks/ @Semcosm
+/.github/workflows/ @Semcosm
+/scripts/validate_commit_message.sh @Semcosm
+/scripts/validate_commit_range.sh @Semcosm
+/scripts/validate_repo.sh @Semcosm
+/REPOSITORY_POLICY.md @Semcosm
+/CONTRIBUTING.md @Semcosm
+/RELEASE.md @Semcosm

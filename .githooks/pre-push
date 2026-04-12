@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+remote_name="${1:-}"
+remote_url="${2:-}"
+repo_root="$(git rev-parse --show-toplevel)"
+zeros="0000000000000000000000000000000000000000"
+
+fail() {
+  echo "pre-push rejected: $1" >&2
+  exit 1
+}
+
+cd "$repo_root"
+
+scripts/validate_repo.sh
+
+git diff --quiet || fail "working tree must be clean before push"
+git diff --cached --quiet || fail "index must be clean before push"
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -n "${local_ref:-}" ] || continue
+
+  if [ "$local_sha" = "$zeros" ]; then
+    case "$remote_ref" in
+      refs/heads/main)
+        fail "deleting main is not allowed"
+        ;;
+      refs/tags/v*)
+        fail "deleting formal release tags is not allowed"
+        ;;
+    esac
+    continue
+  fi
+
+  case "$remote_ref" in
+    refs/heads/main)
+      if [ "${UGS_ALLOW_MAIN_PUSH:-}" = "bootstrap" ]; then
+        :
+      elif [ "${UGS_ALLOW_MAIN_PUSH:-}" = "emergency" ] && [ -n "${UGS_EMERGENCY_REASON:-}" ]; then
+        :
+      else
+        fail "direct pushes to main are blocked; push a topic branch and merge through a CR"
+      fi
+      ;;
+    refs/tags/v*)
+      object_type="$(git cat-file -t "$local_sha")"
+      [ "$object_type" = "tag" ] || fail "formal release tags must be annotated"
+      tag_payload="$(git cat-file -p "$local_sha")"
+      printf '%s\n' "$tag_payload" | grep -Eq 'BEGIN (PGP|SSH) SIGNATURE' || fail "formal release tags must be signed"
+      ;;
+  esac
+
+  if [ "$remote_sha" = "$zeros" ]; then
+    while IFS= read -r commit; do
+      tmp_file="$(mktemp)"
+      trap 'rm -f "$tmp_file"' EXIT
+      git log -1 --format=%B "$commit" > "$tmp_file"
+      scripts/validate_commit_message.sh "$tmp_file"
+      rm -f "$tmp_file"
+      trap - EXIT
+    done < <(git rev-list --reverse "$local_sha" --not --remotes="${remote_name}")
+  else
+    scripts/validate_commit_range.sh "$remote_sha..$local_sha"
+  fi
+done

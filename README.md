@@ -18,6 +18,9 @@ The current document set is `v0.2` and focuses on a portable workflow model buil
 - [Commit Convention](docs/git/commit-convention.md)
 - [Review Policy](docs/git/review-policy.md)
 - [Release Policy](docs/git/release-policy.md)
+- [Repository Policy](REPOSITORY_POLICY.md)
+- [Contributing](CONTRIBUTING.md)
+- [Release Guide](RELEASE.md)
 - [Managed Hooks](.githooks/README.md)
 
 ## Scope
@@ -31,9 +34,23 @@ UGS defines:
 - signed annotated tag based release requirements
 - a minimum automation baseline through managed hooks or equivalent enforcement
 
+## This Repository
+
+This repository stores the UGS documents and also applies UGS to itself.
+
+Repository-local governance is declared in:
+
+- [REPOSITORY_POLICY.md](REPOSITORY_POLICY.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [RELEASE.md](RELEASE.md)
+- [.github/pull_request_template.md](.github/pull_request_template.md)
+- [.github/workflows/ugs-validate.yml](.github/workflows/ugs-validate.yml)
+
 ## Repository Layout
 
 ```text
 docs/git/     core specification documents
 .githooks/    managed hooks directory for repository enforcement
+.github/      hosting-platform workflow and PR template mapping
+scripts/      reusable repository validation scripts
 ```
