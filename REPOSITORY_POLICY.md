@@ -4,9 +4,12 @@ This file is the repository-local declaration required by UGS Core v0.2.
 
 ## Effective Conformance
 
-The repository's UGS conformance claim begins with the first commit on `main`
-that introduces this policy, the managed hooks, the contribution guide, and
-the remote validation workflow.
+The repository's UGS conformance claim begins with the first non-bootstrap
+change integrated on `main` after the governance layer is installed.
+
+The bootstrap adoption commit that introduces this policy, the managed hooks,
+the contribution guide, and the remote validation workflow is a one-time
+exception used only to install the enforcement layer.
 
 Earlier bootstrap commits are preserved for traceability but are outside the
 repository's conformance claim.
@@ -45,6 +48,9 @@ Emergency Path: defined
 
 - `main` is a protected branch.
 - Local direct pushes to `main` are rejected by `.githooks/pre-push`.
+- Normal maintainer integration without the GitHub web UI is allowed only when
+  the topic branch has already been pushed and `main` is fast-forwarded using
+  `UGS_ALLOW_MAIN_PUSH=cr`.
 - The only planned exception is the one-time bootstrap push that lands this
   policy and its enforcement layer on `main`.
 - Emergency direct pushes require `UGS_ALLOW_MAIN_PUSH=emergency` and a non-empty

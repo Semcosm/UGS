@@ -37,6 +37,11 @@ while read -r local_ref local_sha remote_ref remote_sha; do
     refs/heads/main)
       if [ "${UGS_ALLOW_MAIN_PUSH:-}" = "bootstrap" ]; then
         :
+      elif [ "${UGS_ALLOW_MAIN_PUSH:-}" = "cr" ]; then
+        git merge-base --is-ancestor "$remote_sha" "$local_sha" || fail "main integration must be fast-forward"
+        git for-each-ref --contains "$local_sha" --format='%(refname:short)' "refs/remotes/${remote_name}" \
+          | grep -Ev "^${remote_name}/main$" >/dev/null \
+          || fail "push the topic branch first before integrating main with UGS_ALLOW_MAIN_PUSH=cr"
       elif [ "${UGS_ALLOW_MAIN_PUSH:-}" = "emergency" ] && [ -n "${UGS_EMERGENCY_REASON:-}" ]; then
         :
       else

@@ -16,6 +16,7 @@ git config core.hooksPath .githooks
 `pre-push` 的默认规则：
 
 - 正常情况下拒绝直接推送 `main`
+- 允许 `UGS_ALLOW_MAIN_PUSH=cr` 在 topic branch 已先行推送、且 `main` 为 fast-forward 集成时完成等价 CR 集成
 - 允许 `UGS_ALLOW_MAIN_PUSH=bootstrap` 执行一次治理落地引导推送
 - 允许 `UGS_ALLOW_MAIN_PUSH=emergency` 且设置 `UGS_EMERGENCY_REASON` 时执行紧急直推
 

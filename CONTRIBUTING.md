@@ -90,4 +90,6 @@ The managed hooks run the same checks automatically during commit and push.
 
 - Do not push directly to `main` during normal operation.
 - Push your topic branch and merge through a PR or equivalent CR.
+- When integrating without the GitHub web UI, first push the topic branch and
+  then fast-forward `main` with `UGS_ALLOW_MAIN_PUSH=cr`.
 - The only normal bypass is the one-time bootstrap push that adopts this policy.
