@@ -15,5 +15,7 @@ Use `cr/TEMPLATE.md` for new records.
 the decision to keep v0.3 planning non-normative until a future adoption CR.
 `CR-0008-add-ugs-signing-key.md` records the addition of the dedicated
 maintainer key used for commit and release signatures.
+`CR-0009-fix-initial-push-validation.md` records the correction for first-push
+CI range calculation.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

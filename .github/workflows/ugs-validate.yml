@@ -44,7 +44,16 @@ jobs:
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
           elif [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
-            range="${{ github.sha }}"
+            # A newly-created branch has no push predecessor. Compare it with
+            # the protected baseline instead of handing a single SHA to
+            # git-rev-list, which would walk the entire historical ancestry.
+            if git rev-parse --quiet --verify refs/remotes/origin/main^{commit} >/dev/null 2>&1; then
+              range="refs/remotes/origin/main..${{ github.sha }}"
+            elif git rev-parse --quiet --verify "${{ github.sha }}^" >/dev/null 2>&1; then
+              range="${{ github.sha }}^..${{ github.sha }}"
+            else
+              range="${{ github.sha }}"
+            fi
           else
             range="${{ github.event.before }}..${{ github.sha }}"
           fi
@@ -56,7 +65,15 @@ jobs:
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             range="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
           elif [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
-            range="${{ github.sha }}"
+            # Keep signature validation aligned with commit-message validation
+            # for first pushes of a newly-created branch.
+            if git rev-parse --quiet --verify refs/remotes/origin/main^{commit} >/dev/null 2>&1; then
+              range="refs/remotes/origin/main..${{ github.sha }}"
+            elif git rev-parse --quiet --verify "${{ github.sha }}^" >/dev/null 2>&1; then
+              range="${{ github.sha }}^..${{ github.sha }}"
+            else
+              range="${{ github.sha }}"
+            fi
           else
             range="${{ github.event.before }}..${{ github.sha }}"
           fi
