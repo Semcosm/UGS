@@ -2,6 +2,11 @@
 
 This repository follows UGS Core v0.2 as declared in `REPOSITORY_POLICY.md`.
 
+The UGS Core v0.2 normative baseline is closed. Editorial corrections still
+follow the normal CR path; proposals that change normative behavior belong in the
+non-normative [v0.3 roadmap](docs/roadmap/v0.3.md) first and must not be
+silently mixed into a v0.2 release packet.
+
 ## Local Setup
 
 Configure the managed hooks path after cloning:

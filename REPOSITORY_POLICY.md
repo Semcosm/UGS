@@ -21,6 +21,12 @@ verification are adopted.
 Earlier unsigned commits remain for traceability but are outside that higher
 signing claim.
 
+The UGS Core v0.2 normative baseline is now closed for new normative
+requirements.
+Release material for that baseline is recorded in
+`releases/v0.2.0.md`; proposed normative changes are tracked by the v0.3
+roadmap and must be adopted through a new CR before they become effective.
+
 ## Repository Declaration
 
 ```text
@@ -177,5 +183,6 @@ Compatibility rules:
   `keys/allowed_signers` and not listed in `keys/revoked_signers`.
 - Release tag names SHOULD use `v<major>.<minor>.<patch>`.
 - Release notes are required for every formal release.
+- Release notes MUST be stored under `releases/v<major>.<minor>.<patch>.md`.
 - Release signers are repository maintainers.
 - Release verification guidance is published in `RELEASE.md`.

@@ -2,6 +2,12 @@
 
 This repository uses signed annotated tags as formal release objects.
 
+Release notes are kept under `releases/` using the filename
+`v<major>.<minor>.<patch>.md`. A release packet records the exact scope and
+verification evidence; it is not a published release until the corresponding
+trusted signed tag exists. The current v0.2 closure packet is
+[`releases/v0.2.0.md`](releases/v0.2.0.md).
+
 ## Release Object
 
 - Tag form: `v<major>.<minor>.<patch>`
@@ -16,6 +22,8 @@ Before creating a release tag, ensure:
 - release notes are prepared
 - compatibility impact is understood
 - rollback guidance is available when applicable
+- the working tree and index are clean
+- repository, commit-message, CR, and signature validation has passed
 
 ## Signing
 
@@ -32,9 +40,25 @@ Before creating a release tag, ensure:
 ```bash
 git checkout main
 git pull --ff-only
+git diff --quiet
+git diff --cached --quiet
+scripts/validate_repo.sh
+scripts/validate_commit_range.sh <previous-release>..HEAD
+scripts/validate_commit_signatures.sh <previous-release>..HEAD
 git tag -s vX.Y.Z -m "UGS vX.Y.Z"
 git push origin vX.Y.Z
 ```
+
+Replace `<previous-release>` with the preceding release tag. For the initial
+v0.2.0 tag, validate from the high-trust signing anchor instead:
+
+```bash
+scripts/validate_commit_range.sh 5cc6c9344b657354f463cf06fbb7d38f964a9c6d^..HEAD
+scripts/validate_commit_signatures.sh 5cc6c9344b657354f463cf06fbb7d38f964a9c6d^..HEAD
+```
+
+Do not use an unsigned or lightweight tag as a substitute for the formal
+release object.
 
 ## Verify A Release
 
@@ -52,3 +76,7 @@ If verification fails:
 - confirm the signer is present in `keys/allowed_signers`
 - check `keys/revoked_signers` and any published key-rotation notice
 - report the failure before proceeding
+
+Formal release tags are append-only. Never delete, force-update, or replace an
+existing `v*` tag; publish a superseding patch release when correction is
+needed.

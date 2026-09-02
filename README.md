@@ -2,7 +2,10 @@
 
 Universal Git Standard (UGS) is a platform-agnostic, Git-native change governance standard for individual and team collaboration.
 
-The current document set is `v0.2` and focuses on a portable workflow model built from native Git primitives:
+The current normative document set is `v0.2`. Its closure is recorded in the
+`v0.2.0` release packet, while the next iteration is being designed in the
+non-normative `v0.3` roadmap. The workflow model is built from native Git
+primitives:
 
 - refs and branches
 - commits
@@ -21,7 +24,18 @@ The current document set is `v0.2` and focuses on a portable workflow model buil
 - [Repository Policy](REPOSITORY_POLICY.md)
 - [Contributing](CONTRIBUTING.md)
 - [Release Guide](RELEASE.md)
+- [v0.2.0 Release Packet](releases/v0.2.0.md)
+- [v0.3 Roadmap](docs/roadmap/v0.3.md)
 - [Managed Hooks](.githooks/README.md)
+
+## Version Status
+
+- **v0.2:** normative baseline; no new normative requirements are being added
+  to this line.
+- **v0.2.0:** release packet is complete; publication still requires a signed
+  annotated `v0.2.0` tag by a trusted maintainer.
+- **v0.3:** planning only. The roadmap does not change the v0.2 contract until
+  a future CR adopts it.
 
 ## Scope
 
@@ -52,9 +66,11 @@ Repository-local governance is declared in:
 
 ```text
 docs/git/     core specification documents
+docs/roadmap/ non-normative version and migration plans
 .githooks/    managed hooks directory for repository enforcement
 .github/      hosting-platform workflow and PR template mapping
 cr/           equivalent change request records for off-platform review flows
 keys/         trusted SSH signer registry and revocation data
+releases/     release packets and verification notes
 scripts/      reusable repository validation scripts
 ```
