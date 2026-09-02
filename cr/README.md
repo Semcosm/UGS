@@ -10,3 +10,10 @@ Use cases:
 - a patch-series or request-pull flow needs the same minimum fields as a PR
 
 Use `cr/TEMPLATE.md` for new records.
+
+`CR-0007-close-v0-2-plan-v0-3.md` records the repository's v0.2 closure and
+the decision to keep v0.3 planning non-normative until a future adoption CR.
+`CR-0008-add-ugs-signing-key.md` records the addition of the dedicated
+maintainer key used for commit and release signatures.
+Records are append-only audit artifacts: do not rewrite an integrated record
+to change its historical decision or commit identity.
