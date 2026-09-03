@@ -14,6 +14,8 @@ required_files=(
   "docs/git/review-policy.md"
   "docs/git/release-policy.md"
   "REPOSITORY_POLICY.md"
+  ".ugs/policy.json"
+  ".ugs/schema/policy.schema.json"
   "CONTRIBUTING.md"
   "RELEASE.md"
   "releases/v0.2.0.md"
@@ -33,7 +35,11 @@ required_files=(
   "scripts/validate_commit_range.sh"
   "scripts/validate_commit_signatures.sh"
   "scripts/validate_cr_record.sh"
+  "scripts/validate_policy_manifest.sh"
+  "scripts/test_policy_manifest.sh"
   "scripts/validate_repo.sh"
+  "scripts/ugs_check.sh"
+  "scripts/test_git_fixtures.sh"
 )
 
 for file in "${required_files[@]}"; do
@@ -47,7 +53,11 @@ executable_files=(
   "scripts/validate_commit_range.sh"
   "scripts/validate_commit_signatures.sh"
   "scripts/validate_cr_record.sh"
+  "scripts/validate_policy_manifest.sh"
+  "scripts/test_policy_manifest.sh"
   "scripts/validate_repo.sh"
+  "scripts/ugs_check.sh"
+  "scripts/test_git_fixtures.sh"
 )
 
 for file in "${executable_files[@]}"; do
@@ -77,6 +87,9 @@ grep -Fq "## Rollback" .github/pull_request_template.md || fail "PR template mus
 grep -Fq "## Breaking Change" .github/pull_request_template.md || fail "PR template must include Breaking Change"
 grep -Fq "## Backport Target" .github/pull_request_template.md || fail "PR template must include Backport Target"
 grep -Fq "scripts/validate_commit_signatures.sh" .github/workflows/ugs-validate.yml || fail "workflow must validate commit signatures"
+
+scripts/validate_policy_manifest.sh
+scripts/test_policy_manifest.sh
 
 cr_records=(cr/CR-*.md)
 if [ -e "${cr_records[0]}" ]; then

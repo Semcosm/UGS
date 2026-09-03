@@ -21,6 +21,12 @@ git config gpg.ssh.allowedSignersFile keys/allowed_signers
 git config gpg.ssh.revocationFile keys/revoked_signers
 ```
 
+Install `jq` before running the policy-manifest validators. On Arch Linux:
+
+```bash
+sudo pacman -S --needed jq
+```
+
 The signing key you use locally must correspond to an entry in
 `keys/allowed_signers`.
 
@@ -110,6 +116,7 @@ Run the repository checks before pushing:
 
 ```bash
 scripts/validate_repo.sh
+scripts/ugs_check.sh
 scripts/validate_commit_range.sh main..HEAD
 scripts/validate_commit_signatures.sh main..HEAD
 scripts/validate_cr_record.sh cr/CR-0003-record-equivalent-crs.md

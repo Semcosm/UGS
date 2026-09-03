@@ -35,7 +35,9 @@ primitives:
 - **v0.2.0:** release packet is complete; publication still requires a signed
   annotated `v0.2.0` tag by a trusted maintainer.
 - **v0.3:** planning only. The roadmap does not change the v0.2 contract until
-  a future CR adopts it.
+  a future CR adopts it. Pre-1.0 work is rapid iteration and does not promise
+  compatibility across draft schemas, commands, reports, or validator
+  behavior; each change must document migration and rollback impact.
 
 ## Scope
 
