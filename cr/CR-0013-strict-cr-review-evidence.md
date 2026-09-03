@@ -3,13 +3,13 @@
 Base: main
 Head or Range: feat/v0-3-draft-3-cr-evidence / 71b9f777..780434e
 Title: feat(review): add strict CR and review evidence checks
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3-draft-3
 Base OID: 71b9f777e866851bb2b3a0b22d23fea8c794d3dd
 Head OID: 780434e807be9e9907232249b6b003aa81381a14
-Integrated Result: pending
+Integrated Result: main@da80d3440e866b5578efd9ff79ceb8cd3ab5f95e
 
 ## Summary
 
