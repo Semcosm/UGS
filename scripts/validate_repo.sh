@@ -19,6 +19,7 @@ required_files=(
   "CONTRIBUTING.md"
   "RELEASE.md"
   "releases/v0.2.0.md"
+  "releases/v0.3.0.md"
   "docs/roadmap/v0.3.md"
   "cr/README.md"
   "cr/TEMPLATE.md"
