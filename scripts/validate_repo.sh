@@ -42,6 +42,8 @@ required_files=(
   "scripts/test_git_fixtures.sh"
   "scripts/validate_review_trailers.sh"
   "scripts/test_review_trailers.sh"
+  "scripts/validate_release_tag.sh"
+  "scripts/test_release_tag.sh"
 )
 
 for file in "${required_files[@]}"; do
@@ -62,6 +64,8 @@ executable_files=(
   "scripts/test_git_fixtures.sh"
   "scripts/validate_review_trailers.sh"
   "scripts/test_review_trailers.sh"
+  "scripts/validate_release_tag.sh"
+  "scripts/test_release_tag.sh"
 )
 
 for file in "${executable_files[@]}"; do

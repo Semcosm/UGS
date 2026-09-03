@@ -41,6 +41,9 @@ jobs:
       - name: Validate review trailer fixtures
         run: scripts/test_review_trailers.sh
 
+      - name: Validate release tag fixtures
+        run: scripts/test_release_tag.sh
+
       - name: Validate equivalent CR records
         run: |
           set -euo pipefail
