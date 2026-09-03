@@ -40,6 +40,8 @@ required_files=(
   "scripts/validate_repo.sh"
   "scripts/ugs_check.sh"
   "scripts/test_git_fixtures.sh"
+  "scripts/validate_review_trailers.sh"
+  "scripts/test_review_trailers.sh"
 )
 
 for file in "${required_files[@]}"; do
@@ -58,6 +60,8 @@ executable_files=(
   "scripts/validate_repo.sh"
   "scripts/ugs_check.sh"
   "scripts/test_git_fixtures.sh"
+  "scripts/validate_review_trailers.sh"
+  "scripts/test_review_trailers.sh"
 )
 
 for file in "${executable_files[@]}"; do

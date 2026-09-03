@@ -3,6 +3,13 @@
 Base: main
 Head or Range: main..docs/v0-3-policy-manifest
 Title: feat(conformance): add draft local conformance command
+Revision: 1
+Status: integrated
+Decision: accepted
+Policy Version: v0.3-draft-2
+Base OID: 6d7e94a43c8bdb2fef8fa4b0dde170379746bbe6
+Head OID: 50a56e5abdf51c06fd445039ae79111efcc0f2d6
+Integrated Result: main@71b9f777e866851bb2b3a0b22d23fea8c794d3dd
 
 ## Summary
 

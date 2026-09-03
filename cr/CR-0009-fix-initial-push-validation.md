@@ -3,6 +3,13 @@
 Base: `main` at `670e72d`
 Head or Range: `docs/v0-2-close-v0-3-plan`
 Title: `fix(ci): validate new-branch commits against the protected baseline`
+Revision: 1
+Status: integrated
+Decision: accepted
+Policy Version: v0.2
+Base OID: 670e72d4b87beb6b7aee8a06c90c3bd44c8300d9
+Head OID: 6d7e94a43c8bdb2fef8fa4b0dde170379746bbe6
+Integrated Result: main@6d7e94a43c8bdb2fef8fa4b0dde170379746bbe6
 
 ## Summary
 

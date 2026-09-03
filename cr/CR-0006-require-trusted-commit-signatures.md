@@ -3,6 +3,13 @@
 Base: `main` at `e904990`
 Head or Range: `chore/repo-high-trust-signing`
 Title: `chore(repo): require trusted commit signatures`
+Revision: 1
+Status: integrated
+Decision: accepted
+Policy Version: v0.2
+Base OID: e904990df5b6078e709f2c271d1fedf6076ab8f5
+Head OID: 670e72d4b87beb6b7aee8a06c90c3bd44c8300d9
+Integrated Result: main@670e72d4b87beb6b7aee8a06c90c3bd44c8300d9
 
 ## Summary
 

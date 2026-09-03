@@ -1,0 +1,3 @@
+docs(fixture): reject incomplete review trailers
+
+Tested-by: UGS Fixture <fixture@example.invalid>
