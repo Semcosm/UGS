@@ -74,7 +74,7 @@ done
 
 if [ "$format" = "json" ]; then
   jq -n \
-    --arg format "ugs-conformance/v0.3-draft-2" \
+    --arg format "ugs-conformance/v0.3-rc-1" \
     --arg result "$(if [ "$failed_count" -eq 0 ]; then printf pass; else printf fail; fi)" \
     --argjson checks "$(jq -s . "$report_dir"/*.json)" \
     '{format: $format, result: $result, checks: $checks}'
