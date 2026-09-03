@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+manifest="${1:-.ugs/policy.json}"
+
+fail() {
+  echo "policy manifest validation failed: $1" >&2
+  exit 1
+}
+
+warn() {
+  echo "policy manifest warning: $1" >&2
+}
+
+[ -f "$manifest" ] || fail "manifest does not exist: $manifest"
+command -v jq >/dev/null 2>&1 || fail "jq is required"
+jq empty "$manifest" >/dev/null 2>&1 || fail "manifest is not valid JSON"
+
+require() {
+  local expression="$1"
+  local message="$2"
+  jq -e "$expression" "$manifest" >/dev/null || fail "$message"
+}
+
+require 'type == "object"' "top level must be an object"
+require '([keys[] | select(. != "$schema" and . != "format" and . != "schema_version" and . != "policy_version" and . != "migration" and . != "branching" and . != "commits" and . != "review" and . != "automation" and . != "releases" and . != "exceptions" and . != "extensions")] | length) == 0' "unknown top-level field; use extensions.x-* for extensions"
+require '(."$schema" == "schema/policy.schema.json")' 'unsupported $schema'
+require '.format == "ugs-policy/v0.3-draft-1"' "unsupported format"
+require '.schema_version == 1' "unsupported schema_version"
+require '.policy_version == "0.3-draft"' "unsupported policy_version"
+require '.migration.legacy_policy == "REPOSITORY_POLICY.md" and .migration.legacy_policy_mode == "warn"' "migration must retain REPOSITORY_POLICY.md in warn mode"
+require '.branching.profile | IN("continuous", "release")' "invalid branching.profile"
+require '.branching.merge_strategy | IN("rebase-ff", "merge", "squash")' "invalid branching.merge_strategy"
+require '(.branching.protected_refs | type == "array" and length > 0 and all(.[]; type == "string" and length > 0))' "branching.protected_refs must be a non-empty string array"
+require '(.branching.topic_prefixes | type == "array" and length > 0 and all(.[]; type == "string" and endswith("/")))' "branching.topic_prefixes must contain slash-terminated strings"
+require '.commits.signing_level | IN("unsigned", "commits-signed", "high-trust-commits-signed")' "invalid commits.signing_level"
+require '(.commits.core_types | type == "array" and length > 0 and length == (unique | length) and all(.[]; type == "string" and test("^[a-z]+$")))' "commits.core_types must be unique lowercase tokens"
+require '(.commits.extended_types | type == "array" and length == (unique | length) and all(.[]; type == "string" and test("^[a-z][a-z0-9-]*$")))' "commits.extended_types must be unique tokens"
+require '.commits.trailers_required | type == "boolean"' "commits.trailers_required must be boolean"
+require '.review.model | IN("change-level", "commit-level")' "invalid review.model"
+require '(.review.human_review.maintainer_authored | type == "boolean") and (.review.human_review.external_contributions | type == "boolean") and (.review.test_evidence_required | type == "boolean") and (.review.maintainer_ack_sensitive_paths | type == "boolean")' "review boolean declarations are invalid"
+require '.review.conclusion_storage | IN("trailers", "cr-record")' "invalid review.conclusion_storage"
+require '(.automation.required_checks | type == "array" and length > 0 and unique == . and all(.[]; type == "string" and length > 0))' "automation.required_checks must be a non-empty unique string array"
+require '.automation.hooks_path == ".githooks"' "unsupported automation.hooks_path"
+require '.releases.versioning == "semver" and .releases.tag_pattern == "v<major>.<minor>.<patch>" and .releases.notes_path == "releases/"' "unsupported release declaration"
+require '(.releases.annotated_tags_required | type == "boolean") and (.releases.trusted_signatures_required | type == "boolean")' "release requirements must be boolean"
+require '(.exceptions.emergency_direct_push | type == "boolean") and (.exceptions.post_event_review_required | type == "boolean")' "exception capabilities must be boolean"
+require '(.extensions | type == "object" and all(keys[]; startswith("x-")))' "extensions keys must begin with x-"
+
+if [ -f REPOSITORY_POLICY.md ]; then
+  compare_legacy() {
+    local legacy="$1"
+    local expression="$2"
+    if grep -Fq "$legacy" REPOSITORY_POLICY.md && ! jq -e "$expression" "$manifest" >/dev/null; then
+      warn "manifest conflicts with REPOSITORY_POLICY.md: $legacy"
+    fi
+  }
+  compare_legacy 'UGS Profile: continuous' '.branching.profile == "continuous"'
+  compare_legacy 'Merge Strategy: rebase-ff' '.branching.merge_strategy == "rebase-ff"'
+  compare_legacy 'Versioning: semver' '.releases.versioning == "semver"'
+  compare_legacy 'Signing Level: high-trust-commits-signed' '.commits.signing_level == "high-trust-commits-signed"'
+  compare_legacy 'Protected Long-Lived Branches: main' '.branching.protected_refs | index("main") != null'
+  compare_legacy 'Hooks Path: .githooks' '.automation.hooks_path == ".githooks"'
+fi

@@ -29,6 +29,15 @@ jobs:
       - name: Validate repository policy files
         run: scripts/validate_repo.sh
 
+      - name: Validate policy manifest fixtures
+        run: scripts/test_policy_manifest.sh
+
+      - name: Run UGS conformance check
+        run: scripts/ugs_check.sh
+
+      - name: Validate disposable Git fixtures
+        run: scripts/test_git_fixtures.sh
+
       - name: Validate equivalent CR records
         run: |
           set -euo pipefail
