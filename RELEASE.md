@@ -49,6 +49,23 @@ git tag -s vX.Y.Z -m "UGS vX.Y.Z"
 git push origin vX.Y.Z
 ```
 
+## High-Trust Integration
+
+GitHub PR checks provide review and CI evidence, but a hosting-platform rebase
+or squash operation may create an unsigned integration commit. For this
+repository, integrate an approved topic branch with the local signed
+fast-forward path before creating a formal release tag:
+
+```bash
+git fetch origin main
+git switch main
+git merge --ff-only origin/main
+UGS_ALLOW_MAIN_PUSH=cr git push origin HEAD:main
+```
+
+The topic branch must already be pushed and have a matching CR record. The
+pre-push hook re-runs repository, CR, commit-message, and signature checks.
+
 Replace `<previous-release>` with the preceding release tag. For the initial
 v0.2.0 tag, validate from the high-trust signing anchor instead:
 

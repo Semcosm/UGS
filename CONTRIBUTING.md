@@ -133,3 +133,17 @@ The managed hooks run the same checks automatically during commit and push.
 - When integrating without the GitHub web UI, first push the topic branch and
   then fast-forward `main` with `UGS_ALLOW_MAIN_PUSH=cr`.
 - The only normal bypass is the one-time bootstrap push that adopts this policy.
+
+For high-trust integration, use GitHub PR checks for review and CI, then
+fast-forward `main` locally so the integrated commits remain SSH-signed:
+
+```bash
+git fetch origin main
+git switch main
+git merge --ff-only origin/main
+UGS_ALLOW_MAIN_PUSH=cr git push origin HEAD:main
+```
+
+Do not use a hosting-platform rebase or squash merge for high-trust changes
+when the platform-generated integration commit cannot carry a trusted SSH
+signature.
