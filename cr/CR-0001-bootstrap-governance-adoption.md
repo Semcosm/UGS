@@ -3,6 +3,13 @@
 Base: `main` at `67923ba`
 Head or Range: `chore/repo-ugs-compliance` / `67923ba..00ea46e`
 Title: `chore(repo): adopt UGS governance and enforcement`
+Revision: 1
+Status: integrated
+Decision: accepted
+Policy Version: v0.2
+Base OID: 67923ba4a95d286edc527c03402c6a9dbb0ed044
+Head OID: 00ea46e51f13d2cfedeedebfe72f280b48984c1b
+Integrated Result: main@00ea46e51f13d2cfedeedebfe72f280b48984c1b
 
 ## Summary
 

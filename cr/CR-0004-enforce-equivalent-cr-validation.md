@@ -3,6 +3,13 @@
 Base: `main` at `8df4eb1`
 Head or Range: `chore/repo-cr-record-validation`
 Title: `chore(repo): enforce equivalent CR record validation`
+Revision: 1
+Status: integrated
+Decision: accepted
+Policy Version: v0.2
+Base OID: d2b87c54e35f79aab4cda6a1ffe119b7f01b9270
+Head OID: 8df4eb182faf9f0856097d9cb420efc7f16b006c
+Integrated Result: main@8df4eb182faf9f0856097d9cb420efc7f16b006c
 
 ## Summary
 

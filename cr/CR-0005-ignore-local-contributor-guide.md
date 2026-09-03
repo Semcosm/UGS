@@ -3,6 +3,13 @@
 Base: `main` at `d2b87c5`
 Head or Range: `chore/repo-ignore-local-guide`
 Title: `chore(repo): ignore local contributor guide`
+Revision: 1
+Status: integrated
+Decision: accepted
+Policy Version: v0.2
+Base OID: 8df4eb182faf9f0856097d9cb420efc7f16b006c
+Head OID: e904990df5b6078e709f2c271d1fedf6076ab8f5
+Integrated Result: main@e904990df5b6078e709f2c271d1fedf6076ab8f5
 
 ## Summary
 

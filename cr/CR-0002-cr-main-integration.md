@@ -3,6 +3,13 @@
 Base: `main` at `00ea46e`
 Head or Range: `chore/repo-cr-main-integration` / `00ea46e..93b5473`
 Title: `chore(repo): allow CR-based fast-forward integration`
+Revision: 1
+Status: integrated
+Decision: accepted
+Policy Version: v0.2
+Base OID: 00ea46e51f13d2cfedeedebfe72f280b48984c1b
+Head OID: 93b54733e794037fc5fe9d161efe0d654085e66d
+Integrated Result: main@93b54733e794037fc5fe9d161efe0d654085e66d
 
 ## Summary
 

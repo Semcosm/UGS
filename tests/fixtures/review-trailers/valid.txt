@@ -1,0 +1,6 @@
+docs(fixture): exercise review trailers
+
+Validate the draft review evidence contract.
+
+Reviewed-by: UGS Reviewer <reviewer@example.invalid>
+Tested-by: UGS Fixture <fixture@example.invalid>

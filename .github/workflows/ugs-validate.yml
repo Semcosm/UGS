@@ -38,6 +38,9 @@ jobs:
       - name: Validate disposable Git fixtures
         run: scripts/test_git_fixtures.sh
 
+      - name: Validate review trailer fixtures
+        run: scripts/test_review_trailers.sh
+
       - name: Validate equivalent CR records
         run: |
           set -euo pipefail
