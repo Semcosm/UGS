@@ -19,8 +19,7 @@ printf '%s\n' "$tag" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$' \
 git rev-parse --verify "refs/tags/$tag" >/dev/null 2>&1 \
   || fail "tag does not exist: $tag"
 
-tag_object="$(git rev-parse "refs/tags/$tag")"
-[ "$(git cat-file -t "$tag_object")" = "tag" ] \
+tag_object="$(git rev-parse --verify "refs/tags/$tag^{tag}" 2>/dev/null)" \
   || fail "formal release tag must be annotated"
 target="$(git rev-parse "refs/tags/$tag^{commit}")"
 [ -n "$target" ] || fail "tag must point to a commit"
