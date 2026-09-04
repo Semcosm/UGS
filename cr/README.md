@@ -33,5 +33,7 @@ profile/merge-strategy matrix.
 CR provenance validation is exercised by `scripts/test_cr_provenance.sh`.
 `CR-0027-cr-provenance-validation.md` records the integrated-result
 reachability rule.
+`CR-0028-integration-strategy-evidence.md` records strategy-specific CR
+provenance validation.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

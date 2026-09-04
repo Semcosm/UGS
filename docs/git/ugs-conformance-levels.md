@@ -28,6 +28,9 @@ single normal integration operation. A repository **MUST** declare both.
 The matrix permits a strategy but does not relax signing, review, CR, or
 protected-ref requirements imposed by the declared conformance level.
 
+The selected strategy **MUST** be recorded in each new v0.3 CR so the source
+range and final integration object can be interpreted deterministically.
+
 ## 3. Current repository declaration
 
 UGS declares `continuous`, `rebase-ff`, and `high-trust`. This combination is

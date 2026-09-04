@@ -84,6 +84,11 @@ require_metadata_line "Policy Version"
 require_metadata_line "Base OID"
 require_metadata_line "Head OID"
 require_metadata_line "Integrated Result"
+integration_strategy="$(sed -n 's/^Integration Strategy: //p' "$cr_file")"
+if [ -n "$integration_strategy" ]; then
+  printf '%s\n' "$integration_strategy" | grep -Eq '^(rebase-ff|merge|squash)$' \
+    || fail "Integration Strategy is invalid"
+fi
 
 revision="$(sed -n 's/^Revision: //p' "$cr_file")"
 printf '%s\n' "$revision" | grep -Eq '^[1-9][0-9]*$' \
@@ -133,6 +138,28 @@ else
     || fail "integrated result is not reachable from main"
   git merge-base --is-ancestor "$base_oid" "$integrated_oid" \
     || fail "integrated result must descend from Base OID"
+
+  if [ -n "$integration_strategy" ]; then
+    case "$integration_strategy" in
+      rebase-ff)
+        [ "$integrated_oid" = "$head_oid" ] \
+          || fail "rebase-ff integrated result must equal Head OID"
+        ;;
+      merge)
+        [ "$(git cat-file commit "$integrated_oid" | sed -n '/^$/q; /^parent /p' | wc -l)" -ge 2 ] \
+          || fail "merge integration must produce a merge commit"
+        git merge-base --is-ancestor "$head_oid" "$integrated_oid" \
+          || fail "merge result must contain Head OID"
+        ;;
+      squash)
+        [ "$integrated_oid" != "$head_oid" ] \
+          || fail "squash integrated result must differ from Head OID"
+        if git merge-base --is-ancestor "$head_oid" "$integrated_oid"; then
+          fail "squash result must not contain Head OID as an ancestor"
+        fi
+        ;;
+    esac
+  fi
 fi
 git merge-base --is-ancestor "$base_oid" "$head_oid" \
   || fail "Base OID must be an ancestor of Head OID"

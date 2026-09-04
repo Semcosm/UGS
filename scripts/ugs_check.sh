@@ -67,6 +67,7 @@ run_check "review trailer fixtures" scripts/test_review_trailers.sh
 run_check "release tag fixtures" scripts/test_release_tag.sh
 run_check "ref update fixtures" scripts/test_ref_update.sh
 run_check "CR provenance fixtures" scripts/test_cr_provenance.sh
+run_check "CR integration strategy fixtures" scripts/test_cr_integration_strategy.sh
 
 for file in cr/CR-*.md; do
   [ -e "$file" ] || continue

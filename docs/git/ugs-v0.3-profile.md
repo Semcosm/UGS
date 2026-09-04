@@ -58,6 +58,12 @@ the CR's `Base OID`. The CR's `Head OID` need not be an ancestor of the
 integrated result: squash and merge integrations may create a different result
 object. Rebase-fast-forward integrations normally use the head object itself.
 
+New v0.3 CRs **MUST** declare `Integration Strategy` as `rebase-ff`, `merge`,
+or `squash`. A rebase-fast-forward result equals `Head OID`; a merge result is
+a merge commit containing the source head; and a squash result is a distinct
+commit that does not contain the source head as an ancestor. Historical CRs
+without this field remain valid as grandfathered records.
+
 The repository's declared review model and sensitive-path acknowledgment
 requirements apply to every v0.3 change. Final review and test conclusions
 should be represented by commit trailers when the integration path supports
