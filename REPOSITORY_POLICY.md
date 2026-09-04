@@ -14,12 +14,10 @@ exception used only to install the enforcement layer.
 Earlier bootstrap commits are preserved for traceability but are outside the
 repository's conformance claim.
 
-The repository's high-trust commit-signing claim begins with the first change
-integrated on `main` after the trusted signer registry and signature
-verification are adopted.
-
-Earlier unsigned commits remain for traceability but are outside that higher
-signing claim.
+The repository's high-trust commit-signing claim begins at the recovered
+signed fast-forward integration `459572b`. The earlier v0.3 draft integration
+sequence contains unsigned commits and remains outside that claim for
+traceability; it is recorded in `cr/CR-0020-signing-boundary-recovery.md`.
 
 The UGS Core v0.2 normative baseline is now closed for new normative
 requirements.

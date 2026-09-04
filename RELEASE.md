@@ -67,11 +67,14 @@ The topic branch must already be pushed and have a matching CR record. The
 pre-push hook re-runs repository, CR, commit-message, and signature checks.
 
 Replace `<previous-release>` with the preceding release tag. For the initial
-v0.2.0 tag, validate from the high-trust signing anchor instead:
+v0.2.0 tag, validate from the high-trust signing anchor instead. For the v0.3
+release candidate, validate from the recovered signed fast-forward boundary:
 
 ```bash
 scripts/validate_commit_range.sh 5cc6c9344b657354f463cf06fbb7d38f964a9c6d^..HEAD
 scripts/validate_commit_signatures.sh 5cc6c9344b657354f463cf06fbb7d38f964a9c6d^..HEAD
+scripts/validate_commit_range.sh 459572bf2910267659b3bb590fdf1b00b26ed94f^..HEAD
+scripts/validate_commit_signatures.sh 459572bf2910267659b3bb590fdf1b00b26ed94f^..HEAD
 ```
 
 Do not use an unsigned or lightweight tag as a substitute for the formal

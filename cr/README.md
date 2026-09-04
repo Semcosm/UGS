@@ -17,5 +17,9 @@ the decision to keep v0.3 planning non-normative until a future adoption CR.
 maintainer key used for commit and release signatures.
 `CR-0009-fix-initial-push-validation.md` records the correction for first-push
 CI range calculation.
+`CR-0019-v0-3-adoption-decisions.md` records the design decisions that gate
+normative v0.3 adoption.
+`CR-0020-signing-boundary-recovery.md` records the recovered high-trust
+signing boundary after the unsigned draft integration sequence.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.
