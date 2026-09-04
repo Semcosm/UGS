@@ -1,6 +1,7 @@
 # UGS Repository Policy
 
-This file is the repository-local declaration required by UGS Core v0.2.
+This file is the legacy repository-local declaration retained for v0.3
+migration and compatibility reporting.
 
 ## Effective Conformance
 
@@ -19,11 +20,9 @@ signed fast-forward integration `459572b`. The earlier v0.3 draft integration
 sequence contains unsigned commits and remains outside that claim for
 traceability; it is recorded in `cr/CR-0020-signing-boundary-recovery.md`.
 
-The UGS Core v0.2 normative baseline is now closed for new normative
-requirements.
-Release material for that baseline is recorded in
-`releases/v0.2.0.md`; proposed normative changes are tracked by the v0.3
-roadmap and must be adopted through a new CR before they become effective.
+The UGS Core v0.2 normative baseline is retained as historical compatibility
+context. The v0.3 policy manifest and conformance profile are active under the
+adoption recorded in `cr/CR-0021-v0-3-normative-adoption.md`.
 
 ## Repository Declaration
 

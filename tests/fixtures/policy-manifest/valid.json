@@ -1,8 +1,8 @@
 {
   "$schema": "schema/policy.schema.json",
-  "format": "ugs-policy/v0.3-draft-1",
+  "format": "ugs-policy/v0.3",
   "schema_version": 1,
-  "policy_version": "0.3-draft",
+  "policy_version": "0.3",
   "migration": {"legacy_policy": "REPOSITORY_POLICY.md", "legacy_policy_mode": "warn"},
   "branching": {"profile": "continuous", "merge_strategy": "rebase-ff", "protected_refs": ["main"], "topic_prefixes": ["docs/"]},
   "commits": {"signing_level": "high-trust-commits-signed", "core_types": ["docs"], "extended_types": [], "trailers_required": true},

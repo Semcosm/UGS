@@ -98,7 +98,7 @@ printf '%s\n' "$decision" | grep -Eq '^(accepted|rejected|superseded|pending)$' 
   || fail "Decision is invalid"
 
 policy_version="$(sed -n 's/^Policy Version: //p' "$cr_file")"
-printf '%s\n' "$policy_version" | grep -Eq '^v(0\.2|0\.3-(draft-[0-9]+|rc-[0-9]+))$' \
+printf '%s\n' "$policy_version" | grep -Eq '^v(0\.2|0\.3(-[0-9]+)?|0\.3-(draft-[0-9]+|rc-[0-9]+))$' \
   || fail "Policy Version is invalid"
 
 base_oid="$(sed -n 's/^Base OID: //p' "$cr_file")"
