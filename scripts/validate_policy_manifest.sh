@@ -23,11 +23,14 @@ require() {
 }
 
 require 'type == "object"' "top level must be an object"
-require '([keys[] | select(. != "$schema" and . != "format" and . != "schema_version" and . != "policy_version" and . != "migration" and . != "branching" and . != "commits" and . != "review" and . != "automation" and . != "releases" and . != "exceptions" and . != "extensions")] | length) == 0' "unknown top-level field; use extensions.x-* for extensions"
+require '([keys[] | select(. != "$schema" and . != "format" and . != "schema_version" and . != "policy_version" and . != "conformance_level" and . != "migration" and . != "branching" and . != "commits" and . != "review" and . != "automation" and . != "releases" and . != "exceptions" and . != "extensions")] | length) == 0' "unknown top-level field; use extensions.x-* for extensions"
 require '(."$schema" == "schema/policy.schema.json")' 'unsupported $schema'
 require '.format == "ugs-policy/v0.3"' "unsupported format"
 require '.schema_version == 1' "unsupported schema_version"
 require '.policy_version == "0.3"' "unsupported policy_version"
+require '.conformance_level | IN("baseline", "standard", "high-trust")' "invalid conformance_level"
+require '(.conformance_level == "baseline") or ((.branching.protected_refs | length > 0) and (.automation.required_checks | length > 0) and .review.test_evidence_required and .releases.annotated_tags_required and .releases.trusted_signatures_required)' "standard levels require protected refs, checks, test evidence, and signed annotated releases"
+require '(.conformance_level != "high-trust") or (.commits.signing_level == "high-trust-commits-signed")' "high-trust requires trusted signed commits"
 require '.migration.legacy_policy == "REPOSITORY_POLICY.md" and .migration.legacy_policy_mode == "warn"' "migration must retain REPOSITORY_POLICY.md in warn mode"
 require '.branching.profile | IN("continuous", "release")' "invalid branching.profile"
 require '.branching.merge_strategy | IN("rebase-ff", "merge", "squash")' "invalid branching.merge_strategy"

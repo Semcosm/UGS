@@ -18,6 +18,7 @@ primitives:
 
 - [UGS Core](docs/git/ugs-core.md)
 - [UGS v0.3 Policy And Conformance Profile](docs/git/ugs-v0.3-profile.md)
+- [UGS Conformance Levels And Profile Matrix](docs/git/ugs-conformance-levels.md)
 - [Branch Profiles](docs/git/ugs-branch-profiles.md)
 - [Commit Convention](docs/git/commit-convention.md)
 - [Review Policy](docs/git/review-policy.md)

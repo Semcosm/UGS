@@ -28,5 +28,7 @@ annotated release tags before CI validation.
 `CR-0024-v0-3-profile-documentation.md` records the human-readable adopted
 v0.3 profile boundary.
 `CR-0025-v0-3-3-release.md` records the v0.3.3 profile clarification release.
+`CR-0026-conformance-levels.md` records v0.3 conformance levels and the
+profile/merge-strategy matrix.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

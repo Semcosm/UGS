@@ -32,6 +32,7 @@ UGS Profile: continuous
 Merge Strategy: rebase-ff
 Versioning: semver
 Signing Level: high-trust-commits-signed
+Conformance Level: high-trust
 Core Commit Types: feat, fix, refactor, docs, test, build, ci, chore, perf, revert
 Extended Commit Types: <none>
 Review Model: change-level

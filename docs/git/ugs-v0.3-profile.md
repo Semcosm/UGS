@@ -18,6 +18,7 @@ The repository **MUST** publish `.ugs/policy.json` with:
 
 - `format` equal to `ugs-policy/v0.3`;
 - `schema_version` equal to `1`;
+- a `conformance_level` of `baseline`, `standard`, or `high-trust`;
 - a declared branch profile and merge strategy;
 - protected refs, commit types, review requirements, and automation checks;
 - release tag and signature requirements; and
@@ -25,6 +26,9 @@ The repository **MUST** publish `.ugs/policy.json` with:
 
 The schema is published at `.ugs/schema/policy.schema.json`. Unknown fields
 are invalid; extensions **MUST** use keys beginning with `x-`.
+
+The level requirements and profile/merge-strategy matrix are defined in
+`docs/git/ugs-conformance-levels.md`.
 
 ## 3. Conformance evidence
 
@@ -78,7 +82,7 @@ and warning reporting.
 
 ## 7. Deferred capabilities
 
-Conformance levels, signed review attestations, signer lifecycle metadata,
-quality profiles, supply-chain profiles, and additional repository shapes are
-separate follow-up work. They are not implied by the v0.3 profile unless
-explicitly declared by a future profile or extension.
+Signed review attestations, signer lifecycle metadata, quality profiles,
+supply-chain profiles, and additional repository shapes are separate follow-up
+work. They are not implied by the v0.3 profile unless explicitly declared by a
+future profile or extension.

@@ -3,6 +3,7 @@
   "format": "ugs-policy/v0.3",
   "schema_version": 1,
   "policy_version": "0.3",
+  "conformance_level": "high-trust",
   "migration": {
     "legacy_policy": "REPOSITORY_POLICY.md",
     "legacy_policy_mode": "warn"
