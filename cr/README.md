@@ -38,6 +38,7 @@ provenance validation.
 `CR-0029-review-conclusion-inheritance.md` records final review trailer
 inheritance validation.
 `CR-0030-signer-lifecycle-and-attestation.md` records signer lifecycle
- metadata and the v0.3 attestation boundary.
+metadata and the v0.3 attestation boundary.
+`CR-0031-v0-3-4-release.md` records the v0.3.4 P1 capabilities release.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

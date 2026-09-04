@@ -28,6 +28,7 @@ primitives:
 - [Release Guide](RELEASE.md)
 - [v0.2.0 Release Packet](releases/v0.2.0.md)
 - [v0.3.0 Release Packet](releases/v0.3.0.md)
+- [v0.3.4 Release Packet](releases/v0.3.4.md)
 - [v0.3 Roadmap](docs/roadmap/v0.3.md)
 - [Managed Hooks](.githooks/README.md)
 
