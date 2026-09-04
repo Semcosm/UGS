@@ -1,7 +1,7 @@
 # CR-0032: Define exception lifecycle records
 
 Base: main
-Head or Range: feat/p1-signer-lifecycle / 0cf2f1b..HEAD
+Head or Range: feat/p1-exception-lifecycle / 0cf2f1b..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(policy): define exception lifecycle records
