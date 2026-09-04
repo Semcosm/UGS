@@ -23,5 +23,7 @@ normative v0.3 adoption.
 signing boundary after the unsigned draft integration sequence.
 `CR-0022-release-tag-validator-fix.md` records the CI correction for annotated
 release-tag detection.
+`CR-0023-release-tag-workflow-fix.md` records the checkout fix that restores
+annotated release tags before CI validation.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.
