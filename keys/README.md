@@ -8,6 +8,7 @@ Files:
 - `allowed_signers`: OpenSSH allowed signers file used for Git signature
   verification. Entries in this repository use `namespaces="git"`.
 - `revoked_signers`: OpenSSH revocation file consulted during verification.
+- `signer_roles.json`: v0.3 signer roles, fingerprints, status, and effective dates.
 
 Operational rules:
 
@@ -17,3 +18,6 @@ Operational rules:
 - Keep at least one standby signing key available when possible.
 - If every trusted signing key is lost, use the repository emergency path only
   to rotate trust material and restore signed normal operation.
+
+Signer role records are append-only audit metadata. An active signer MUST be
+present in `allowed_signers`; a revoked signer MUST have an effective end date.

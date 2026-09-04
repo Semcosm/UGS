@@ -26,6 +26,8 @@ required_files=(
   "keys/README.md"
   "keys/allowed_signers"
   "keys/revoked_signers"
+  "keys/signer_roles.json"
+  ".ugs/schema/signer-roles.schema.json"
   ".github/pull_request_template.md"
   ".github/CODEOWNERS"
   ".github/workflows/ugs-validate.yml"
@@ -50,6 +52,8 @@ required_files=(
   "scripts/test_cr_provenance.sh"
   "scripts/test_cr_integration_strategy.sh"
   "scripts/test_cr_review_inheritance.sh"
+  "scripts/validate_signer_roles.sh"
+  "scripts/test_signer_roles.sh"
 )
 
 for file in "${required_files[@]}"; do
@@ -90,6 +94,7 @@ grep -Fq "Signing Level: high-trust-commits-signed" REPOSITORY_POLICY.md || fail
 grep -Fq "Protected Long-Lived Branches: main" REPOSITORY_POLICY.md || fail "missing protected branch declaration"
 grep -Fq "Hooks Path: .githooks" REPOSITORY_POLICY.md || fail "missing hooks path declaration"
 grep -Eq '^[^#[:space:]]+ namespaces="git" ssh-' keys/allowed_signers || fail "allowed signers must declare at least one git-scoped SSH signer"
+scripts/validate_signer_roles.sh
 
 grep -Fq "REPOSITORY_POLICY.md" README.md || fail "README must link repository policy"
 grep -Fq "CONTRIBUTING.md" README.md || fail "README must link contributing guide"

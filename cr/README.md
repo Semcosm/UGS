@@ -37,5 +37,7 @@ reachability rule.
 provenance validation.
 `CR-0029-review-conclusion-inheritance.md` records final review trailer
 inheritance validation.
+`CR-0030-signer-lifecycle-and-attestation.md` records signer lifecycle
+ metadata and the v0.3 attestation boundary.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

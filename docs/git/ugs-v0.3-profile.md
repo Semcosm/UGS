@@ -98,9 +98,14 @@ trusted-signing boundary, protected refs, and rollback path. The legacy
 `REPOSITORY_POLICY.md` declaration remains available for migration comparison
 and warning reporting.
 
+Signer lifecycle metadata **MUST** identify each principal's role, key
+fingerprint, effective start date, status, and (when revoked) effective end
+date. Active lifecycle entries **MUST** correspond to `keys/allowed_signers`.
+Reviewer trailers are attestations bound to the final signed commit; v0.3 does
+not define a separate reviewer-signature wire format.
+
 ## 7. Deferred capabilities
 
-Signed review attestations, signer lifecycle metadata, quality profiles,
-supply-chain profiles, and additional repository shapes are separate follow-up
-work. They are not implied by the v0.3 profile unless explicitly declared by a
-future profile or extension.
+Quality profiles, supply-chain profiles, and additional repository shapes are
+separate follow-up work. They are not implied by the v0.3 profile unless
+explicitly declared by a future profile or extension.
