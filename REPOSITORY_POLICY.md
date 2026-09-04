@@ -21,8 +21,9 @@ sequence contains unsigned commits and remains outside that claim for
 traceability; it is recorded in `cr/CR-0020-signing-boundary-recovery.md`.
 
 The UGS Core v0.2 normative baseline is retained as historical compatibility
-context. The v0.3 policy manifest and conformance profile are active under the
-adoption recorded in `cr/CR-0021-v0-3-normative-adoption.md`.
+context. The v0.3 policy manifest and conformance profile in
+`docs/git/ugs-v0.3-profile.md` are active under the adoption recorded in
+`cr/CR-0021-v0-3-normative-adoption.md`.
 
 ## Repository Declaration
 

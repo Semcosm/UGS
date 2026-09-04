@@ -25,5 +25,7 @@ signing boundary after the unsigned draft integration sequence.
 release-tag detection.
 `CR-0023-release-tag-workflow-fix.md` records the checkout fix that restores
 annotated release tags before CI validation.
+`CR-0024-v0-3-profile-documentation.md` records the human-readable adopted
+v0.3 profile boundary.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

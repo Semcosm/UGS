@@ -17,6 +17,7 @@ primitives:
 ## Document Map
 
 - [UGS Core](docs/git/ugs-core.md)
+- [UGS v0.3 Policy And Conformance Profile](docs/git/ugs-v0.3-profile.md)
 - [Branch Profiles](docs/git/ugs-branch-profiles.md)
 - [Commit Convention](docs/git/commit-convention.md)
 - [Review Policy](docs/git/review-policy.md)
@@ -67,7 +68,7 @@ Repository-local governance is declared in:
 ## Repository Layout
 
 ```text
-docs/git/     core specification documents
+docs/git/     core and adopted profile specification documents
 docs/roadmap/ non-normative version and migration plans
 .githooks/    managed hooks directory for repository enforcement
 .github/      hosting-platform workflow and PR template mapping
