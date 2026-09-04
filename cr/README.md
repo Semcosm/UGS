@@ -35,5 +35,7 @@ CR provenance validation is exercised by `scripts/test_cr_provenance.sh`.
 reachability rule.
 `CR-0028-integration-strategy-evidence.md` records strategy-specific CR
 provenance validation.
+`CR-0029-review-conclusion-inheritance.md` records final review trailer
+inheritance validation.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

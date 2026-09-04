@@ -69,6 +69,12 @@ requirements apply to every v0.3 change. Final review and test conclusions
 should be represented by commit trailers when the integration path supports
 them.
 
+New v0.3 CRs that declare `Review Evidence: trailers` **MUST** have both
+`Reviewed-by` and `Tested-by` on the final integrated commit. For rebase-ff this
+is the source head; for merge and squash it is the resulting integration
+commit. Review conclusions on discarded or superseded source commits do not
+alone satisfy this requirement.
+
 ## 5. Protected refs and releases
 
 The declared protected refs **MUST** be enforced at the authoritative boundary

@@ -89,6 +89,11 @@ if [ -n "$integration_strategy" ]; then
   printf '%s\n' "$integration_strategy" | grep -Eq '^(rebase-ff|merge|squash)$' \
     || fail "Integration Strategy is invalid"
 fi
+review_evidence="$(sed -n 's/^Review Evidence: //p' "$cr_file")"
+if [ -n "$review_evidence" ]; then
+  printf '%s\n' "$review_evidence" | grep -Eq '^trailers$' \
+    || fail "Review Evidence is invalid"
+fi
 
 revision="$(sed -n 's/^Revision: //p' "$cr_file")"
 printf '%s\n' "$revision" | grep -Eq '^[1-9][0-9]*$' \
@@ -159,6 +164,13 @@ else
         fi
         ;;
     esac
+  fi
+
+  if [ "$review_evidence" = "trailers" ]; then
+    git cat-file commit "$integrated_oid" | grep -Eq '^Reviewed-by: .+$' \
+      || fail "integrated result must carry Reviewed-by trailer"
+    git cat-file commit "$integrated_oid" | grep -Eq '^Tested-by: .+$' \
+      || fail "integrated result must carry Tested-by trailer"
   fi
 fi
 git merge-base --is-ancestor "$base_oid" "$head_oid" \

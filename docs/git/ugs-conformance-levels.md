@@ -31,6 +31,10 @@ protected-ref requirements imposed by the declared conformance level.
 The selected strategy **MUST** be recorded in each new v0.3 CR so the source
 range and final integration object can be interpreted deterministically.
 
+When trailer review evidence is claimed, the final integration object must
+carry both the review and test conclusions; source-only trailers are
+insufficient after rewrite or squash.
+
 ## 3. Current repository declaration
 
 UGS declares `continuous`, `rebase-ff`, and `high-trust`. This combination is

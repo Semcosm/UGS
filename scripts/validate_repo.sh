@@ -49,6 +49,7 @@ required_files=(
   "scripts/test_ref_update.sh"
   "scripts/test_cr_provenance.sh"
   "scripts/test_cr_integration_strategy.sh"
+  "scripts/test_cr_review_inheritance.sh"
 )
 
 for file in "${required_files[@]}"; do
@@ -75,6 +76,7 @@ executable_files=(
   "scripts/test_ref_update.sh"
   "scripts/test_cr_provenance.sh"
   "scripts/test_cr_integration_strategy.sh"
+  "scripts/test_cr_review_inheritance.sh"
 )
 
 for file in "${executable_files[@]}"; do
