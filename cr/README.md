@@ -21,5 +21,7 @@ CI range calculation.
 normative v0.3 adoption.
 `CR-0020-signing-boundary-recovery.md` records the recovered high-trust
 signing boundary after the unsigned draft integration sequence.
+`CR-0022-release-tag-validator-fix.md` records the CI correction for annotated
+release-tag detection.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.
