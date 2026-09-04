@@ -120,6 +120,19 @@ else
   integrated_oid="${integrated_result#main@}"
   git cat-file -e "$integrated_oid^{commit}" 2>/dev/null \
     || fail "integrated result is not a commit in this repository: $integrated_oid"
+  printf '%s\n' "$integrated_oid" | grep -Eq '^[0-9a-f]{40}$' \
+    || fail "Integrated Result must contain a full lowercase SHA-1"
+  main_ref=""
+  if git rev-parse --quiet --verify refs/heads/main^{commit} >/dev/null 2>&1; then
+    main_ref="refs/heads/main"
+  elif git rev-parse --quiet --verify refs/remotes/origin/main^{commit} >/dev/null 2>&1; then
+    main_ref="refs/remotes/origin/main"
+  fi
+  [ -n "$main_ref" ] || fail "main ref is required to verify integrated provenance"
+  git merge-base --is-ancestor "$integrated_oid" "$main_ref" \
+    || fail "integrated result is not reachable from main"
+  git merge-base --is-ancestor "$base_oid" "$integrated_oid" \
+    || fail "integrated result must descend from Base OID"
 fi
 git merge-base --is-ancestor "$base_oid" "$head_oid" \
   || fail "Base OID must be an ancestor of Head OID"

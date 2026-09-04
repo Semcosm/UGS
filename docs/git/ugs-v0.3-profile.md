@@ -52,6 +52,12 @@ decision, policy version, integrated result, risk, rollback, and test evidence.
 Accepted integrated changes **MUST** remain auditable without relying on
 mutable hosting-platform state.
 
+When `Integrated Result` is present, its `main@<commit OID>` **MUST** identify
+an existing commit reachable from `main`, and that commit **MUST** descend from
+the CR's `Base OID`. The CR's `Head OID` need not be an ancestor of the
+integrated result: squash and merge integrations may create a different result
+object. Rebase-fast-forward integrations normally use the head object itself.
+
 The repository's declared review model and sensitive-path acknowledgment
 requirements apply to every v0.3 change. Final review and test conclusions
 should be represented by commit trailers when the integration path supports

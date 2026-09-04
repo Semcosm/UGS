@@ -30,5 +30,8 @@ v0.3 profile boundary.
 `CR-0025-v0-3-3-release.md` records the v0.3.3 profile clarification release.
 `CR-0026-conformance-levels.md` records v0.3 conformance levels and the
 profile/merge-strategy matrix.
+CR provenance validation is exercised by `scripts/test_cr_provenance.sh`.
+`CR-0027-cr-provenance-validation.md` records the integrated-result
+reachability rule.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.
