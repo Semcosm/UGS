@@ -1,7 +1,7 @@
 # CR-0022: Fix annotated tag validation in CI
 
 Base: main
-Head or Range: main / 5288f58..f220ef4
+Head or Range: fix/release-tag-validator / 5288f58..f220ef4
 Title: fix(release): recognize annotated tag objects in CI
 Revision: 1
 Status: accepted
