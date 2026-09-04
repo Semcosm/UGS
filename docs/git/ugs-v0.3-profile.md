@@ -104,6 +104,11 @@ date. Active lifecycle entries **MUST** correspond to `keys/allowed_signers`.
 Reviewer trailers are attestations bound to the final signed commit; v0.3 does
 not define a separate reviewer-signature wire format.
 
+Exception records under `cr/EX-*.md` **MUST** identify the exception type,
+authorizer, reason, start and expiry timestamps, event commit, and post-event
+review. Bootstrap exceptions are one-time; emergency exceptions are time-bound
+and must close with a reachable `main@<OID>` review result.
+
 ## 7. Deferred capabilities
 
 Quality profiles, supply-chain profiles, and additional repository shapes are

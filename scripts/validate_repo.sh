@@ -27,6 +27,7 @@ required_files=(
   "keys/allowed_signers"
   "keys/revoked_signers"
   "keys/signer_roles.json"
+  "cr/EX-0001-bootstrap-governance.md"
   ".ugs/schema/signer-roles.schema.json"
   ".github/pull_request_template.md"
   ".github/CODEOWNERS"
@@ -54,6 +55,8 @@ required_files=(
   "scripts/test_cr_review_inheritance.sh"
   "scripts/validate_signer_roles.sh"
   "scripts/test_signer_roles.sh"
+  "scripts/validate_exception_record.sh"
+  "scripts/test_exception_records.sh"
 )
 
 for file in "${required_files[@]}"; do
@@ -95,6 +98,9 @@ grep -Fq "Protected Long-Lived Branches: main" REPOSITORY_POLICY.md || fail "mis
 grep -Fq "Hooks Path: .githooks" REPOSITORY_POLICY.md || fail "missing hooks path declaration"
 grep -Eq '^[^#[:space:]]+ namespaces="git" ssh-' keys/allowed_signers || fail "allowed signers must declare at least one git-scoped SSH signer"
 scripts/validate_signer_roles.sh
+for file in cr/EX-*.md; do
+  scripts/validate_exception_record.sh "$file"
+done
 
 grep -Fq "REPOSITORY_POLICY.md" README.md || fail "README must link repository policy"
 grep -Fq "CONTRIBUTING.md" README.md || fail "README must link contributing guide"
