@@ -15,6 +15,26 @@ git -C "$repo" config user.email "bootstrap@example.invalid"
 git -C "$repo" log -1 --format=%s | grep -Fqx 'chore(bootstrap): initialize UGS governance'
 "$root_dir/scripts/validate_policy_manifest.sh" "$repo/.ugs/policy.json"
 
+standard_repo="$temp_dir/standard-repo"
+mkdir -p "$standard_repo"
+git init --quiet -b main "$standard_repo"
+git -C "$standard_repo" config user.name "Bootstrap Fixture"
+git -C "$standard_repo" config user.email "bootstrap@example.invalid"
+"$root_dir/scripts/ugs_init.sh" --profile standard "$standard_repo" >/dev/null
+[ "$(jq -r '.conformance_level' "$standard_repo/.ugs/policy.json")" = "standard" ]
+(cd "$standard_repo" && scripts/validate_policy_manifest.sh && scripts/validate_quality_profile.sh && scripts/validate_supply_chain_profile.sh && scripts/validate_action_pinning.sh && scripts/validate_repository_shape.sh)
+[ -f "$standard_repo/.github/workflows/ugs-validate.yml" ]
+[ -x "$standard_repo/scripts/validate_quality_profile.sh" ]
+
+standard_migrate="$temp_dir/standard-migrate"
+git init --quiet -b main "$standard_migrate"
+git -C "$standard_migrate" config user.name "Bootstrap Fixture"
+git -C "$standard_migrate" config user.email "bootstrap@example.invalid"
+"$root_dir/scripts/ugs_init.sh" --profile standard --migrate "$standard_migrate" >/dev/null
+before_migrate="$(git -C "$standard_migrate" rev-parse HEAD)"
+"$root_dir/scripts/ugs_init.sh" --profile standard --migrate "$standard_migrate" >/dev/null
+[ "$(git -C "$standard_migrate" rev-parse HEAD)" = "$before_migrate" ]
+
 if "$root_dir/scripts/ugs_init.sh" "$repo" >/dev/null 2>&1; then
   echo "bootstrap unexpectedly overwrote an initialized repository" >&2
   exit 1
@@ -44,5 +64,9 @@ package_root="$unpack/ugs-bootstrap-v0.0.0-test"
 package_target="$temp_dir/package-repo"
 "$package_root/scripts/ugs_init.sh" --no-commit "$package_target" >/dev/null
 [ -f "$package_target/.ugs/policy.json" ]
+package_standard="$temp_dir/package-standard-repo"
+"$package_root/scripts/ugs_init.sh" --profile standard --no-commit "$package_standard" >/dev/null
+[ "$(jq -r '.conformance_level' "$package_standard/.ugs/policy.json")" = "standard" ]
+(cd "$package_standard" && scripts/validate_policy_manifest.sh && scripts/validate_quality_profile.sh && scripts/validate_supply_chain_profile.sh && scripts/validate_action_pinning.sh && scripts/validate_repository_shape.sh)
 
 echo "UGS bootstrap package fixtures passed"
