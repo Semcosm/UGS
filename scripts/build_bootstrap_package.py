@@ -33,12 +33,16 @@ def main():
         shutil.copy2(root / "scripts/validate_policy_manifest.sh", stage / "scripts/validate_policy_manifest.sh")
         shutil.copy2(root / "bootstrap/README.md", stage / "README.md")
         shutil.copy2(root / "bootstrap/templates/policy.json", stage / "bootstrap/templates/policy.json")
+        shutil.copy2(root / "bootstrap/templates/policy-standard.json", stage / "bootstrap/templates/policy-standard.json")
+        shutil.copy2(root / "bootstrap/templates/standard-workflow.yml", stage / "bootstrap/templates/standard-workflow.yml")
         shutil.copy2(root / ".ugs/schema/policy.schema.json", stage / "bootstrap/templates/policy.schema.json")
+        for name in ("validate_quality_profile.sh", "validate_supply_chain_profile.sh", "validate_supply_chain_evidence.sh", "validate_action_pinning.sh", "validate_repository_shape.sh"):
+            shutil.copy2(root / "scripts" / name, stage / "scripts" / name)
         for path in stage.rglob("*"):
             if path.is_file(): path.chmod(0o755 if path.name.endswith(".sh") or path.name.endswith(".py") else 0o644)
         files = sorted(p for p in stage.rglob("*") if p.is_file())
         commit = subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip()
-        manifest = {"format": "ugs-bootstrap/v1", "version": args.version, "source_commit": commit, "profile": "baseline", "files": [{"path": str(p.relative_to(stage)), "sha256": digest(p)} for p in files]}
+        manifest = {"format": "ugs-bootstrap/v1", "version": args.version, "source_commit": commit, "profiles": ["baseline", "standard"], "files": [{"path": str(p.relative_to(stage)), "sha256": digest(p)} for p in files]}
         (stage / "MANIFEST.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
         archive = output / ("ugs-bootstrap-" + args.version + ".tar.gz")
         epoch = os.environ.get("SOURCE_DATE_EPOCH", "0")
