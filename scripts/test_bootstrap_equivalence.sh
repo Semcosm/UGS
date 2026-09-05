@@ -38,8 +38,13 @@ scripts/ugs_init.py	scripts/ugs_init.py
 scripts/ugs_init.sh	scripts/ugs_init.sh
 scripts/validate_policy_manifest.sh	scripts/validate_policy_manifest.sh
 scripts/validate_cr_record.sh	scripts/validate_cr_record.sh
+scripts/validate_cr_review.sh	scripts/validate_cr_review.sh
 scripts/validate_pr_cr.sh	scripts/validate_pr_cr.sh
 scripts/create_pr_from_cr.sh	scripts/create_pr_from_cr.sh
+adapters/github/validate_pr.sh	adapters/github/validate_pr.sh
+adapters/github/create_pr_from_cr.sh	adapters/github/create_pr_from_cr.sh
+adapters/github/validate_adapter.sh	adapters/github/validate_adapter.sh
+adapters/bare-git/update	adapters/bare-git/update
 scripts/validate_main_cr_range.sh	scripts/validate_main_cr_range.sh
 scripts/validate_ref_update.sh	scripts/validate_ref_update.sh
 scripts/test_profile_conformance.sh	scripts/test_profile_conformance.sh
@@ -66,9 +71,12 @@ for profile in baseline standard high-trust; do
   case "$profile" in
     baseline)
       (cd "$target" && scripts/validate_policy_manifest.sh .ugs/policy.json)
+      [ ! -e "$target/.github" ]
+      [ -x "$target/adapters/bare-git/update" ]
       ;;
     standard)
       (cd "$target" && scripts/validate_policy_manifest.sh .ugs/policy.json && scripts/validate_quality_profile.sh .ugs/policy.json && scripts/validate_supply_chain_profile.sh .ugs/policy.json && scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows && scripts/validate_repository_shape.sh .ugs/policy.json)
+      [ -x "$target/adapters/github/validate_pr.sh" ]
       ;;
     high-trust)
       (cd "$target" && scripts/validate_policy_manifest.sh .ugs/policy.json && scripts/validate_signer_roles.sh && scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows)

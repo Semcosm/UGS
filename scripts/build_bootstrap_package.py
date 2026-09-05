@@ -28,11 +28,16 @@ def main():
         stage = Path(temporary) / ("ugs-bootstrap-" + args.version)
         (stage / "bootstrap/templates").mkdir(parents=True)
         (stage / "scripts").mkdir(parents=True)
+        (stage / "adapters/github").mkdir(parents=True)
+        (stage / "adapters/bare-git").mkdir(parents=True)
         (stage / ".github/workflows").mkdir(parents=True)
         shutil.copy2(root / "scripts/ugs_init.py", stage / "scripts/ugs_init.py")
         shutil.copy2(root / "scripts/ugs_init.sh", stage / "scripts/ugs_init.sh")
-        for name in ("validate_policy_manifest.sh", "validate_cr_record.sh", "validate_pr_cr.sh", "create_pr_from_cr.sh", "validate_main_cr_range.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):
+        for name in ("validate_policy_manifest.sh", "validate_cr_record.sh", "validate_cr_review.sh", "validate_pr_cr.sh", "create_pr_from_cr.sh", "validate_main_cr_range.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):
             shutil.copy2(root / "scripts" / name, stage / "scripts" / name)
+        for name in ("validate_pr.sh", "create_pr_from_cr.sh", "validate_adapter.sh"):
+            shutil.copy2(root / "adapters/github" / name, stage / "adapters/github" / name)
+        shutil.copy2(root / "adapters/bare-git/update", stage / "adapters/bare-git/update")
         shutil.copy2(root / "bootstrap/README.md", stage / "README.md")
         shutil.copy2(root / "bootstrap/templates/policy.json", stage / "bootstrap/templates/policy.json")
         shutil.copy2(root / "bootstrap/templates/policy-standard.json", stage / "bootstrap/templates/policy-standard.json")
@@ -49,7 +54,7 @@ def main():
         for name in ("validate_signer_roles.sh", "validate_commit_signatures.sh", "validate_release_tag.sh", "validate_release_attestation.sh"):
             shutil.copy2(root / "scripts" / name, stage / "scripts" / name)
         for path in stage.rglob("*"):
-            if path.is_file(): path.chmod(0o755 if path.name.endswith(".sh") or path.name.endswith(".py") else 0o644)
+            if path.is_file(): path.chmod(0o755 if path.name.endswith(".sh") or path.name.endswith(".py") or str(path.relative_to(stage)).startswith("adapters/") else 0o644)
         files = sorted(p for p in stage.rglob("*") if p.is_file())
         commit = subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip()
         manifest = {"format": "ugs-bootstrap/v1", "version": args.version, "source_commit": commit, "profiles": ["baseline", "standard", "high-trust"], "files": [{"path": str(p.relative_to(stage)), "sha256": digest(p)} for p in files]}

@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
-  echo "usage: $0 <release-tag> [manifest]" >&2
+if [ "$#" -lt 1 ] || [ "$#" -gt 3 ]; then
+  echo "usage: $0 <release-tag> [manifest] [repository]" >&2
   exit 2
 fi
 tag="$1"
 root_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 manifest="${2:-$root_dir/.ugs/policy.json}"
+repository="${3:-}"
 fail() { echo "supply-chain release validation failed: $1" >&2; exit 1; }
 [ -f "$manifest" ] || fail "manifest does not exist: $manifest"
 cd "$root_dir"
@@ -20,10 +21,7 @@ if ! jq -e '.supply_chain? // {} | has("evidence")' "$manifest" >/dev/null; then
 fi
 commit="$(git rev-parse --verify "refs/tags/$tag^{commit}")" || fail "release tag does not resolve: $tag"
 signature_requirement="$(jq -r '.supply_chain.release_attestations == "signed"' "$manifest")"
-origin_url="$(git config --get remote.origin.url || true)"
-repository="$(printf '%s\n' "$origin_url" | sed -nE 's#.*github[^:/]*[:/]([^/]+/[^/]+)(\.git)?$#\1#p')"
-[ -n "$repository" ] || fail "cannot determine repository from remote.origin.url"
-repository="$(printf '%s' "$repository" | sed 's/\.git$//')"
+[ -n "$repository" ] || fail "repository identity must be provided explicitly"
 declare -a evidence_digests=()
 collect_common() {
   local path="$1" kind="$2" release commit_value digest

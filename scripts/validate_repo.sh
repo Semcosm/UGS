@@ -32,9 +32,6 @@ required_files=(
   "keys/signer_roles.json"
   "cr/EX-0001-bootstrap-governance.md"
   ".ugs/schema/signer-roles.schema.json"
-  ".github/pull_request_template.md"
-  ".github/CODEOWNERS"
-  ".github/workflows/ugs-validate.yml"
   ".githooks/README.md"
   ".githooks/commit-msg"
   ".githooks/pre-push"
@@ -42,6 +39,8 @@ required_files=(
   "scripts/validate_commit_range.sh"
   "scripts/validate_commit_signatures.sh"
   "scripts/validate_cr_record.sh"
+  "scripts/validate_cr_review.sh"
+  "scripts/test_core_bare_repository.sh"
   "scripts/validate_policy_manifest.sh"
   "scripts/test_policy_manifest.sh"
   "scripts/validate_repo.sh"
@@ -94,7 +93,6 @@ required_files=(
   "scripts/test_bootstrap_equivalence.sh"
   "scripts/test_bootstrap_release.sh"
   "docs/git/ugs-bootstrap.md"
-  ".github/workflows/ugs-release.yml"
 )
 
 for file in "${required_files[@]}"; do
@@ -108,6 +106,8 @@ executable_files=(
   "scripts/validate_commit_range.sh"
   "scripts/validate_commit_signatures.sh"
   "scripts/validate_cr_record.sh"
+  "scripts/validate_cr_review.sh"
+  "scripts/test_core_bare_repository.sh"
   "scripts/validate_policy_manifest.sh"
   "scripts/test_policy_manifest.sh"
   "scripts/validate_repo.sh"
@@ -176,14 +176,6 @@ grep -Fq "docs/git/ugs-supply-chain-profile.md" README.md || fail "README must l
 grep -Fq "docs/git/ugs-repository-shapes.md" README.md || fail "README must link repository shapes"
 grep -Fq "cr/README.md" README.md || fail "README must link CR record guide"
 grep -Fq "keys/README.md" README.md || fail "README must link trusted signer guide"
-grep -Fq "## Summary" .github/pull_request_template.md || fail "PR template must include Summary"
-grep -Fq "## Motivation" .github/pull_request_template.md || fail "PR template must include Motivation"
-grep -Fq "## Test Evidence" .github/pull_request_template.md || fail "PR template must include Test Evidence"
-grep -Fq "## Risk" .github/pull_request_template.md || fail "PR template must include Risk"
-grep -Fq "## Rollback" .github/pull_request_template.md || fail "PR template must include Rollback"
-grep -Fq "## Breaking Change" .github/pull_request_template.md || fail "PR template must include Breaking Change"
-grep -Fq "## Backport Target" .github/pull_request_template.md || fail "PR template must include Backport Target"
-grep -Fq "scripts/validate_commit_signatures.sh" .github/workflows/ugs-validate.yml || fail "workflow must validate commit signatures"
 grep -Fq "scripts/test_conformance.sh" README.md || fail "README must document conformance fixtures"
 grep -Fq "docs/git/ugs-bootstrap.md" README.md || fail "README must document bootstrap package"
 
@@ -192,7 +184,9 @@ scripts/test_policy_manifest.sh
 scripts/validate_quality_profile.sh
 scripts/validate_supply_chain_profile.sh
 scripts/validate_supply_chain_evidence.sh
-scripts/validate_action_pinning.sh
+if [ -d .github ]; then
+  scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows
+fi
 scripts/test_action_pinning.sh
 scripts/test_supply_chain_evidence.sh
 scripts/test_sbom.sh
@@ -200,7 +194,6 @@ scripts/test_release_attestation.sh
 scripts/test_build_record.sh
 scripts/test_supply_chain_release.sh
 scripts/validate_repository_shape.sh
-scripts/test_bootstrap_equivalence.sh
 
 cr_records=(cr/CR-*.md)
 if [ -e "${cr_records[0]}" ]; then

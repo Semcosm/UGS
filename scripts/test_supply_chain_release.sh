@@ -37,11 +37,11 @@ cp "$temp_dir/build.json" "$root_dir/tests/fixtures/release-build.json"
 cp "$temp_dir/attestation-signed.json" "$root_dir/tests/fixtures/release-attestation.json"
 trap 'rm -rf "$temp_dir"; rm -f "$root_dir/tests/fixtures/release-sbom.json" "$root_dir/tests/fixtures/release-sbom-spdx.json" "$root_dir/tests/fixtures/release-build.json" "$root_dir/tests/fixtures/release-attestation.json"' EXIT
 jq '.supply_chain.evidence = {sbom_paths:["tests/fixtures/release-sbom.json","tests/fixtures/release-sbom-spdx.json"],build_record_paths:["tests/fixtures/release-build.json"],attestation_paths:["tests/fixtures/release-attestation.json"]}' "$temp_dir/manifest.json" > "$temp_dir/manifest-relative.json"
-UGS_ALLOWED_SIGNERS_FILE="$temp_dir/allowed_signers" "$validator" "$tag" "$temp_dir/manifest-relative.json"
+UGS_ALLOWED_SIGNERS_FILE="$temp_dir/allowed_signers" "$validator" "$tag" "$temp_dir/manifest-relative.json" "Semcosm/UGS"
 jq '.artifact.digest = "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"' \
   "$root_dir/tests/fixtures/release-build.json" > "$temp_dir/build-mismatch.json"
 cp "$temp_dir/build-mismatch.json" "$root_dir/tests/fixtures/release-build.json"
-if UGS_ALLOWED_SIGNERS_FILE="$temp_dir/allowed_signers" "$validator" "$tag" "$temp_dir/manifest-relative.json" >/dev/null 2>&1; then
+if UGS_ALLOWED_SIGNERS_FILE="$temp_dir/allowed_signers" "$validator" "$tag" "$temp_dir/manifest-relative.json" "Semcosm/UGS" >/dev/null 2>&1; then
   echo "release digest mismatch fixture unexpectedly passed" >&2
   exit 1
 fi

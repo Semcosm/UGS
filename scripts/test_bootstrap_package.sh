@@ -11,6 +11,7 @@ git -C "$repo" config user.name "Bootstrap Fixture"
 git -C "$repo" config user.email "bootstrap@example.invalid"
 "$root_dir/scripts/ugs_init.sh" --profile baseline "$repo"
 [ -d "$repo/.git" ]
+[ ! -e "$repo/.github" ]
 [ "$(git -C "$repo" config --get core.hooksPath)" = ".githooks" ]
 git -C "$repo" log -1 --format=%s | grep -Fqx 'chore(bootstrap): initialize UGS governance'
 "$root_dir/scripts/validate_policy_manifest.sh" "$repo/.ugs/policy.json"
@@ -24,6 +25,7 @@ git -C "$standard_repo" config user.email "bootstrap@example.invalid"
 [ "$(jq -r '.conformance_level' "$standard_repo/.ugs/policy.json")" = "standard" ]
 (cd "$standard_repo" && scripts/validate_policy_manifest.sh && scripts/validate_quality_profile.sh && scripts/validate_supply_chain_profile.sh && scripts/validate_action_pinning.sh && scripts/validate_repository_shape.sh)
 [ -f "$standard_repo/.github/workflows/ugs-validate.yml" ]
+[ -x "$standard_repo/adapters/github/validate_pr.sh" ]
 [ -x "$standard_repo/scripts/validate_quality_profile.sh" ]
 
 high_trust="$temp_dir/high-trust-repo"
