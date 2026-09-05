@@ -36,7 +36,6 @@ primitives:
   - [Trusted Signers](keys/README.md)
   - [Change Requests](cr/README.md)
   - [Adapters](adapters/README.md)
-  - [Pull Request Template](.github/pull_request_template.md)
 - **Roadmap, releases, and implementation**
   - [v0.3 Roadmap](docs/roadmap/v0.3.md)
   - [v0.2.0 Release Packet](releases/v0.2.0.md)
