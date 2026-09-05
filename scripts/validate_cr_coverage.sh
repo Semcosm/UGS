@@ -19,7 +19,7 @@ while IFS=$'\t' read -r oid subject; do
   if grep -Fqx "$oid" "$covered_file"; then
     continue
   fi
-  if git diff-tree --no-commit-id --name-only -r "$oid" | grep -Eq '^cr/CR-[0-9]{4}-[^/]+\.md$'; then
+  if git diff-tree --no-commit-id --name-only -r -m "$oid" | grep -Eq '^cr/CR-[0-9]{4}-[^/]+\.md$'; then
     continue
   fi
   printf '%s\t%s\n' "$oid" "$subject" >> "$missing_file"
