@@ -62,7 +62,9 @@ archive="$package_dir/ugs-bootstrap-v0.0.0-test.tar.gz"
 cp "$archive" "$temp_dir/first.tar.gz"
 SOURCE_DATE_EPOCH=0 "$root_dir/scripts/build_bootstrap_package.sh" v0.0.0-test --output-dir "$package_dir" >/dev/null
 cmp -s "$temp_dir/first.tar.gz" "$archive"
-tar -tzf "$archive" | grep -Fqx 'ugs-bootstrap-v0.0.0-test/scripts/ugs_init.py'
+tar_listing="$temp_dir/archive.list"
+tar -tzf "$archive" > "$tar_listing"
+grep -Fqx 'ugs-bootstrap-v0.0.0-test/scripts/ugs_init.py' "$tar_listing"
 unpack="$temp_dir/unpack"
 mkdir -p "$unpack"
 tar -xzf "$archive" -C "$unpack"
