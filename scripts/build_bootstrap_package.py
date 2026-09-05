@@ -35,7 +35,7 @@ def main():
         shutil.copy2(root / "scripts/ugs_init.sh", stage / "scripts/ugs_init.sh")
         for name in ("validate_policy_manifest.sh", "validate_cr_record.sh", "validate_cr_review.sh", "validate_pr_cr.sh", "create_pr_from_cr.sh", "validate_main_cr_range.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):
             shutil.copy2(root / "scripts" / name, stage / "scripts" / name)
-        for name in ("validate_pr.sh", "create_pr_from_cr.sh", "validate_adapter.sh"):
+        for name in ("validate_pr.sh", "create_pr_from_cr.sh", "validate_adapter.sh", "validate_action_pinning.sh", "download_release.sh", "publish_release.sh"):
             shutil.copy2(root / "adapters/github" / name, stage / "adapters/github" / name)
         shutil.copy2(root / "adapters/bare-git/update", stage / "adapters/bare-git/update")
         shutil.copy2(root / "bootstrap/README.md", stage / "README.md")

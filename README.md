@@ -85,6 +85,7 @@ Repository-local governance is declared in:
 - [.github/pull_request_template.md](.github/pull_request_template.md)
 - [.github/workflows/ugs-validate.yml](.github/workflows/ugs-validate.yml)
 - [cr/README.md](cr/README.md)
+- [adapters/README.md](adapters/README.md)
 
 ## Repository Layout
 
@@ -97,4 +98,5 @@ cr/           equivalent change request records for off-platform review flows
 keys/         trusted SSH signer registry and revocation data
 releases/     release packets and verification notes
 scripts/      reusable repository validation scripts
+adapters/     platform mappings kept outside UGS Core
 ```

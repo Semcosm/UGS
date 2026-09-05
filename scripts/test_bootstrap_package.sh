@@ -26,6 +26,7 @@ git -C "$standard_repo" config user.email "bootstrap@example.invalid"
 (cd "$standard_repo" && scripts/validate_policy_manifest.sh && scripts/validate_quality_profile.sh && scripts/validate_supply_chain_profile.sh && scripts/validate_action_pinning.sh && scripts/validate_repository_shape.sh)
 [ -f "$standard_repo/.github/workflows/ugs-validate.yml" ]
 [ -x "$standard_repo/adapters/github/validate_pr.sh" ]
+[ -x "$standard_repo/adapters/github/validate_action_pinning.sh" ]
 [ -x "$standard_repo/scripts/validate_quality_profile.sh" ]
 
 high_trust="$temp_dir/high-trust-repo"

@@ -185,7 +185,7 @@ scripts/validate_quality_profile.sh
 scripts/validate_supply_chain_profile.sh
 scripts/validate_supply_chain_evidence.sh
 if [ -d .github ]; then
-  scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows
+  adapters/github/validate_action_pinning.sh .ugs/policy.json .github/workflows
 fi
 scripts/test_action_pinning.sh
 scripts/test_supply_chain_evidence.sh
