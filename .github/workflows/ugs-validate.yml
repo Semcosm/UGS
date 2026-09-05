@@ -55,6 +55,9 @@ jobs:
       - name: Validate independent conformance fixtures
         run: scripts/test_conformance.sh
 
+      - name: Validate all UGS profiles
+        run: scripts/test_profile_conformance.sh
+
       - name: Validate bootstrap package fixtures
         run: scripts/test_bootstrap_package.sh
 

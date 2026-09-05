@@ -31,7 +31,8 @@ def main():
         (stage / ".github/workflows").mkdir(parents=True)
         shutil.copy2(root / "scripts/ugs_init.py", stage / "scripts/ugs_init.py")
         shutil.copy2(root / "scripts/ugs_init.sh", stage / "scripts/ugs_init.sh")
-        shutil.copy2(root / "scripts/validate_policy_manifest.sh", stage / "scripts/validate_policy_manifest.sh")
+        for name in ("validate_policy_manifest.sh", "validate_cr_record.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):
+            shutil.copy2(root / "scripts" / name, stage / "scripts" / name)
         shutil.copy2(root / "bootstrap/README.md", stage / "README.md")
         shutil.copy2(root / "bootstrap/templates/policy.json", stage / "bootstrap/templates/policy.json")
         shutil.copy2(root / "bootstrap/templates/policy-standard.json", stage / "bootstrap/templates/policy-standard.json")

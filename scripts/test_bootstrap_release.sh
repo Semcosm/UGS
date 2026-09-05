@@ -95,6 +95,7 @@ git init --quiet -b main "$standard_repo"
   scripts/validate_repository_shape.sh .ugs/policy.json)
 [ "$(jq -r '.conformance_level' "$standard_repo/.ugs/policy.json")" = "standard" ]
 [ "$(git -C "$standard_repo" config --get core.hooksPath)" = ".githooks" ]
+(cd "$standard_repo" && scripts/test_profile_conformance.sh)
 
 echo "published bootstrap standard profile verified and consumed: $tag"
 
@@ -108,5 +109,6 @@ if jq -e '.profiles | index("high-trust")' "$manifest" >/dev/null 2>&1; then
     scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows)
   [ "$(jq -r '.conformance_level' "$high_trust_repo/.ugs/policy.json")" = "high-trust" ]
   [ -f "$high_trust_repo/keys/allowed_signers" ]
+  (cd "$high_trust_repo" && scripts/test_profile_conformance.sh)
   echo "published bootstrap high-trust profile verified and consumed: $tag"
 fi
