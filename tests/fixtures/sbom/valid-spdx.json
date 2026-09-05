@@ -4,6 +4,6 @@
   "name": "ugs-fixture",
   "documentNamespace": "https://example.invalid/ugs-fixture",
   "creationInfo": {"created": "2026-09-05T00:00:00Z", "creators": ["Tool: ugs-fixture"]},
-  "documentComment": "ugs:sourceCommit=0123456789012345678901234567890123456789;ugs:release=v0.3.10",
+  "documentComment": "ugs:sourceCommit=0123456789012345678901234567890123456789;ugs:release=v0.3.10;ugs:artifactDigest=sha256:0123456789012345678901234567890123456789012345678901234567890123",
   "packages": [{"SPDXID": "SPDXRef-Package-zlib", "name": "zlib", "versionInfo": "1.3", "downloadLocation": "NOASSERTION", "checksums": [{"algorithm": "SHA256", "checksumValue": "0123456789012345678901234567890123456789012345678901234567890123"}]}]
 }
