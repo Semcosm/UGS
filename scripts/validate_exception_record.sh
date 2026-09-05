@@ -49,9 +49,16 @@ if [ "$status" = "closed" ]; then
   printf '%s\n' "$post_review" | grep -Eq '^main@[0-9a-f]{40}$' || fail "closed exceptions require main@<full commit OID> review"
   review_oid="${post_review#main@}"
   git cat-file -e "$review_oid^{commit}" 2>/dev/null || fail "post-event review is not a commit"
-  git merge-base --is-ancestor "$review_oid" refs/heads/main 2>/dev/null \
-    || git merge-base --is-ancestor "$review_oid" refs/remotes/origin/main 2>/dev/null \
-    || fail "post-event review is not reachable from main"
+  main_ref=""
+  if git rev-parse --verify refs/heads/main^{commit} >/dev/null 2>&1; then
+    main_ref="refs/heads/main"
+  elif git rev-parse --verify refs/remotes/origin/main^{commit} >/dev/null 2>&1; then
+    main_ref="refs/remotes/origin/main"
+  else
+    main_ref="HEAD"
+  fi
+  git merge-base --is-ancestor "$review_oid" "$main_ref" \
+    || fail "post-event review is not reachable from validation history"
 else
   [ "$post_review" = "pending" ] || fail "active exceptions require pending post-event review"
 fi
