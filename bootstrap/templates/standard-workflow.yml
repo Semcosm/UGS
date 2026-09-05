@@ -15,6 +15,9 @@ jobs:
       - name: Validate persisted CR and generated PR body
         if: github.event_name == 'pull_request'
         run: scripts/validate_pr_cr.sh "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" "$GITHUB_EVENT_PATH"
+      - name: Validate persisted CR coverage on main
+        if: github.ref == 'refs/heads/main'
+        run: scripts/validate_main_cr_range.sh "${{ github.event.before }}" "${{ github.sha }}"
       - name: Validate UGS standard policy
         run: |
           scripts/validate_policy_manifest.sh

@@ -166,4 +166,4 @@ jobs:
 
       - name: Validate persisted CR coverage on main
         if: github.ref == 'refs/heads/main'
-        run: scripts/validate_cr_coverage.sh "${{ github.sha }}"
+        run: scripts/validate_main_cr_range.sh "${{ github.event.before }}" "${{ github.sha }}"
