@@ -63,7 +63,13 @@ fi
 if jq -e 'has("supply_chain")' "$manifest" >/dev/null; then
   require '.supply_chain | type == "object" and (.profile | IN("basic", "standard", "high-trust"))' "invalid supply_chain.profile"
   for field in action_pinning sbom reproducible_builds release_attestations; do
-    require ".supply_chain.${field} | IN(\"none\", \"declared\", \"full_sha\", \"release\", \"verified\", \"signed\")" "invalid supply_chain.${field}"
+    case "$field" in
+      action_pinning) values='"none", "declared", "full_sha"' ;;
+      sbom) values='"none", "declared", "release"' ;;
+      reproducible_builds) values='"none", "declared", "verified"' ;;
+      release_attestations) values='"none", "declared", "signed"' ;;
+    esac
+    require ".supply_chain.${field} | IN(${values})" "invalid supply_chain.${field}"
   done
   require '(.supply_chain.profile != "basic") or (all([.supply_chain.action_pinning, .supply_chain.sbom, .supply_chain.reproducible_builds, .supply_chain.release_attestations][]; . != "none"))' "basic supply-chain profile requires declared evidence"
   require '(.supply_chain.profile != "standard") or (.supply_chain.action_pinning == "full_sha" and .supply_chain.sbom == "release" and .supply_chain.reproducible_builds != "none" and .supply_chain.release_attestations == "signed")' "standard supply-chain profile requires pinned actions, release SBOM, build evidence, and signed attestations"

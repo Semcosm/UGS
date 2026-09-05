@@ -49,5 +49,7 @@ capabilities release.
 profile.
 `CR-0036-repository-shape-capabilities.md` records the optional repository
 shape capabilities.
+`CR-0037-supply-chain-enum-validation.md` records the supply-chain enum
+validation correction.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.
