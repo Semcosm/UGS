@@ -11,7 +11,7 @@ cp "$root_dir/cr/CR-0060-document-map-governance.md" "$body"
 printf '\n' >> "$body"
 jq -n --rawfile body "$body" '{pull_request: {body: $body}}' > "$event"
 
-base="$(git -C "$root_dir" rev-parse main)"
+base="$(sed -n 's/^Base OID: //p' "$root_dir/cr/CR-0060-document-map-governance.md")"
 head="$(git -C "$root_dir" rev-parse HEAD)"
 (cd "$root_dir" && adapters/github/validate_pr.sh "$base" "$head" "$event" >/dev/null)
 echo "PR body normalization fixture passed"
