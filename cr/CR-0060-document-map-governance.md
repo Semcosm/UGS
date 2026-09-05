@@ -5,12 +5,12 @@ Head or Range: working tree based on main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(governance): add configurable Document Map validation
-Revision: 4
+Revision: 5
 Status: pending
 Decision: pending
 Policy Version: v0.3
 Base OID: 2f56c8ec2deda73539650d0413ea33eca02c6d92
-Head OID: 8d7ef98c0551094b1f5dd1257611f4ca8e67bff1
+Head OID: 850e0bb31d250615af8474cf21a08f6335ff610d
 Integrated Result: pending
 
 ## Summary
@@ -32,6 +32,8 @@ hierarchy. A separate recursive configuration plus generator makes the tree
 the source of truth without embedding document-specific paths in the policy
 manifest. Bootstrap and release tests explicitly enable the feature and verify
 generation and validation before accepting the package.
+The PR adapter normalization is covered by `scripts/test_pr_cr.sh` with an
+API-style trailing blank line in the review body.
 
 ## Test Evidence
 
