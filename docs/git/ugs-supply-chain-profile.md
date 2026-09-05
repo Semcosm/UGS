@@ -41,3 +41,8 @@ detached signature in the `ugs-attestation` namespace. The release signer is
 authorized for that namespace in `keys/allowed_signers`.
 `scripts/validate_supply_chain_release.sh` applies these checks to evidence
 paths during tag validation.
+
+Build records use `scripts/validate_build_record.sh` and carry the same release
+tag, commit SHA, artifact digest, builder identity, and build timestamp. A
+release with evidence enabled must keep these identifiers consistent across
+the SBOM, build record, and attestation.

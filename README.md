@@ -41,6 +41,7 @@ primitives:
 - [v0.3.11 Release Packet](releases/v0.3.11.md)
 - [v0.3.12 Release Packet](releases/v0.3.12.md)
 - [v0.3.13 Release Packet](releases/v0.3.13.md)
+- [v0.3.14 Release Packet](releases/v0.3.14.md)
 - [v0.3 Roadmap](docs/roadmap/v0.3.md)
 - [Managed Hooks](.githooks/README.md)
 

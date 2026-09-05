@@ -68,6 +68,8 @@ required_files=(
   "scripts/validate_release_attestation.sh"
   "scripts/test_release_attestation.sh"
   "scripts/validate_supply_chain_release.sh"
+  "scripts/validate_build_record.sh"
+  "scripts/test_build_record.sh"
   "scripts/validate_repository_shape.sh"
   "scripts/validate_supply_chain_profile.sh"
 )
@@ -103,6 +105,8 @@ executable_files=(
   "scripts/validate_release_attestation.sh"
   "scripts/test_release_attestation.sh"
   "scripts/validate_supply_chain_release.sh"
+  "scripts/validate_build_record.sh"
+  "scripts/test_build_record.sh"
 )
 
 for file in "${executable_files[@]}"; do
@@ -147,6 +151,7 @@ scripts/validate_supply_chain_profile.sh
 scripts/validate_supply_chain_evidence.sh
 scripts/test_sbom.sh
 scripts/test_release_attestation.sh
+scripts/test_build_record.sh
 scripts/validate_repository_shape.sh
 
 cr_records=(cr/CR-*.md)

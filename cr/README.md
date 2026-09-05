@@ -59,5 +59,7 @@ validation and tag binding.
 attestation verification.
 `CR-0041-evidence-path-validation-fix.md` records the evidence path validator
 correction.
+`CR-0042-build-record-validation.md` records build-record and release evidence
+binding validation.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

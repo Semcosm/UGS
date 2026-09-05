@@ -19,6 +19,9 @@ while IFS= read -r path; do
   scripts/validate_sbom.sh "$path" "$tag" "$commit"
 done < <(jq -r '.supply_chain.evidence.sbom_paths // [] | .[]' "$manifest")
 while IFS= read -r path; do
+  scripts/validate_build_record.sh "$path" "$tag" "$commit"
+done < <(jq -r '.supply_chain.evidence.build_record_paths // [] | .[]' "$manifest")
+while IFS= read -r path; do
   scripts/validate_release_attestation.sh "$path" "$tag" "$commit" "$signature_requirement"
 done < <(jq -r '.supply_chain.evidence.attestation_paths // [] | .[]' "$manifest")
 echo "supply-chain release validation passed ($tag)"

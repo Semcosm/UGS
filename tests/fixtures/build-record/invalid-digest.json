@@ -1,0 +1,4 @@
+{
+  "schema_version": 1, "type": "ugs-build-record", "release_tag": "v0.3.10", "commit": "0123456789012345678901234567890123456789",
+  "artifact": {"digest": "sha256:bad"}, "builder": {"id": "fixture"}, "built_at": "2026-09-05T00:00:00Z"
+}
