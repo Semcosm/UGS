@@ -46,6 +46,28 @@ while IFS=$'\t' read -r relative expected; do
   [ "$actual_digest" = "$expected" ] || { echo "manifest digest mismatch: $relative" >&2; exit 1; }
 done < <(jq -r '.files[] | [.path, .sha256] | @tsv' "$manifest")
 
+# The downloaded package must be byte-for-byte equivalent to the source tree
+# checked out at the signed release tag, not merely internally self-consistent.
+source_root="$temp_dir/release-source"
+mkdir -p "$source_root"
+git archive "$tag" | tar -x -C "$source_root"
+while IFS= read -r relative; do
+  case "$relative" in
+    README.md) source="bootstrap/README.md" ;;
+    bootstrap/templates/policy.schema.json) source=".ugs/schema/policy.schema.json" ;;
+    *) source="$relative" ;;
+  esac
+  cmp -s "$source_root/$source" "$package_root/$relative" || {
+    echo "published package differs from release source: $source -> $relative" >&2
+    exit 1
+  }
+done < <(jq -r '.files[].path' "$manifest")
+
+if rg -n -- '-----BEGIN (OPENSSH|RSA|EC|DSA) PRIVATE KEY-----' "$package_root" >/dev/null 2>&1; then
+  echo "published bootstrap package unexpectedly contains a private key" >&2
+  exit 1
+fi
+
 repo="$temp_dir/consumer-repository"
 git init --quiet -b main "$repo"
 git -C "$repo" config user.name "UGS Release Consumer"
@@ -75,3 +97,16 @@ git init --quiet -b main "$standard_repo"
 [ "$(git -C "$standard_repo" config --get core.hooksPath)" = ".githooks" ]
 
 echo "published bootstrap standard profile verified and consumed: $tag"
+
+if jq -e '.profiles | index("high-trust")' "$manifest" >/dev/null 2>&1; then
+  high_trust_repo="$temp_dir/high-trust-consumer-repository"
+  git init --quiet -b main "$high_trust_repo"
+  "$package_root/scripts/ugs_init.sh" --profile high-trust --no-commit "$high_trust_repo"
+  (cd "$high_trust_repo" && \
+    scripts/validate_policy_manifest.sh .ugs/policy.json && \
+    scripts/validate_signer_roles.sh && \
+    scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows)
+  [ "$(jq -r '.conformance_level' "$high_trust_repo/.ugs/policy.json")" = "high-trust" ]
+  [ -f "$high_trust_repo/keys/allowed_signers" ]
+  echo "published bootstrap high-trust profile verified and consumed: $tag"
+fi

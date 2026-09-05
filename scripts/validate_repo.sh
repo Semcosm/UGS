@@ -85,6 +85,7 @@ required_files=(
   "scripts/build_bootstrap_package.py"
   "scripts/build_bootstrap_package.sh"
   "scripts/test_bootstrap_package.sh"
+  "scripts/test_bootstrap_equivalence.sh"
   "scripts/test_bootstrap_release.sh"
   "docs/git/ugs-bootstrap.md"
   ".github/workflows/ugs-release.yml"
@@ -134,6 +135,7 @@ executable_files=(
   "scripts/build_bootstrap_package.py"
   "scripts/build_bootstrap_package.sh"
   "scripts/test_bootstrap_package.sh"
+  "scripts/test_bootstrap_equivalence.sh"
   "scripts/test_bootstrap_release.sh"
 )
 
@@ -187,6 +189,7 @@ scripts/test_release_attestation.sh
 scripts/test_build_record.sh
 scripts/test_supply_chain_release.sh
 scripts/validate_repository_shape.sh
+scripts/test_bootstrap_equivalence.sh
 
 cr_records=(cr/CR-*.md)
 if [ -e "${cr_records[0]}" ]; then
