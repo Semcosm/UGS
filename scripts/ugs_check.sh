@@ -64,6 +64,7 @@ run_check "policy manifest fixtures" scripts/test_policy_manifest.sh
 run_check "repository policy" scripts/validate_repo.sh
 run_check "Git evidence fixtures" scripts/test_git_fixtures.sh
 run_check "independent conformance fixtures" scripts/test_conformance.sh
+run_check "profile conformance" scripts/test_profile_conformance.sh
 run_check "bootstrap package fixtures" scripts/test_bootstrap_package.sh
 run_check "review trailer fixtures" scripts/test_review_trailers.sh
 run_check "release tag fixtures" scripts/test_release_tag.sh

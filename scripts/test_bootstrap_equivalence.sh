@@ -37,6 +37,9 @@ bootstrap/templates/standard-workflow.yml	bootstrap/templates/standard-workflow.
 scripts/ugs_init.py	scripts/ugs_init.py
 scripts/ugs_init.sh	scripts/ugs_init.sh
 scripts/validate_policy_manifest.sh	scripts/validate_policy_manifest.sh
+scripts/validate_cr_record.sh	scripts/validate_cr_record.sh
+scripts/validate_ref_update.sh	scripts/validate_ref_update.sh
+scripts/test_profile_conformance.sh	scripts/test_profile_conformance.sh
 scripts/validate_quality_profile.sh	scripts/validate_quality_profile.sh
 scripts/validate_supply_chain_profile.sh	scripts/validate_supply_chain_profile.sh
 scripts/validate_supply_chain_evidence.sh	scripts/validate_supply_chain_evidence.sh

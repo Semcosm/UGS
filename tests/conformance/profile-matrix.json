@@ -1,0 +1,9 @@
+{
+  "format": "ugs-profile-conformance/v1",
+  "profiles": {
+    "baseline": ["generated-policy", "hooks", "commit-msg", "cr", "lifecycle", "protected-ref", "migration", "dry-run", "idempotence"],
+    "standard": ["baseline", "quality-documents", "supply-chain-profile", "action-sha-pinning", "generated-workflow", "repository-shape"],
+    "high-trust": ["standard", "signed-commit", "signed-commit-range", "signed-annotated-tag", "trusted-signer", "revoked-signer", "unsigned-commit-rejection", "attestation-namespace", "private-key-exclusion"]
+  },
+  "entrypoint": "scripts/test_profile_conformance.sh"
+}
