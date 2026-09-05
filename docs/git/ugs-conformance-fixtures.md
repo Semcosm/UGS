@@ -26,3 +26,8 @@ generated consumer repositories, hooks, CRs, all declared integration modes,
 migration/dry-run/idempotence, protected refs, quality and supply-chain
 requirements, and temporary-key high-trust signing checks. It prints one
 result per profile and fails if any profile requirement fails.
+
+`scripts/validate_cr_coverage.sh` audits the first-parent history after the
+adopted coverage anchor and fails on an OID not named by a persisted CR. A
+commit that adds or modifies its persisted CR is also covered. The historical
+coverage migration is recorded in `cr/CR-0047-historical-main-coverage.md`.
