@@ -61,3 +61,17 @@ if "$package_root/scripts/ugs_init.sh" "$repo" >/dev/null 2>&1; then
 fi
 
 echo "published bootstrap asset verified and consumed: $tag"
+
+standard_repo="$temp_dir/standard-consumer-repository"
+git init --quiet -b main "$standard_repo"
+"$package_root/scripts/ugs_init.sh" --profile standard --no-commit "$standard_repo"
+(cd "$standard_repo" && \
+  scripts/validate_policy_manifest.sh .ugs/policy.json && \
+  scripts/validate_quality_profile.sh .ugs/policy.json && \
+  scripts/validate_supply_chain_profile.sh .ugs/policy.json && \
+  scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows && \
+  scripts/validate_repository_shape.sh .ugs/policy.json)
+[ "$(jq -r '.conformance_level' "$standard_repo/.ugs/policy.json")" = "standard" ]
+[ "$(git -C "$standard_repo" config --get core.hooksPath)" = ".githooks" ]
+
+echo "published bootstrap standard profile verified and consumed: $tag"
