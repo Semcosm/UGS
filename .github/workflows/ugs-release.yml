@@ -18,6 +18,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Restore annotated release tag
+        run: git fetch --force origin "refs/tags/${GITHUB_REF_NAME}:refs/tags/${GITHUB_REF_NAME}"
+
       - name: Verify release tag
         run: scripts/validate_release_tag.sh "${GITHUB_REF_NAME}"
 
