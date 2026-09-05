@@ -26,6 +26,12 @@ git -C "$standard_repo" config user.email "bootstrap@example.invalid"
 [ -f "$standard_repo/.github/workflows/ugs-validate.yml" ]
 [ -x "$standard_repo/scripts/validate_quality_profile.sh" ]
 
+high_trust="$temp_dir/high-trust-repo"
+"$root_dir/scripts/ugs_init.sh" --profile high-trust --no-commit "$high_trust" >/dev/null
+(cd "$high_trust" && scripts/validate_policy_manifest.sh && scripts/validate_signer_roles.sh && scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows)
+[ "$(jq -r '.conformance_level' "$high_trust/.ugs/policy.json")" = "high-trust" ]
+[ -f "$high_trust/keys/allowed_signers" ]
+
 standard_migrate="$temp_dir/standard-migrate"
 git init --quiet -b main "$standard_migrate"
 git -C "$standard_migrate" config user.name "Bootstrap Fixture"
@@ -68,5 +74,8 @@ package_standard="$temp_dir/package-standard-repo"
 "$package_root/scripts/ugs_init.sh" --profile standard --no-commit "$package_standard" >/dev/null
 [ "$(jq -r '.conformance_level' "$package_standard/.ugs/policy.json")" = "standard" ]
 (cd "$package_standard" && scripts/validate_policy_manifest.sh && scripts/validate_quality_profile.sh && scripts/validate_supply_chain_profile.sh && scripts/validate_action_pinning.sh && scripts/validate_repository_shape.sh)
+package_high="$temp_dir/package-high-trust-repo"
+"$package_root/scripts/ugs_init.sh" --profile high-trust --no-commit "$package_high" >/dev/null
+(cd "$package_high" && scripts/validate_policy_manifest.sh && scripts/validate_signer_roles.sh)
 
 echo "UGS bootstrap package fixtures passed"
