@@ -1,17 +1,17 @@
 # CR-0045: Preserve signature provenance across GitHub rebase integration
 
 Base: main
-Head or Range: main..HEAD
+Head or Range: fix/ci-verify-github-rebase / 9632f8b..main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: fix(ci): preserve signature provenance for GitHub rebase integration
 Revision: 1
-Status: accepted
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 52ac3d160de4e8bd03707a41bfd42338c6f6e460
-Head OID: 52ac3d160de4e8bd03707a41bfd42338c6f6e460
-Integrated Result: pending
+Head OID: 5cf0cc0e59e6ac7dd1b3cf96be289f3692c8e7bd
+Integrated Result: main@5cf0cc0e59e6ac7dd1b3cf96be289f3692c8e7bd
 
 ## Summary
 
