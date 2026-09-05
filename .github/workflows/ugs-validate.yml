@@ -94,7 +94,13 @@ jobs:
               range="${{ github.sha }}"
             fi
           else
-            range="${{ github.event.before }}..${{ github.sha }}"
+            if git rev-parse --quiet --verify "${{ github.event.before }}^{commit}" >/dev/null 2>&1; then
+              range="${{ github.event.before }}..${{ github.sha }}"
+            elif git rev-parse --quiet --verify refs/remotes/origin/main^{commit} >/dev/null 2>&1; then
+              range="refs/remotes/origin/main..${{ github.sha }}"
+            else
+              range="${{ github.sha }}"
+            fi
           fi
           scripts/validate_commit_range.sh "$range"
 
@@ -119,7 +125,13 @@ jobs:
               range="${{ github.sha }}"
             fi
           else
-            range="${{ github.event.before }}..${{ github.sha }}"
+            if git rev-parse --quiet --verify "${{ github.event.before }}^{commit}" >/dev/null 2>&1; then
+              range="${{ github.event.before }}..${{ github.sha }}"
+            elif git rev-parse --quiet --verify refs/remotes/origin/main^{commit} >/dev/null 2>&1; then
+              range="refs/remotes/origin/main..${{ github.sha }}"
+            else
+              range="${{ github.sha }}"
+            fi
           fi
           scripts/validate_commit_signatures.sh "$range"
 
