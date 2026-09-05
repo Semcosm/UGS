@@ -9,11 +9,12 @@ command -v jq >/dev/null 2>&1 || fail "jq is required"
 body_file="$(mktemp)"; trap 'rm -f "$body_file"' EXIT
 jq -r '.pull_request.body // empty' "$event" > "$body_file"
 [ -s "$body_file" ] || fail "PR body is empty"
-sed -i '${/^$/d;}' "$body_file"
+while [ -s "$body_file" ] && [ -z "$(tail -n 1 "$body_file")" ]; do
+  sed -i '$d' "$body_file"
+done
 mapfile -t records < <(git diff --name-only "$base..$head" -- 'cr/CR-*.md')
 [ "${#records[@]}" -gt 0 ] || fail "PR must add or modify a persisted CR"
 for record in "${records[@]}"; do
   "$repo_root/scripts/validate_cr_review.sh" "$base" "$head" "$record" "$body_file"
 done
 echo "GitHub PR adapter validation passed (${#records[@]} record(s))"
-
