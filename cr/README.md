@@ -51,5 +51,7 @@ profile.
 shape capabilities.
 `CR-0037-supply-chain-enum-validation.md` records the supply-chain enum
 validation correction.
+`CR-0038-supply-chain-evidence-and-sbom.md` records supply-chain evidence path
+and SBOM validation support.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

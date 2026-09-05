@@ -1,0 +1,5 @@
+{
+  "bomFormat": "CycloneDX", "specVersion": "1.5",
+  "metadata": {"timestamp": "2026-09-05T00:00:00Z", "properties": [{"name": "ugs:sourceCommit", "value": "0123456789012345678901234567890123456789"}, {"name": "ugs:release", "value": "v0.3.10"}]},
+  "components": [{"type": "library", "bom-ref": "pkg:unknown", "name": "unknown", "hashes": [{"alg": "SHA-256", "content": "0123456789012345678901234567890123456789012345678901234567890123"}]}]
+}

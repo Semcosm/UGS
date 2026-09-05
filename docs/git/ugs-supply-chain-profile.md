@@ -23,6 +23,13 @@ reproducible build. The reference validator checks the declared contract;
 tool-specific production of SBOMs and attestations remains outside the UGS
 Core.
 
+The optional `evidence` object lists repository-relative paths for SBOMs,
+attestations, and build records. Paths must not be absolute or escape the
+repository. `scripts/validate_supply_chain_evidence.sh` checks the path
+contract and profile-specific minimums. `scripts/validate_sbom.sh` accepts
+SPDX and CycloneDX documents and requires component identity, version, build
+time, source commit, and release metadata.
+
 The profile is additive and optional. Repositories without this section remain
 valid v0.3 repositories, and a declaration does not retroactively invalidate
 older releases or v0.2 history.

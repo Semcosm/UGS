@@ -24,4 +24,10 @@ case "$profile" in
   standard) jq -e '.supply_chain.action_pinning == "full_sha" and .supply_chain.sbom == "release" and .supply_chain.reproducible_builds != "none" and .supply_chain.release_attestations == "signed"' "$manifest" >/dev/null || fail "standard profile requirements are incomplete" ;;
   high-trust) jq -e '.supply_chain.action_pinning == "full_sha" and .supply_chain.sbom == "release" and .supply_chain.reproducible_builds == "verified" and .supply_chain.release_attestations == "signed"' "$manifest" >/dev/null || fail "high-trust profile requirements are incomplete" ;;
 esac
+if jq -e '.supply_chain | has("evidence")' "$manifest" >/dev/null; then
+  for field in sbom_paths attestation_paths build_record_paths; do
+    jq -e --arg field "$field" '.supply_chain.evidence[$field] // [] | all(.[]; type == "string" and startswith("/") | not and (contains("..") | not) and length > 0)' "$manifest" >/dev/null \
+      || fail "invalid supply-chain evidence paths: $field"
+  done
+fi
 echo "supply-chain profile validation passed ($profile)"

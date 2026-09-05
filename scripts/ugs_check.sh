@@ -73,6 +73,8 @@ run_check "signer roles fixtures" scripts/test_signer_roles.sh
 run_check "exception record fixtures" scripts/test_exception_records.sh
 run_check "quality profile" scripts/validate_quality_profile.sh
 run_check "supply-chain profile" scripts/validate_supply_chain_profile.sh
+run_check "supply-chain evidence" scripts/validate_supply_chain_evidence.sh
+run_check "SBOM fixtures" scripts/test_sbom.sh
 run_check "repository shape" scripts/validate_repository_shape.sh
 
 for file in cr/CR-*.md; do

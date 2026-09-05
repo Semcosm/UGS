@@ -62,6 +62,9 @@ required_files=(
   "scripts/test_exception_records.sh"
   "scripts/validate_quality_profile.sh"
   "scripts/validate_supply_chain_profile.sh"
+  "scripts/validate_supply_chain_evidence.sh"
+  "scripts/validate_sbom.sh"
+  "scripts/test_sbom.sh"
   "scripts/validate_repository_shape.sh"
   "scripts/validate_supply_chain_profile.sh"
 )
@@ -91,6 +94,9 @@ executable_files=(
   "scripts/test_cr_provenance.sh"
   "scripts/test_cr_integration_strategy.sh"
   "scripts/test_cr_review_inheritance.sh"
+  "scripts/validate_supply_chain_evidence.sh"
+  "scripts/validate_sbom.sh"
+  "scripts/test_sbom.sh"
 )
 
 for file in "${executable_files[@]}"; do
@@ -132,6 +138,8 @@ scripts/validate_policy_manifest.sh
 scripts/test_policy_manifest.sh
 scripts/validate_quality_profile.sh
 scripts/validate_supply_chain_profile.sh
+scripts/validate_supply_chain_evidence.sh
+scripts/test_sbom.sh
 scripts/validate_repository_shape.sh
 
 cr_records=(cr/CR-*.md)
