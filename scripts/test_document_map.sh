@@ -3,10 +3,12 @@ set -euo pipefail
 
 root_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 validator="$root_dir/scripts/validate_document_map.py"
+generator="$root_dir/scripts/generate_document_map.py"
 temp_dir="$(mktemp -d)"
 trap 'rm -rf "$temp_dir"' EXIT
 
 "$validator"
+"$generator" --check
 cp "$root_dir/.ugs/document-map.json" "$temp_dir/valid.json"
 "$validator" "$temp_dir/valid.json"
 
