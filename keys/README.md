@@ -5,8 +5,9 @@ formal release tags in this repository.
 
 Files:
 
-- `allowed_signers`: OpenSSH allowed signers file used for Git signature
-  verification. Entries in this repository use `namespaces="git"`.
+- `allowed_signers`: OpenSSH allowed signers file used for Git and attestation
+  signature verification. The release signer uses
+  `namespaces="git,ugs-attestation"`.
 - `revoked_signers`: OpenSSH revocation file consulted during verification.
 - `signer_roles.json`: v0.3 signer roles, fingerprints, status, and effective dates.
 
@@ -21,3 +22,5 @@ Operational rules:
 
 Signer role records are append-only audit metadata. An active signer MUST be
 present in `allowed_signers`; a revoked signer MUST have an effective end date.
+The release signer is authorized for both the `git` and `ugs-attestation`
+signature namespaces. Attestation signatures must use the latter namespace.

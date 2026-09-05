@@ -55,5 +55,7 @@ validation correction.
 and SBOM validation support.
 `CR-0039-release-attestation-validation.md` records release attestation
 validation and tag binding.
+`CR-0040-attestation-signature-verification.md` records cryptographic SSH
+attestation verification.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

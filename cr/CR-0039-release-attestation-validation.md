@@ -31,8 +31,8 @@ Run `scripts/test_release_attestation.sh`, `scripts/validate_repo.sh`, and
 
 ## Risk
 
-The reference validator checks structure and binding but does not replace
-Sigstore, in-toto, or builder-specific cryptographic adapters.
+The reference validator checks structure, binding, and SSH detached
+signatures. Sigstore, in-toto, or builder-specific adapters remain optional.
 
 ## Rollback
 

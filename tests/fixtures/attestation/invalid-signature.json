@@ -1,0 +1,5 @@
+{
+  "schema_version": 1, "type": "ugs-release-attestation", "repository": "Semcosm/UGS", "release_tag": "v0.3.10", "commit": "0123456789012345678901234567890123456789",
+  "artifact": {"name": "x", "digest": "sha256:0123456789012345678901234567890123456789012345678901234567890123"}, "builder": {"id": "fixture"}, "built_at": "2026-09-05T00:00:00Z",
+  "signature": {"format": "ssh", "namespace": "ugs-attestation", "principal": "chenzhipeng.main@gmail.com", "value": "bm90LWEtc2lnbmF0dXJl"}
+}

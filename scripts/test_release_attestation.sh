@@ -12,4 +12,8 @@ if "$validator" "$fixtures/invalid-commit.json" >/dev/null 2>&1; then
   echo "attestation fixture unexpectedly passed: invalid-commit.json" >&2
   exit 1
 fi
+if "$validator" "$fixtures/invalid-signature.json" >/dev/null 2>&1; then
+  echo "attestation fixture unexpectedly passed: invalid-signature.json" >&2
+  exit 1
+fi
 echo "release attestation fixtures validation passed"

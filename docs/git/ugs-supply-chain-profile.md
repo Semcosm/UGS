@@ -36,5 +36,8 @@ older releases or v0.2 history.
 
 Release attestations use `scripts/validate_release_attestation.sh` and bind a
 release tag to a commit, artifact SHA-256 digest, builder identity, and build
-timestamp. `scripts/validate_supply_chain_release.sh` applies those checks to
-the evidence paths during tag validation.
+timestamp. The attestation payload is canonicalized and verified with an SSH
+detached signature in the `ugs-attestation` namespace. The release signer is
+authorized for that namespace in `keys/allowed_signers`.
+`scripts/validate_supply_chain_release.sh` applies these checks to evidence
+paths during tag validation.

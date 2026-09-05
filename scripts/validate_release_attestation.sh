@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [ "$#" -lt 1 ] || [ "$#" -gt 3 ]; then
-  echo "usage: $0 <attestation.json> [release-tag] [commit]" >&2
+if [ "$#" -lt 1 ] || [ "$#" -gt 4 ]; then
+  echo "usage: $0 <attestation.json> [release-tag] [commit] [require-signature]" >&2
   exit 2
 fi
 attestation="$1"
 expected_tag="${2:-}"
 expected_commit="${3:-}"
+require_signature="${4:-false}"
 fail() { echo "release attestation validation failed: $1" >&2; exit 1; }
 [ -f "$attestation" ] || fail "file does not exist: $attestation"
 command -v jq >/dev/null 2>&1 || fail "jq is required"
@@ -26,7 +27,13 @@ commit="$(jq -r '.commit' "$attestation")"
 if [ -n "$expected_tag" ] && git rev-parse --verify --quiet "refs/tags/$expected_tag^{commit}" >/dev/null; then
   [ "$(git rev-parse "refs/tags/$expected_tag^{commit}")" = "$commit" ] || fail "attestation commit differs from release tag target"
 fi
-if jq -e '.signature != null' "$attestation" >/dev/null; then
-  jq -e '.signature.verified == true and (.signature.algorithm | IN("ssh", "sigstore")) and (.signature.signer | type == "string" and length > 0)' "$attestation" >/dev/null || fail "invalid attestation signature metadata"
+if [ "$require_signature" = "true" ] || jq -e '.signature != null' "$attestation" >/dev/null; then
+  jq -e '.signature.format == "ssh" and .signature.namespace == "ugs-attestation" and (.signature.principal | type == "string" and contains("@")) and (.signature.value | type == "string" and length > 0)' "$attestation" >/dev/null || fail "invalid SSH attestation signature metadata"
+  command -v ssh-keygen >/dev/null 2>&1 || fail "ssh-keygen is required for signed attestations"
+  temp_dir="$(mktemp -d)"
+  trap 'rm -rf "$temp_dir"' EXIT
+  jq -cS 'del(.signature)' "$attestation" > "$temp_dir/payload"
+  printf '%s' "$(jq -r '.signature.value' "$attestation")" | base64 --decode > "$temp_dir/signature" 2>/dev/null || fail "attestation signature is not base64"
+  ssh-keygen -Y verify -f keys/allowed_signers -I "$(jq -r '.signature.principal' "$attestation")" -n ugs-attestation -s "$temp_dir/signature" < "$temp_dir/payload" >/dev/null 2>&1 || fail "SSH attestation signature verification failed"
 fi
 echo "release attestation validation passed"
