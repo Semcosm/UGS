@@ -11,6 +11,26 @@ scripts/ugs_init.sh --profile standard /path/to/empty-repository
 scripts/ugs_init.sh --profile high-trust /path/to/empty-repository
 ```
 
+Document Map support is optional and is not installed by default. To enable
+the feature, pass `--with-document-map`:
+
+```bash
+scripts/ugs_init.sh --profile standard --with-document-map /path/to/empty-repository
+```
+
+The bootstrap package then installs a minimal
+`.ugs/document-map.json`, `document-map.schema.json`, and the generator and
+checker scripts. The minimal template maps only `README.md`; users extend the
+tree as their documentation grows. `scripts/generate_document_map.py` renders
+the configured tree, while `scripts/validate_document_map.py` checks that the
+README has not drifted. Standard workflows invoke the checker only when the
+configuration exists.
+
+The published package's release tests must initialize at least one consumer
+with `--with-document-map` and pass both generation and validation checks. This
+keeps the feature optional for consumers while making it a tested capability
+of every UGS bootstrap release.
+
 The command creates or initializes a Git repository, installs the UGS policy,
 schema, CR template, policy validator, and managed hooks, then creates a
 commit when Git identity is configured. `standard` additionally installs the

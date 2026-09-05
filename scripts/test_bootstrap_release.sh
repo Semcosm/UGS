@@ -98,6 +98,13 @@ git init --quiet -b main "$standard_repo"
 
 echo "published bootstrap standard profile verified and consumed: $tag"
 
+document_map_repo="$temp_dir/document-map-consumer-repository"
+git init --quiet -b main "$document_map_repo"
+"$package_root/scripts/ugs_init.sh" --profile standard --with-document-map --no-commit "$document_map_repo"
+[ "$(jq -r '.document_map' "$document_map_repo/.ugs/bootstrap.json")" = "true" ]
+(cd "$document_map_repo" && scripts/generate_document_map.py --check && scripts/validate_document_map.py)
+echo "published bootstrap optional Document Map verified and consumed: $tag"
+
 if jq -e '.profiles | index("high-trust")' "$manifest" >/dev/null 2>&1; then
   high_trust_repo="$temp_dir/high-trust-consumer-repository"
   git init --quiet -b main "$high_trust_repo"

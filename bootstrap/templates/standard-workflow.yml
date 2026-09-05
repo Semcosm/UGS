@@ -25,3 +25,6 @@ jobs:
           scripts/validate_supply_chain_profile.sh
           scripts/validate_action_pinning.sh
           scripts/validate_repository_shape.sh
+          if [ -f .ugs/document-map.json ]; then
+            scripts/validate_document_map.py
+          fi
