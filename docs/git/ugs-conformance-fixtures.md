@@ -19,3 +19,10 @@ hooks, exercises rebase/merge/squash, and checks protected-ref updates.
 Other implementations can consume the JSON catalog and compare normalized
 `pass`/`fail` results and failure reasons. Git OIDs are generated locally for
 each disposable run and are intentionally not tied to this repository.
+
+The end-to-end profile gate is `scripts/test_profile_conformance.sh`. Its
+matrix is recorded in `tests/conformance/profile-matrix.json` and covers
+generated consumer repositories, hooks, CRs, all declared integration modes,
+migration/dry-run/idempotence, protected refs, quality and supply-chain
+requirements, and temporary-key high-trust signing checks. It prints one
+result per profile and fails if any profile requirement fails.
