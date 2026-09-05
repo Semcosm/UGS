@@ -46,6 +46,7 @@ primitives:
 - [v0.3 Roadmap](docs/roadmap/v0.3.md)
 - [Managed Hooks](.githooks/README.md)
 - [Portable Conformance Fixtures](docs/git/ugs-conformance-fixtures.md)
+- [UGS Bootstrap Package](docs/git/ugs-bootstrap.md)
 
 ## Version Status
 

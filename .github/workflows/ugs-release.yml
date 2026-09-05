@@ -1,0 +1,38 @@
+name: ugs-release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap-package:
+    name: build and publish bootstrap package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out release tag
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+
+      - name: Verify release tag
+        run: scripts/validate_release_tag.sh "${GITHUB_REF_NAME}"
+
+      - name: Test bootstrap package
+        run: scripts/test_bootstrap_package.sh
+
+      - name: Build bootstrap package
+        env:
+          SOURCE_DATE_EPOCH: 0
+        run: scripts/build_bootstrap_package.sh "${GITHUB_REF_NAME}" --output-dir dist
+
+      - name: Publish release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1 || \
+            gh release create "${GITHUB_REF_NAME}" --verify-tag --title "UGS ${GITHUB_REF_NAME}" --notes-file "releases/${GITHUB_REF_NAME}.md"
+          gh release upload "${GITHUB_REF_NAME}" dist/* --clobber
