@@ -30,8 +30,7 @@
         {"title": "Managed Hooks", "path": ".githooks/README.md"},
         {"title": "Trusted Signers", "path": "keys/README.md"},
         {"title": "Change Requests", "path": "cr/README.md"},
-        {"title": "Adapters", "path": "adapters/README.md"},
-        {"title": "Pull Request Template", "path": ".github/pull_request_template.md"}
+        {"title": "Adapters", "path": "adapters/README.md"}
       ]
     },
     {
