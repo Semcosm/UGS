@@ -50,5 +50,12 @@
     "required_documents": ["README.md", "CONTRIBUTING.md", "RELEASE.md"],
     "test_entrypoints": ["scripts/validate_repo.sh", "scripts/ugs_check.sh"]
   },
+  "supply_chain": {
+    "profile": "basic",
+    "action_pinning": "declared",
+    "sbom": "declared",
+    "reproducible_builds": "declared",
+    "release_attestations": "declared"
+  },
   "extensions": {}
 }

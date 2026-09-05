@@ -45,5 +45,7 @@ exception lifecycle validation.
 `CR-0033-v0-3-5-release.md` records the v0.3.5 exception lifecycle
 capabilities release.
 `CR-0034-quality-profile.md` records the optional v0.3 quality profile.
+`CR-0035-supply-chain-profile.md` records the optional v0.3 supply-chain
+profile.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

@@ -23,7 +23,7 @@ require() {
 }
 
 require 'type == "object"' "top level must be an object"
-require '([keys[] | select(. != "$schema" and . != "format" and . != "schema_version" and . != "policy_version" and . != "conformance_level" and . != "migration" and . != "branching" and . != "commits" and . != "review" and . != "automation" and . != "releases" and . != "exceptions" and . != "quality" and . != "extensions")] | length) == 0' "unknown top-level field; use extensions.x-* for extensions"
+require '([keys[] | select(. != "$schema" and . != "format" and . != "schema_version" and . != "policy_version" and . != "conformance_level" and . != "migration" and . != "branching" and . != "commits" and . != "review" and . != "automation" and . != "releases" and . != "exceptions" and . != "quality" and . != "supply_chain" and . != "extensions")] | length) == 0' "unknown top-level field; use extensions.x-* for extensions"
 require '(."$schema" == "schema/policy.schema.json")' 'unsupported $schema'
 require '.format == "ugs-policy/v0.3"' "unsupported format"
 require '.schema_version == 1' "unsupported schema_version"
@@ -59,6 +59,15 @@ if jq -e 'has("quality")' "$manifest" >/dev/null; then
   while IFS= read -r path; do
     [ -x "$path" ] || fail "quality test entrypoint must be executable: $path"
   done < <(jq -r '.quality.test_entrypoints[]' "$manifest")
+fi
+if jq -e 'has("supply_chain")' "$manifest" >/dev/null; then
+  require '.supply_chain | type == "object" and (.profile | IN("basic", "standard", "high-trust"))' "invalid supply_chain.profile"
+  for field in action_pinning sbom reproducible_builds release_attestations; do
+    require ".supply_chain.${field} | IN(\"none\", \"declared\", \"full_sha\", \"release\", \"verified\", \"signed\")" "invalid supply_chain.${field}"
+  done
+  require '(.supply_chain.profile != "basic") or (all([.supply_chain.action_pinning, .supply_chain.sbom, .supply_chain.reproducible_builds, .supply_chain.release_attestations][]; . != "none"))' "basic supply-chain profile requires declared evidence"
+  require '(.supply_chain.profile != "standard") or (.supply_chain.action_pinning == "full_sha" and .supply_chain.sbom == "release" and .supply_chain.reproducible_builds != "none" and .supply_chain.release_attestations == "signed")' "standard supply-chain profile requires pinned actions, release SBOM, build evidence, and signed attestations"
+  require '(.supply_chain.profile != "high-trust") or (.supply_chain.action_pinning == "full_sha" and .supply_chain.sbom == "release" and .supply_chain.reproducible_builds == "verified" and .supply_chain.release_attestations == "signed")' "high-trust supply-chain profile requires verified builds"
 fi
 require '(.extensions | type == "object" and all(keys[]; startswith("x-")))' "extensions keys must begin with x-"
 
