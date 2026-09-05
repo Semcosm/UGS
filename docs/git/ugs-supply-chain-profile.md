@@ -34,6 +34,10 @@ The profile is additive and optional. Repositories without this section remain
 valid v0.3 repositories, and a declaration does not retroactively invalidate
 older releases or v0.2 history.
 
+`standard` and `high-trust` declarations MUST include evidence paths for at
+least an SBOM and build record; `high-trust` additionally requires an
+attestation path.
+
 Release attestations use `scripts/validate_release_attestation.sh` and bind a
 release tag to a commit, artifact SHA-256 digest, builder identity, and build
 timestamp. The attestation payload is canonicalized and verified with an SSH

@@ -61,5 +61,7 @@ attestation verification.
 correction.
 `CR-0042-build-record-validation.md` records build-record and release evidence
 binding validation.
+`CR-0043-supply-chain-evidence-requirement.md` records the requirement for
+evidence paths in elevated supply-chain profiles.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

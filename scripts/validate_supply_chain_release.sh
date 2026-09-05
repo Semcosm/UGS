@@ -9,7 +9,9 @@ tag="$1"
 manifest=".ugs/policy.json"
 fail() { echo "supply-chain release validation failed: $1" >&2; exit 1; }
 [ -f "$manifest" ] || fail "manifest does not exist"
+profile="$(jq -r '.supply_chain.profile // "none"' "$manifest")"
 if ! jq -e '.supply_chain? // {} | has("evidence")' "$manifest" >/dev/null; then
+  [ "$profile" = "basic" ] || [ "$profile" = "none" ] || fail "$profile requires supply-chain evidence"
   echo "supply-chain release evidence not declared"
   exit 0
 fi

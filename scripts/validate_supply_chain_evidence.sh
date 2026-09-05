@@ -5,11 +5,12 @@ manifest="${1:-.ugs/policy.json}"
 fail() { echo "supply-chain evidence validation failed: $1" >&2; exit 1; }
 [ -f "$manifest" ] || fail "manifest does not exist: $manifest"
 command -v jq >/dev/null 2>&1 || fail "jq is required"
+profile="$(jq -r '.supply_chain.profile // "none"' "$manifest")"
 if ! jq -e '.supply_chain? // {} | has("evidence")' "$manifest" >/dev/null; then
+  [ "$profile" = "basic" ] || [ "$profile" = "none" ] || fail "$profile requires supply-chain evidence"
   echo "supply-chain evidence not declared"
   exit 0
 fi
-profile="$(jq -r '.supply_chain.profile' "$manifest")"
 for field in sbom_paths attestation_paths build_record_paths; do
   while IFS= read -r path; do
     case "$path" in

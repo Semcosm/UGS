@@ -74,6 +74,7 @@ run_check "exception record fixtures" scripts/test_exception_records.sh
 run_check "quality profile" scripts/validate_quality_profile.sh
 run_check "supply-chain profile" scripts/validate_supply_chain_profile.sh
 run_check "supply-chain evidence" scripts/validate_supply_chain_evidence.sh
+run_check "supply-chain evidence fixtures" scripts/test_supply_chain_evidence.sh
 run_check "SBOM fixtures" scripts/test_sbom.sh
 run_check "release attestation fixtures" scripts/test_release_attestation.sh
 run_check "build record fixtures" scripts/test_build_record.sh

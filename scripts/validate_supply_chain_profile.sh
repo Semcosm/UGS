@@ -24,6 +24,14 @@ case "$profile" in
   standard) jq -e '.supply_chain.action_pinning == "full_sha" and .supply_chain.sbom == "release" and .supply_chain.reproducible_builds != "none" and .supply_chain.release_attestations == "signed"' "$manifest" >/dev/null || fail "standard profile requirements are incomplete" ;;
   high-trust) jq -e '.supply_chain.action_pinning == "full_sha" and .supply_chain.sbom == "release" and .supply_chain.reproducible_builds == "verified" and .supply_chain.release_attestations == "signed"' "$manifest" >/dev/null || fail "high-trust profile requirements are incomplete" ;;
 esac
+if [ "$profile" != "basic" ]; then
+  jq -e '(.supply_chain.evidence | type == "object") and ((.supply_chain.evidence.sbom_paths // []) | length > 0) and ((.supply_chain.evidence.build_record_paths // []) | length > 0)' "$manifest" >/dev/null \
+    || fail "$profile requires SBOM and build evidence paths"
+fi
+if [ "$profile" = "high-trust" ]; then
+  jq -e '(.supply_chain.evidence.attestation_paths // []) | length > 0' "$manifest" >/dev/null \
+    || fail "high-trust requires an attestation evidence path"
+fi
 if jq -e '.supply_chain | has("evidence")' "$manifest" >/dev/null; then
   for field in sbom_paths attestation_paths build_record_paths; do
     jq -e --arg field "$field" '.supply_chain.evidence[$field] // [] | all(.[]; (type == "string") and ((startswith("/")) | not) and ((contains("..")) | not) and (length > 0))' "$manifest" >/dev/null \
