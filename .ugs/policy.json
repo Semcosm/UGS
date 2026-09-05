@@ -57,5 +57,11 @@
     "reproducible_builds": "declared",
     "release_attestations": "declared"
   },
+  "repository_shape": {
+    "model": "single",
+    "submodules": "none",
+    "generated_files": "none",
+    "large_files": "normal"
+  },
   "extensions": {}
 }

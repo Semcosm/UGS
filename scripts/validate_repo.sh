@@ -12,6 +12,7 @@ required_files=(
   "docs/git/ugs-branch-profiles.md"
   "docs/git/ugs-quality-profile.md"
   "docs/git/ugs-supply-chain-profile.md"
+  "docs/git/ugs-repository-shapes.md"
   "docs/git/commit-convention.md"
   "docs/git/review-policy.md"
   "docs/git/release-policy.md"
@@ -61,6 +62,7 @@ required_files=(
   "scripts/test_exception_records.sh"
   "scripts/validate_quality_profile.sh"
   "scripts/validate_supply_chain_profile.sh"
+  "scripts/validate_repository_shape.sh"
   "scripts/validate_supply_chain_profile.sh"
 )
 
@@ -114,6 +116,7 @@ grep -Fq "releases/v0.2.0.md" README.md || fail "README must link v0.2.0 release
 grep -Fq "docs/roadmap/v0.3.md" README.md || fail "README must link v0.3 roadmap"
 grep -Fq "docs/git/ugs-quality-profile.md" README.md || fail "README must link quality profile"
 grep -Fq "docs/git/ugs-supply-chain-profile.md" README.md || fail "README must link supply-chain profile"
+grep -Fq "docs/git/ugs-repository-shapes.md" README.md || fail "README must link repository shapes"
 grep -Fq "cr/README.md" README.md || fail "README must link CR record guide"
 grep -Fq "keys/README.md" README.md || fail "README must link trusted signer guide"
 grep -Fq "## Summary" .github/pull_request_template.md || fail "PR template must include Summary"
@@ -129,6 +132,7 @@ scripts/validate_policy_manifest.sh
 scripts/test_policy_manifest.sh
 scripts/validate_quality_profile.sh
 scripts/validate_supply_chain_profile.sh
+scripts/validate_repository_shape.sh
 
 cr_records=(cr/CR-*.md)
 if [ -e "${cr_records[0]}" ]; then

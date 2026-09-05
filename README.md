@@ -21,6 +21,7 @@ primitives:
 - [UGS Conformance Levels And Profile Matrix](docs/git/ugs-conformance-levels.md)
 - [UGS Quality Profile](docs/git/ugs-quality-profile.md)
 - [UGS Supply-Chain Profile](docs/git/ugs-supply-chain-profile.md)
+- [UGS Repository Shape Capabilities](docs/git/ugs-repository-shapes.md)
 - [Branch Profiles](docs/git/ugs-branch-profiles.md)
 - [Commit Convention](docs/git/commit-convention.md)
 - [Review Policy](docs/git/review-policy.md)
@@ -34,6 +35,7 @@ primitives:
 - [v0.3.5 Release Packet](releases/v0.3.5.md)
 - [v0.3.6 Release Packet](releases/v0.3.6.md)
 - [v0.3.7 Release Packet](releases/v0.3.7.md)
+- [v0.3.8 Release Packet](releases/v0.3.8.md)
 - [v0.3 Roadmap](docs/roadmap/v0.3.md)
 - [Managed Hooks](.githooks/README.md)
 
