@@ -1,17 +1,17 @@
 # CR-0044: Strengthen release evidence verification
 
 Base: main
-Head or Range: main..HEAD
+Head or Range: fix/p2-release-verification / 4c145ce..main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: fix(policy): strengthen release evidence verification
 Revision: 1
-Status: accepted
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: b5b20086b86d81d8cc2ab1f11ba63f7117ed5c63
-Head OID: b5b20086b86d81d8cc2ab1f11ba63f7117ed5c63
-Integrated Result: pending
+Head OID: 52ac3d160de4e8bd03707a41bfd42338c6f6e460
+Integrated Result: main@52ac3d160de4e8bd03707a41bfd42338c6f6e460
 
 ## Summary
 
@@ -39,7 +39,9 @@ fixtures also passed. `git diff --check` passed.
 
 Repositories claiming `standard` or `high-trust` with incomplete evidence,
 unbound repositories, or inconsistent artifact digests will fail validation.
-The current declaration-only `basic` repository remains valid.
+The current declaration-only `basic` repository remains valid. The GitHub
+rebase integration object is tracked separately from the signed source commit
+by CR-0045.
 
 ## Rollback
 
