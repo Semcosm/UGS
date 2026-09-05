@@ -74,6 +74,10 @@ required_files=(
   "scripts/test_build_record.sh"
   "scripts/test_supply_chain_release.sh"
   "scripts/validate_repository_shape.sh"
+  "scripts/conformance.py"
+  "scripts/test_conformance.sh"
+  "tests/conformance/manifest.json"
+  "tests/fixtures/cr/valid-template.md"
 )
 
 for file in "${required_files[@]}"; do
@@ -113,6 +117,8 @@ executable_files=(
   "scripts/validate_action_pinning.sh"
   "scripts/test_action_pinning.sh"
   "scripts/test_supply_chain_release.sh"
+  "scripts/conformance.py"
+  "scripts/test_conformance.sh"
 )
 
 for file in "${executable_files[@]}"; do
@@ -149,6 +155,7 @@ grep -Fq "## Rollback" .github/pull_request_template.md || fail "PR template mus
 grep -Fq "## Breaking Change" .github/pull_request_template.md || fail "PR template must include Breaking Change"
 grep -Fq "## Backport Target" .github/pull_request_template.md || fail "PR template must include Backport Target"
 grep -Fq "scripts/validate_commit_signatures.sh" .github/workflows/ugs-validate.yml || fail "workflow must validate commit signatures"
+grep -Fq "scripts/test_conformance.sh" README.md || fail "README must document conformance fixtures"
 
 scripts/validate_policy_manifest.sh
 scripts/test_policy_manifest.sh
