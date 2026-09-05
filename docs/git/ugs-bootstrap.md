@@ -20,3 +20,8 @@ source and publishes it, its manifest, and its SHA-256 file as Release assets.
 The manifest binds the package to the source commit and records every payload
 file digest. Consumers should verify the signed release tag and checksum
 before extracting the package.
+
+The release workflow includes a consumer job that downloads the published
+assets through the GitHub Releases API on a clean runner. It verifies the
+release tag, checksum, source commit, embedded manifest, every payload digest,
+and then initializes a second clean repository from the extracted package.
