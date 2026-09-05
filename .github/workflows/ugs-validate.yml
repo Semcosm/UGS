@@ -52,6 +52,9 @@ jobs:
       - name: Validate disposable Git fixtures
         run: scripts/test_git_fixtures.sh
 
+      - name: Validate independent conformance fixtures
+        run: scripts/test_conformance.sh
+
       - name: Validate review trailer fixtures
         run: scripts/test_review_trailers.sh
 

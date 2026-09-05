@@ -45,6 +45,7 @@ primitives:
 - [v0.3.15 Release Packet](releases/v0.3.15.md)
 - [v0.3 Roadmap](docs/roadmap/v0.3.md)
 - [Managed Hooks](.githooks/README.md)
+- [Portable Conformance Fixtures](docs/git/ugs-conformance-fixtures.md)
 
 ## Version Status
 
@@ -66,6 +67,9 @@ UGS defines:
 - review evidence placement rules
 - signed annotated tag based release requirements
 - a minimum automation baseline through managed hooks or equivalent enforcement
+
+Run `scripts/test_conformance.sh` to compare the independent fixture
+implementation with the Bash validators.
 
 ## This Repository
 

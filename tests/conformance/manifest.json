@@ -1,0 +1,25 @@
+{
+  "format": "ugs-conformance-fixtures/v1",
+  "fixtures": [
+    {"id": "policy-valid", "kind": "policy", "path": "tests/fixtures/policy-manifest/valid.json", "expected": "pass"},
+    {"id": "policy-invalid-level", "kind": "policy", "path": "tests/fixtures/policy-manifest/invalid-conformance-level.json", "expected": "fail", "reason": "invalid conformance_level"},
+    {"id": "policy-unknown-field", "kind": "policy", "path": "tests/fixtures/policy-manifest/invalid-unknown-field.json", "expected": "fail", "reason": "unknown top-level field"},
+    {"id": "review-valid", "kind": "review", "path": "tests/fixtures/review-trailers/valid.txt", "expected": "pass"},
+    {"id": "review-missing-reviewed-by", "kind": "review", "path": "tests/fixtures/review-trailers/invalid-missing-reviewed-by.txt", "expected": "fail", "reason": "Reviewed-by"},
+    {"id": "sbom-valid-spdx", "kind": "sbom", "path": "tests/fixtures/sbom/valid-spdx.json", "expected": "pass"},
+    {"id": "sbom-invalid-version", "kind": "sbom", "path": "tests/fixtures/sbom/invalid-missing-version.json", "expected": "fail", "reason": "SPDX packages lack name, version, and identity"},
+    {"id": "build-valid", "kind": "build", "path": "tests/fixtures/build-record/valid.json", "expected": "pass"},
+    {"id": "build-invalid-digest", "kind": "build", "path": "tests/fixtures/build-record/invalid-digest.json", "expected": "fail", "reason": "invalid artifact digest"},
+    {"id": "attestation-valid", "kind": "attestation", "path": "tests/fixtures/attestation/valid.json", "expected": "pass"},
+    {"id": "attestation-invalid-digest", "kind": "attestation", "path": "tests/fixtures/attestation/invalid-digest.json", "expected": "fail", "reason": "invalid artifact digest"}
+  ],
+  "generated": {
+    "cr-valid": {"kind": "cr", "expected": "pass"},
+    "cr-invalid-missing-section": {"kind": "cr", "expected": "fail", "reason": "missing section: Risk"},
+    "signed-commit": {"kind": "git-signature", "expected": "pass"},
+    "annotated-signed-tag": {"kind": "git-tag", "expected": "pass"},
+    "lightweight-release-tag": {"kind": "git-tag", "expected": "fail", "reason": "formal release tag must be annotated"},
+    "protected-main-non-ff": {"kind": "protected-ref", "expected": "fail", "reason": "main updates must be fast-forward"},
+    "protected-main-delete": {"kind": "protected-ref", "expected": "fail", "reason": "deleting main is not allowed"}
+  }
+}
