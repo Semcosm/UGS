@@ -20,14 +20,43 @@ validate_commit() {
   git rev-parse --quiet --verify "$commit^{commit}" >/dev/null 2>&1 \
     || fail "invalid commit: $commit"
 
-  git cat-file commit "$commit" | grep -q '^gpgsig ' \
-    || fail "commit is not signed: $commit"
+  if ! git cat-file commit "$commit" | grep -q '^gpgsig '; then
+    validate_rebased_commit "$commit" \
+      || fail "commit is not signed: $commit"
+    return 0
+  fi
 
   git -c gpg.format=ssh \
     -c gpg.ssh.allowedSignersFile="$repo_root/keys/allowed_signers" \
     -c gpg.ssh.revocationFile="$repo_root/keys/revoked_signers" \
     verify-commit "$commit" >/dev/null 2>&1 \
     || fail "commit signature is not trusted: $commit"
+}
+
+validate_rebased_commit() {
+  local target="$1"
+  local target_tree target_parents target_author target_message candidate
+  target_tree="$(git show -s --format='%T' "$target")"
+  target_parents="$(git show -s --format='%P' "$target")"
+  target_author="$(git show -s --format='%an%x09%ae%x09%ad' --date=raw "$target")"
+  target_message="$(git cat-file commit "$target" | sed '1,/^$/d')"
+
+  while IFS= read -r candidate; do
+    [ "$candidate" = "$target" ] && continue
+    [ "$(git show -s --format='%T' "$candidate")" = "$target_tree" ] || continue
+    [ "$(git show -s --format='%P' "$candidate")" = "$target_parents" ] || continue
+    [ "$(git show -s --format='%an%x09%ae%x09%ad' --date=raw "$candidate")" = "$target_author" ] || continue
+    [ "$(git cat-file commit "$candidate" | sed '1,/^$/d')" = "$target_message" ] || continue
+    git cat-file commit "$candidate" | grep -q '^gpgsig ' || continue
+    if git -c gpg.format=ssh \
+      -c gpg.ssh.allowedSignersFile="$repo_root/keys/allowed_signers" \
+      -c gpg.ssh.revocationFile="$repo_root/keys/revoked_signers" \
+      verify-commit "$candidate" >/dev/null 2>&1; then
+      echo "commit signature validation passed via signed source commit: $candidate" >&2
+      return 0
+    fi
+  done < <(git rev-list --all)
+  return 1
 }
 
 if [[ "$spec" == *".."* ]]; then
