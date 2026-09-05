@@ -85,6 +85,7 @@ required_files=(
   "scripts/build_bootstrap_package.py"
   "scripts/build_bootstrap_package.sh"
   "scripts/test_bootstrap_package.sh"
+  "scripts/test_bootstrap_release.sh"
   "docs/git/ugs-bootstrap.md"
   ".github/workflows/ugs-release.yml"
 )
@@ -133,6 +134,7 @@ executable_files=(
   "scripts/build_bootstrap_package.py"
   "scripts/build_bootstrap_package.sh"
   "scripts/test_bootstrap_package.sh"
+  "scripts/test_bootstrap_release.sh"
 )
 
 for file in "${executable_files[@]}"; do
