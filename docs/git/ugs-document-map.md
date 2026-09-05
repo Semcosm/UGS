@@ -37,3 +37,7 @@ The configuration is deliberately separate from `.ugs/policy.json`: policy
 describes repository governance, while the document map describes navigation.
 This keeps the recursive index extensible without adding document-specific
 paths to the policy schema or validator.
+
+Adoption is optional for UGS consumers. Bootstrap users can start with the
+minimal template and opt in when their repository has enough documentation to
+benefit from a maintained map.
