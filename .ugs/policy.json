@@ -45,5 +45,10 @@
     "emergency_direct_push": true,
     "post_event_review_required": true
   },
+  "quality": {
+    "profile": "basic",
+    "required_documents": ["README.md", "CONTRIBUTING.md", "RELEASE.md"],
+    "test_entrypoints": ["scripts/validate_repo.sh", "scripts/ugs_check.sh"]
+  },
   "extensions": {}
 }

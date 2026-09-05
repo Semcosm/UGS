@@ -18,6 +18,7 @@
     "automation": {"$ref": "#/$defs/automation"},
     "releases": {"$ref": "#/$defs/releases"},
     "exceptions": {"$ref": "#/$defs/exceptions"},
+    "quality": {"$ref": "#/$defs/quality"},
     "extensions": {"$ref": "#/$defs/extensions"}
   },
   "$defs": {
@@ -28,6 +29,7 @@
     "automation": {"type": "object", "additionalProperties": false, "required": ["required_checks", "hooks_path"], "properties": {"required_checks": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true}, "hooks_path": {"const": ".githooks"}}},
     "releases": {"type": "object", "additionalProperties": false, "required": ["versioning", "tag_pattern", "annotated_tags_required", "trusted_signatures_required", "notes_path"], "properties": {"versioning": {"const": "semver"}, "tag_pattern": {"const": "v<major>.<minor>.<patch>"}, "annotated_tags_required": {"type": "boolean"}, "trusted_signatures_required": {"type": "boolean"}, "notes_path": {"const": "releases/"}}},
     "exceptions": {"type": "object", "additionalProperties": false, "required": ["emergency_direct_push", "post_event_review_required"], "properties": {"emergency_direct_push": {"type": "boolean"}, "post_event_review_required": {"type": "boolean"}}},
+    "quality": {"type": "object", "additionalProperties": false, "required": ["profile", "required_documents", "test_entrypoints"], "properties": {"profile": {"enum": ["basic", "standard"]}, "required_documents": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}, "test_entrypoints": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}}},
     "extensions": {"type": "object", "propertyNames": {"pattern": "^x-"}}
   }
 }

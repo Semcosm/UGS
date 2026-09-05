@@ -71,6 +71,7 @@ run_check "CR integration strategy fixtures" scripts/test_cr_integration_strateg
 run_check "CR review inheritance fixtures" scripts/test_cr_review_inheritance.sh
 run_check "signer roles fixtures" scripts/test_signer_roles.sh
 run_check "exception record fixtures" scripts/test_exception_records.sh
+run_check "quality profile" scripts/validate_quality_profile.sh
 
 for file in cr/CR-*.md; do
   [ -e "$file" ] || continue

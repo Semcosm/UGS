@@ -23,7 +23,7 @@ require() {
 }
 
 require 'type == "object"' "top level must be an object"
-require '([keys[] | select(. != "$schema" and . != "format" and . != "schema_version" and . != "policy_version" and . != "conformance_level" and . != "migration" and . != "branching" and . != "commits" and . != "review" and . != "automation" and . != "releases" and . != "exceptions" and . != "extensions")] | length) == 0' "unknown top-level field; use extensions.x-* for extensions"
+require '([keys[] | select(. != "$schema" and . != "format" and . != "schema_version" and . != "policy_version" and . != "conformance_level" and . != "migration" and . != "branching" and . != "commits" and . != "review" and . != "automation" and . != "releases" and . != "exceptions" and . != "quality" and . != "extensions")] | length) == 0' "unknown top-level field; use extensions.x-* for extensions"
 require '(."$schema" == "schema/policy.schema.json")' 'unsupported $schema'
 require '.format == "ugs-policy/v0.3"' "unsupported format"
 require '.schema_version == 1' "unsupported schema_version"
@@ -48,6 +48,18 @@ require '.automation.hooks_path == ".githooks"' "unsupported automation.hooks_pa
 require '.releases.versioning == "semver" and .releases.tag_pattern == "v<major>.<minor>.<patch>" and .releases.notes_path == "releases/"' "unsupported release declaration"
 require '(.releases.annotated_tags_required | type == "boolean") and (.releases.trusted_signatures_required | type == "boolean")' "release requirements must be boolean"
 require '(.exceptions.emergency_direct_push | type == "boolean") and (.exceptions.post_event_review_required | type == "boolean")' "exception capabilities must be boolean"
+if jq -e 'has("quality")' "$manifest" >/dev/null; then
+  require '.quality | type == "object" and (.profile | IN("basic", "standard"))' "invalid quality.profile"
+  require '(.quality.required_documents | type == "array" and length == (unique | length) and all(.[]; type == "string" and length > 0))' "quality.required_documents must be unique non-empty strings"
+  require '(.quality.test_entrypoints | type == "array" and length > 0 and length == (unique | length) and all(.[]; type == "string" and length > 0))' "quality.test_entrypoints must be unique non-empty strings"
+  require '(.quality.profile != "standard") or ((.quality.required_documents | index("LICENSE") != null) and (.quality.required_documents | index("SECURITY.md") != null) and (.quality.required_documents | index("CODE_OF_CONDUCT.md") != null) and (.quality.required_documents | index("SUPPORT.md") != null))' "standard quality profile requires license, security, conduct, and support documents"
+  while IFS= read -r path; do
+    [ -f "$path" ] || fail "quality required document does not exist: $path"
+  done < <(jq -r '.quality.required_documents[]' "$manifest")
+  while IFS= read -r path; do
+    [ -x "$path" ] || fail "quality test entrypoint must be executable: $path"
+  done < <(jq -r '.quality.test_entrypoints[]' "$manifest")
+fi
 require '(.extensions | type == "object" and all(keys[]; startswith("x-")))' "extensions keys must begin with x-"
 
 if [ -f REPOSITORY_POLICY.md ]; then

@@ -11,6 +11,6 @@
   "automation": {"required_checks": ["ugs-validate"], "hooks_path": ".githooks"},
   "releases": {"versioning": "semver", "tag_pattern": "v<major>.<minor>.<patch>", "annotated_tags_required": true, "trusted_signatures_required": true, "notes_path": "releases/"},
   "exceptions": {"emergency_direct_push": true, "post_event_review_required": true},
-  "quality": {"profile": "basic", "required_documents": ["README.md"], "test_entrypoints": ["scripts/validate_repo.sh"]},
-  "extensions": {"x-fixture": true}
+  "quality": {"profile": "premium", "required_documents": ["README.md"], "test_entrypoints": ["scripts/validate_repo.sh"]},
+  "extensions": {}
 }

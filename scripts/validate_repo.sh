@@ -10,6 +10,7 @@ required_files=(
   "README.md"
   "docs/git/ugs-core.md"
   "docs/git/ugs-branch-profiles.md"
+  "docs/git/ugs-quality-profile.md"
   "docs/git/commit-convention.md"
   "docs/git/review-policy.md"
   "docs/git/release-policy.md"
@@ -57,6 +58,7 @@ required_files=(
   "scripts/test_signer_roles.sh"
   "scripts/validate_exception_record.sh"
   "scripts/test_exception_records.sh"
+  "scripts/validate_quality_profile.sh"
 )
 
 for file in "${required_files[@]}"; do
@@ -107,6 +109,7 @@ grep -Fq "CONTRIBUTING.md" README.md || fail "README must link contributing guid
 grep -Fq "RELEASE.md" README.md || fail "README must link release guide"
 grep -Fq "releases/v0.2.0.md" README.md || fail "README must link v0.2.0 release packet"
 grep -Fq "docs/roadmap/v0.3.md" README.md || fail "README must link v0.3 roadmap"
+grep -Fq "docs/git/ugs-quality-profile.md" README.md || fail "README must link quality profile"
 grep -Fq "cr/README.md" README.md || fail "README must link CR record guide"
 grep -Fq "keys/README.md" README.md || fail "README must link trusted signer guide"
 grep -Fq "## Summary" .github/pull_request_template.md || fail "PR template must include Summary"
@@ -120,6 +123,7 @@ grep -Fq "scripts/validate_commit_signatures.sh" .github/workflows/ugs-validate.
 
 scripts/validate_policy_manifest.sh
 scripts/test_policy_manifest.sh
+scripts/validate_quality_profile.sh
 
 cr_records=(cr/CR-*.md)
 if [ -e "${cr_records[0]}" ]; then
