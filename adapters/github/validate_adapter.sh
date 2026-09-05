@@ -7,5 +7,5 @@ for file in .github/pull_request_template.md .github/CODEOWNERS .github/workflow
 done
 grep -Fq "## Summary" "$repo_root/.github/pull_request_template.md" || fail "PR template is incomplete"
 grep -Fq "scripts/validate_commit_signatures.sh" "$repo_root/.github/workflows/ugs-validate.yml" || fail "workflow misses signature validation"
-"$repo_root/scripts/validate_action_pinning.sh" .ugs/policy.json .github/workflows
+"$repo_root/adapters/github/validate_action_pinning.sh" .ugs/policy.json .github/workflows
 echo "GitHub adapter validation passed"

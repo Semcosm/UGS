@@ -11,7 +11,6 @@ root_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 temp_dir="$(mktemp -d)"
 trap 'rm -rf "$temp_dir"' EXIT
 
-command -v gh >/dev/null 2>&1 || { echo "gh is required" >&2; exit 1; }
 command -v jq >/dev/null 2>&1 || { echo "jq is required" >&2; exit 1; }
 
 git fetch --quiet --tags origin "refs/tags/$tag:refs/tags/$tag" 2>/dev/null || true
@@ -19,7 +18,7 @@ git fetch --quiet --tags origin "refs/tags/$tag:refs/tags/$tag" 2>/dev/null || t
 
 download_dir="$temp_dir/download"
 mkdir -p "$download_dir"
-gh release download "$tag" --pattern "ugs-bootstrap-${tag}.tar.gz" --pattern "ugs-bootstrap-${tag}.tar.gz.sha256" --pattern "ugs-bootstrap-${tag}.tar.gz.manifest.json" --dir "$download_dir"
+"$root_dir/adapters/github/download_release.sh" "$tag" "$download_dir"
 archive="$download_dir/ugs-bootstrap-${tag}.tar.gz"
 manifest="$archive.manifest.json"
 (cd "$download_dir" && sha256sum -c "$(basename "$archive").sha256")

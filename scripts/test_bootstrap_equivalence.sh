@@ -44,6 +44,9 @@ scripts/create_pr_from_cr.sh	scripts/create_pr_from_cr.sh
 adapters/github/validate_pr.sh	adapters/github/validate_pr.sh
 adapters/github/create_pr_from_cr.sh	adapters/github/create_pr_from_cr.sh
 adapters/github/validate_adapter.sh	adapters/github/validate_adapter.sh
+adapters/github/validate_action_pinning.sh	adapters/github/validate_action_pinning.sh
+adapters/github/download_release.sh	adapters/github/download_release.sh
+adapters/github/publish_release.sh	adapters/github/publish_release.sh
 adapters/bare-git/update	adapters/bare-git/update
 scripts/validate_main_cr_range.sh	scripts/validate_main_cr_range.sh
 scripts/validate_ref_update.sh	scripts/validate_ref_update.sh
@@ -77,6 +80,7 @@ for profile in baseline standard high-trust; do
     standard)
       (cd "$target" && scripts/validate_policy_manifest.sh .ugs/policy.json && scripts/validate_quality_profile.sh .ugs/policy.json && scripts/validate_supply_chain_profile.sh .ugs/policy.json && scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows && scripts/validate_repository_shape.sh .ugs/policy.json)
       [ -x "$target/adapters/github/validate_pr.sh" ]
+      [ -x "$target/adapters/github/validate_action_pinning.sh" ]
       ;;
     high-trust)
       (cd "$target" && scripts/validate_policy_manifest.sh .ugs/policy.json && scripts/validate_signer_roles.sh && scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows)

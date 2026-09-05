@@ -44,6 +44,7 @@ def files(source, profile):
             "adapters/github/validate_pr.sh": (source / "adapters/github/validate_pr.sh").read_text(),
             "adapters/github/create_pr_from_cr.sh": (source / "adapters/github/create_pr_from_cr.sh").read_text(),
             "adapters/github/validate_adapter.sh": (source / "adapters/github/validate_adapter.sh").read_text(),
+            "adapters/github/validate_action_pinning.sh": (source / "adapters/github/validate_action_pinning.sh").read_text(),
             "LICENSE": "# License\n\nThis repository has not selected a license. Replace this file before distributing software.\n",
             "SECURITY.md": "# Security\n\nReport security issues privately to the repository maintainers.\n",
             "CODE_OF_CONDUCT.md": "# Code of Conduct\n\nContributors are expected to act respectfully and in good faith.\n",

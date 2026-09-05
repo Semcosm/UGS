@@ -15,6 +15,10 @@
 
 托管平台提供的 Pull Request、Merge Request、标签、评论、检查页等能力，均视为实现映射层，而不是规范本体。
 
+平台适配器必须把平台事件转换为 Core 的 refs、commit、CR、patch、tag
+和 trailer 输入；Core 校验不得把某一托管平台的 API、事件文件、URL 或
+目录布局作为唯一前提。
+
 ## 2. 术语
 
 ### 2.1 Repository

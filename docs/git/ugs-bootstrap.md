@@ -15,7 +15,8 @@ The command creates or initializes a Git repository, installs the UGS policy,
 schema, CR template, policy validator, and managed hooks, then creates a
 commit when Git identity is configured. `standard` additionally installs the
 quality profile documents, profile validators, supply-chain evidence landing
-area, and a SHA-pinned validation workflow. Use `--no-commit` for a staged
+area, and an optional GitHub compatibility adapter with a SHA-pinned workflow.
+The baseline profile contains only Git-native Core material. Use `--no-commit` for a staged
 initialization, `--dry-run` to inspect the plan, and `--migrate` to add only
 missing UGS files to an existing repository.
 
