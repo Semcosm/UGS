@@ -5,12 +5,12 @@ Head or Range: working tree based on main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(governance): add configurable Document Map validation
-Revision: 3
+Revision: 4
 Status: pending
 Decision: pending
 Policy Version: v0.3
 Base OID: 2f56c8ec2deda73539650d0413ea33eca02c6d92
-Head OID: ce6999d075f15c10eeb6230c70ec120cd3e69502
+Head OID: 8d7ef98c0551094b1f5dd1257611f4ca8e67bff1
 Integrated Result: pending
 
 ## Summary
@@ -41,6 +41,8 @@ generation and validation before accepting the package.
 `scripts/validate_repo.sh` pass. Bootstrap tests verify both the default
 disabled path and the opt-in path; the opt-in path covers generation and
 validation of the minimal map.
+The GitHub PR adapter also normalizes API-added trailing blank lines before
+comparing the generated PR body with the persisted CR.
 
 ## Risk
 
