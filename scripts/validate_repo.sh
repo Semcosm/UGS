@@ -91,6 +91,8 @@ required_files=(
   "tests/fixtures/cr/valid-template.md"
   "bootstrap/README.md"
   "bootstrap/templates/policy.json"
+  "bootstrap/templates/document-map.json"
+  "bootstrap/templates/document-map.schema.json"
   "scripts/ugs_init.py"
   "scripts/ugs_init.sh"
   "scripts/build_bootstrap_package.py"

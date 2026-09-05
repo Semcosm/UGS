@@ -28,6 +28,14 @@ git -C "$standard_repo" config user.email "bootstrap@example.invalid"
 [ -x "$standard_repo/adapters/github/validate_pr.sh" ]
 [ -x "$standard_repo/adapters/github/validate_action_pinning.sh" ]
 [ -x "$standard_repo/scripts/validate_quality_profile.sh" ]
+[ ! -e "$standard_repo/.ugs/document-map.json" ]
+
+standard_document_map="$temp_dir/standard-document-map-repo"
+"$root_dir/scripts/ugs_init.sh" --profile standard --with-document-map --no-commit "$standard_document_map" >/dev/null
+[ "$(jq -r '.document_map' "$standard_document_map/.ugs/bootstrap.json")" = "true" ]
+(cd "$standard_document_map" && scripts/generate_document_map.py --check && scripts/validate_document_map.py)
+[ -x "$standard_document_map/scripts/generate_document_map.py" ]
+[ -x "$standard_document_map/scripts/validate_document_map.py" ]
 
 high_trust="$temp_dir/high-trust-repo"
 "$root_dir/scripts/ugs_init.sh" --profile high-trust --no-commit "$high_trust" >/dev/null

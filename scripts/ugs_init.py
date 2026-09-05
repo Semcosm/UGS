@@ -16,7 +16,7 @@ def error(message):
 def git(target, *args):
     return subprocess.run(["git", "-C", str(target), *args], check=True, stdout=subprocess.PIPE, text=True).stdout.strip()
 
-def files(source, profile):
+def files(source, profile, with_document_map=False):
     template = source / "bootstrap" / "templates"
     policy_name = {"baseline": "policy.json", "standard": "policy-standard.json", "high-trust": "policy-high-trust.json"}[profile]
     policy = json.loads((template / policy_name).read_text())
@@ -39,6 +39,20 @@ def files(source, profile):
         "scripts/create_pr_from_cr.sh": (source / "scripts/create_pr_from_cr.sh").read_text(),
         "scripts/validate_main_cr_range.sh": (source / "scripts/validate_main_cr_range.sh").read_text(),
     }
+    if with_document_map:
+        document_map_schema = source / ".ugs/schema/document-map.schema.json"
+        if not document_map_schema.exists():
+            document_map_schema = template / "document-map.schema.json"
+        output.update({
+            ".ugs/document-map.json": (template / "document-map.json").read_text(),
+            ".ugs/schema/document-map.schema.json": document_map_schema.read_text(),
+            "scripts/generate_document_map.py": (source / "scripts/generate_document_map.py").read_text(),
+            "scripts/validate_document_map.py": (source / "scripts/validate_document_map.py").read_text(),
+        })
+        output["README.md"] += (
+            "\n## Document Map（文档映射）\n\n"
+            "- [Repository README（仓库 README）](README.md)\n\n"
+        )
     if profile in ("standard", "high-trust"):
         output.update({
             "adapters/github/validate_pr.sh": (source / "adapters/github/validate_pr.sh").read_text(),
@@ -74,6 +88,7 @@ def main():
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--migrate", action="store_true", help="allow an existing repository with files")
     parser.add_argument("--no-commit", action="store_true")
+    parser.add_argument("--with-document-map", action="store_true", help="enable the optional generated README Document Map")
     args = parser.parse_args()
     target = Path(args.target).resolve()
     source = Path(__file__).resolve().parent.parent
@@ -88,8 +103,8 @@ def main():
         if not args.dry_run and not args.no_commit:
             identity = subprocess.run(["git", "-C", str(target), "var", "GIT_AUTHOR_IDENT"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             if identity.returncode != 0: return error("Git author identity is not configured; use --no-commit or configure user.name and user.email")
-        output = files(source, args.profile)
-        output[".ugs/bootstrap.json"] = json.dumps({"format": "ugs-bootstrap/v1", "version": args.version, "profile": args.profile, "name": args.name or target.name}, indent=2) + "\n"
+        output = files(source, args.profile, args.with_document_map)
+        output[".ugs/bootstrap.json"] = json.dumps({"format": "ugs-bootstrap/v1", "version": args.version, "profile": args.profile, "name": args.name or target.name, "document_map": args.with_document_map}, indent=2) + "\n"
         if args.migrate:
             output = {relative: content for relative, content in output.items() if not (target / relative).exists()}
         for relative in output:

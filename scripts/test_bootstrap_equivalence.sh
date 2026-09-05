@@ -32,6 +32,8 @@ bootstrap/templates/policy.json	bootstrap/templates/policy.json
 bootstrap/templates/policy-standard.json	bootstrap/templates/policy-standard.json
 bootstrap/templates/policy-high-trust.json	bootstrap/templates/policy-high-trust.json
 .ugs/schema/policy.schema.json	bootstrap/templates/policy.schema.json
+bootstrap/templates/document-map.json	bootstrap/templates/document-map.json
+.ugs/schema/document-map.schema.json	bootstrap/templates/document-map.schema.json
 bootstrap/templates/standard-workflow.yml	bootstrap/templates/standard-workflow.yml
 .github/workflows/ugs-validate.yml	.github/workflows/ugs-validate.yml
 scripts/ugs_init.py	scripts/ugs_init.py
@@ -56,6 +58,8 @@ scripts/validate_supply_chain_profile.sh	scripts/validate_supply_chain_profile.s
 scripts/validate_supply_chain_evidence.sh	scripts/validate_supply_chain_evidence.sh
 scripts/validate_action_pinning.sh	scripts/validate_action_pinning.sh
 scripts/validate_repository_shape.sh	scripts/validate_repository_shape.sh
+scripts/generate_document_map.py	scripts/generate_document_map.py
+scripts/validate_document_map.py	scripts/validate_document_map.py
 scripts/validate_signer_roles.sh	scripts/validate_signer_roles.sh
 scripts/validate_commit_signatures.sh	scripts/validate_commit_signatures.sh
 scripts/validate_release_tag.sh	scripts/validate_release_tag.sh
@@ -69,7 +73,9 @@ FILES
 
 for profile in baseline standard high-trust; do
   target="$temp_dir/$profile-repository"
-  "$package_root/scripts/ugs_init.sh" --profile "$profile" --no-commit "$target" >/dev/null
+  init_args=(--profile "$profile" --no-commit)
+  [ "$profile" = standard ] && init_args+=(--with-document-map)
+  "$package_root/scripts/ugs_init.sh" "${init_args[@]}" "$target" >/dev/null
   [ "$(jq -r '.profile' "$target/.ugs/bootstrap.json")" = "$profile" ]
   case "$profile" in
     baseline)
@@ -81,6 +87,7 @@ for profile in baseline standard high-trust; do
       (cd "$target" && scripts/validate_policy_manifest.sh .ugs/policy.json && scripts/validate_quality_profile.sh .ugs/policy.json && scripts/validate_supply_chain_profile.sh .ugs/policy.json && scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows && scripts/validate_repository_shape.sh .ugs/policy.json)
       [ -x "$target/adapters/github/validate_pr.sh" ]
       [ -x "$target/adapters/github/validate_action_pinning.sh" ]
+      (cd "$target" && scripts/generate_document_map.py --check && scripts/validate_document_map.py)
       ;;
     high-trust)
       (cd "$target" && scripts/validate_policy_manifest.sh .ugs/policy.json && scripts/validate_signer_roles.sh && scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows)

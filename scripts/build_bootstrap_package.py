@@ -42,10 +42,12 @@ def main():
         shutil.copy2(root / "bootstrap/templates/policy.json", stage / "bootstrap/templates/policy.json")
         shutil.copy2(root / "bootstrap/templates/policy-standard.json", stage / "bootstrap/templates/policy-standard.json")
         shutil.copy2(root / "bootstrap/templates/policy-high-trust.json", stage / "bootstrap/templates/policy-high-trust.json")
+        shutil.copy2(root / "bootstrap/templates/document-map.json", stage / "bootstrap/templates/document-map.json")
+        shutil.copy2(root / ".ugs/schema/document-map.schema.json", stage / "bootstrap/templates/document-map.schema.json")
         shutil.copy2(root / "bootstrap/templates/standard-workflow.yml", stage / "bootstrap/templates/standard-workflow.yml")
         shutil.copy2(root / ".github/workflows/ugs-validate.yml", stage / ".github/workflows/ugs-validate.yml")
         shutil.copy2(root / ".ugs/schema/policy.schema.json", stage / "bootstrap/templates/policy.schema.json")
-        for name in ("validate_quality_profile.sh", "validate_supply_chain_profile.sh", "validate_supply_chain_evidence.sh", "validate_action_pinning.sh", "validate_repository_shape.sh"):
+        for name in ("validate_quality_profile.sh", "validate_supply_chain_profile.sh", "validate_supply_chain_evidence.sh", "validate_action_pinning.sh", "validate_repository_shape.sh", "generate_document_map.py", "validate_document_map.py"):
             shutil.copy2(root / "scripts" / name, stage / "scripts" / name)
         for relative in ("keys/README.md", "keys/allowed_signers", "keys/revoked_signers", "keys/signer_roles.json", ".ugs/schema/signer-roles.schema.json"):
             destination = stage / relative
