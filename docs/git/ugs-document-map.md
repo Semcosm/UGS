@@ -25,7 +25,13 @@ When adding or moving a document:
 
 1. Update `.ugs/document-map.json` with the intended tree position.
 2. Render the same node and nesting in `README.md`.
-3. Run `scripts/validate_document_map.py` and `scripts/validate_repo.sh`.
+3. Run `scripts/generate_document_map.py` to render the section.
+4. Run `scripts/validate_document_map.py` and `scripts/validate_repo.sh`.
+
+The generator replaces only the configured `## Document Map` section and
+preserves the rest of README. CI runs the validator in check mode, so a manual
+edit to the generated section fails until the configuration is updated and the
+section is regenerated.
 
 The configuration is deliberately separate from `.ugs/policy.json`: policy
 describes repository governance, while the document map describes navigation.

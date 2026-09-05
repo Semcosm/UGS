@@ -14,67 +14,60 @@ primitives:
 - commit trailers
 - hooks
 
-## Document Map
+## Document Map（文档映射）
 
-- **Normative specifications**
-  - [UGS Core](docs/git/ugs-core.md)
-  - [UGS v0.3 Policy And Conformance Profile](docs/git/ugs-v0.3-profile.md)
-  - [UGS Conformance Levels And Profile Matrix](docs/git/ugs-conformance-levels.md)
-  - [UGS Quality Profile](docs/git/ugs-quality-profile.md)
-  - [UGS Supply-Chain Profile](docs/git/ugs-supply-chain-profile.md)
-  - [UGS Repository Shape Capabilities](docs/git/ugs-repository-shapes.md)
-  - [UGS Document Map](docs/git/ugs-document-map.md)
-  - [Branch Profiles](docs/git/ugs-branch-profiles.md)
-  - [Commit Convention](docs/git/commit-convention.md)
-  - [Review Policy](docs/git/review-policy.md)
-  - [Release Policy](docs/git/release-policy.md)
-- **Repository governance**
-  - [Repository Policy](REPOSITORY_POLICY.md)
-  - [Contributing](CONTRIBUTING.md)
-  - [Release Guide](RELEASE.md)
-  - [Managed Hooks](.githooks/README.md)
-  - [Trusted Signers](keys/README.md)
-  - [Change Requests](cr/README.md)
-  - [Adapters](adapters/README.md)
-- **Roadmap, releases, and implementation**
-  - [v0.3 Roadmap](docs/roadmap/v0.3.md)
-  - [v0.2.0 Release Packet](releases/v0.2.0.md)
-  - [v0.3.0 Release Packet](releases/v0.3.0.md)
-  - **Release packets**
-    - [v0.3.1 Release Packet](releases/v0.3.1.md)
-    - [v0.3.2 Release Packet](releases/v0.3.2.md)
-    - [v0.3.3 Release Packet](releases/v0.3.3.md)
-    - [v0.3.4 Release Packet](releases/v0.3.4.md)
-    - [v0.3.5 Release Packet](releases/v0.3.5.md)
-    - [v0.3.6 Release Packet](releases/v0.3.6.md)
-    - [v0.3.7 Release Packet](releases/v0.3.7.md)
-    - [v0.3.8 Release Packet](releases/v0.3.8.md)
-    - [v0.3.9 Release Packet](releases/v0.3.9.md)
-    - [v0.3.10 Release Packet](releases/v0.3.10.md)
-    - [v0.3.11 Release Packet](releases/v0.3.11.md)
-    - [v0.3.12 Release Packet](releases/v0.3.12.md)
-    - [v0.3.13 Release Packet](releases/v0.3.13.md)
-    - [v0.3.14 Release Packet](releases/v0.3.14.md)
-    - [v0.3.15 Release Packet](releases/v0.3.15.md)
-    - [v0.3.16 Release Packet](releases/v0.3.16.md)
-    - [v0.3.17 Release Packet](releases/v0.3.17.md)
-    - [v0.3.18 Release Packet](releases/v0.3.18.md)
-    - [v0.3.19 Release Packet](releases/v0.3.19.md)
-    - [v0.3.20 Release Packet](releases/v0.3.20.md)
-    - [v0.3.21 Release Packet](releases/v0.3.21.md)
-    - [v0.3.22 Release Packet](releases/v0.3.22.md)
-    - [v0.3.23 Release Packet](releases/v0.3.23.md)
-    - [v0.3.24 Release Packet](releases/v0.3.24.md)
-    - [v0.3.25 Release Packet](releases/v0.3.25.md)
-  - [UGS Bootstrap Package](docs/git/ugs-bootstrap.md)
-  - [Portable Conformance Fixtures](docs/git/ugs-conformance-fixtures.md)
-
-The map is configured as a versioned tree in
-[`.ugs/document-map.json`](.ugs/document-map.json). Run
-`scripts/validate_document_map.py` to verify that every mapped file exists and
-that this section has the same titles, links, and nesting. The configuration is
-the machine-readable source for the tree; this README remains its human-facing
-rendering.
+- **Normative specifications（规范性文档）**
+  - [UGS Core（UGS 核心）](docs/git/ugs-core.md)
+  - [UGS v0.3 Policy And Conformance Profile（UGS v0.3 政策与合规性配置文件）](docs/git/ugs-v0.3-profile.md)
+  - [UGS Conformance Levels And Profile Matrix（UGS 一致性等级与配置文件矩阵）](docs/git/ugs-conformance-levels.md)
+  - [UGS Quality Profile（UGS 质量标准）](docs/git/ugs-quality-profile.md)
+  - [UGS Supply-Chain Profile（UGS 供应链配置文件）](docs/git/ugs-supply-chain-profile.md)
+  - [UGS Repository Shape Capabilities（UGS 仓库形态能力）](docs/git/ugs-repository-shapes.md)
+  - [UGS Document Map（UGS 文档映射）](docs/git/ugs-document-map.md)
+  - [Branch Profiles（分支配置文件）](docs/git/ugs-branch-profiles.md)
+  - [Commit Convention（提交约定）](docs/git/commit-convention.md)
+  - [Review Policy（审查政策）](docs/git/review-policy.md)
+  - [Release Policy（发布政策）](docs/git/release-policy.md)
+- **Repository governance（仓库治理）**
+  - [Repository Policy（仓库政策）](REPOSITORY_POLICY.md)
+  - [Contributing（贡献指南）](CONTRIBUTING.md)
+  - [Release Guide（发布指南）](RELEASE.md)
+  - [Managed Hooks（管理式钩子）](.githooks/README.md)
+  - [Trusted Signers（可信签名者）](keys/README.md)
+  - [Change Requests（变更请求）](cr/README.md)
+  - [Adapters（适配器）](adapters/README.md)
+- **Roadmap, releases, and implementation（路线图、发布与实现）**
+  - [v0.3 Roadmap（v0.3 路线图）](docs/roadmap/v0.3.md)
+  - [v0.2.0 Release Packet（v0.2.0 发布包）](releases/v0.2.0.md)
+  - [v0.3.0 Release Packet（v0.3.0 发布包）](releases/v0.3.0.md)
+  - **Release packets（发布包）**
+    - [v0.3.1 Release Packet（v0.3.1 版本发布说明）](releases/v0.3.1.md)
+    - [v0.3.2 Release Packet（v0.3.2 版本发布说明）](releases/v0.3.2.md)
+    - [v0.3.3 Release Packet（v0.3.3 版本发布说明）](releases/v0.3.3.md)
+    - [v0.3.4 Release Packet（v0.3.4 版本发布说明）](releases/v0.3.4.md)
+    - [v0.3.5 Release Packet（v0.3.5 版本发布说明）](releases/v0.3.5.md)
+    - [v0.3.6 Release Packet（v0.3.6 版本发布说明）](releases/v0.3.6.md)
+    - [v0.3.7 Release Packet（v0.3.7 版本发布说明）](releases/v0.3.7.md)
+    - [v0.3.8 Release Packet（v0.3.8 版本发布说明）](releases/v0.3.8.md)
+    - [v0.3.9 Release Packet（v0.3.9 版本发布说明）](releases/v0.3.9.md)
+    - [v0.3.10 Release Packet（v0.3.10 版本发布说明）](releases/v0.3.10.md)
+    - [v0.3.11 Release Packet（v0.3.11 版本发布说明）](releases/v0.3.11.md)
+    - [v0.3.12 Release Packet（v0.3.12 版本发布说明）](releases/v0.3.12.md)
+    - [v0.3.13 Release Packet（v0.3.13 版本发布说明）](releases/v0.3.13.md)
+    - [v0.3.14 Release Packet（v0.3.14 版本发布说明）](releases/v0.3.14.md)
+    - [v0.3.15 Release Packet（v0.3.15 版本发布说明）](releases/v0.3.15.md)
+    - [v0.3.16 Release Packet（v0.3.16 版本发布说明）](releases/v0.3.16.md)
+    - [v0.3.17 Release Packet（v0.3.17 版本发布说明）](releases/v0.3.17.md)
+    - [v0.3.18 Release Packet（v0.3.18 版本发布说明）](releases/v0.3.18.md)
+    - [v0.3.19 Release Packet（v0.3.19 版本发布说明）](releases/v0.3.19.md)
+    - [v0.3.20 Release Packet（v0.3.20 版本发布说明）](releases/v0.3.20.md)
+    - [v0.3.21 Release Packet（v0.3.21 版本发布说明）](releases/v0.3.21.md)
+    - [v0.3.22 Release Packet（v0.3.22 版本发布说明）](releases/v0.3.22.md)
+    - [v0.3.23 Release Packet（v0.3.23 版本发布说明）](releases/v0.3.23.md)
+    - [v0.3.24 Release Packet（v0.3.24 版本发布说明）](releases/v0.3.24.md)
+    - [v0.3.25 Release Packet（v0.3.25 版本发布说明）](releases/v0.3.25.md)
+  - [UGS Bootstrap Package（UGS Bootstrap 包）](docs/git/ugs-bootstrap.md)
+  - [Portable Conformance Fixtures（便携式一致性测试夹具）](docs/git/ugs-conformance-fixtures.md)
 
 ## Version Status
 
