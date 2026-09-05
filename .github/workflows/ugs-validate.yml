@@ -55,6 +55,9 @@ jobs:
       - name: Validate independent conformance fixtures
         run: scripts/test_conformance.sh
 
+      - name: Validate bootstrap package fixtures
+        run: scripts/test_bootstrap_package.sh
+
       - name: Validate review trailer fixtures
         run: scripts/test_review_trailers.sh
 

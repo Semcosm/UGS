@@ -78,6 +78,15 @@ required_files=(
   "scripts/test_conformance.sh"
   "tests/conformance/manifest.json"
   "tests/fixtures/cr/valid-template.md"
+  "bootstrap/README.md"
+  "bootstrap/templates/policy.json"
+  "scripts/ugs_init.py"
+  "scripts/ugs_init.sh"
+  "scripts/build_bootstrap_package.py"
+  "scripts/build_bootstrap_package.sh"
+  "scripts/test_bootstrap_package.sh"
+  "docs/git/ugs-bootstrap.md"
+  ".github/workflows/ugs-release.yml"
 )
 
 for file in "${required_files[@]}"; do
@@ -119,6 +128,11 @@ executable_files=(
   "scripts/test_supply_chain_release.sh"
   "scripts/conformance.py"
   "scripts/test_conformance.sh"
+  "scripts/ugs_init.py"
+  "scripts/ugs_init.sh"
+  "scripts/build_bootstrap_package.py"
+  "scripts/build_bootstrap_package.sh"
+  "scripts/test_bootstrap_package.sh"
 )
 
 for file in "${executable_files[@]}"; do
@@ -156,6 +170,7 @@ grep -Fq "## Breaking Change" .github/pull_request_template.md || fail "PR templ
 grep -Fq "## Backport Target" .github/pull_request_template.md || fail "PR template must include Backport Target"
 grep -Fq "scripts/validate_commit_signatures.sh" .github/workflows/ugs-validate.yml || fail "workflow must validate commit signatures"
 grep -Fq "scripts/test_conformance.sh" README.md || fail "README must document conformance fixtures"
+grep -Fq "docs/git/ugs-bootstrap.md" README.md || fail "README must document bootstrap package"
 
 scripts/validate_policy_manifest.sh
 scripts/test_policy_manifest.sh

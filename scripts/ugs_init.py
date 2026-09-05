@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+"""Generate a UGS baseline in an empty or explicitly migrated repository."""
+import argparse
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+def error(message):
+    print("ugs init: " + message, file=sys.stderr)
+    return 1
+
+def git(target, *args):
+    return subprocess.run(["git", "-C", str(target), *args], check=True, stdout=subprocess.PIPE, text=True).stdout.strip()
+
+def files(source):
+    template = source / "bootstrap" / "templates"
+    policy = json.loads((template / "policy.json").read_text())
+    return {
+        ".ugs/policy.json": json.dumps(policy, indent=2) + "\n",
+        ".ugs/bootstrap.json": "",
+        ".ugs/schema/policy.schema.json": ((source / ".ugs/schema/policy.schema.json") if (source / ".ugs/schema/policy.schema.json").exists() else (source / "bootstrap/templates/policy.schema.json")).read_text(),
+        ".githooks/README.md": "# UGS managed hooks\n\nInstall with `git config core.hooksPath .githooks`.\n",
+        ".githooks/commit-msg": "#!/usr/bin/env bash\nset -euo pipefail\ngrep -Eq '^[a-z]+(\\([^)]+\\))?: .+' \"$1\" || { echo 'UGS: invalid commit subject' >&2; exit 1; }\n",
+        "REPOSITORY_POLICY.md": "# Repository Policy\n\nUGS Profile: continuous\nMerge Strategy: rebase-ff\nVersioning: semver\nSigning Level: unsigned\nProtected Long-Lived Branches: main\nHooks Path: .githooks\n",
+        "README.md": "# UGS-governed repository\n\nThis repository was initialized by the UGS bootstrap package.\n\nRun `scripts/validate_policy_manifest.sh` to validate the policy.\n",
+        "cr/README.md": "# Change Requests\n\nRecord accepted changes under `cr/` using the UGS CR template.\n",
+        "cr/TEMPLATE.md": "# CR-XXXX: <title>\n\nBase: main\nHead or Range: <commit-or-range>\nRevision: 1\nStatus: pending\nDecision: pending\nPolicy Version: v0.3\nBase OID: <base-oid>\nHead OID: <head-oid>\nIntegrated Result: pending\n\n## Summary\n\n<summary>\n\n## Motivation\n\n<motivation>\n\n## Test Evidence\n\n<test evidence>\n\n## Risk\n\n<risk>\n\n## Rollback\n\n<rollback>\n\n## Breaking Change\n\n<breaking change>\n\n## Backport Target\n\n<backport target>\n",
+        "scripts/validate_policy_manifest.sh": (source / "scripts/validate_policy_manifest.sh").read_text(),
+    }
+
+def main():
+    parser = argparse.ArgumentParser(description="initialize a UGS baseline repository")
+    parser.add_argument("target", nargs="?", default=".")
+    parser.add_argument("--profile", choices=["baseline"], default="baseline")
+    parser.add_argument("--name", default="")
+    parser.add_argument("--version", default="source")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--migrate", action="store_true", help="allow an existing repository with files")
+    parser.add_argument("--no-commit", action="store_true")
+    args = parser.parse_args()
+    target = Path(args.target).resolve()
+    source = Path(__file__).resolve().parent.parent
+    if not target.exists(): target.mkdir(parents=True)
+    if not target.is_dir(): return error("target is not a directory")
+    try:
+        is_git = (target / ".git").exists()
+        has_files = any(target.iterdir())
+        if has_files and not args.migrate and not (is_git and not any(p.name != ".git" for p in target.iterdir())):
+            return error("target is not empty; use --migrate explicitly")
+        if not is_git and not args.dry_run: subprocess.run(["git", "init", "--initial-branch", "main", str(target)], check=True, stdout=subprocess.DEVNULL)
+        if not args.dry_run and not args.no_commit:
+            identity = subprocess.run(["git", "-C", str(target), "var", "GIT_AUTHOR_IDENT"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            if identity.returncode != 0: return error("Git author identity is not configured; use --no-commit or configure user.name and user.email")
+        output = files(source)
+        output[".ugs/bootstrap.json"] = json.dumps({"format": "ugs-bootstrap/v1", "version": args.version, "profile": args.profile, "name": args.name or target.name}, indent=2) + "\n"
+        if args.migrate:
+            output = {relative: content for relative, content in output.items() if not (target / relative).exists()}
+        for relative in output:
+            destination = target / relative
+            if destination.exists() and not args.migrate: return error("refusing to overwrite " + relative)
+            print(("would write " if args.dry_run else "write ") + relative)
+        if args.dry_run: return 0
+        staging = Path(tempfile.mkdtemp(prefix="ugs-init-", dir=str(target.parent)))
+        try:
+            for relative, content in output.items():
+                destination = staging / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_text(content)
+                if relative.endswith("commit-msg") or relative.endswith("validate_policy_manifest.sh"): destination.chmod(0o755)
+            for relative in output:
+                destination = target / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                os.replace(staging / relative, destination)
+        finally: shutil.rmtree(staging, ignore_errors=True)
+        subprocess.run(["git", "-C", str(target), "config", "core.hooksPath", ".githooks"], check=True)
+        has_head = subprocess.run(["git", "-C", str(target), "rev-parse", "--verify", "HEAD"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+        if not args.no_commit and not has_head:
+            subprocess.run(["git", "-C", str(target), "add", ".ugs", ".githooks", "REPOSITORY_POLICY.md", "README.md", "cr", "scripts/validate_policy_manifest.sh"], check=True)
+            subprocess.run(["git", "-C", str(target), "commit", "-m", "chore(bootstrap): initialize UGS governance", "-m", "Refs: ugs-bootstrap"], check=True)
+        print("UGS baseline initialized at " + str(target))
+        return 0
+    except subprocess.CalledProcessError as exc: return error("command failed with status " + str(exc.returncode))
+
+if __name__ == "__main__": sys.exit(main())
