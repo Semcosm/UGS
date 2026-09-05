@@ -26,7 +26,7 @@ case "$profile" in
 esac
 if jq -e '.supply_chain | has("evidence")' "$manifest" >/dev/null; then
   for field in sbom_paths attestation_paths build_record_paths; do
-    jq -e --arg field "$field" '.supply_chain.evidence[$field] // [] | all(.[]; type == "string" and startswith("/") | not and (contains("..") | not) and length > 0)' "$manifest" >/dev/null \
+    jq -e --arg field "$field" '.supply_chain.evidence[$field] // [] | all(.[]; (type == "string") and ((startswith("/")) | not) and ((contains("..")) | not) and (length > 0))' "$manifest" >/dev/null \
       || fail "invalid supply-chain evidence paths: $field"
   done
 fi

@@ -57,5 +57,7 @@ and SBOM validation support.
 validation and tag binding.
 `CR-0040-attestation-signature-verification.md` records cryptographic SSH
 attestation verification.
+`CR-0041-evidence-path-validation-fix.md` records the evidence path validator
+correction.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.
