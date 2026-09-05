@@ -35,6 +35,7 @@ def files(source, profile):
         "scripts/validate_cr_record.sh": (source / "scripts/validate_cr_record.sh").read_text(),
         "scripts/validate_pr_cr.sh": (source / "scripts/validate_pr_cr.sh").read_text(),
         "scripts/create_pr_from_cr.sh": (source / "scripts/create_pr_from_cr.sh").read_text(),
+        "scripts/validate_main_cr_range.sh": (source / "scripts/validate_main_cr_range.sh").read_text(),
     }
     if profile in ("standard", "high-trust"):
         output.update({
