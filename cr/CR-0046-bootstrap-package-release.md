@@ -5,12 +5,12 @@ Head or Range: release/v0-3-17
 Integration Strategy: rebase-ff
 Title: docs(release): prepare v0.3.17 bootstrap package release
 Revision: 1
-Status: accepted
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: afec9df2f98f0375814518654eccdcdc82bd11f8
-Head OID: 6190303f7d314dcf849db6b29c112748b4e3c2a5
-Integrated Result: pending
+Head OID: c97638fd59b99583c028885e9361147270d1e256
+Integrated Result: main@c97638fd59b99583c028885e9361147270d1e256
 
 ## Summary
 
