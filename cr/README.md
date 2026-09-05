@@ -53,5 +53,7 @@ shape capabilities.
 validation correction.
 `CR-0038-supply-chain-evidence-and-sbom.md` records supply-chain evidence path
 and SBOM validation support.
+`CR-0039-release-attestation-validation.md` records release attestation
+validation and tag binding.
 Records are append-only audit artifacts: do not rewrite an integrated record
 to change its historical decision or commit identity.

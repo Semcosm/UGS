@@ -33,3 +33,8 @@ time, source commit, and release metadata.
 The profile is additive and optional. Repositories without this section remain
 valid v0.3 repositories, and a declaration does not retroactively invalidate
 older releases or v0.2 history.
+
+Release attestations use `scripts/validate_release_attestation.sh` and bind a
+release tag to a commit, artifact SHA-256 digest, builder identity, and build
+timestamp. `scripts/validate_supply_chain_release.sh` applies those checks to
+the evidence paths during tag validation.
