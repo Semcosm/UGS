@@ -100,7 +100,7 @@ printf '%s\n' "$revision" | grep -Eq '^[1-9][0-9]*$' \
   || fail "Revision must be a positive integer"
 
 status="$(sed -n 's/^Status: //p' "$cr_file")"
-printf '%s\n' "$status" | grep -Eq '^(accepted|integrated|rejected|superseded)$' \
+printf '%s\n' "$status" | grep -Eq '^(pending|accepted|integrated|rejected|superseded)$' \
   || fail "Status is invalid"
 
 decision="$(sed -n 's/^Decision: //p' "$cr_file")"

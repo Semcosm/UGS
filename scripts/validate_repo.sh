@@ -19,6 +19,8 @@ required_files=(
   "REPOSITORY_POLICY.md"
   ".ugs/policy.json"
   ".ugs/schema/policy.schema.json"
+  ".ugs/document-map.json"
+  ".ugs/schema/document-map.schema.json"
   "CONTRIBUTING.md"
   "RELEASE.md"
   "releases/v0.2.0.md"
@@ -45,6 +47,8 @@ required_files=(
   "scripts/validate_policy_manifest.sh"
   "scripts/test_policy_manifest.sh"
   "scripts/validate_repo.sh"
+  "scripts/validate_document_map.py"
+  "scripts/test_document_map.sh"
   "scripts/ugs_check.sh"
   "scripts/test_git_fixtures.sh"
   "scripts/validate_review_trailers.sh"
@@ -113,6 +117,8 @@ executable_files=(
   "scripts/validate_policy_manifest.sh"
   "scripts/test_policy_manifest.sh"
   "scripts/validate_repo.sh"
+  "scripts/validate_document_map.py"
+  "scripts/test_document_map.sh"
   "scripts/ugs_check.sh"
   "scripts/test_git_fixtures.sh"
   "scripts/validate_review_trailers.sh"
@@ -180,7 +186,10 @@ grep -Fq "cr/README.md" README.md || fail "README must link CR record guide"
 grep -Fq "keys/README.md" README.md || fail "README must link trusted signer guide"
 grep -Fq "scripts/test_conformance.sh" README.md || fail "README must document conformance fixtures"
 grep -Fq "docs/git/ugs-bootstrap.md" README.md || fail "README must document bootstrap package"
+grep -Fq "docs/git/ugs-document-map.md" README.md || fail "README must document document map"
 
+scripts/validate_document_map.py
+scripts/test_document_map.sh
 scripts/validate_policy_manifest.sh
 scripts/test_policy_manifest.sh
 scripts/validate_quality_profile.sh
