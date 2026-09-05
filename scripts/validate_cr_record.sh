@@ -137,8 +137,10 @@ else
     main_ref="refs/heads/main"
   elif git rev-parse --quiet --verify refs/remotes/origin/main^{commit} >/dev/null 2>&1; then
     main_ref="refs/remotes/origin/main"
+  elif git rev-parse --quiet --verify HEAD^{commit} >/dev/null 2>&1; then
+    main_ref="HEAD"
   fi
-  [ -n "$main_ref" ] || fail "main ref is required to verify integrated provenance"
+  [ -n "$main_ref" ] || fail "validation history is required to verify integrated provenance"
   git merge-base --is-ancestor "$integrated_oid" "$main_ref" \
     || fail "integrated result is not reachable from main"
   git merge-base --is-ancestor "$base_oid" "$integrated_oid" \
