@@ -6,7 +6,9 @@ trap 'rm -rf "$temp_dir"' EXIT
 bare_repo="$temp_dir/server.git"
 git init --bare --quiet "$bare_repo"
 git --git-dir "$bare_repo" fetch --quiet "$root_dir" main:refs/heads/main
-old_object="$(git -C "$root_dir" rev-parse origin/main)"
+cr_commit="$(git -C "$root_dir" log -1 --format='%H' -- cr/CR-0057-bare-git-update-hook.md)"
+[ -n "$cr_commit" ] || { echo "no persisted CR commit found" >&2; exit 1; }
+old_object="$(git -C "$root_dir" rev-parse "$cr_commit^")"
 git --git-dir "$bare_repo" update-ref refs/heads/main "$old_object"
 new_object="$(git -C "$root_dir" rev-parse HEAD)"
 git --git-dir "$bare_repo" fetch --quiet "$root_dir" "$new_object"
