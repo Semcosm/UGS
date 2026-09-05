@@ -33,12 +33,17 @@ def files(source, profile):
         "cr/TEMPLATE.md": "# CR-XXXX: <title>\n\nBase: main\nHead or Range: <commit-or-range>\nRevision: 1\nStatus: pending\nDecision: pending\nPolicy Version: v0.3\nBase OID: <base-oid>\nHead OID: <head-oid>\nIntegrated Result: pending\n\n## Summary\n\n<summary>\n\n## Motivation\n\n<motivation>\n\n## Test Evidence\n\n<test evidence>\n\n## Risk\n\n<risk>\n\n## Rollback\n\n<rollback>\n\n## Breaking Change\n\n<breaking change>\n\n## Backport Target\n\n<backport target>\n",
         "scripts/validate_policy_manifest.sh": (source / "scripts/validate_policy_manifest.sh").read_text(),
         "scripts/validate_cr_record.sh": (source / "scripts/validate_cr_record.sh").read_text(),
+        "scripts/validate_cr_review.sh": (source / "scripts/validate_cr_review.sh").read_text(),
+        "adapters/bare-git/update": (source / "adapters/bare-git/update").read_text(),
         "scripts/validate_pr_cr.sh": (source / "scripts/validate_pr_cr.sh").read_text(),
         "scripts/create_pr_from_cr.sh": (source / "scripts/create_pr_from_cr.sh").read_text(),
         "scripts/validate_main_cr_range.sh": (source / "scripts/validate_main_cr_range.sh").read_text(),
     }
     if profile in ("standard", "high-trust"):
         output.update({
+            "adapters/github/validate_pr.sh": (source / "adapters/github/validate_pr.sh").read_text(),
+            "adapters/github/create_pr_from_cr.sh": (source / "adapters/github/create_pr_from_cr.sh").read_text(),
+            "adapters/github/validate_adapter.sh": (source / "adapters/github/validate_adapter.sh").read_text(),
             "LICENSE": "# License\n\nThis repository has not selected a license. Replace this file before distributing software.\n",
             "SECURITY.md": "# Security\n\nReport security issues privately to the repository maintainers.\n",
             "CODE_OF_CONDUCT.md": "# Code of Conduct\n\nContributors are expected to act respectfully and in good faith.\n",
@@ -97,7 +102,7 @@ def main():
                 destination = staging / relative
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 destination.write_text(content)
-                if relative.endswith(".sh") or relative.endswith(".py") or relative.endswith("commit-msg"): destination.chmod(0o755)
+                if relative.endswith(".sh") or relative.endswith(".py") or relative.endswith("commit-msg") or relative.startswith("adapters/"): destination.chmod(0o755)
             for relative in output:
                 destination = target / relative
                 destination.parent.mkdir(parents=True, exist_ok=True)
