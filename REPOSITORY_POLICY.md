@@ -95,6 +95,10 @@ Emergency Path: defined
 
 ## Change Request Policy
 
+Every non-trivial integration MUST have a persisted `cr/CR-*.md` record.
+The record is the authoritative CR; a GitHub pull request is a generated
+review view of that record, not a substitute for it.
+
 On GitHub pull requests:
 
 - `base`, `head`, and `title` are satisfied by PR metadata.
@@ -111,14 +115,15 @@ Outside GitHub, the same CR fields MUST be carried explicitly in the cover
 letter, request-pull text, or equivalent review medium.
 
 The default PR template in `.github/pull_request_template.md` is the canonical
-GitHub mapping for the CR minimum field set.
+GitHub mapping for the CR minimum field set. PRs SHOULD be created with
+`scripts/create_pr_from_cr.sh`, which uses the CR file as the PR body.
 
 For off-platform or archive-friendly flows, this repository stores equivalent
 CR records under `cr/`.
 
-Equivalent CR-based integration into `main` MUST have a matching record under
-`cr/` whose `Head or Range` identifies the topic branch, tip commit, or commit
-range being integrated.
+The persisted CR MUST have a matching `Head OID` in the proposed history and
+its PR body MUST be byte-for-byte identical to the CR source. CI MUST reject a
+PR or main integration that has no matching persisted CR.
 
 GitHub-hosted enforcement SHOULD additionally enable:
 

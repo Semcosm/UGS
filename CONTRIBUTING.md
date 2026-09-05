@@ -83,7 +83,8 @@ Signed-off-by: Semcosm <chenzhipeng.main@gmail.com>
 
 ## Change Requests
 
-On GitHub, the pull request itself is the CR.
+The persisted `cr/CR-*.md` file is the authoritative CR for every non-trivial
+change. On GitHub, the pull request is a generated review view of that CR.
 
 The PR body must include:
 
@@ -98,10 +99,9 @@ The PR body must include:
 `base`, `head`, and `title` are provided by GitHub PR metadata and do not need
 to be duplicated in the body.
 
-When not using a GitHub PR, record the CR under `cr/` using `cr/TEMPLATE.md`.
-Equivalent CR integrations into `main` must have a matching `cr/CR-*.md`
-record whose `Head or Range` identifies the topic branch, tip commit, or
-commit range being integrated.
+Create the PR from the CR with `scripts/create_pr_from_cr.sh`. When not using
+GitHub, the same persisted CR is consumed through request-pull or patch review.
+Every integrated change must retain its matching `cr/CR-*.md` record.
 
 ## Review Expectations
 

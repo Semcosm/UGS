@@ -12,6 +12,9 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
+      - name: Validate persisted CR and generated PR body
+        if: github.event_name == 'pull_request'
+        run: scripts/validate_pr_cr.sh "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" "$GITHUB_EVENT_PATH"
       - name: Validate UGS standard policy
         run: |
           scripts/validate_policy_manifest.sh

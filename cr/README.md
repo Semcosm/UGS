@@ -11,6 +11,10 @@ Use cases:
 
 Use `cr/TEMPLATE.md` for new records.
 
+Every non-trivial integration must retain a persisted CR record. Use
+`scripts/create_pr_from_cr.sh` to create the GitHub PR from that record, and
+use `scripts/validate_pr_cr.sh` to verify that the PR body has not diverged.
+
 `CR-0007-close-v0-2-plan-v0-3.md` records the repository's v0.2 closure and
 the decision to keep v0.3 planning non-normative until a future adoption CR.
 `CR-0008-add-ugs-signing-key.md` records the addition of the dedicated
