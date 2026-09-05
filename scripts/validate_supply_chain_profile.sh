@@ -28,9 +28,9 @@ if [ "$profile" != "basic" ]; then
   jq -e '(.supply_chain.evidence | type == "object") and ((.supply_chain.evidence.sbom_paths // []) | length > 0) and ((.supply_chain.evidence.build_record_paths // []) | length > 0)' "$manifest" >/dev/null \
     || fail "$profile requires SBOM and build evidence paths"
 fi
-if [ "$profile" = "high-trust" ]; then
+if [ "$profile" != "basic" ]; then
   jq -e '(.supply_chain.evidence.attestation_paths // []) | length > 0' "$manifest" >/dev/null \
-    || fail "high-trust requires an attestation evidence path"
+    || fail "$profile requires an attestation evidence path"
 fi
 if jq -e '.supply_chain | has("evidence")' "$manifest" >/dev/null; then
   for field in sbom_paths attestation_paths build_record_paths; do

@@ -34,9 +34,10 @@ The profile is additive and optional. Repositories without this section remain
 valid v0.3 repositories, and a declaration does not retroactively invalidate
 older releases or v0.2 history.
 
-`standard` and `high-trust` declarations MUST include evidence paths for at
-least an SBOM and build record; `high-trust` additionally requires an
-attestation path.
+`standard` and `high-trust` declarations MUST include non-empty evidence paths
+for an SBOM, build record, and attestation. The JSON Schema expresses these
+profile constraints as well as the capability/profile mapping; validators
+must enforce the same rules.
 
 Release attestations use `scripts/validate_release_attestation.sh` and bind a
 release tag to a commit, artifact SHA-256 digest, builder identity, and build
@@ -49,4 +50,6 @@ paths during tag validation.
 Build records use `scripts/validate_build_record.sh` and carry the same release
 tag, commit SHA, artifact digest, builder identity, and build timestamp. A
 release with evidence enabled must keep these identifiers consistent across
-the SBOM, build record, and attestation.
+the SBOM, build record, and attestation. Release validation also requires an
+attestation's repository to match the current Git origin and rejects evidence
+for another release or repository.
