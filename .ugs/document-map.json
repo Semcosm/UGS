@@ -1,0 +1,75 @@
+{
+  "$schema": "schema/document-map.schema.json",
+  "format": "ugs-document-map/v1",
+  "schema_version": 1,
+  "document": "README.md",
+  "heading": "Document Map",
+  "nodes": [
+    {
+      "title": "Normative specifications",
+      "children": [
+        {"title": "UGS Core", "path": "docs/git/ugs-core.md"},
+        {"title": "UGS v0.3 Policy And Conformance Profile", "path": "docs/git/ugs-v0.3-profile.md"},
+        {"title": "UGS Conformance Levels And Profile Matrix", "path": "docs/git/ugs-conformance-levels.md"},
+        {"title": "UGS Quality Profile", "path": "docs/git/ugs-quality-profile.md"},
+        {"title": "UGS Supply-Chain Profile", "path": "docs/git/ugs-supply-chain-profile.md"},
+        {"title": "UGS Repository Shape Capabilities", "path": "docs/git/ugs-repository-shapes.md"},
+        {"title": "UGS Document Map", "path": "docs/git/ugs-document-map.md"},
+        {"title": "Branch Profiles", "path": "docs/git/ugs-branch-profiles.md"},
+        {"title": "Commit Convention", "path": "docs/git/commit-convention.md"},
+        {"title": "Review Policy", "path": "docs/git/review-policy.md"},
+        {"title": "Release Policy", "path": "docs/git/release-policy.md"}
+      ]
+    },
+    {
+      "title": "Repository governance",
+      "children": [
+        {"title": "Repository Policy", "path": "REPOSITORY_POLICY.md"},
+        {"title": "Contributing", "path": "CONTRIBUTING.md"},
+        {"title": "Release Guide", "path": "RELEASE.md"},
+        {"title": "Managed Hooks", "path": ".githooks/README.md"},
+        {"title": "Trusted Signers", "path": "keys/README.md"},
+        {"title": "Change Requests", "path": "cr/README.md"},
+        {"title": "Adapters", "path": "adapters/README.md"},
+        {"title": "Pull Request Template", "path": ".github/pull_request_template.md"}
+      ]
+    },
+    {
+      "title": "Roadmap, releases, and implementation",
+      "children": [
+        {"title": "v0.3 Roadmap", "path": "docs/roadmap/v0.3.md"},
+        {"title": "v0.2.0 Release Packet", "path": "releases/v0.2.0.md"},
+        {"title": "v0.3.0 Release Packet", "path": "releases/v0.3.0.md"},
+        {"title": "Release packets", "children": [
+          {"title": "v0.3.1 Release Packet", "path": "releases/v0.3.1.md"},
+          {"title": "v0.3.2 Release Packet", "path": "releases/v0.3.2.md"},
+          {"title": "v0.3.3 Release Packet", "path": "releases/v0.3.3.md"},
+          {"title": "v0.3.4 Release Packet", "path": "releases/v0.3.4.md"},
+          {"title": "v0.3.5 Release Packet", "path": "releases/v0.3.5.md"},
+          {"title": "v0.3.6 Release Packet", "path": "releases/v0.3.6.md"},
+          {"title": "v0.3.7 Release Packet", "path": "releases/v0.3.7.md"},
+          {"title": "v0.3.8 Release Packet", "path": "releases/v0.3.8.md"},
+          {"title": "v0.3.9 Release Packet", "path": "releases/v0.3.9.md"},
+          {"title": "v0.3.10 Release Packet", "path": "releases/v0.3.10.md"},
+          {"title": "v0.3.11 Release Packet", "path": "releases/v0.3.11.md"},
+          {"title": "v0.3.12 Release Packet", "path": "releases/v0.3.12.md"},
+          {"title": "v0.3.13 Release Packet", "path": "releases/v0.3.13.md"},
+          {"title": "v0.3.14 Release Packet", "path": "releases/v0.3.14.md"},
+          {"title": "v0.3.15 Release Packet", "path": "releases/v0.3.15.md"},
+          {"title": "v0.3.16 Release Packet", "path": "releases/v0.3.16.md"},
+          {"title": "v0.3.17 Release Packet", "path": "releases/v0.3.17.md"},
+          {"title": "v0.3.18 Release Packet", "path": "releases/v0.3.18.md"},
+          {"title": "v0.3.19 Release Packet", "path": "releases/v0.3.19.md"},
+          {"title": "v0.3.20 Release Packet", "path": "releases/v0.3.20.md"},
+          {"title": "v0.3.21 Release Packet", "path": "releases/v0.3.21.md"},
+          {"title": "v0.3.22 Release Packet", "path": "releases/v0.3.22.md"},
+          {"title": "v0.3.23 Release Packet", "path": "releases/v0.3.23.md"},
+          {"title": "v0.3.24 Release Packet", "path": "releases/v0.3.24.md"},
+          {"title": "v0.3.25 Release Packet", "path": "releases/v0.3.25.md"}
+        ]},
+        {"title": "UGS Bootstrap Package", "path": "docs/git/ugs-bootstrap.md"},
+        {"title": "Portable Conformance Fixtures", "path": "docs/git/ugs-conformance-fixtures.md"}
+      ]
+    }
+  ]
+}
