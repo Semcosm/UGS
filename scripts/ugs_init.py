@@ -18,9 +18,9 @@ def git(target, *args):
 
 def files(source, profile):
     template = source / "bootstrap" / "templates"
-    policy_name = "policy-standard.json" if profile == "standard" else "policy.json"
+    policy_name = {"baseline": "policy.json", "standard": "policy-standard.json", "high-trust": "policy-high-trust.json"}[profile]
     policy = json.loads((template / policy_name).read_text())
-    signing_level = "commits-signed" if profile == "standard" else "unsigned"
+    signing_level = {"baseline": "unsigned", "standard": "commits-signed", "high-trust": "high-trust-commits-signed"}[profile]
     output = {
         ".ugs/policy.json": json.dumps(policy, indent=2) + "\n",
         ".ugs/bootstrap.json": "",
@@ -33,7 +33,7 @@ def files(source, profile):
         "cr/TEMPLATE.md": "# CR-XXXX: <title>\n\nBase: main\nHead or Range: <commit-or-range>\nRevision: 1\nStatus: pending\nDecision: pending\nPolicy Version: v0.3\nBase OID: <base-oid>\nHead OID: <head-oid>\nIntegrated Result: pending\n\n## Summary\n\n<summary>\n\n## Motivation\n\n<motivation>\n\n## Test Evidence\n\n<test evidence>\n\n## Risk\n\n<risk>\n\n## Rollback\n\n<rollback>\n\n## Breaking Change\n\n<breaking change>\n\n## Backport Target\n\n<backport target>\n",
         "scripts/validate_policy_manifest.sh": (source / "scripts/validate_policy_manifest.sh").read_text(),
     }
-    if profile == "standard":
+    if profile in ("standard", "high-trust"):
         output.update({
             "LICENSE": "# License\n\nThis repository has not selected a license. Replace this file before distributing software.\n",
             "SECURITY.md": "# Security\n\nReport security issues privately to the repository maintainers.\n",
@@ -47,12 +47,18 @@ def files(source, profile):
                      "validate_supply_chain_evidence.sh", "validate_action_pinning.sh",
                      "validate_repository_shape.sh"):
             output["scripts/" + name] = (source / "scripts" / name).read_text()
+    if profile == "high-trust":
+        for relative in ("keys/README.md", "keys/allowed_signers", "keys/revoked_signers", "keys/signer_roles.json", ".ugs/schema/signer-roles.schema.json"):
+            output[relative] = (source / relative).read_text()
+        for name in ("validate_signer_roles.sh", "validate_commit_signatures.sh", "validate_release_tag.sh", "validate_release_attestation.sh"):
+            output["scripts/" + name] = (source / "scripts" / name).read_text()
+        output[".github/workflows/ugs-validate.yml"] = (source / ".github/workflows/ugs-validate.yml").read_text()
     return output
 
 def main():
     parser = argparse.ArgumentParser(description="initialize a UGS-governed repository")
     parser.add_argument("target", nargs="?", default=".")
-    parser.add_argument("--profile", choices=["baseline", "standard"], default="baseline")
+    parser.add_argument("--profile", choices=["baseline", "standard", "high-trust"], default="baseline")
     parser.add_argument("--name", default="")
     parser.add_argument("--version", default="source")
     parser.add_argument("--dry-run", action="store_true")
@@ -97,7 +103,9 @@ def main():
         has_head = subprocess.run(["git", "-C", str(target), "rev-parse", "--verify", "HEAD"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
         if not args.no_commit and not has_head:
             subprocess.run(["git", "-C", str(target), "add", "--"] + list(output), check=True)
-            subprocess.run(["git", "-C", str(target), "commit", "-m", "chore(bootstrap): initialize UGS governance", "-m", "Refs: ugs-bootstrap"], check=True)
+            commit_command = ["git", "-C", str(target), "commit"]
+            if args.profile == "high-trust": commit_command.append("-S")
+            subprocess.run(commit_command + ["-m", "chore(bootstrap): initialize UGS governance", "-m", "Refs: ugs-bootstrap"], check=True)
         print("UGS " + args.profile + " initialized at " + str(target))
         return 0
     except subprocess.CalledProcessError as exc: return error("command failed with status " + str(exc.returncode))
