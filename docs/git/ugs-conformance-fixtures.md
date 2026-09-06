@@ -27,6 +27,15 @@ migration/dry-run/idempotence, protected refs, quality and supply-chain
 requirements, and temporary-key high-trust signing checks. It prints one
 result per profile and fails if any profile requirement fails.
 
+The bootstrap package tests include `scripts/test_bootstrap_upgrade.sh`. This
+fixture builds a deterministic release, verifies the embedded and external
+component inventories, rejects tampered manifests and archives before writing,
+and exercises full-component upgrades, explicit profile activation, rollback,
+project-owned file preservation, filesystem conflicts, normal and linked
+worktrees, managed worktrees, and bare-repository rejection. The upgrade path
+is therefore tested as a consumer-facing operation rather than only as a
+package construction detail.
+
 `scripts/validate_cr_coverage.sh` audits the first-parent history after the
 adopted coverage anchor and fails on an OID not named by a persisted CR. A
 commit that adds or modifies its persisted CR is also covered. The historical

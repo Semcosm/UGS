@@ -7,11 +7,12 @@ trap 'rm -rf "$temp_dir"' EXIT
 zeros="0000000000000000000000000000000000000000"
 first_object="1111111111111111111111111111111111111111"
 
-version="v0.3.26"
+version="v0.3.27"
 dist_dir="$temp_dir/dist"
 SOURCE_DATE_EPOCH=0 "$root_dir/scripts/build_bootstrap_package.sh" "$version" --output-dir "$dist_dir" >/dev/null
 archive="$dist_dir/ugs-bootstrap-$version.tar.gz"
 manifest="$archive.manifest.json"
+components="$archive.components.json"
 unpack_dir="$temp_dir/unpack"
 mkdir -p "$unpack_dir"
 tar -xzf "$archive" -C "$unpack_dir"
@@ -20,6 +21,8 @@ package_root="$unpack_dir/ugs-bootstrap-$version"
 source_commit="$(git -C "$root_dir" rev-parse HEAD)"
 [ "$(jq -r '.source_commit' "$manifest")" = "$source_commit" ]
 jq -e '.profiles == ["baseline", "standard", "high-trust"]' "$manifest" >/dev/null
+[ -f "$components" ]
+cmp -s "$components" "$package_root/COMPONENTS.json"
 
 # These are the source inputs used by the builder. The archive must contain
 # byte-for-byte copies, so a package cannot silently drift from its tag.
@@ -49,6 +52,18 @@ docs/git/ugs-v0.3-profile.md	docs/git/ugs-v0.3-profile.md
 bootstrap/templates/policy.json	bootstrap/templates/policy.json
 bootstrap/templates/policy-standard.json	bootstrap/templates/policy-standard.json
 bootstrap/templates/policy-high-trust.json	bootstrap/templates/policy-high-trust.json
+bootstrap/templates/CODE_OF_CONDUCT.md	bootstrap/templates/CODE_OF_CONDUCT.md
+bootstrap/templates/LICENSE	bootstrap/templates/LICENSE
+bootstrap/templates/README.md	bootstrap/templates/README.md
+bootstrap/templates/RELEASE.md	bootstrap/templates/RELEASE.md
+bootstrap/templates/SECURITY.md	bootstrap/templates/SECURITY.md
+bootstrap/templates/SUPPORT.md	bootstrap/templates/SUPPORT.md
+bootstrap/templates/cr/README.md	bootstrap/templates/cr/README.md
+bootstrap/templates/cr/TEMPLATE.md	bootstrap/templates/cr/TEMPLATE.md
+bootstrap/templates/githooks/README.md	bootstrap/templates/githooks/README.md
+bootstrap/templates/githooks/commit-msg	bootstrap/templates/githooks/commit-msg
+bootstrap/templates/repository-policy.md	bootstrap/templates/repository-policy.md
+bootstrap/templates/supply-chain-README.md	bootstrap/templates/supply-chain-README.md
 .ugs/schema/policy.schema.json	bootstrap/templates/policy.schema.json
 bootstrap/templates/document-map.json	bootstrap/templates/document-map.json
 .ugs/schema/document-map.schema.json	bootstrap/templates/document-map.schema.json
@@ -56,6 +71,9 @@ bootstrap/templates/standard-workflow.yml	bootstrap/templates/standard-workflow.
 .github/workflows/ugs-validate.yml	.github/workflows/ugs-validate.yml
 scripts/ugs_init.py	scripts/ugs_init.py
 scripts/ugs_init.sh	scripts/ugs_init.sh
+scripts/ugs.sh	scripts/ugs.sh
+scripts/ugs_upgrade.py	scripts/ugs_upgrade.py
+scripts/ugs_upgrade.sh	scripts/ugs_upgrade.sh
 scripts/validate_policy_manifest.sh	scripts/validate_policy_manifest.sh
 scripts/validate_cr_record.sh	scripts/validate_cr_record.sh
 scripts/validate_cr_review.sh	scripts/validate_cr_review.sh

@@ -71,6 +71,9 @@ jobs:
       - name: Validate bootstrap package fixtures
         run: scripts/test_bootstrap_package.sh
 
+      - name: Validate bootstrap upgrade fixtures
+        run: scripts/test_bootstrap_upgrade.sh
+
       - name: Validate review trailer fixtures
         run: scripts/test_review_trailers.sh
 

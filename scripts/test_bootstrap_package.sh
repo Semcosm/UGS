@@ -87,6 +87,7 @@ SOURCE_DATE_EPOCH=0 "$root_dir/scripts/build_bootstrap_package.sh" "$package_ver
 archive="$package_dir/ugs-bootstrap-${package_version}.tar.gz"
 [ -f "$archive" ]
 [ -f "$archive.manifest.json" ]
+[ -f "$archive.components.json" ]
 [ -f "$archive.sha256" ]
 (cd "$package_dir" && sha256sum -c "$archive.sha256")
 cp "$archive" "$temp_dir/first.tar.gz"
@@ -99,6 +100,8 @@ unpack="$temp_dir/unpack"
 mkdir -p "$unpack"
 tar -xzf "$archive" -C "$unpack"
 package_root="$unpack/ugs-bootstrap-${package_version}"
+[ -f "$package_root/COMPONENTS.json" ]
+cmp -s "$archive.components.json" "$package_root/COMPONENTS.json"
 for document in \
   OFFLINE-QUICKSTART.md \
   CONTRIBUTING.md \

@@ -69,7 +69,8 @@
           {"title": "v0.3.23 Release Packet", "title_zh": "v0.3.23 版本发布说明", "path": "releases/v0.3.23.md"},
           {"title": "v0.3.24 Release Packet", "title_zh": "v0.3.24 版本发布说明", "path": "releases/v0.3.24.md"},
           {"title": "v0.3.25 Release Packet", "title_zh": "v0.3.25 版本发布说明", "path": "releases/v0.3.25.md"},
-          {"title": "v0.3.26 Release Packet", "title_zh": "v0.3.26 版本发布说明", "path": "releases/v0.3.26.md"}
+          {"title": "v0.3.26 Release Packet", "title_zh": "v0.3.26 版本发布说明", "path": "releases/v0.3.26.md"},
+          {"title": "v0.3.27 Release Packet", "title_zh": "v0.3.27 版本发布说明", "path": "releases/v0.3.27.md"}
         ]},
         {"title": "UGS Bootstrap Package", "title_zh": "UGS Bootstrap 包", "path": "docs/git/ugs-bootstrap.md"},
         {"title": "Portable Conformance Fixtures", "title_zh": "便携式一致性测试夹具", "path": "docs/git/ugs-conformance-fixtures.md"}

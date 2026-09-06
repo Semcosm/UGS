@@ -11,6 +11,16 @@ root_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 temp_dir="$(mktemp -d)"
 trap 'rm -rf "$temp_dir"' EXIT
 
+version_parts=()
+IFS=. read -r -a version_parts <<< "${tag#v}"
+major="${version_parts[0]}"
+minor="${version_parts[1]}"
+patch="${version_parts[2]}"
+components_required=false
+if [ "$major" -gt 0 ] || [ "$minor" -gt 3 ] || { [ "$major" -eq 0 ] && [ "$minor" -eq 3 ] && [ "$patch" -ge 27 ]; }; then
+  components_required=true
+fi
+
 command -v jq >/dev/null 2>&1 || { echo "jq is required" >&2; exit 1; }
 
 git fetch --quiet --tags origin "refs/tags/$tag:refs/tags/$tag" 2>/dev/null || true
@@ -21,6 +31,7 @@ mkdir -p "$download_dir"
 "$root_dir/adapters/github/download_release.sh" "$tag" "$download_dir"
 archive="$download_dir/ugs-bootstrap-${tag}.tar.gz"
 manifest="$archive.manifest.json"
+components="$archive.components.json"
 (cd "$download_dir" && sha256sum -c "$(basename "$archive").sha256")
 
 tag_commit="$(git rev-list -n1 "$tag^{commit}")"
@@ -36,6 +47,12 @@ tar -xzf "$archive" -C "$unpack_dir"
 package_root="$unpack_dir/ugs-bootstrap-${tag}"
 [ -x "$package_root/scripts/ugs_init.sh" ]
 [ -f "$package_root/MANIFEST.json" ]
+if [ "$components_required" = true ]; then
+  [ -f "$package_root/COMPONENTS.json" ] || {
+    echo "published bootstrap asset missing COMPONENTS.json" >&2
+    exit 1
+  }
+fi
 [ -f "$package_root/RELEASE-NOTES.md" ] || {
   echo "published bootstrap asset missing release notes" >&2
   exit 1
@@ -67,6 +84,9 @@ for document in \
   }
 done
 cmp -s "$manifest" "$package_root/MANIFEST.json"
+if [ "$components_required" = true ]; then
+  cmp -s "$components" "$package_root/COMPONENTS.json"
+fi
 
 while IFS=$'\t' read -r relative expected; do
   actual="$package_root/$relative"
@@ -85,6 +105,7 @@ while IFS= read -r relative; do
     README.md) source="bootstrap/README.md" ;;
     OFFLINE-QUICKSTART.md) source="bootstrap/OFFLINE-QUICKSTART.md" ;;
     RELEASE-NOTES.md) source="releases/${tag}.md" ;;
+    COMPONENTS.json) continue ;;
     bootstrap/templates/policy.schema.json) source=".ugs/schema/policy.schema.json" ;;
     *) source="$relative" ;;
   esac
@@ -122,6 +143,20 @@ if "$package_root/scripts/ugs_init.sh" "$repo" >/dev/null 2>&1; then
 fi
 
 echo "published bootstrap asset verified and consumed: $tag"
+
+if [ "$components_required" = true ]; then
+  upgrade_repo="$temp_dir/upgrade-consumer-repository"
+  git init --quiet -b main "$upgrade_repo"
+  git -C "$upgrade_repo" config user.name "UGS Upgrade Consumer"
+  git -C "$upgrade_repo" config user.email "ugs-upgrade-consumer@example.invalid"
+  "$package_root/scripts/ugs_init.sh" --profile baseline --no-commit "$upgrade_repo"
+  printf '%s\n' 'consumer-owned README' > "$upgrade_repo/README.md"
+  "$package_root/scripts/ugs.sh" upgrade --archive "$archive" "$upgrade_repo" >/dev/null
+  [ "$(jq -r '.conformance_level' "$upgrade_repo/.ugs/policy.json")" = "baseline" ]
+  [ -x "$upgrade_repo/adapters/github/validate_pr.sh" ]
+  [ "$(cat "$upgrade_repo/README.md")" = "consumer-owned README" ]
+  echo "published bootstrap upgrade flow verified and consumed: $tag"
+fi
 
 standard_repo="$temp_dir/standard-consumer-repository"
 git init --quiet -b main "$standard_repo"

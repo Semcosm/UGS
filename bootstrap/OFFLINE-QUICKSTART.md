@@ -11,14 +11,16 @@ Run these commands in the directory containing the downloaded archive and its
 checksum file. Replace the tag when using another release:
 
 ```bash
-tag=v0.3.26
+tag=v0.3.27
 sha256sum -c "ugs-bootstrap-${tag}.tar.gz.sha256"
 tar -xzf "ugs-bootstrap-${tag}.tar.gz"
 cd "ugs-bootstrap-${tag}"
 ```
 
 `MANIFEST.json` records the SHA-256 digest of every file in the archive. Keep
-the archive, checksum, and manifest together when distributing the package.
+the archive, checksum, manifest, and `COMPONENTS.json` together when
+distributing the package. The archive consumer verifies the external
+`.manifest.json` and `.components.json` sidecars before installation.
 If the archive includes `RELEASE-NOTES.md`, read it after extraction for the
 changes and verification notes specific to that version.
 
@@ -55,6 +57,45 @@ For an already initialized repository, add only missing files with:
 ```bash
 ./scripts/ugs_init.sh --profile standard --migrate /path/to/repository
 ```
+
+For an existing UGS v0.3.x repository, install the complete component set
+without changing its active profile:
+
+```bash
+./scripts/ugs.sh upgrade \
+  --archive "../ugs-bootstrap-${tag}.tar.gz" \
+  --dry-run /path/to/repository
+./scripts/ugs.sh upgrade \
+  --archive "../ugs-bootstrap-${tag}.tar.gz" \
+  --backup-dir /path/to/ugs-backup-${tag} \
+  /path/to/repository
+```
+
+The dry run lists additions, updates, project-owned files that will be
+preserved, and filesystem conflicts. Existing README, policy, workflow, trust
+files, and CR history are preserved by default. A conflict stops the upgrade
+before any write; `--overwrite-project-files` is an explicit opt-in for
+replacing project-owned files. The command prints the exact rollback command.
+
+The active profile remains unchanged even though all profile components are
+installed. Activate a profile only as a separate step:
+
+```bash
+./scripts/ugs.sh activate --profile standard \
+  --archive "../ugs-bootstrap-${tag}.tar.gz" /path/to/repository
+```
+
+Use `baseline`, `standard`, or `high-trust`. To roll back, use the package's
+script and the backup directory printed by the upgrade:
+
+```bash
+./scripts/ugs.sh rollback \
+  --backup-dir /path/to/ugs-backup-${tag} /path/to/repository
+```
+
+The installer supports normal `.git` directories, linked-worktree `.git`
+files, and managed worktrees with `.git-worktree`. It detects bare Git
+repositories and explains that a worktree checkout is required.
 
 ## 3. Run local checks
 

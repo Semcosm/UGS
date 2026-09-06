@@ -52,10 +52,14 @@ the repository is initialized or migrated with `--profile standard` or
 validator are included in every profile.
 
 Every formal release builds `ugs-bootstrap-v<version>.tar.gz` from the tagged
-source and publishes it, its manifest, and its SHA-256 file as Release assets.
-The manifest binds the package to the source commit and records every payload
-file digest. The single package contains all supported profile templates;
-`--profile` selects the generated repository shape. Consumers should verify
+source and publishes it, its manifest, component inventory, and SHA-256 file as
+Release assets. The manifest binds the package to the source commit and
+records every payload file digest. The component inventory is published as
+`ugs-bootstrap-v<version>.tar.gz.components.json`, is copied into the archive
+as `COMPONENTS.json`, and describes the install target, category, profile
+coverage, mode, and ownership of every payload file. The single package
+contains all supported profile templates; `--profile` selects the generated
+repository shape. Consumers should verify
 the signed release tag and checksum before extracting the package.
 
 The archive also includes `OFFLINE-QUICKSTART.md` at its root, plus offline
@@ -66,7 +70,54 @@ the local documents. When the tagged source contains a matching release
 packet, the archive also includes it as `RELEASE-NOTES.md`; a downloaded
 release remains usable without web access.
 
+## Full-Component Upgrade
+
+The package includes `scripts/ugs.sh`, `scripts/ugs_upgrade.py`, and a
+machine-readable `COMPONENTS.json`. Use the package script from the extracted
+release directory to upgrade an existing v0.3.x consumer:
+
+```bash
+./scripts/ugs.sh upgrade \
+  --archive ./ugs-bootstrap-vX.Y.Z.tar.gz \
+  --dry-run /path/to/repository
+./scripts/ugs.sh upgrade \
+  --archive ./ugs-bootstrap-vX.Y.Z.tar.gz \
+  --backup-dir /path/to/backup \
+  /path/to/repository
+```
+
+The archive checksum and all four manifests are verified before writes. The
+upgrade installs every component, regardless of the currently active profile,
+then preserves that profile in `.ugs/policy.json`. It never implicitly
+activates `standard` or `high-trust`.
+
+The component manifest records each archive file's category, supported
+profiles, destination, mode, and ownership. Categories are `core`,
+`profile-specific`, `template`, `documentation`, `test`, and `release-only`.
+Project-owned documents are added when missing and reported as
+`project-preserved` when they differ; CR history is not copied. Use
+`--overwrite-project-files` only after reviewing the dry-run output. A
+filesystem conflict aborts before any write. Each successful operation creates
+a recoverable backup and prints a rollback command:
+
+```bash
+./scripts/ugs.sh rollback --backup-dir /path/to/backup /path/to/repository
+```
+
+Profile activation is explicit and separate:
+
+```bash
+./scripts/ugs.sh activate --profile baseline --archive ./ugs-bootstrap-vX.Y.Z.tar.gz /path/to/repository
+./scripts/ugs.sh activate --profile standard --archive ./ugs-bootstrap-vX.Y.Z.tar.gz /path/to/repository
+./scripts/ugs.sh activate --profile high-trust --archive ./ugs-bootstrap-vX.Y.Z.tar.gz /path/to/repository
+```
+
+Normal, linked-worktree, and managed-worktree layouts are supported. Bare Git
+repositories are detected and rejected because installation needs a worktree;
+install into a checkout associated with the bare repository instead.
+
 The release workflow includes a consumer job that downloads the published
 assets through the GitHub Releases API on a clean runner. It verifies the
 release tag, checksum, source commit, embedded manifest, every payload digest,
-and then initializes a second clean repository from the extracted package.
+every payload category, and then initializes and upgrades clean consumer
+repositories from the extracted package.

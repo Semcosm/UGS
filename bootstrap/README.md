@@ -37,6 +37,59 @@ baseline repository) to install the GitHub adapter;
 the bare-Git update adapter and its Core ref-update validator are included in
 every profile.
 
+## Upgrade An Existing Repository
+
+The release package also contains `scripts/ugs.sh`, `scripts/ugs_upgrade.py`,
+and `COMPONENTS.json`. These provide a full-component upgrade path for an
+existing UGS repository. The installer verifies the archive checksum, the
+embedded `MANIFEST.json`, the external manifest, and the component manifest
+before it writes anything.
+
+From the extracted release directory, first inspect the plan:
+
+```bash
+./scripts/ugs.sh upgrade \
+  --archive ./ugs-bootstrap-v0.3.27.tar.gz \
+  --dry-run /path/to/existing-repository
+```
+
+Then install with a backup outside the target repository:
+
+```bash
+./scripts/ugs.sh upgrade \
+  --archive ./ugs-bootstrap-v0.3.27.tar.gz \
+  --backup-dir /path/to/ugs-backup-v0.3.27 \
+  /path/to/existing-repository
+```
+
+`upgrade` installs the complete component set, including standard and
+high-trust files, but preserves the current `.ugs/policy.json` profile. It
+does not activate a stronger profile. Existing project-owned documents are
+reported as `project-preserved`; CR history is never part of the component
+set. Use `--overwrite-project-files` only after reviewing the dry-run report.
+Filesystem conflicts abort before any write. The command prints a rollback
+command that restores the backup and the previous `core.hooksPath` setting.
+
+After the full component set is installed, activate a profile explicitly:
+
+```bash
+./scripts/ugs.sh activate --profile standard \
+  --archive ./ugs-bootstrap-v0.3.27.tar.gz \
+  /path/to/existing-repository
+```
+
+Use `--profile baseline`, `standard`, or `high-trust`. A profile activation
+only changes the policy declaration and activation metadata; it does not copy
+or delete profile components. A bare Git repository is detected and rejected
+because it has no worktree. Normal, linked-worktree, and managed-worktree
+layouts are supported, including a managed `.git-worktree` directory with a
+placeholder `.git` file.
+
+`COMPONENTS.json` classifies every archive file as `core`, `profile-specific`,
+`template`, `documentation`, `test`, or `release-only`, and records whether
+the destination is UGS-owned or project-owned. Keep the archive, `.sha256`,
+`.manifest.json`, and `.components.json` together for offline installation.
+
 ## Offline UGS Documentation
 
 The release archive includes the UGS guidance needed to use the package
