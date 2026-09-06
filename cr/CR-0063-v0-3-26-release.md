@@ -5,12 +5,12 @@ Head or Range: chore/release-v0-3-26
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(release): prepare v0.3.26 release
-Revision: 2
+Revision: 3
 Status: accepted
 Decision: accepted
 Policy Version: v0.3
 Base OID: 90be0d0595c9ba520ae1c21616313cbf7c567c68
-Head OID: 49de624d2f2f0c460579b3fa42a64e79acf5b59a
+Head OID: d5518a902d707ac4b2fabc5f2a7fae4ff7e3ee48
 Integrated Result: pending
 
 ## Summary
