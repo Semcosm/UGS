@@ -1,16 +1,16 @@
 # CR-0060: Add configurable Document Map governance
 
 Base: main
-Head or Range: working tree based on main
+Head or Range: main@a10461f23d9c745d92ec09befec45aa213c390f7
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(governance): add configurable Document Map validation
-Revision: 6
+Revision: 7
 Status: pending
 Decision: pending
 Policy Version: v0.3
 Base OID: 2f56c8ec2deda73539650d0413ea33eca02c6d92
-Head OID: 73093573fbbed3cbd6efeebeecba62618a0fad25
+Head OID: a10461f23d9c745d92ec09befec45aa213c390f7
 Integrated Result: pending
 
 ## Summary
