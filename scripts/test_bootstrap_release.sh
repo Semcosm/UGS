@@ -36,7 +36,16 @@ tar -xzf "$archive" -C "$unpack_dir"
 package_root="$unpack_dir/ugs-bootstrap-${tag}"
 [ -x "$package_root/scripts/ugs_init.sh" ]
 [ -f "$package_root/MANIFEST.json" ]
+[ -f "$package_root/RELEASE-NOTES.md" ] || {
+  echo "published bootstrap asset missing release notes" >&2
+  exit 1
+}
+cmp -s "$root_dir/releases/${tag}.md" "$package_root/RELEASE-NOTES.md" || {
+  echo "published bootstrap asset has mismatched release notes" >&2
+  exit 1
+}
 for document in \
+  OFFLINE-QUICKSTART.md \
   CONTRIBUTING.md \
   RELEASE.md \
   docs/git/commit-convention.md \
@@ -74,6 +83,8 @@ git archive "$tag" | tar -x -C "$source_root"
 while IFS= read -r relative; do
   case "$relative" in
     README.md) source="bootstrap/README.md" ;;
+    OFFLINE-QUICKSTART.md) source="bootstrap/OFFLINE-QUICKSTART.md" ;;
+    RELEASE-NOTES.md) source="releases/${tag}.md" ;;
     bootstrap/templates/policy.schema.json) source=".ugs/schema/policy.schema.json" ;;
     *) source="$relative" ;;
   esac

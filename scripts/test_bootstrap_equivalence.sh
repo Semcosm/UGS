@@ -7,7 +7,7 @@ trap 'rm -rf "$temp_dir"' EXIT
 zeros="0000000000000000000000000000000000000000"
 first_object="1111111111111111111111111111111111111111"
 
-version="v0.0.0-equivalence"
+version="v0.3.26"
 dist_dir="$temp_dir/dist"
 SOURCE_DATE_EPOCH=0 "$root_dir/scripts/build_bootstrap_package.sh" "$version" --output-dir "$dist_dir" >/dev/null
 archive="$dist_dir/ugs-bootstrap-$version.tar.gz"
@@ -30,6 +30,7 @@ while IFS=$'\t' read -r source relative; do
   }
 done <<'FILES'
 bootstrap/README.md	README.md
+bootstrap/OFFLINE-QUICKSTART.md	OFFLINE-QUICKSTART.md
 CONTRIBUTING.md	CONTRIBUTING.md
 RELEASE.md	RELEASE.md
 docs/git/commit-convention.md	docs/git/commit-convention.md
@@ -87,6 +88,13 @@ keys/revoked_signers	keys/revoked_signers
 keys/signer_roles.json	keys/signer_roles.json
 .ugs/schema/signer-roles.schema.json	.ugs/schema/signer-roles.schema.json
 FILES
+
+if [ -f "$root_dir/releases/${version}.md" ]; then
+  cmp -s "$root_dir/releases/${version}.md" "$package_root/RELEASE-NOTES.md" || {
+    echo "bootstrap source/package mismatch: releases/${version}.md -> RELEASE-NOTES.md" >&2
+    exit 1
+  }
+fi
 
 for profile in baseline standard high-trust; do
   target="$temp_dir/$profile-repository"

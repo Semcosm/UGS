@@ -81,24 +81,26 @@ if "$root_dir/scripts/ugs_init.sh" "$temp_dir/non-empty" >/dev/null 2>&1; then
   exit 1
 fi
 
+package_version="v0.0.0-test"
 package_dir="$temp_dir/dist"
-SOURCE_DATE_EPOCH=0 "$root_dir/scripts/build_bootstrap_package.sh" v0.0.0-test --output-dir "$package_dir" >/dev/null
-archive="$package_dir/ugs-bootstrap-v0.0.0-test.tar.gz"
+SOURCE_DATE_EPOCH=0 "$root_dir/scripts/build_bootstrap_package.sh" "$package_version" --output-dir "$package_dir" >/dev/null
+archive="$package_dir/ugs-bootstrap-${package_version}.tar.gz"
 [ -f "$archive" ]
 [ -f "$archive.manifest.json" ]
 [ -f "$archive.sha256" ]
 (cd "$package_dir" && sha256sum -c "$archive.sha256")
 cp "$archive" "$temp_dir/first.tar.gz"
-SOURCE_DATE_EPOCH=0 "$root_dir/scripts/build_bootstrap_package.sh" v0.0.0-test --output-dir "$package_dir" >/dev/null
+SOURCE_DATE_EPOCH=0 "$root_dir/scripts/build_bootstrap_package.sh" "$package_version" --output-dir "$package_dir" >/dev/null
 cmp -s "$temp_dir/first.tar.gz" "$archive"
 tar_listing="$temp_dir/archive.list"
 tar -tzf "$archive" > "$tar_listing"
-grep -Fqx 'ugs-bootstrap-v0.0.0-test/scripts/ugs_init.py' "$tar_listing"
+grep -Fqx "ugs-bootstrap-${package_version}/scripts/ugs_init.py" "$tar_listing"
 unpack="$temp_dir/unpack"
 mkdir -p "$unpack"
 tar -xzf "$archive" -C "$unpack"
-package_root="$unpack/ugs-bootstrap-v0.0.0-test"
+package_root="$unpack/ugs-bootstrap-${package_version}"
 for document in \
+  OFFLINE-QUICKSTART.md \
   CONTRIBUTING.md \
   RELEASE.md \
   docs/git/commit-convention.md \
@@ -119,6 +121,18 @@ for document in \
     exit 1
   }
 done
+if [ -f "$root_dir/releases/${package_version}.md" ]; then
+  [ -f "$package_root/RELEASE-NOTES.md" ] || {
+    echo "bootstrap package missing release notes" >&2
+    exit 1
+  }
+  cmp -s "$root_dir/releases/${package_version}.md" "$package_root/RELEASE-NOTES.md"
+else
+  [ ! -e "$package_root/RELEASE-NOTES.md" ] || {
+    echo "test package unexpectedly contains release notes" >&2
+    exit 1
+  }
+fi
 package_target="$temp_dir/package-repo"
 "$package_root/scripts/ugs_init.sh" --no-commit "$package_target" >/dev/null
 [ -f "$package_target/.ugs/policy.json" ]

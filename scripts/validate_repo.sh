@@ -91,6 +91,7 @@ required_files=(
   "tests/conformance/profile-matrix.json"
   "tests/fixtures/cr/valid-template.md"
   "bootstrap/README.md"
+  "bootstrap/OFFLINE-QUICKSTART.md"
   "bootstrap/templates/policy.json"
   "bootstrap/templates/document-map.json"
   "bootstrap/templates/document-map.schema.json"

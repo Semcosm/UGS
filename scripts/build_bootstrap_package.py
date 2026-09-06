@@ -40,8 +40,12 @@ def main():
             shutil.copy2(root / "adapters/github" / name, stage / "adapters/github" / name)
         shutil.copy2(root / "adapters/bare-git/update", stage / "adapters/bare-git/update")
         shutil.copy2(root / "bootstrap/README.md", stage / "README.md")
+        shutil.copy2(root / "bootstrap/OFFLINE-QUICKSTART.md", stage / "OFFLINE-QUICKSTART.md")
         shutil.copy2(root / "CONTRIBUTING.md", stage / "CONTRIBUTING.md")
         shutil.copy2(root / "RELEASE.md", stage / "RELEASE.md")
+        release_notes = root / "releases" / (args.version + ".md")
+        if release_notes.is_file():
+            shutil.copy2(release_notes, stage / "RELEASE-NOTES.md")
         for source in sorted((root / "docs/git").glob("*.md")):
             shutil.copy2(source, stage / "docs/git" / source.name)
         shutil.copy2(root / "bootstrap/templates/policy.json", stage / "bootstrap/templates/policy.json")

@@ -4,7 +4,9 @@ This directory is the source for the versioned UGS bootstrap package. It is
 not a hand-maintained copy of an initialized repository. The release builder
 packages it together with the generator and the current policy schema.
 
-Run `scripts/ugs_init.sh --help` for the local development entry point.
+Start with [OFFLINE-QUICKSTART.md](OFFLINE-QUICKSTART.md) for a complete,
+offline consumer walkthrough. Run `scripts/ugs_init.sh --help` for the local
+development entry point.
 The generated package supports `baseline`, `standard`, and `high-trust`
 profiles. High-trust output contains public trust metadata only; private keys
 remain with the operator.
@@ -39,8 +41,10 @@ every profile.
 
 The release archive includes the UGS guidance needed to use the package
 without opening the project website. Start with
+[`OFFLINE-QUICKSTART.md`](OFFLINE-QUICKSTART.md) and
 `docs/git/ugs-bootstrap.md`, then use the local Core, v0.3 profile,
 conformance-level, commit, review, and release policy documents under
 `docs/git/`. `CONTRIBUTING.md` and `RELEASE.md` are included as local
 operational guides. These documents are copied from the same tagged source as
-the package and are listed with checksums in `MANIFEST.json`.
+the package and are listed with checksums in `MANIFEST.json`. When available,
+`RELEASE-NOTES.md` is the release packet for the archive's version.
