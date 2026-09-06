@@ -36,6 +36,27 @@ tar -xzf "$archive" -C "$unpack_dir"
 package_root="$unpack_dir/ugs-bootstrap-${tag}"
 [ -x "$package_root/scripts/ugs_init.sh" ]
 [ -f "$package_root/MANIFEST.json" ]
+for document in \
+  CONTRIBUTING.md \
+  RELEASE.md \
+  docs/git/commit-convention.md \
+  docs/git/release-policy.md \
+  docs/git/review-policy.md \
+  docs/git/ugs-bootstrap.md \
+  docs/git/ugs-branch-profiles.md \
+  docs/git/ugs-conformance-fixtures.md \
+  docs/git/ugs-conformance-levels.md \
+  docs/git/ugs-core.md \
+  docs/git/ugs-document-map.md \
+  docs/git/ugs-quality-profile.md \
+  docs/git/ugs-repository-shapes.md \
+  docs/git/ugs-supply-chain-profile.md \
+  docs/git/ugs-v0.3-profile.md; do
+  [ -f "$package_root/$document" ] || {
+    echo "published bootstrap asset missing offline documentation: $document" >&2
+    exit 1
+  }
+done
 cmp -s "$manifest" "$package_root/MANIFEST.json"
 
 while IFS=$'\t' read -r relative expected; do
@@ -75,6 +96,14 @@ git -C "$repo" config user.email "ugs-release-consumer@example.invalid"
 (cd "$repo" && scripts/validate_policy_manifest.sh .ugs/policy.json)
 [ "$(git -C "$repo" config --get core.hooksPath)" = ".githooks" ]
 [ "$(git -C "$repo" log -1 --format=%s)" = "chore(bootstrap): initialize UGS governance" ]
+[ -x "$repo/adapters/bare-git/update" ]
+[ -x "$repo/scripts/validate_ref_update.sh" ]
+[ ! -e "$repo/adapters/github" ]
+if (cd "$repo" && ./scripts/create_pr_from_cr.sh >"$temp_dir/release-create-pr-output" 2>&1); then
+  echo "published baseline create_pr_from_cr wrapper unexpectedly passed" >&2
+  exit 1
+fi
+grep -Fq 'optional GitHub adapter is not installed' "$temp_dir/release-create-pr-output"
 
 if "$package_root/scripts/ugs_init.sh" "$repo" >/dev/null 2>&1; then
   echo "published bootstrap package overwrote an initialized repository" >&2

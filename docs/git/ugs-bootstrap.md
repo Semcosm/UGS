@@ -45,12 +45,24 @@ validators. It never generates or packages private keys; a normal high-trust
 initialization requires the operator's SSH signing key, while `--no-commit`
 supports preparing a repository before trust material is configured.
 
+The baseline profile keeps the GitHub adapter optional. Its CR helper commands
+remain as compatibility wrappers and return a clear installation message until
+the repository is initialized or migrated with `--profile standard` or
+`--profile high-trust`. The bare-Git update adapter and its Core ref-update
+validator are included in every profile.
+
 Every formal release builds `ugs-bootstrap-v<version>.tar.gz` from the tagged
 source and publishes it, its manifest, and its SHA-256 file as Release assets.
 The manifest binds the package to the source commit and records every payload
 file digest. The single package contains all supported profile templates;
 `--profile` selects the generated repository shape. Consumers should verify
 the signed release tag and checksum before extracting the package.
+
+The archive also includes offline copies of the applicable UGS Core, v0.3
+profile, conformance, commit, review, release, and bootstrap guidance under
+`docs/git/`, together with `CONTRIBUTING.md` and `RELEASE.md`. The root
+`README.md` points to these local documents so a downloaded release remains
+usable without web access.
 
 The release workflow includes a consumer job that downloads the published
 assets through the GitHub Releases API on a clean runner. It verifies the

@@ -4,6 +4,8 @@ set -euo pipefail
 root_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 temp_dir="$(mktemp -d)"
 trap 'rm -rf "$temp_dir"' EXIT
+zeros="0000000000000000000000000000000000000000"
+first_object="1111111111111111111111111111111111111111"
 
 repo="$temp_dir/repo"
 git init --quiet -b main "$repo"
@@ -12,9 +14,24 @@ git -C "$repo" config user.email "bootstrap@example.invalid"
 "$root_dir/scripts/ugs_init.sh" --profile baseline "$repo"
 [ -d "$repo/.git" ]
 [ ! -e "$repo/.github" ]
+[ -x "$repo/adapters/bare-git/update" ]
+[ -x "$repo/scripts/validate_ref_update.sh" ]
+[ -x "$repo/scripts/validate_main_cr_range.sh" ]
+[ ! -e "$repo/adapters/github" ]
+(cd "$repo" && ./adapters/bare-git/update refs/heads/main "$zeros" "$first_object" >/dev/null)
 [ "$(git -C "$repo" config --get core.hooksPath)" = ".githooks" ]
 git -C "$repo" log -1 --format=%s | grep -Fqx 'chore(bootstrap): initialize UGS governance'
 "$root_dir/scripts/validate_policy_manifest.sh" "$repo/.ugs/policy.json"
+if (cd "$repo" && ./scripts/create_pr_from_cr.sh >"$temp_dir/create-pr-output" 2>&1); then
+  echo "baseline create_pr_from_cr wrapper unexpectedly passed" >&2
+  exit 1
+fi
+grep -Fq 'optional GitHub adapter is not installed' "$temp_dir/create-pr-output"
+if (cd "$repo" && ./scripts/validate_pr_cr.sh >"$temp_dir/validate-pr-output" 2>&1); then
+  echo "baseline validate_pr_cr wrapper unexpectedly passed" >&2
+  exit 1
+fi
+grep -Fq 'optional GitHub adapter is not installed' "$temp_dir/validate-pr-output"
 
 standard_repo="$temp_dir/standard-repo"
 mkdir -p "$standard_repo"
@@ -27,6 +44,7 @@ git -C "$standard_repo" config user.email "bootstrap@example.invalid"
 [ -f "$standard_repo/.github/workflows/ugs-validate.yml" ]
 [ -x "$standard_repo/adapters/github/validate_pr.sh" ]
 [ -x "$standard_repo/adapters/github/validate_action_pinning.sh" ]
+[ -x "$standard_repo/scripts/validate_ref_update.sh" ]
 [ -x "$standard_repo/scripts/validate_quality_profile.sh" ]
 [ ! -e "$standard_repo/.ugs/document-map.json" ]
 
@@ -80,9 +98,31 @@ unpack="$temp_dir/unpack"
 mkdir -p "$unpack"
 tar -xzf "$archive" -C "$unpack"
 package_root="$unpack/ugs-bootstrap-v0.0.0-test"
+for document in \
+  CONTRIBUTING.md \
+  RELEASE.md \
+  docs/git/commit-convention.md \
+  docs/git/release-policy.md \
+  docs/git/review-policy.md \
+  docs/git/ugs-bootstrap.md \
+  docs/git/ugs-branch-profiles.md \
+  docs/git/ugs-conformance-fixtures.md \
+  docs/git/ugs-conformance-levels.md \
+  docs/git/ugs-core.md \
+  docs/git/ugs-document-map.md \
+  docs/git/ugs-quality-profile.md \
+  docs/git/ugs-repository-shapes.md \
+  docs/git/ugs-supply-chain-profile.md \
+  docs/git/ugs-v0.3-profile.md; do
+  [ -f "$package_root/$document" ] || {
+    echo "bootstrap package missing offline documentation: $document" >&2
+    exit 1
+  }
+done
 package_target="$temp_dir/package-repo"
 "$package_root/scripts/ugs_init.sh" --no-commit "$package_target" >/dev/null
 [ -f "$package_target/.ugs/policy.json" ]
+(cd "$package_target" && ./adapters/bare-git/update refs/heads/main "$zeros" "$first_object" >/dev/null)
 package_standard="$temp_dir/package-standard-repo"
 "$package_root/scripts/ugs_init.sh" --profile standard --no-commit "$package_standard" >/dev/null
 [ "$(jq -r '.conformance_level' "$package_standard/.ugs/policy.json")" = "standard" ]

@@ -29,7 +29,7 @@ def files(source, profile, with_document_map=False):
         ".githooks/commit-msg": "#!/usr/bin/env bash\nset -euo pipefail\ngrep -Eq '^[a-z]+(\\([^)]+\\))?: .+' \"$1\" || { echo 'UGS: invalid commit subject' >&2; exit 1; }\n",
         "REPOSITORY_POLICY.md": "# Repository Policy\n\nUGS Profile: continuous\nMerge Strategy: rebase-ff\nVersioning: semver\nSigning Level: " + signing_level + "\nProtected Long-Lived Branches: main\nHooks Path: .githooks\n",
         "README.md": "# UGS-governed repository\n\nThis repository was initialized by the UGS bootstrap package.\n\nRun `scripts/validate_policy_manifest.sh` to validate the policy.\n",
-        "cr/README.md": "# Change Requests\n\nRecord accepted changes under `cr/` using the UGS CR template.\n",
+        "cr/README.md": "# Change Requests\n\nRecord accepted changes under `cr/` using the UGS CR template.\n\nThe `scripts/create_pr_from_cr.sh` and `scripts/validate_pr_cr.sh` commands are compatibility wrappers for the optional GitHub adapter. In the baseline profile they report that the adapter is not installed; initialize or migrate with `--profile standard` or `--profile high-trust` to enable them.\n",
         "cr/TEMPLATE.md": "# CR-XXXX: <title>\n\nBase: main\nHead or Range: <commit-or-range>\nRevision: 1\nStatus: pending\nDecision: pending\nPolicy Version: v0.3\nBase OID: <base-oid>\nHead OID: <head-oid>\nIntegrated Result: pending\n\n## Summary\n\n<summary>\n\n## Motivation\n\n<motivation>\n\n## Test Evidence\n\n<test evidence>\n\n## Risk\n\n<risk>\n\n## Rollback\n\n<rollback>\n\n## Breaking Change\n\n<breaking change>\n\n## Backport Target\n\n<backport target>\n",
         "scripts/validate_policy_manifest.sh": (source / "scripts/validate_policy_manifest.sh").read_text(),
         "scripts/validate_cr_record.sh": (source / "scripts/validate_cr_record.sh").read_text(),
@@ -38,6 +38,7 @@ def files(source, profile, with_document_map=False):
         "scripts/validate_pr_cr.sh": (source / "scripts/validate_pr_cr.sh").read_text(),
         "scripts/create_pr_from_cr.sh": (source / "scripts/create_pr_from_cr.sh").read_text(),
         "scripts/validate_main_cr_range.sh": (source / "scripts/validate_main_cr_range.sh").read_text(),
+        "scripts/validate_ref_update.sh": (source / "scripts/validate_ref_update.sh").read_text(),
     }
     if with_document_map:
         document_map_schema = source / ".ugs/schema/document-map.schema.json"

@@ -4,6 +4,8 @@ set -euo pipefail
 root_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 temp_dir="$(mktemp -d)"
 trap 'rm -rf "$temp_dir"' EXIT
+zeros="0000000000000000000000000000000000000000"
+first_object="1111111111111111111111111111111111111111"
 
 version="v0.0.0-equivalence"
 dist_dir="$temp_dir/dist"
@@ -28,6 +30,21 @@ while IFS=$'\t' read -r source relative; do
   }
 done <<'FILES'
 bootstrap/README.md	README.md
+CONTRIBUTING.md	CONTRIBUTING.md
+RELEASE.md	RELEASE.md
+docs/git/commit-convention.md	docs/git/commit-convention.md
+docs/git/release-policy.md	docs/git/release-policy.md
+docs/git/review-policy.md	docs/git/review-policy.md
+docs/git/ugs-bootstrap.md	docs/git/ugs-bootstrap.md
+docs/git/ugs-branch-profiles.md	docs/git/ugs-branch-profiles.md
+docs/git/ugs-conformance-fixtures.md	docs/git/ugs-conformance-fixtures.md
+docs/git/ugs-conformance-levels.md	docs/git/ugs-conformance-levels.md
+docs/git/ugs-core.md	docs/git/ugs-core.md
+docs/git/ugs-document-map.md	docs/git/ugs-document-map.md
+docs/git/ugs-quality-profile.md	docs/git/ugs-quality-profile.md
+docs/git/ugs-repository-shapes.md	docs/git/ugs-repository-shapes.md
+docs/git/ugs-supply-chain-profile.md	docs/git/ugs-supply-chain-profile.md
+docs/git/ugs-v0.3-profile.md	docs/git/ugs-v0.3-profile.md
 bootstrap/templates/policy.json	bootstrap/templates/policy.json
 bootstrap/templates/policy-standard.json	bootstrap/templates/policy-standard.json
 bootstrap/templates/policy-high-trust.json	bootstrap/templates/policy-high-trust.json
@@ -82,11 +99,20 @@ for profile in baseline standard high-trust; do
       (cd "$target" && scripts/validate_policy_manifest.sh .ugs/policy.json)
       [ ! -e "$target/.github" ]
       [ -x "$target/adapters/bare-git/update" ]
+      [ -x "$target/scripts/validate_ref_update.sh" ]
+      [ ! -e "$target/adapters/github" ]
+      (cd "$target" && ./adapters/bare-git/update refs/heads/main "$zeros" "$first_object" >/dev/null)
+      if (cd "$target" && ./scripts/create_pr_from_cr.sh >"$temp_dir/baseline-create-pr-output" 2>&1); then
+        echo "baseline create_pr_from_cr wrapper unexpectedly passed" >&2
+        exit 1
+      fi
+      grep -Fq 'optional GitHub adapter is not installed' "$temp_dir/baseline-create-pr-output"
       ;;
     standard)
       (cd "$target" && scripts/validate_policy_manifest.sh .ugs/policy.json && scripts/validate_quality_profile.sh .ugs/policy.json && scripts/validate_supply_chain_profile.sh .ugs/policy.json && scripts/validate_action_pinning.sh .ugs/policy.json .github/workflows && scripts/validate_repository_shape.sh .ugs/policy.json)
       [ -x "$target/adapters/github/validate_pr.sh" ]
       [ -x "$target/adapters/github/validate_action_pinning.sh" ]
+      [ -x "$target/scripts/validate_ref_update.sh" ]
       (cd "$target" && scripts/generate_document_map.py --check && scripts/validate_document_map.py)
       ;;
     high-trust)

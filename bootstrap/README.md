@@ -27,3 +27,20 @@ the checker automatically whenever `.ugs/document-map.json` exists.
 Repositories that do not opt in receive no Document Map files and are not
 required to use this feature. Release tests always exercise the opt-in path so
 the published package cannot silently ship a broken Document Map capability.
+
+The baseline profile keeps the GitHub adapter optional. Its CR helper wrappers
+report how to enable the adapter instead of failing on a missing target. Use
+`--profile standard` or `--profile high-trust` (with `--migrate` for an existing
+baseline repository) to install the GitHub adapter;
+the bare-Git update adapter and its Core ref-update validator are included in
+every profile.
+
+## Offline UGS Documentation
+
+The release archive includes the UGS guidance needed to use the package
+without opening the project website. Start with
+`docs/git/ugs-bootstrap.md`, then use the local Core, v0.3 profile,
+conformance-level, commit, review, and release policy documents under
+`docs/git/`. `CONTRIBUTING.md` and `RELEASE.md` are included as local
+operational guides. These documents are copied from the same tagged source as
+the package and are listed with checksums in `MANIFEST.json`.

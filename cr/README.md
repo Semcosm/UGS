@@ -11,9 +11,12 @@ Use cases:
 
 Use `cr/TEMPLATE.md` for new records.
 
-Every non-trivial integration must retain a persisted CR record. Use
-`scripts/create_pr_from_cr.sh` to create the GitHub PR from that record, and
-use `scripts/validate_pr_cr.sh` to verify that the PR body has not diverged.
+Every non-trivial integration must retain a persisted CR record. The
+`scripts/create_pr_from_cr.sh` and `scripts/validate_pr_cr.sh` commands are
+compatibility wrappers for the optional GitHub adapter. Baseline repositories
+keep that adapter disabled; the wrappers report how to enable it. Initialize or
+migrate with `--profile standard` or `--profile high-trust` to install the
+adapter.
 
 `CR-0007-close-v0-2-plan-v0-3.md` records the repository's v0.2 closure and
 the decision to keep v0.3 planning non-normative until a future adoption CR.

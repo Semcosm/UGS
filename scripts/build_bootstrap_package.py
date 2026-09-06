@@ -31,6 +31,7 @@ def main():
         (stage / "adapters/github").mkdir(parents=True)
         (stage / "adapters/bare-git").mkdir(parents=True)
         (stage / ".github/workflows").mkdir(parents=True)
+        (stage / "docs/git").mkdir(parents=True)
         shutil.copy2(root / "scripts/ugs_init.py", stage / "scripts/ugs_init.py")
         shutil.copy2(root / "scripts/ugs_init.sh", stage / "scripts/ugs_init.sh")
         for name in ("validate_policy_manifest.sh", "validate_cr_record.sh", "validate_cr_review.sh", "validate_pr_cr.sh", "create_pr_from_cr.sh", "validate_main_cr_range.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):
@@ -39,6 +40,10 @@ def main():
             shutil.copy2(root / "adapters/github" / name, stage / "adapters/github" / name)
         shutil.copy2(root / "adapters/bare-git/update", stage / "adapters/bare-git/update")
         shutil.copy2(root / "bootstrap/README.md", stage / "README.md")
+        shutil.copy2(root / "CONTRIBUTING.md", stage / "CONTRIBUTING.md")
+        shutil.copy2(root / "RELEASE.md", stage / "RELEASE.md")
+        for source in sorted((root / "docs/git").glob("*.md")):
+            shutil.copy2(source, stage / "docs/git" / source.name)
         shutil.copy2(root / "bootstrap/templates/policy.json", stage / "bootstrap/templates/policy.json")
         shutil.copy2(root / "bootstrap/templates/policy-standard.json", stage / "bootstrap/templates/policy-standard.json")
         shutil.copy2(root / "bootstrap/templates/policy-high-trust.json", stage / "bootstrap/templates/policy-high-trust.json")
