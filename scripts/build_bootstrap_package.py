@@ -85,6 +85,8 @@ def component_manifest(stage, version, source_commit):
     for name in ("LICENSE", "SECURITY.md", "CODE_OF_CONDUCT.md", "SUPPORT.md", "RELEASE.md"):
         add("bootstrap/templates/" + name, name, "profile-specific", "standard", ["standard", "high-trust"], ownership="project")
     add("bootstrap/templates/supply-chain-README.md", ".ugs/supply-chain/README.md", "profile-specific", "standard", ["standard", "high-trust"])
+    for name in ("LICENSE", "LICENSES/Apache-2.0.txt", "LICENSES/CC-BY-4.0.txt"):
+        add(name, ".ugs/docs/" + name, "documentation", "licensing")
 
     for relative in (
         "keys/README.md",
@@ -159,6 +161,10 @@ def main():
         (stage / "adapters/bare-git").mkdir(parents=True)
         (stage / ".github/workflows").mkdir(parents=True)
         (stage / "docs/git").mkdir(parents=True)
+        (stage / "LICENSES").mkdir(parents=True)
+        shutil.copy2(root / "LICENSE", stage / "LICENSE")
+        for name in ("Apache-2.0.txt", "CC-BY-4.0.txt"):
+            shutil.copy2(root / "LICENSES" / name, stage / "LICENSES" / name)
         shutil.copy2(root / "scripts/ugs_init.py", stage / "scripts/ugs_init.py")
         shutil.copy2(root / "scripts/ugs_init.sh", stage / "scripts/ugs_init.sh")
         for name in ("ugs.sh", "ugs_upgrade.py", "ugs_upgrade.sh", "validate_policy_manifest.sh", "validate_cr_record.sh", "validate_cr_review.sh", "validate_pr_cr.sh", "create_pr_from_cr.sh", "validate_main_cr_range.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):

@@ -128,3 +128,21 @@ releases/     release packets and verification notes
 scripts/      reusable repository validation scripts
 adapters/     platform mappings kept outside UGS Core
 ```
+
+## Licensing
+
+UGS uses a layered license policy:
+
+- implementation, hooks, adapters, configuration, and test components use
+  Apache-2.0;
+- specifications, guides, release packets, and change-request records use
+  CC BY 4.0.
+
+The [license overview](LICENSE) and complete texts for [Apache-2.0](LICENSES/Apache-2.0.txt)
+and [CC BY 4.0](LICENSES/CC-BY-4.0.txt) are kept in the repository. The
+bootstrap package also carries these texts and installs them under
+`.ugs/docs/` for offline consumers. Its root `LICENSE` is a project-owned
+starting template and does not choose a license for the consumer's own work.
+
+Neither license grants permission to use the UGS name, logo, or conformance
+claim to imply endorsement, certification, or official status.

@@ -101,6 +101,10 @@ grep -Fq 'project-preserved: README.md' "$temp_dir/upgrade-output"
 [ -x "$repo/scripts/ugs_upgrade.sh" ]
 [ -f "$repo/.ugs/docs/git/ugs-core.md" ]
 [ -f "$repo/.ugs/docs/OFFLINE-QUICKSTART.md" ]
+[ -f "$repo/.ugs/docs/LICENSE" ]
+[ -f "$repo/.ugs/docs/LICENSES/Apache-2.0.txt" ]
+[ -f "$repo/.ugs/docs/LICENSES/CC-BY-4.0.txt" ]
+grep -Fq "project-owned starting point" "$repo/LICENSE"
 [ -f "$repo/cr/project-history.md" ]
 [ "$(cat "$repo/README.md")" = "$before_readme" ]
 (cd "$repo" && scripts/validate_policy_manifest.sh .ugs/policy.json)

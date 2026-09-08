@@ -3,6 +3,12 @@
 The bootstrap package is generated from the UGS source tree. It is not a
 second hand-maintained repository skeleton.
 
+The package also carries the UGS license overview and complete Apache-2.0 and
+CC BY 4.0 texts at its root. Initialized repositories receive copies under
+`.ugs/docs/`; the root `LICENSE` generated for the standard profiles remains
+a project-owned starting point that consumers should replace or extend for
+their own work.
+
 For local development:
 
 ```bash

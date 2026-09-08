@@ -32,6 +32,9 @@ while IFS=$'\t' read -r source relative; do
     exit 1
   }
 done <<'FILES'
+LICENSE	LICENSE
+LICENSES/Apache-2.0.txt	LICENSES/Apache-2.0.txt
+LICENSES/CC-BY-4.0.txt	LICENSES/CC-BY-4.0.txt
 bootstrap/README.md	README.md
 bootstrap/OFFLINE-QUICKSTART.md	OFFLINE-QUICKSTART.md
 CONTRIBUTING.md	CONTRIBUTING.md

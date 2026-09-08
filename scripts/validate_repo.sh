@@ -8,6 +8,9 @@ fail() {
 
 required_files=(
   "README.md"
+  "LICENSE"
+  "LICENSES/Apache-2.0.txt"
+  "LICENSES/CC-BY-4.0.txt"
   "docs/git/ugs-core.md"
   "docs/git/ugs-branch-profiles.md"
   "docs/git/ugs-quality-profile.md"
@@ -126,6 +129,11 @@ required_files=(
 for file in "${required_files[@]}"; do
   [ -f "$file" ] || fail "missing required file: $file"
 done
+
+grep -Fq "Apache-2.0" LICENSE || fail "LICENSE must declare Apache-2.0"
+grep -Fq "CC BY 4.0" LICENSE || fail "LICENSE must declare CC BY 4.0"
+grep -Fq "Apache License" LICENSES/Apache-2.0.txt || fail "Apache-2.0 license text is invalid"
+grep -Fq "Creative Commons Attribution 4.0 International" LICENSES/CC-BY-4.0.txt || fail "CC BY 4.0 license text is invalid"
 
 executable_files=(
   ".githooks/commit-msg"

@@ -4,6 +4,12 @@ This directory is the source for the versioned UGS bootstrap package. It is
 not a hand-maintained copy of an initialized repository. The release builder
 packages it together with the generator and the current policy schema.
 
+The package also carries the UGS license overview and complete Apache-2.0 and
+CC BY 4.0 texts at its root. Initialized repositories receive copies under
+`.ugs/docs/`; the root `LICENSE` generated for the standard profiles remains
+a project-owned starting point that consumers should replace or extend for
+their own work.
+
 Start with [OFFLINE-QUICKSTART.md](OFFLINE-QUICKSTART.md) for a complete,
 offline consumer walkthrough. Run `scripts/ugs_init.sh --help` for the local
 development entry point.

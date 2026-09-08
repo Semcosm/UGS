@@ -24,6 +24,9 @@ def files(source, profile, with_document_map=False):
     output = {
         ".ugs/policy.json": json.dumps(policy, indent=2) + "\n",
         ".ugs/bootstrap.json": "",
+        ".ugs/docs/LICENSE": (source / "LICENSE").read_text(),
+        ".ugs/docs/LICENSES/Apache-2.0.txt": (source / "LICENSES/Apache-2.0.txt").read_text(),
+        ".ugs/docs/LICENSES/CC-BY-4.0.txt": (source / "LICENSES/CC-BY-4.0.txt").read_text(),
         ".ugs/schema/policy.schema.json": ((source / ".ugs/schema/policy.schema.json") if (source / ".ugs/schema/policy.schema.json").exists() else (source / "bootstrap/templates/policy.schema.json")).read_text(),
         ".githooks/README.md": "# UGS managed hooks\n\nInstall with `git config core.hooksPath .githooks`.\n",
         ".githooks/commit-msg": "#!/usr/bin/env bash\nset -euo pipefail\ngrep -Eq '^[a-z]+(\\([^)]+\\))?: .+' \"$1\" || { echo 'UGS: invalid commit subject' >&2; exit 1; }\n",
@@ -60,7 +63,7 @@ def files(source, profile, with_document_map=False):
             "adapters/github/create_pr_from_cr.sh": (source / "adapters/github/create_pr_from_cr.sh").read_text(),
             "adapters/github/validate_adapter.sh": (source / "adapters/github/validate_adapter.sh").read_text(),
             "adapters/github/validate_action_pinning.sh": (source / "adapters/github/validate_action_pinning.sh").read_text(),
-            "LICENSE": "# License\n\nThis repository has not selected a license. Replace this file before distributing software.\n",
+            "LICENSE": (template / "LICENSE").read_text(),
             "SECURITY.md": "# Security\n\nReport security issues privately to the repository maintainers.\n",
             "CODE_OF_CONDUCT.md": "# Code of Conduct\n\nContributors are expected to act respectfully and in good faith.\n",
             "SUPPORT.md": "# Support\n\nUse the repository issue tracker for support requests.\n",

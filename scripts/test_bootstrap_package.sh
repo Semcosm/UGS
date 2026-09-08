@@ -40,6 +40,7 @@ git -C "$standard_repo" config user.name "Bootstrap Fixture"
 git -C "$standard_repo" config user.email "bootstrap@example.invalid"
 "$root_dir/scripts/ugs_init.sh" --profile standard "$standard_repo" >/dev/null
 [ "$(jq -r '.conformance_level' "$standard_repo/.ugs/policy.json")" = "standard" ]
+grep -Fq "project-owned starting point" "$standard_repo/LICENSE"
 (cd "$standard_repo" && scripts/validate_policy_manifest.sh && scripts/validate_quality_profile.sh && scripts/validate_supply_chain_profile.sh && scripts/validate_action_pinning.sh && scripts/validate_repository_shape.sh)
 [ -f "$standard_repo/.github/workflows/ugs-validate.yml" ]
 [ -x "$standard_repo/adapters/github/validate_pr.sh" ]
@@ -102,6 +103,11 @@ tar -xzf "$archive" -C "$unpack"
 package_root="$unpack/ugs-bootstrap-${package_version}"
 [ -f "$package_root/COMPONENTS.json" ]
 cmp -s "$archive.components.json" "$package_root/COMPONENTS.json"
+[ -f "$package_root/LICENSE" ]
+[ -f "$package_root/LICENSES/Apache-2.0.txt" ]
+[ -f "$package_root/LICENSES/CC-BY-4.0.txt" ]
+grep -Fq "Apache-2.0" "$package_root/LICENSE"
+grep -Fq "CC BY 4.0" "$package_root/LICENSE"
 for document in \
   OFFLINE-QUICKSTART.md \
   CONTRIBUTING.md \
@@ -139,6 +145,9 @@ fi
 package_target="$temp_dir/package-repo"
 "$package_root/scripts/ugs_init.sh" --no-commit "$package_target" >/dev/null
 [ -f "$package_target/.ugs/policy.json" ]
+[ -f "$package_target/.ugs/docs/LICENSE" ]
+[ -f "$package_target/.ugs/docs/LICENSES/Apache-2.0.txt" ]
+[ -f "$package_target/.ugs/docs/LICENSES/CC-BY-4.0.txt" ]
 (cd "$package_target" && ./adapters/bare-git/update refs/heads/main "$zeros" "$first_object" >/dev/null)
 package_standard="$temp_dir/package-standard-repo"
 "$package_root/scripts/ugs_init.sh" --profile standard --no-commit "$package_standard" >/dev/null
