@@ -1,17 +1,18 @@
 # CR-0065: Self-bootstrap UGS repository from the v0.3.27 release
 
 Base: main
-Head or Range: chore/self-bootstrap-v0-3-27
+Head or Range: chore/self-bootstrap-v0-3-27 / chore/record-cr-0065-integration / 33827e9..165cbc1
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: chore(bootstrap): self-bootstrap repository with v0.3.27
-Revision: 1
-Status: pending
-Decision: pending
+Revision: 2
+Status: integrated
+Decision: accepted
 Policy Version: v0.3
 Base OID: 33827e98046ee41c7b919700f681748871086400
-Head OID: fbec7f716aa92c7f92d5b485a16d26c8309c02bc
-Integrated Result: pending
+Head OID: 165cbc1ec7c63ad852bf3d2ddbdcedc36e476f6e
+Integrated Result: main@165cbc1ec7c63ad852bf3d2ddbdcedc36e476f6e
+Coverage OIDs: fbec7f716aa92c7f92d5b485a16d26c8309c02bc
 
 ## Summary
 
