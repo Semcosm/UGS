@@ -12,6 +12,7 @@ Policy Version: v0.3
 Base OID: ac9119c8dc96886ebe279da2527d94ff35a1bbf6
 Head OID: 33827e98046ee41c7b919700f681748871086400
 Integrated Result: main@33827e98046ee41c7b919700f681748871086400
+Coverage OIDs: fa1537cfd37e41223ebcf15f3b414bc5541707e4
 
 ## Summary
 

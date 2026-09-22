@@ -12,6 +12,7 @@ Policy Version: v0.3
 Base OID: 20db5f23a304bc9c1f7738a3ac102a68e3a8a6ce
 Head OID: 72c19cd0fdc5249c12c2f2ba79913cb791a6a031
 Integrated Result: main@72c19cd0fdc5249c12c2f2ba79913cb791a6a031
+Coverage OIDs: 20db5f23a304bc9c1f7738a3ac102a68e3a8a6ce
 
 ## Summary
 
