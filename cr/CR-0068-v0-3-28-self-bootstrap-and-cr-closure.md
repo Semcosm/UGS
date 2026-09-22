@@ -1,16 +1,16 @@
 # CR-0068: Self-bootstrap v0.3.28 and close verified historical CR records
 
 Base: main
-Head or Range: chore/establish-layered-licensing / ded9bc0..18747c2
+Head or Range: chore/establish-layered-licensing / ded9bc0..b470202
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: chore(bootstrap): self-bootstrap v0.3.28
-Revision: 1
+Revision: 2
 Status: accepted
 Decision: accepted
 Policy Version: v0.3
 Base OID: ded9bc0f6b9dd519473ba5e33367e3ee80fd62f6
-Head OID: 18747c201e47ff23d86cf71d2a6ecfef6fa37ede
+Head OID: b470202b1b34b80f10de3c386b2c0a30b28505af
 Integrated Result: pending
 
 ## Summary
