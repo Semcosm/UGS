@@ -11,7 +11,7 @@ Run these commands in the directory containing the downloaded archive and its
 checksum file. Replace the tag when using another release:
 
 ```bash
-tag=v0.3.27
+tag=v0.3.28
 sha256sum -c "ugs-bootstrap-${tag}.tar.gz.sha256"
 tar -xzf "ugs-bootstrap-${tag}.tar.gz"
 cd "ugs-bootstrap-${tag}"

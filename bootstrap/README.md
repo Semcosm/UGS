@@ -55,7 +55,7 @@ From the extracted release directory, first inspect the plan:
 
 ```bash
 ./scripts/ugs.sh upgrade \
-  --archive ./ugs-bootstrap-v0.3.27.tar.gz \
+  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
   --dry-run /path/to/existing-repository
 ```
 
@@ -63,8 +63,8 @@ Then install with a backup outside the target repository:
 
 ```bash
 ./scripts/ugs.sh upgrade \
-  --archive ./ugs-bootstrap-v0.3.27.tar.gz \
-  --backup-dir /path/to/ugs-backup-v0.3.27 \
+  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
+  --backup-dir /path/to/ugs-backup-v0.3.28 \
   /path/to/existing-repository
 ```
 
@@ -80,7 +80,7 @@ After the full component set is installed, activate a profile explicitly:
 
 ```bash
 ./scripts/ugs.sh activate --profile standard \
-  --archive ./ugs-bootstrap-v0.3.27.tar.gz \
+  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
   /path/to/existing-repository
 ```
 
