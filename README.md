@@ -38,6 +38,7 @@ primitives:
   - [Adapters（适配器）](adapters/README.md)
 - **Roadmap, releases, and implementation（路线图、发布与实现）**
   - [v0.3 Roadmap（v0.3 路线图）](docs/roadmap/v0.3.md)
+  - [v1.0 And Beyond Roadmap（v1.0 及长期路线图）](docs/roadmap/v1.0-and-beyond.md)
   - [v0.2.0 Release Packet（v0.2.0 发布包）](releases/v0.2.0.md)
   - [v0.3.0 Release Packet（v0.3.0 发布包）](releases/v0.3.0.md)
   - **Release packets（发布包）**

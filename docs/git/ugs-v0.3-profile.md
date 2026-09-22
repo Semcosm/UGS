@@ -109,8 +109,16 @@ authorizer, reason, start and expiry timestamps, event commit, and post-event
 review. Bootstrap exceptions are one-time; emergency exceptions are time-bound
 and must close with a reachable `main@<OID>` review result.
 
-## 7. Deferred capabilities
+## 7. Optional profiles and deferred capabilities
 
-Quality profiles, supply-chain profiles, and additional repository shapes are
-separate follow-up work. They are not implied by the v0.3 profile unless
-explicitly declared by a future profile or extension.
+Quality, supply-chain, and repository-shape capabilities are separately
+specified optional v0.3 profiles in `ugs-quality-profile.md`,
+`ugs-supply-chain-profile.md`, and `ugs-repository-shapes.md`. They are
+available to repositories that explicitly declare them; their absence does not
+invalidate an otherwise conforming v0.3 repository and this profile does not
+silently make them mandatory.
+
+Further work remains for stronger cross-binding of production evidence,
+portable adapter capability reporting, reviewer attestations, and the v1.0
+compatibility contract. Those changes require a future profile or versioned
+extension and are not implied by the v0.3 profile.
