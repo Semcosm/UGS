@@ -1,7 +1,7 @@
 # CR-0069: Upgrade supply-chain assurance with v0.3.28 evidence
 
 Base: main
-Head or Range: chore/supply-chain-evidence / 0a4d508..ebca89f
+Head or Range: chore/supply-chain-evidence / 0a4d508..d699a83
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(supply-chain): publish v0.3.28 provenance evidence
@@ -10,7 +10,7 @@ Status: accepted
 Decision: accepted
 Policy Version: v0.3
 Base OID: 0a4d5088866008b912235ab83b048e5950ea5058
-Head OID: ebca89f2cee03a1300ad3de1a4a6f8ea6eab4f00
+Head OID: d699a835de3e2b8718dcdecb777dac55250f4673
 Integrated Result: pending
 
 ## Summary
