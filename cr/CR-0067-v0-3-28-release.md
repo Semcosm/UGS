@@ -5,13 +5,13 @@ Head or Range: chore/establish-layered-licensing / 32057d8..33c90bf
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(release): prepare v0.3.28 licensing release
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 32057d8a031d5b07a971f5dfe8f6093f46dd0dcd
 Head OID: 33c90bf44d3ea734f441dc4a5a247da85fac0b82
-Integrated Result: pending
+Integrated Result: main@33c90bf44d3ea734f441dc4a5a247da85fac0b82
 
 ## Summary
 

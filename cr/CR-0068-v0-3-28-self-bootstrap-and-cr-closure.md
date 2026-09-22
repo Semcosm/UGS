@@ -5,7 +5,7 @@ Head or Range: chore/establish-layered-licensing / ded9bc0..b470202
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: chore(bootstrap): self-bootstrap v0.3.28
-Revision: 3
+Revision: 4
 Status: accepted
 Decision: accepted
 Policy Version: v0.3
@@ -44,7 +44,7 @@ commits and retain their required review evidence.
 
 The bootstrap upgrade is additive and preserves the active high-trust profile,
 project-owned files, and immutable release tags. CR status changes are audit
-metadata only; eight records remain pending because their historical commits do
+metadata only; seven records remain pending because their historical commits do
 not carry the required review trailer, and CR-0060 remains pending by decision.
 
 ## Rollback
