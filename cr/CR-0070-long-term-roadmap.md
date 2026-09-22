@@ -1,17 +1,17 @@
 # CR-0070: Publish the UGS long-term roadmap and align adopted profile docs
 
 Base: main
-Head or Range: docs/long-term-roadmap-integration / 02665e4..94aa56b
+Head or Range: docs/long-term-roadmap-integration / 02665e4..0735ffd
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(roadmap): add long-term UGS evolution plan
-Revision: 2
-Status: accepted
+Revision: 3
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 02665e45984f0e92f3ecad3d62f35b68416bde27
-Head OID: 94aa56b7154ab5c86ab4b2e960a41a04fd0f3af7
-Integrated Result: pending
+Head OID: 0735ffdeb76f521dd6e261d45b26d68866defde7
+Integrated Result: main@0735ffdeb76f521dd6e261d45b26d68866defde7
 
 ## Summary
 
