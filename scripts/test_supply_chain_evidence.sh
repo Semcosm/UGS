@@ -21,7 +21,7 @@ for validator in "$manifest_validator" "$profile_validator" "$evidence_validator
     exit 1
   fi
 done
-jq '.supply_chain.evidence = {sbom_paths: ["README.md"], build_record_paths: ["REPOSITORY_POLICY.md"], attestation_paths: []}' \
+jq '.supply_chain.evidence = {sbom_paths: ["README.md"], build_record_paths: ["REPOSITORY_POLICY.md"], attestation_paths: ["README.md"]}' \
   "$root_dir/.ugs/policy.json" > "$temp_dir/valid-evidence.json"
 "$evidence_validator" "$temp_dir/valid-evidence.json"
 
