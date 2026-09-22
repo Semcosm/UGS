@@ -5,13 +5,13 @@ Head or Range: fix/p2-attestation-signature / v0.3.11..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: fix(policy): verify signed release attestations
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: c9455bfa7f48a26a2645982daead493298c0b9f8
-Head OID: c9455bfa7f48a26a2645982daead493298c0b9f8
-Integrated Result: pending
+Head OID: 93965f1295fd0d0c4b55c4ecb784c85d751b2218
+Integrated Result: main@93965f1295fd0d0c4b55c4ecb784c85d751b2218
 
 ## Summary
 

@@ -5,13 +5,13 @@ Head or Range: feat/p2-release-attestation / v0.3.10..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(policy): validate release attestations
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 20b7269af774a740e8bc0a15f0d7387e9876b571
-Head OID: 20b7269af774a740e8bc0a15f0d7387e9876b571
-Integrated Result: pending
+Head OID: c9455bfa7f48a26a2645982daead493298c0b9f8
+Integrated Result: main@c9455bfa7f48a26a2645982daead493298c0b9f8
 
 ## Summary
 

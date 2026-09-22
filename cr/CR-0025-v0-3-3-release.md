@@ -3,13 +3,13 @@
 Base: main
 Head or Range: docs/v0-3-3-release / 9afa382..HEAD
 Title: docs(release): publish v0.3.3 profile clarification
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 9afa382e6a00e80a76fc5c85625ac6cbd2b3aab0
-Head OID: 9afa382e6a00e80a76fc5c85625ac6cbd2b3aab0
-Integrated Result: pending
+Head OID: 9145670bb8a5e3e1e317a369d5b29675e0f5f108
+Integrated Result: main@9145670bb8a5e3e1e317a369d5b29675e0f5f108
 
 ## Summary
 

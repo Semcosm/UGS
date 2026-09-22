@@ -3,13 +3,13 @@
 Base: main
 Head or Range: fix/release-tag-workflow / f28ecc7..HEAD
 Title: fix(ci): restore annotated release tags before validation
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: f28ecc78ad7bbf84ac376bcbc6f8398236ee0ceb
-Head OID: f28ecc78ad7bbf84ac376bcbc6f8398236ee0ceb
-Integrated Result: pending
+Head OID: a70840a5933def666e7e8c5bc81349e5373ecd2e
+Integrated Result: main@a70840a5933def666e7e8c5bc81349e5373ecd2e
 
 ## Summary
 

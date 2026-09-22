@@ -5,13 +5,13 @@ Head or Range: feat/p2-supply-chain-profile / v0.3.6..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(policy): define optional supply-chain profile
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 23f893c3a5a6796b23ce6032258bda896650b704
-Head OID: 23f893c3a5a6796b23ce6032258bda896650b704
-Integrated Result: pending
+Head OID: 2b149f8f7a28f35782a70033dfd74768f7ccfde4
+Integrated Result: main@2b149f8f7a28f35782a70033dfd74768f7ccfde4
 
 ## Summary
 

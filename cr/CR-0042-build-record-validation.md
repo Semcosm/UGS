@@ -5,13 +5,13 @@ Head or Range: feat/p2-build-record / v0.3.13..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(policy): validate build records
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 73f2a774fa599229a876d4289f0f5cceb2440569
-Head OID: 73f2a774fa599229a876d4289f0f5cceb2440569
-Integrated Result: pending
+Head OID: b95c3d704d54812612cdd9abf4734c9174c7aa66
+Integrated Result: main@b95c3d704d54812612cdd9abf4734c9174c7aa66
 
 ## Summary
 

@@ -5,13 +5,13 @@ Head or Range: refactor/github-release-adapter
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: refactor(adapter): isolate GitHub release operations
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 31dcdbc20945b8888a75208e6971090ad8e82e9a
-Head OID: 31dcdbc20945b8888a75208e6971090ad8e82e9a
-Integrated Result: pending
+Head OID: ae9ede6d951b311d3de2dac4f9f2aa5ebe8bfc18
+Integrated Result: main@ae9ede6d951b311d3de2dac4f9f2aa5ebe8bfc18
 
 ## Summary
 

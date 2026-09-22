@@ -3,13 +3,13 @@
 Base: main
 Head or Range: docs/v0-3-adopt / afe98ff
 Title: docs(repo): record trusted-signing boundary recovery
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3-rc-1
 Base OID: afe98ff18847b1549a440c5c4f0128fdd71df14e
-Head OID: afe98ff18847b1549a440c5c4f0128fdd71df14e
-Integrated Result: pending
+Head OID: e29d5fd60e9cec76f51547e124482f9e367e6882
+Integrated Result: main@e29d5fd60e9cec76f51547e124482f9e367e6882
 
 ## Summary
 

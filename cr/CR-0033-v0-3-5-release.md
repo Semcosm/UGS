@@ -5,13 +5,13 @@ Head or Range: docs/v0-3-5-release / 0c1b061..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(release): publish v0.3.5 exception lifecycle capabilities
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 0c1b061681c1a61fd86af058a7d41c65677d6180
-Head OID: 0c1b061681c1a61fd86af058a7d41c65677d6180
-Integrated Result: pending
+Head OID: 6d8cbaa7bb61d489418ade33af9e09404cf1b5e0
+Integrated Result: main@6d8cbaa7bb61d489418ade33af9e09404cf1b5e0
 
 ## Summary
 

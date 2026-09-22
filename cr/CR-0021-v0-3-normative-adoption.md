@@ -3,13 +3,13 @@
 Base: main
 Head or Range: docs/v0-3-adopt / e29d5fd..HEAD
 Title: docs(policy): adopt v0.3 policy and conformance profile
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: e29d5fd60e9cec76f51547e124482f9e367e6882
-Head OID: e29d5fd60e9cec76f51547e124482f9e367e6882
-Integrated Result: pending
+Head OID: 5288f584f31b254053debfdd5be38987ece10312
+Integrated Result: main@5288f584f31b254053debfdd5be38987ece10312
 
 ## Summary
 

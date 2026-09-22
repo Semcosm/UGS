@@ -3,13 +3,13 @@
 Base: main
 Head or Range: docs/fix-signed-main-integration / e4f0d247..459572b
 Title: docs(repo): require signed fast-forward integration
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3-draft-3
 Base OID: e4f0d2477c12b9391e3d50d36770427e720297ac
-Head OID: 459572bf2910267659b3bb590fdf1b00b26ed94f
-Integrated Result: pending
+Head OID: 5b423aa897d61f54092d6e1d3152f00c50bc6215
+Integrated Result: main@5b423aa897d61f54092d6e1d3152f00c50bc6215
 
 ## Summary
 

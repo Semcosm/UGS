@@ -4,13 +4,13 @@ Base: main
 Head or Range: historical first-parent commits after CR-0046; see Coverage OIDs
 Integration Strategy: rebase-ff
 Title: chore(governance): require persisted CR coverage
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 496db6911fbc93cac600c7ec21f973a447805922
 Head OID: 496db6911fbc93cac600c7ec21f973a447805922
-Integrated Result: pending
+Integrated Result: main@496db6911fbc93cac600c7ec21f973a447805922
 Coverage OIDs: 374ccd95bb0e93711b92dffdf50fb93af4d0f179 2a32dca230e123a568d57d8a05f066a3cf5782c4 cbcff44ec8db8eeb0f467a7f5522ea9c532a55a8 b7ca1d3a78bc046077524ef787417249c4c0bed1 e12c6fafd870be075451bcb62638f95eab5565a4 c1741d58bae93552a7246e63dad938c42950fc2e 7accb588c35cf8535397d596fe2e749eac5caa19 e4d9df25aacc819f2aa245a2d3ee9c4ae5098aee bf7161a4915733a33a3751883181728ed78e86d3 05cc3c2246cf93628a9b713905333955ae8bc734 496db6911fbc93cac600c7ec21f973a447805922
 
 ## Summary

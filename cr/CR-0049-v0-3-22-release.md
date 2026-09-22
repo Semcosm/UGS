@@ -4,13 +4,13 @@ Base: main
 Head or Range: docs/release-v0-3-22-cr
 Integration Strategy: rebase-ff
 Title: docs(release): prepare v0.3.22 release
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 99d7c36c4779cf3295cbd4a1eb2c1b1899c06f3b
 Head OID: 99d7c36c4779cf3295cbd4a1eb2c1b1899c06f3b
-Integrated Result: pending
+Integrated Result: main@99d7c36c4779cf3295cbd4a1eb2c1b1899c06f3b
 
 ## Summary
 

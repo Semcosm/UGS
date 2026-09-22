@@ -5,13 +5,13 @@ Head or Range: fix/p2-evidence-path-jq / v0.3.12..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: fix(policy): correct evidence path validation
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 93965f1295fd0d0c4b55c4ecb784c85d751b2218
-Head OID: 93965f1295fd0d0c4b55c4ecb784c85d751b2218
-Integrated Result: pending
+Head OID: 73f2a774fa599229a876d4289f0f5cceb2440569
+Integrated Result: main@73f2a774fa599229a876d4289f0f5cceb2440569
 
 ## Summary
 

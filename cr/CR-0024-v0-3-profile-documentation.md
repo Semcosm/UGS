@@ -3,13 +3,13 @@
 Base: main
 Head or Range: docs/v0-3-profile-documentation / a70840a..HEAD
 Title: docs(policy): document the adopted v0.3 profile
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: a70840a5933def666e7e8c5bc81349e5373ecd2e
-Head OID: a70840a5933def666e7e8c5bc81349e5373ecd2e
-Integrated Result: pending
+Head OID: 9afa382e6a00e80a76fc5c85625ac6cbd2b3aab0
+Integrated Result: main@9afa382e6a00e80a76fc5c85625ac6cbd2b3aab0
 
 ## Summary
 

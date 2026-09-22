@@ -5,13 +5,13 @@ Head or Range: refactor/github-release-adapter
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: refactor(adapter): move Actions pinning implementation to GitHub adapter
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: ae9ede6d951b311d3de2dac4f9f2aa5ebe8bfc18
-Head OID: ae9ede6d951b311d3de2dac4f9f2aa5ebe8bfc18
-Integrated Result: pending
+Head OID: b22cf9458c33f1642b54e2a5da2c92e7fbbcdd7f
+Integrated Result: main@b22cf9458c33f1642b54e2a5da2c92e7fbbcdd7f
 
 ## Summary
 

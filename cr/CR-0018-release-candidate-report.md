@@ -3,13 +3,13 @@
 Base: main
 Head or Range: release/v0-3-rc / c4b1fc8..05d5488
 Title: feat(conformance): mark release candidate report
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3-rc-1
 Base OID: c4b1fc8c86c90c7a5d3f2e830c1db9ef7b574ded
-Head OID: 05d5488128370bebfce8c48618b634ced0f99d5c
-Integrated Result: pending
+Head OID: afe98ff18847b1549a440c5c4f0128fdd71df14e
+Integrated Result: main@afe98ff18847b1549a440c5c4f0128fdd71df14e
 
 ## Summary
 

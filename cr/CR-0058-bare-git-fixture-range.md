@@ -5,13 +5,13 @@ Head or Range: fix/bare-git-update-hook
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: test(adapter): stabilize bare Git update fixture range
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 20db5f23a304bc9c1f7738a3ac102a68e3a8a6ce
-Head OID: 20db5f23a304bc9c1f7738a3ac102a68e3a8a6ce
-Integrated Result: pending
+Head OID: 72c19cd0fdc5249c12c2f2ba79913cb791a6a031
+Integrated Result: main@72c19cd0fdc5249c12c2f2ba79913cb791a6a031
 
 ## Summary
 

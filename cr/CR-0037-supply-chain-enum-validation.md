@@ -5,13 +5,13 @@ Head or Range: fix/p2-supply-chain-enums / v0.3.8..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: fix(policy): align supply-chain enum validation
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 5a42ad36c30d8df5ebc75b176a9bae0fc685038c
-Head OID: 5a42ad36c30d8df5ebc75b176a9bae0fc685038c
-Integrated Result: pending
+Head OID: 159baa192d60f86ce972864ff93f5afe25261e6e
+Integrated Result: main@159baa192d60f86ce972864ff93f5afe25261e6e
 
 ## Summary
 

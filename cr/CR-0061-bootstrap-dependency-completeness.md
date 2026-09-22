@@ -5,13 +5,13 @@ Head or Range: chore/release-v0-3-26
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: fix(bootstrap): close release package dependency gaps
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: a10461f23d9c745d92ec09befec45aa213c390f7
-Head OID: b25c81a4641137f58a37afdc4ac7b1902dd10d32
-Integrated Result: pending
+Head OID: 90be0d0595c9ba520ae1c21616313cbf7c567c68
+Integrated Result: main@90be0d0595c9ba520ae1c21616313cbf7c567c68
 
 ## Summary
 

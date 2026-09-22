@@ -5,13 +5,13 @@ Head or Range: feat/bootstrap-upgrade-flow
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(bootstrap): add full-component upgrade flow
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: ac9119c8dc96886ebe279da2527d94ff35a1bbf6
-Head OID: fa1537cfd37e41223ebcf15f3b414bc5541707e4
-Integrated Result: pending
+Head OID: 33827e98046ee41c7b919700f681748871086400
+Integrated Result: main@33827e98046ee41c7b919700f681748871086400
 
 ## Summary
 

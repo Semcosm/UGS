@@ -5,13 +5,13 @@ Head or Range: feat/p2-quality-profile / v0.3.5..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(policy): define optional quality profile
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 6d8cbaa7bb61d489418ade33af9e09404cf1b5e0
-Head OID: 6d8cbaa7bb61d489418ade33af9e09404cf1b5e0
-Integrated Result: pending
+Head OID: 23f893c3a5a6796b23ce6032258bda896650b704
+Integrated Result: main@23f893c3a5a6796b23ce6032258bda896650b704
 
 ## Summary
 

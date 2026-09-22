@@ -5,13 +5,13 @@ Head or Range: refactor/core-cr-adapter
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: refactor(core): isolate GitHub PR metadata from CR review validation
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 32e4575abee237d18f085887f4bd444f7c934186
-Head OID: 32e4575abee237d18f085887f4bd444f7c934186
-Integrated Result: pending
+Head OID: 61d0029c4a383564ae0cd9590b68a8b28a015ca1
+Integrated Result: main@61d0029c4a383564ae0cd9590b68a8b28a015ca1
 
 ## Summary
 

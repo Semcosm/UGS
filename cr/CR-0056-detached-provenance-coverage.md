@@ -5,13 +5,13 @@ Head or Range: chore/record-cr-0056-coverage
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(cr): record detached provenance coverage
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: c841d7169a899812b20424e68a0285d582eabbe1
-Head OID: c841d7169a899812b20424e68a0285d582eabbe1
-Integrated Result: pending
+Head OID: 778481d83be07706aa4543268a71a53ab34dc67e
+Integrated Result: main@778481d83be07706aa4543268a71a53ab34dc67e
 Coverage OIDs: 37b2bc20810544da906e78172c9f27bdc79b184c
 
 ## Summary

@@ -5,13 +5,13 @@ Head or Range: chore/release-v0-3-24-cr
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(release): prepare v0.3.24 core adapter release
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: b22cf9458c33f1642b54e2a5da2c92e7fbbcdd7f
-Head OID: b22cf9458c33f1642b54e2a5da2c92e7fbbcdd7f
-Integrated Result: pending
+Head OID: c841d7169a899812b20424e68a0285d582eabbe1
+Integrated Result: main@c841d7169a899812b20424e68a0285d582eabbe1
 
 ## Summary
 

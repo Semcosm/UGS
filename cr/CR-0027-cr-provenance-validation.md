@@ -3,13 +3,13 @@
 Base: main
 Head or Range: feat/p1-cr-provenance / 65d572c..HEAD
 Title: feat(cr): validate integrated provenance
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 65d572cb22579478f825493fd9fdd9e029ec34f9
-Head OID: 65d572cb22579478f825493fd9fdd9e029ec34f9
-Integrated Result: pending
+Head OID: bf8d5c71b4bd781928881e4e90b1de626b736f38
+Integrated Result: main@bf8d5c71b4bd781928881e4e90b1de626b736f38
 
 ## Summary
 

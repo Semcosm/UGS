@@ -3,13 +3,13 @@
 Base: main
 Head or Range: feat/v0-3-draft-5-ref-enforcement / 3ad1efe..a704a4d
 Title: feat(refs): enforce protected ref update rules
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3-draft-5
 Base OID: 3ad1efe0940eee8aceaa330261d376ba6e2bbf06
-Head OID: a704a4d0101f0fdad8105d7042708fa675703823
-Integrated Result: pending
+Head OID: bf4a678afc3795837feb7b7447a82db51ad5b0ef
+Integrated Result: main@bf4a678afc3795837feb7b7447a82db51ad5b0ef
 
 ## Summary
 

@@ -3,13 +3,13 @@
 Base: main
 Head or Range: feat/v0-3-draft-6-enforcement-adapters / bf4a678..53f89c5
 Title: feat(ci): enforce release refs in adapters
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3-draft-6
 Base OID: bf4a678afc3795837feb7b7447a82db51ad5b0ef
-Head OID: 53f89c530245d6241143cbd4a35ba0b1084421e3
-Integrated Result: pending
+Head OID: c4b1fc8c86c90c7a5d3f2e830c1db9ef7b574ded
+Integrated Result: main@c4b1fc8c86c90c7a5d3f2e830c1db9ef7b574ded
 
 ## Summary
 

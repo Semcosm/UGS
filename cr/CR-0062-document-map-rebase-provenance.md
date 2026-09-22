@@ -5,13 +5,13 @@ Head or Range: chore/release-v0-3-26
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: chore(cr): refresh Document Map CR provenance after remote rebase
-Revision: 2
-Status: accepted
+Revision: 3
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: a10461f23d9c745d92ec09befec45aa213c390f7
-Head OID: b25c81a4641137f58a37afdc4ac7b1902dd10d32
-Integrated Result: pending
+Head OID: 90be0d0595c9ba520ae1c21616313cbf7c567c68
+Integrated Result: main@90be0d0595c9ba520ae1c21616313cbf7c567c68
 Coverage OIDs: 23e4945183fde5bfb3a68cd10cbbdd9d93c6bf34 bc19667f7a8fca2f9e132e02ab1390e7951c9fb5 be284844118caa0d3d60ceeb5a9b9c69fb4efe94 02a8da23497f7acd1e2dfcb48e255890e1f5cf53 fa4689827166a0fbdcf5572e34f1acb450e4e537 fdbfc5f90ab49ab363afcccedd934166a2915be8 c4be5e2a9bfebd7ec4dafe0ddc4bf42925876060
 
 ## Summary

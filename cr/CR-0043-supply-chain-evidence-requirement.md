@@ -5,13 +5,13 @@ Head or Range: fix/p2-evidence-required / v0.3.14..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: fix(policy): require evidence for elevated profiles
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: b95c3d704d54812612cdd9abf4734c9174c7aa66
-Head OID: b95c3d704d54812612cdd9abf4734c9174c7aa66
-Integrated Result: pending
+Head OID: b5b20086b86d81d8cc2ab1f11ba63f7117ed5c63
+Integrated Result: main@b5b20086b86d81d8cc2ab1f11ba63f7117ed5c63
 
 ## Summary
 

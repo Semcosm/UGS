@@ -3,13 +3,13 @@
 Base: main
 Head or Range: fix/release-tag-validator / 5288f58..f220ef4
 Title: fix(release): recognize annotated tag objects in CI
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 5288f584f31b254053debfdd5be38987ece10312
-Head OID: f220ef409b0ee3ac5551e92902e372933bab82c6
-Integrated Result: pending
+Head OID: a1f0d1b699e47659c7c854fdca48845122995599
+Integrated Result: main@a1f0d1b699e47659c7c854fdca48845122995599
 
 ## Summary
 

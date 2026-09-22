@@ -3,13 +3,13 @@
 Base: main
 Head or Range: feat/v0-3-draft-4-release-enforcement / 5b423aa..88fc8e8
 Title: feat(release): validate signed release tags
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3-draft-4
 Base OID: 5b423aa897d61f54092d6e1d3152f00c50bc6215
-Head OID: 88fc8e85078682bb0eed87de4a93eabc4ea9b7c0
-Integrated Result: pending
+Head OID: 3ad1efe0940eee8aceaa330261d376ba6e2bbf06
+Integrated Result: main@3ad1efe0940eee8aceaa330261d376ba6e2bbf06
 
 ## Summary
 

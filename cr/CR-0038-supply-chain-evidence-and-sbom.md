@@ -5,13 +5,13 @@ Head or Range: feat/p2-supply-chain-evidence / v0.3.9..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(policy): validate supply-chain evidence and SBOMs
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 159baa192d60f86ce972864ff93f5afe25261e6e
-Head OID: 159baa192d60f86ce972864ff93f5afe25261e6e
-Integrated Result: pending
+Head OID: 20b7269af774a740e8bc0a15f0d7387e9876b571
+Integrated Result: main@20b7269af774a740e8bc0a15f0d7387e9876b571
 
 ## Summary
 

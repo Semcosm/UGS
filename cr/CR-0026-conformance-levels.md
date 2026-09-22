@@ -3,13 +3,13 @@
 Base: main
 Head or Range: feat/p1-conformance-levels / 9145670..HEAD
 Title: feat(policy): define conformance levels and profile matrix
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 9145670bb8a5e3e1e317a369d5b29675e0f5f108
-Head OID: 9145670bb8a5e3e1e317a369d5b29675e0f5f108
-Integrated Result: pending
+Head OID: 65d572cb22579478f825493fd9fdd9e029ec34f9
+Integrated Result: main@65d572cb22579478f825493fd9fdd9e029ec34f9
 
 ## Summary
 

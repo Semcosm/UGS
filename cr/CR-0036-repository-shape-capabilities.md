@@ -5,13 +5,13 @@ Head or Range: feat/p2-repository-shapes / v0.3.7..HEAD
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(policy): define repository-shape capabilities
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 2b149f8f7a28f35782a70033dfd74768f7ccfde4
-Head OID: 2b149f8f7a28f35782a70033dfd74768f7ccfde4
-Integrated Result: pending
+Head OID: 5a42ad36c30d8df5ebc75b176a9bae0fc685038c
+Integrated Result: main@5a42ad36c30d8df5ebc75b176a9bae0fc685038c
 
 ## Summary
 

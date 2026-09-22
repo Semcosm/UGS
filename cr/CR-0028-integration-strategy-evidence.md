@@ -4,13 +4,13 @@ Base: main
 Head or Range: feat/p1-integration-strategy / bf8d5c7..HEAD
 Integration Strategy: rebase-ff
 Title: feat(cr): validate integration strategy evidence
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: bf8d5c71b4bd781928881e4e90b1de626b736f38
-Head OID: bf8d5c71b4bd781928881e4e90b1de626b736f38
-Integrated Result: pending
+Head OID: f083c43b595d7b47e99a1ffa3ea9b25ffc9da322
+Integrated Result: main@f083c43b595d7b47e99a1ffa3ea9b25ffc9da322
 
 ## Summary
 

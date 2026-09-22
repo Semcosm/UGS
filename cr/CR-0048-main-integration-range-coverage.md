@@ -4,13 +4,13 @@ Base: main
 Head or Range: generated integration commits from CR-0047
 Integration Strategy: rebase-ff
 Title: fix(governance): validate CR coverage across main integration ranges
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 33ad5d867d7fd6c9d7c32e62b843a42e42bd8653
 Head OID: 33ad5d867d7fd6c9d7c32e62b843a42e42bd8653
-Integrated Result: pending
+Integrated Result: main@33ad5d867d7fd6c9d7c32e62b843a42e42bd8653
 Coverage OIDs: 5cb8a6afb080471e1b155f21077176262c89516f 33ad5d867d7fd6c9d7c32e62b843a42e42bd8653
 
 ## Summary

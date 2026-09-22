@@ -5,13 +5,13 @@ Head or Range: fix/bare-git-update-hook
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: fix(adapter): support bare Git update hooks
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 778481d83be07706aa4543268a71a53ab34dc67e
-Head OID: 778481d83be07706aa4543268a71a53ab34dc67e
-Integrated Result: pending
+Head OID: c52cdc55e47e0ca0af41b5dc3ff7e17eb6285c79
+Integrated Result: main@c52cdc55e47e0ca0af41b5dc3ff7e17eb6285c79
 
 ## Summary
 
