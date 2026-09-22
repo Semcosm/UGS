@@ -5,13 +5,13 @@ Head or Range: main@a10461f23d9c745d92ec09befec45aa213c390f7
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(governance): add configurable Document Map validation
-Revision: 7
-Status: pending
-Decision: pending
+Revision: 8
+Status: integrated
+Decision: accepted
 Policy Version: v0.3
 Base OID: 2f56c8ec2deda73539650d0413ea33eca02c6d92
 Head OID: a10461f23d9c745d92ec09befec45aa213c390f7
-Integrated Result: pending
+Integrated Result: main@a10461f23d9c745d92ec09befec45aa213c390f7
 
 ## Summary
 

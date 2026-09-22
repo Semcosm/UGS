@@ -5,13 +5,13 @@ Head or Range: chore/establish-layered-licensing / ded9bc0..b470202
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: chore(bootstrap): self-bootstrap v0.3.28
-Revision: 4
-Status: accepted
+Revision: 5
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: ded9bc0f6b9dd519473ba5e33367e3ee80fd62f6
 Head OID: b470202b1b34b80f10de3c386b2c0a30b28505af
-Integrated Result: pending
+Integrated Result: main@b470202b1b34b80f10de3c386b2c0a30b28505af
 Coverage OIDs: 18747c201e47ff23d86cf71d2a6ecfef6fa37ede
 
 ## Summary
@@ -28,8 +28,7 @@ was the current signed release. Its installed metadata and offline license
 files therefore lagged the published package. The README document map and
 bootstrap examples also omitted the current release. Historical accepted CRs
 with complete final trailers can be closed deterministically; records lacking
-those trailers or still awaiting acceptance must remain pending until their
-evidence is supplied.
+those trailers must remain pending until their evidence is supplied.
 
 ## Test Evidence
 
@@ -45,7 +44,7 @@ commits and retain their required review evidence.
 The bootstrap upgrade is additive and preserves the active high-trust profile,
 project-owned files, and immutable release tags. CR status changes are audit
 metadata only; seven records remain pending because their historical commits do
-not carry the required review trailer, and CR-0060 remains pending by decision.
+not carry the required review trailer.
 
 ## Rollback
 
