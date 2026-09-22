@@ -5,13 +5,13 @@ Head or Range: chore/supply-chain-evidence / 0a4d508..d699a83
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(supply-chain): publish v0.3.28 provenance evidence
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 0a4d5088866008b912235ab83b048e5950ea5058
 Head OID: d699a835de3e2b8718dcdecb777dac55250f4673
-Integrated Result: pending
+Integrated Result: main@d699a835de3e2b8718dcdecb777dac55250f4673
 
 ## Summary
 
