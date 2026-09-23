@@ -6,12 +6,12 @@ Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(conformance): add stable error and report contracts
 Revision: 1
-Status: accepted
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 5b6564ace5a5381c72f73fd4e12e31a49d4612f9
 Head OID: 89c7e34e2efa2bdd1251e626e44bb69be597c0e2
-Integrated Result: pending
+Integrated Result: main@89c7e34e2efa2bdd1251e626e44bb69be597c0e2
 
 ## Summary
 
