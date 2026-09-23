@@ -5,13 +5,13 @@ Head or Range: chore/v0-4-contract-hardening / a82686d..6e5cd61
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: docs(contract): publish v0.4 vocabulary rules
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: a82686d4113be830687f6ef2eec53ee85f7dc369
 Head OID: 6e5cd61e31e9a5f4a7235ae112fc210e1743bf7f
-Integrated Result: pending
+Integrated Result: main@6e5cd61e31e9a5f4a7235ae112fc210e1743bf7f
 
 ## Summary
 
