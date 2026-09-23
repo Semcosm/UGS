@@ -162,6 +162,9 @@ migrate_report="$temp_dir/migrate-report.json"
 run_migrate --dry-run --report "$migrate_report" "$migrate_alias" >/dev/null
 jq -e '.format == "ugs-migration/v1" and .command == "migrate" and .status == "planned" and .dry_run == true' "$migrate_report" >/dev/null
 [ ! -e "$migrate_alias/.ugs/installation.json" ]
+migrate_stdout_report="$temp_dir/migrate-stdout-report.json"
+run_migrate --dry-run --report - "$migrate_alias" > "$migrate_stdout_report"
+jq -e '.format == "ugs-migration/v1" and .command == "migrate" and .status == "planned" and .dry_run == true' "$migrate_stdout_report" >/dev/null
 
 overwrite_backup="$temp_dir/overwrite-backup"
 run_upgrade --overwrite-project-files --backup-dir "$overwrite_backup" "$repo" >/dev/null
