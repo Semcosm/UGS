@@ -48,6 +48,7 @@ docs/git/ugs-conformance-fixtures.md	docs/git/ugs-conformance-fixtures.md
 docs/git/ugs-conformance-levels.md	docs/git/ugs-conformance-levels.md
 docs/git/ugs-core.md	docs/git/ugs-core.md
 docs/git/ugs-document-map.md	docs/git/ugs-document-map.md
+docs/git/ugs-v0-4-contract.md	docs/git/ugs-v0-4-contract.md
 docs/git/ugs-quality-profile.md	docs/git/ugs-quality-profile.md
 docs/git/ugs-repository-shapes.md	docs/git/ugs-repository-shapes.md
 docs/git/ugs-supply-chain-profile.md	docs/git/ugs-supply-chain-profile.md

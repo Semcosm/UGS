@@ -46,3 +46,10 @@ signed fast-forward update to protected `main`.
 Conformance levels are an additive v0.3 profile. They do not retroactively
 invalidate accepted v0.2 history. A future profile may add stricter evidence
 without changing the two branch-profile definitions.
+
+The semantic branch-profile term release-line is represented by the v0.3 wire
+value release, and the semantic strategy term merge-commit is represented by
+the v0.3 wire value merge. These are retained compatibility aliases, not
+separate profiles or strategies. The complete vocabulary, unknown-field rule,
+extension namespace, policy-version boundary, and downgrade behavior are
+defined in the UGS v0.4 Contract And Compatibility Guide.

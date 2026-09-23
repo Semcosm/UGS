@@ -122,3 +122,12 @@ Further work remains for stronger cross-binding of production evidence,
 portable adapter capability reporting, reviewer attestations, and the v1.0
 compatibility contract. Those changes require a future profile or versioned
 extension and are not implied by the v0.3 profile.
+
+## 8. v0.4 compatibility contract
+
+The v0.3 wire values release and merge remain accepted aliases for the
+semantic terms release-line and merge-commit. Unknown Core fields remain
+invalid, and repository-specific additions remain limited to extensions keys
+beginning with x-. The policy-version versus distribution-SemVer boundary,
+deprecation classes, and explicit downgrade requirements are defined in the
+UGS v0.4 Contract And Compatibility Guide.

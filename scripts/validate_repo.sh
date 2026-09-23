@@ -13,6 +13,7 @@ required_files=(
   "LICENSES/CC-BY-4.0.txt"
   "docs/git/ugs-core.md"
   "docs/git/ugs-branch-profiles.md"
+  "docs/git/ugs-v0-4-contract.md"
   "docs/git/ugs-quality-profile.md"
   "docs/git/ugs-supply-chain-profile.md"
   "docs/git/ugs-repository-shapes.md"
@@ -225,6 +226,7 @@ grep -Fq "keys/README.md" README.md || fail "README must link trusted signer gui
 grep -Fq "scripts/test_conformance.sh" README.md || fail "README must document conformance fixtures"
 grep -Fq "docs/git/ugs-bootstrap.md" README.md || fail "README must document bootstrap package"
 grep -Fq "docs/git/ugs-document-map.md" README.md || fail "README must document document map"
+grep -Fq "docs/git/ugs-v0-4-contract.md" README.md || fail "README must document v0.4 contract"
 
 scripts/validate_document_map.py
 scripts/test_document_map.sh

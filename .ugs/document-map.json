@@ -12,6 +12,7 @@
       "children": [
         {"title": "UGS Core", "title_zh": "UGS 核心", "path": "docs/git/ugs-core.md"},
         {"title": "UGS v0.3 Policy And Conformance Profile", "title_zh": "UGS v0.3 政策与合规性配置文件", "path": "docs/git/ugs-v0.3-profile.md"},
+        {"title": "UGS v0.4 Contract And Compatibility Guide", "title_zh": "UGS v0.4 合同与兼容性指南", "path": "docs/git/ugs-v0-4-contract.md"},
         {"title": "UGS Conformance Levels And Profile Matrix", "title_zh": "UGS 一致性等级与配置文件矩阵", "path": "docs/git/ugs-conformance-levels.md"},
         {"title": "UGS Quality Profile", "title_zh": "UGS 质量标准", "path": "docs/git/ugs-quality-profile.md"},
         {"title": "UGS Supply-Chain Profile", "title_zh": "UGS 供应链配置文件", "path": "docs/git/ugs-supply-chain-profile.md"},
