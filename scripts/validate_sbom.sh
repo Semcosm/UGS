@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+. "$script_dir/ugs_errors.sh"
+
 if [ "$#" -lt 1 ] || [ "$#" -gt 3 ]; then
   echo "usage: $0 <sbom.json> [release] [commit]" >&2
   exit 2
@@ -8,7 +11,27 @@ fi
 sbom="$1"
 expected_release="${2:-}"
 expected_commit="${3:-}"
-fail() { echo "SBOM validation failed: $1" >&2; exit 1; }
+fail() {
+  local message="$1"
+  local code="UGS-SBOM-999"
+  case "$message" in
+    "file does not exist:"*) code="UGS-SBOM-001" ;;
+    "jq is required") code="UGS-SBOM-002" ;;
+    "file is not valid JSON") code="UGS-SBOM-003" ;;
+    "invalid SPDX version") code="UGS-SBOM-004" ;;
+    "SPDX creation time is missing") code="UGS-SBOM-005" ;;
+    "SPDX packages lack name, version, and identity") code="UGS-SBOM-006" ;;
+    "CycloneDX metadata is incomplete") code="UGS-SBOM-007" ;;
+    "CycloneDX components lack name, version, and identity") code="UGS-SBOM-008" ;;
+    "unsupported SBOM format;"*) code="UGS-SBOM-009" ;;
+    "UGS source commit metadata is missing") code="UGS-SBOM-010" ;;
+    "UGS release metadata is missing") code="UGS-SBOM-011" ;;
+    "UGS artifact digest metadata is missing") code="UGS-SBOM-012" ;;
+    "release metadata does not match"*) code="UGS-SBOM-013" ;;
+    "source commit metadata does not match"*) code="UGS-SBOM-014" ;;
+  esac
+  ugs_fail "$code" "$message"
+}
 [ -f "$sbom" ] || fail "file does not exist: $sbom"
 command -v jq >/dev/null 2>&1 || fail "jq is required"
 jq empty "$sbom" >/dev/null 2>&1 || fail "file is not valid JSON"

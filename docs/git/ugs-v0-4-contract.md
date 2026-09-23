@@ -125,7 +125,56 @@ weaker policy and conformance level. It MUST NOT silently claim the stronger
 guarantee after downgrade. Rollback MUST restore the prior manifest and
 preserve the original protected history.
 
-## 7. Conformance expectations
+## 7. Stable diagnostics and report contracts
+
+UGS validators expose stable machine-readable diagnostics in addition to
+human-readable messages. The shared Bash contract is implemented by
+`scripts/ugs_errors.sh`: text mode emits `UGS-...: message` on stderr, while
+`UGS_ERROR_FORMAT=json` emits one object with exactly these fields:
+
+```json
+{
+  "format": "ugs-error/v1",
+  "code": "UGS-POLICY-010",
+  "message": "invalid conformance_level"
+}
+```
+
+Error codes are stable identifiers within the policy contract. Consumers MUST
+branch on `code`, not on the diagnostic prose. `UGS-0000` is reserved for a
+successful result and MUST NOT identify a failure. A validator that cannot
+provide a more specific check code MUST use its deterministic `UGS-CHECK-*`
+fallback rather than inventing a free-form identifier.
+
+`scripts/ugs_check.sh --format json` emits the `ugs-conformance/v0.3` report
+shape until a future policy version explicitly changes it:
+
+```json
+{
+  "format": "ugs-conformance/v0.3",
+  "schema_version": 1,
+  "result": "pass",
+  "checks": [
+    {
+      "name": "policy manifest",
+      "status": "pass",
+      "code": "UGS-0000",
+      "output": ""
+    }
+  ]
+}
+```
+
+The top-level field set is `format`, `schema_version`, `result`, and `checks`.
+Each check object contains `name`, `status`, `code`, and `output`;
+`status` is `pass` or `fail`, and a passing check MUST use `UGS-0000`.
+Implementations MUST preserve this shape when producing the v0.3 report and
+MUST publish a versioned compatibility decision before adding or renaming
+fields. The independent fixture runner also includes `code` alongside each
+fixture's `id`, `status`, and `reason`, so Bash and Python implementations can
+be compared without parsing prose.
+
+## 8. Conformance expectations
 
 An implementation claiming this contract MUST:
 
@@ -138,6 +187,6 @@ An implementation claiming this contract MUST:
   release notes; and
 - make deprecation, downgrade, and rollback behavior observable in its report.
 
-The v0.4 contract is intentionally additive. Stable error identifiers,
-normalized JSON reports, and an executable offline migration command are
-separate deliverables and are tracked by CR-0072 and CR-0073.
+The v0.4 contract is intentionally additive. Stable error identifiers and
+normalized JSON reports are delivered by CR-0072. An executable offline
+migration command remains a separate deliverable tracked by CR-0073.

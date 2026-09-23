@@ -2,7 +2,48 @@
 set -euo pipefail
 
 root_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
-PYTHONDONTWRITEBYTECODE=1 python3 "$root_dir/scripts/conformance.py" >/dev/null
+temp_dir="$(mktemp -d)"
+trap 'rm -rf "$temp_dir"' EXIT
+python_report="$temp_dir/python-report.jsonl"
+PYTHONDONTWRITEBYTECODE=1 python3 "$root_dir/scripts/conformance.py" >"$python_report"
+
+assert_equivalent_fixture() {
+  local id="$1" kind="$2" path="$3" expected="$4" expected_code="$5"
+  local validator status output actual_code python_code
+  case "$kind" in
+    policy) validator="$root_dir/scripts/validate_policy_manifest.sh" ;;
+    review) validator="$root_dir/scripts/validate_review_trailers.sh" ;;
+    sbom) validator="$root_dir/scripts/validate_sbom.sh" ;;
+    build) validator="$root_dir/scripts/validate_build_record.sh" ;;
+    attestation) validator="$root_dir/scripts/validate_release_attestation.sh" ;;
+    *) return 0 ;;
+  esac
+  output="$temp_dir/$id.json"
+  set +e
+  UGS_ERROR_FORMAT=json "$validator" "$root_dir/$path" >"$output" 2>&1
+  status=$?
+  set -e
+  if [ "$expected" = "pass" ]; then
+    [ "$status" -eq 0 ] || { echo "Bash validator unexpectedly failed: $id" >&2; return 1; }
+    actual_code="UGS-0000"
+  else
+    [ "$status" -ne 0 ] || { echo "Bash validator unexpectedly passed: $id" >&2; return 1; }
+    actual_code="$(jq -r '.code // empty' "$output")"
+  fi
+  [ "$actual_code" = "$expected_code" ] || {
+    echo "Bash/Python error code mismatch for $id: $actual_code != $expected_code" >&2
+    return 1
+  }
+  python_code="$(jq -r --arg id "$id" 'select(.id == $id) | .code' "$python_report")"
+  [ "$python_code" = "$expected_code" ] || {
+    echo "Python fixture code mismatch for $id: $python_code != $expected_code" >&2
+    return 1
+  }
+}
+
+while IFS=$'\t' read -r id kind path expected code; do
+  assert_equivalent_fixture "$id" "$kind" "$path" "$expected" "$code"
+done < <(jq -r '.fixtures[] | [.id, .kind, .path, .expected, (.code // "UGS-0000")] | @tsv' "$root_dir/tests/conformance/manifest.json")
 
 run_expected() {
   local expected="$1"; shift
@@ -26,8 +67,6 @@ run_expected fail "$root_dir/scripts/validate_build_record.sh" "$fixtures/build-
 run_expected pass "$root_dir/scripts/validate_release_attestation.sh" "$fixtures/attestation/valid.json"
 run_expected fail "$root_dir/scripts/validate_release_attestation.sh" "$fixtures/attestation/invalid-digest.json"
 
-temp_dir="$(mktemp -d)"
-trap 'rm -rf "$temp_dir"' EXIT
 repo="$temp_dir/repo"
 git init --quiet -b main "$repo"
 git -C "$repo" config user.name "Conformance Fixture"

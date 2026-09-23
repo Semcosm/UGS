@@ -42,6 +42,7 @@ def component_manifest(stage, version, source_commit):
     # overwrite flag when they already differ.
     for name in (
         "scripts/ugs.sh",
+        "scripts/ugs_errors.sh",
         "scripts/ugs_upgrade.py",
         "scripts/ugs_upgrade.sh",
         "scripts/ugs_init.py",
@@ -167,7 +168,7 @@ def main():
             shutil.copy2(root / "LICENSES" / name, stage / "LICENSES" / name)
         shutil.copy2(root / "scripts/ugs_init.py", stage / "scripts/ugs_init.py")
         shutil.copy2(root / "scripts/ugs_init.sh", stage / "scripts/ugs_init.sh")
-        for name in ("ugs.sh", "ugs_upgrade.py", "ugs_upgrade.sh", "validate_policy_manifest.sh", "validate_cr_record.sh", "validate_cr_review.sh", "validate_pr_cr.sh", "create_pr_from_cr.sh", "validate_main_cr_range.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):
+        for name in ("ugs.sh", "ugs_errors.sh", "ugs_upgrade.py", "ugs_upgrade.sh", "validate_policy_manifest.sh", "validate_cr_record.sh", "validate_cr_review.sh", "validate_pr_cr.sh", "create_pr_from_cr.sh", "validate_main_cr_range.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):
             shutil.copy2(root / "scripts" / name, stage / "scripts" / name)
         for name in ("validate_pr.sh", "create_pr_from_cr.sh", "validate_adapter.sh", "validate_action_pinning.sh", "download_release.sh", "publish_release.sh"):
             shutil.copy2(root / "adapters/github" / name, stage / "adapters/github" / name)

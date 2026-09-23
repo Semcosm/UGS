@@ -76,6 +76,7 @@ bootstrap/templates/standard-workflow.yml	bootstrap/templates/standard-workflow.
 scripts/ugs_init.py	scripts/ugs_init.py
 scripts/ugs_init.sh	scripts/ugs_init.sh
 scripts/ugs.sh	scripts/ugs.sh
+scripts/ugs_errors.sh	scripts/ugs_errors.sh
 scripts/ugs_upgrade.py	scripts/ugs_upgrade.py
 scripts/ugs_upgrade.sh	scripts/ugs_upgrade.sh
 scripts/validate_policy_manifest.sh	scripts/validate_policy_manifest.sh

@@ -1,12 +1,33 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+. "$script_dir/ugs_errors.sh"
+
 if [ "$#" -lt 1 ] || [ "$#" -gt 3 ]; then
   echo "usage: $0 <build-record.json> [release-tag] [commit]" >&2
   exit 2
 fi
 record="$1"; expected_tag="${2:-}"; expected_commit="${3:-}"
-fail() { echo "build record validation failed: $1" >&2; exit 1; }
+fail() {
+  local message="$1"
+  local code="UGS-BUILD-999"
+  case "$message" in
+    "file does not exist:"*) code="UGS-BUILD-001" ;;
+    "jq is required") code="UGS-BUILD-002" ;;
+    "file is not valid JSON") code="UGS-BUILD-003" ;;
+    "invalid build record header") code="UGS-BUILD-004" ;;
+    "invalid release tag") code="UGS-BUILD-005" ;;
+    "invalid commit SHA") code="UGS-BUILD-006" ;;
+    "invalid artifact digest") code="UGS-BUILD-007" ;;
+    "builder identity is missing") code="UGS-BUILD-008" ;;
+    "build timestamp is missing") code="UGS-BUILD-009" ;;
+    "release tag does not match"*) code="UGS-BUILD-010" ;;
+    "commit does not match"*) code="UGS-BUILD-011" ;;
+    "build record commit differs"*) code="UGS-BUILD-012" ;;
+  esac
+  ugs_fail "$code" "$message"
+}
 [ -f "$record" ] || fail "file does not exist: $record"
 command -v jq >/dev/null 2>&1 || fail "jq is required"
 jq empty "$record" >/dev/null 2>&1 || fail "file is not valid JSON"

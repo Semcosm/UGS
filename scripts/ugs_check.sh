@@ -30,12 +30,22 @@ trap 'rm -rf "$report_dir"' EXIT
 check_count=0
 failed_count=0
 
+check_slug() {
+  printf '%s' "$1" | tr '[:lower:] ' '[:upper:]_' | tr -cd 'A-Z0-9_' | tr '_' '-'
+}
+
+extract_code() {
+  sed -n 's/^\(UGS-[A-Z0-9-]*\): .*/\1/p' | head -n 1
+}
+
 run_check() {
   local name="$1"
   shift
   local output
   local status
   local report_file
+  local code
+  local fallback_code
 
   report_file="$report_dir/$(printf '%03d' "$check_count").json"
   check_count=$((check_count + 1))
@@ -45,12 +55,16 @@ run_check() {
   set -e
   if [ "$status" -eq 0 ]; then
     status_name="pass"
+    code="UGS-0000"
   else
     status_name="fail"
     failed_count=$((failed_count + 1))
+    code="$(printf '%s\n' "$output" | extract_code)"
+    fallback_code="UGS-CHECK-$(check_slug "$name")"
+    [ -n "$code" ] || code="$fallback_code"
   fi
-  jq -n --arg name "$name" --arg status "$status_name" --arg output "$output" \
-    '{name: $name, status: $status, output: $output}' > "$report_file"
+  jq -n --arg name "$name" --arg status "$status_name" --arg code "$code" --arg output "$output" \
+    '{name: $name, status: $status, code: $code, output: $output}' > "$report_file"
   if [ "$format" = "text" ]; then
     printf '[%s] %s\n' "$status_name" "$name"
     if [ -n "$output" ] && [ "$status" -ne 0 ]; then
@@ -95,9 +109,10 @@ done
 if [ "$format" = "json" ]; then
   jq -n \
     --arg format "ugs-conformance/v0.3" \
+    --argjson schema_version 1 \
     --arg result "$(if [ "$failed_count" -eq 0 ]; then printf pass; else printf fail; fi)" \
     --argjson checks "$(jq -s . "$report_dir"/*.json)" \
-    '{format: $format, result: $result, checks: $checks}'
+    '{format: $format, schema_version: $schema_version, result: $result, checks: $checks}'
 fi
 
 [ "$failed_count" -eq 0 ]

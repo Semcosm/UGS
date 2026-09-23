@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+. "$script_dir/ugs_errors.sh"
+
 if [ "$#" -ne 1 ]; then
   echo "usage: $0 <cr-record-file>" >&2
   exit 2
@@ -9,8 +12,24 @@ fi
 cr_file="$1"
 
 fail() {
-  echo "cr record validation failed: $1" >&2
-  exit 1
+  local message="$1"
+  local code="UGS-CR-999"
+  case "$message" in
+    "record file does not exist"*) code="UGS-CR-001" ;;
+    "missing "*) code="UGS-CR-002" ;;
+    *"must not use an unfilled template placeholder"*) code="UGS-CR-003" ;;
+    "title must match"*) code="UGS-CR-004" ;;
+    "missing section:"*) code="UGS-CR-005" ;;
+    "section must include non-placeholder content:"*) code="UGS-CR-006" ;;
+    "CR object IDs must be full lowercase SHA-1 values") code="UGS-CR-007" ;;
+    "CR object ID is not a commit"*) code="UGS-CR-008" ;;
+    "integrated CRs must have"*) code="UGS-CR-009" ;;
+    "Integrated Result must match"*) code="UGS-CR-010" ;;
+    "integrated result is not a commit"*) code="UGS-CR-011" ;;
+    "integrated result is not reachable"*) code="UGS-CR-012" ;;
+    "Base OID must be an ancestor"*) code="UGS-CR-013" ;;
+  esac
+  ugs_fail "$code" "$message"
 }
 
 require_metadata_line() {
