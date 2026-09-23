@@ -78,6 +78,28 @@ release remains usable without web access.
 
 ## Full-Component Upgrade
 
+### Explicit Offline Migration
+
+The migrate command is the explicit offline migration entry point. The
+upgrade command remains a compatibility alias.
+
+```bash
+./scripts/ugs.sh migrate \
+  --archive ./ugs-bootstrap-vX.Y.Z.tar.gz \
+  --dry-run \
+  --report /path/to/migration-report.json \
+  /path/to/repository
+./scripts/ugs.sh migrate \
+  --archive ./ugs-bootstrap-vX.Y.Z.tar.gz \
+  --backup-dir /path/to/backup \
+  --report /path/to/migration-report.json \
+  /path/to/repository
+```
+
+The dry run changes no target files. The report uses the versioned
+ugs-migration/v1 JSON shape and records the repository inventory, desired file
+digests, package identity, conflict status, and backup/rollback information.
+
 The package includes `scripts/ugs.sh`, `scripts/ugs_upgrade.py`, and a
 machine-readable `COMPONENTS.json`. Use the package script from the extracted
 release directory to upgrade an existing v0.3.x consumer:
@@ -108,6 +130,17 @@ a recoverable backup and prints a rollback command:
 
 ```bash
 ./scripts/ugs.sh rollback --backup-dir /path/to/backup /path/to/repository
+```
+
+BACKUP.json records pre-migration file digests and modes. Rollback verifies the
+restored files, permissions, and core.hooksPath, and can emit a machine-readable
+result with:
+
+```bash
+./scripts/ugs.sh rollback \
+  --backup-dir /path/to/backup \
+  --report /path/to/rollback-report.json \
+  /path/to/repository
 ```
 
 Profile activation is explicit and separate:

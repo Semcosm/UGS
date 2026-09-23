@@ -7,11 +7,11 @@ case "${1:-}" in
     shift
     exec "$root_dir/scripts/ugs_init.sh" "$@"
     ;;
-  install|upgrade|activate|rollback)
+  install|upgrade|migrate|activate|rollback)
     exec python3 "$root_dir/scripts/ugs_upgrade.py" "$@"
     ;;
   *)
-    echo "usage: $0 {init|install|upgrade|activate|rollback} [options]" >&2
+    echo "usage: $0 {init|install|upgrade|migrate|activate|rollback} [options]" >&2
     exit 2
     ;;
 esac

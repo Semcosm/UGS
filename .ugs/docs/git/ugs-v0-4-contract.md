@@ -188,5 +188,8 @@ An implementation claiming this contract MUST:
 - make deprecation, downgrade, and rollback behavior observable in its report.
 
 The v0.4 contract is intentionally additive. Stable error identifiers and
-normalized JSON reports are delivered by CR-0072. An executable offline
-migration command remains a separate deliverable tracked by CR-0073.
+normalized JSON reports are delivered by CR-0072. The executable offline
+migration command is delivered by CR-0073: `migrate` inventories a repository,
+supports a no-write dry run, emits the versioned `ugs-migration/v1` report,
+writes a digest-and-mode backup, and verifies rollback; `upgrade` remains the
+compatibility alias.

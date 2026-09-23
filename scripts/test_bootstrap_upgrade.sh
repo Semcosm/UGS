@@ -20,6 +20,10 @@ run_upgrade() {
   "$package_root/scripts/ugs.sh" upgrade --archive "$archive" "$@"
 }
 
+run_migrate() {
+  "$package_root/scripts/ugs.sh" migrate --archive "$archive" "$@"
+}
+
 jq -e '
   .format == "ugs-components/v1" and
   .active_profile == "preserved-until-explicit-activation" and
@@ -82,19 +86,27 @@ git -C "$repo" config user.email "ugs-upgrade-fixture@example.invalid"
 "$package_root/scripts/ugs_init.sh" --profile baseline --no-commit "$repo" >/dev/null
 printf '%s\n' 'project-owned README' > "$repo/README.md"
 printf '%s\n' 'historical project CR' > "$repo/cr/project-history.md"
+git -C "$repo" add -A
+git -C "$repo" commit --quiet -m 'chore(test): create migration base' -m 'Refs: migration-fixture'
+before_head="$(git -C "$repo" rev-parse HEAD)"
 before_readme="$(cat "$repo/README.md")"
 
 dry_run_output="$temp_dir/dry-run-output"
-run_upgrade --dry-run "$repo" > "$dry_run_output"
+dry_run_report="$temp_dir/dry-run-report.json"
+run_upgrade --dry-run --report "$dry_run_report" "$repo" > "$dry_run_output"
 grep -Fq 'repository layout: normal' "$dry_run_output"
 grep -Fq 'project-preserved: README.md' "$dry_run_output"
+jq -e '.format == "ugs-migration/v1" and .schema_version == 1 and .command == "upgrade" and .status == "planned" and .dry_run == true and .backup == null and .inventory.operation_count > 0' "$dry_run_report" >/dev/null
 [ "$(cat "$repo/README.md")" = "$before_readme" ]
 [ ! -e "$repo/.ugs/installation.json" ]
 
 backup="$temp_dir/conventional-backup"
-run_upgrade --backup-dir "$backup" "$repo" > "$temp_dir/upgrade-output"
+migration_report="$temp_dir/migration-report.json"
+run_upgrade --backup-dir "$backup" --report "$migration_report" "$repo" > "$temp_dir/upgrade-output"
 grep -Fq 'active profile: baseline' "$temp_dir/upgrade-output"
 grep -Fq 'project-preserved: README.md' "$temp_dir/upgrade-output"
+jq -e --arg backup "$backup" '.format == "ugs-migration/v1" and .schema_version == 1 and .status == "applied" and .dry_run == false and .backup.path == $backup and .rollback.verified == false and .inventory.counts.add > 0' "$migration_report" >/dev/null
+[ -f "$backup/BACKUP.json" ]
 [ "$(jq -r '.conformance_level' "$repo/.ugs/policy.json")" = "baseline" ]
 [ "$(jq -r '.active_profile' "$repo/.ugs/installation.json")" = "baseline" ]
 [ -x "$repo/adapters/github/validate_pr.sh" ]
@@ -131,12 +143,25 @@ high_trust_backup="$temp_dir/high-trust-backup"
 "$package_root/scripts/ugs.sh" rollback --backup-dir "$high_trust_backup" "$repo" >/dev/null
 [ "$(jq -r '.conformance_level' "$repo/.ugs/policy.json")" = "baseline" ]
 
-"$package_root/scripts/ugs.sh" rollback --backup-dir "$backup" "$repo" >/dev/null
+rollback_report="$temp_dir/rollback-report.json"
+"$package_root/scripts/ugs.sh" rollback --backup-dir "$backup" --report "$rollback_report" "$repo" >/dev/null
+jq -e --arg backup "$backup" '.format == "ugs-migration/v1" and .schema_version == 1 and .command == "rollback" and .status == "rolled_back" and .backup.path == $backup and .rollback.verified == true and .rollback.hooks_restored == true' "$rollback_report" >/dev/null
 [ "$(jq -r '.conformance_level' "$repo/.ugs/policy.json")" = "baseline" ]
 [ ! -e "$repo/.ugs/installation.json" ]
 [ ! -e "$repo/adapters/github/validate_pr.sh" ]
 [ "$(cat "$repo/README.md")" = "$before_readme" ]
 [ -f "$repo/cr/project-history.md" ]
+[ "$(git -C "$repo" rev-parse HEAD)" = "$before_head" ]
+
+migrate_alias="$temp_dir/migrate-alias"
+git init --quiet -b main "$migrate_alias"
+git -C "$migrate_alias" config user.name "UGS Migrate Fixture"
+git -C "$migrate_alias" config user.email "ugs-migrate-fixture@example.invalid"
+"$package_root/scripts/ugs_init.sh" --profile baseline --no-commit "$migrate_alias" >/dev/null
+migrate_report="$temp_dir/migrate-report.json"
+run_migrate --dry-run --report "$migrate_report" "$migrate_alias" >/dev/null
+jq -e '.format == "ugs-migration/v1" and .command == "migrate" and .status == "planned" and .dry_run == true' "$migrate_report" >/dev/null
+[ ! -e "$migrate_alias/.ugs/installation.json" ]
 
 overwrite_backup="$temp_dir/overwrite-backup"
 run_upgrade --overwrite-project-files --backup-dir "$overwrite_backup" "$repo" >/dev/null

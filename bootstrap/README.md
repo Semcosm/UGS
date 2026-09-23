@@ -45,6 +45,26 @@ every profile.
 
 ## Upgrade An Existing Repository
 
+The explicit offline migration entry point is migrate; upgrade remains a
+compatibility alias.
+
+```bash
+./scripts/ugs.sh migrate \
+  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
+  --dry-run \
+  --report /path/to/migration-report.json \
+  /path/to/existing-repository
+./scripts/ugs.sh migrate \
+  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
+  --backup-dir /path/to/ugs-backup-v0.3.28 \
+  --report /path/to/migration-report.json \
+  /path/to/existing-repository
+```
+
+The dry run changes no target files. The ugs-migration/v1 report records the
+inventory, package identity, desired file digests, conflict status, and
+backup/rollback information.
+
 The release package also contains `scripts/ugs.sh`, `scripts/ugs_upgrade.py`,
 and `COMPONENTS.json`. These provide a full-component upgrade path for an
 existing UGS repository. The installer verifies the archive checksum, the
@@ -75,6 +95,16 @@ reported as `project-preserved`; CR history is never part of the component
 set. Use `--overwrite-project-files` only after reviewing the dry-run report.
 Filesystem conflicts abort before any write. The command prints a rollback
 command that restores the backup and the previous `core.hooksPath` setting.
+The backup contains BACKUP.json with pre-migration file digests and modes.
+Rollback verifies restored files, permissions, and core.hooksPath and emits a
+ROLLBACK-REPORT.json result:
+
+```bash
+./scripts/ugs.sh rollback \
+  --backup-dir /path/to/ugs-backup-v0.3.28 \
+  --report /path/to/rollback-report.json \
+  /path/to/existing-repository
+```
 
 After the full component set is installed, activate a profile explicitly:
 

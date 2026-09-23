@@ -58,16 +58,20 @@ For an already initialized repository, add only missing files with:
 ./scripts/ugs_init.sh --profile standard --migrate /path/to/repository
 ```
 
-For an existing UGS v0.3.x repository, install the complete component set
-without changing its active profile:
+For an existing UGS v0.3.x repository, use the explicit offline migration
+entry point to install the complete component set without changing its active
+profile. The `upgrade` command remains a compatibility alias:
 
 ```bash
-./scripts/ugs.sh upgrade \
+./scripts/ugs.sh migrate \
   --archive "../ugs-bootstrap-${tag}.tar.gz" \
-  --dry-run /path/to/repository
-./scripts/ugs.sh upgrade \
+  --dry-run \
+  --report /path/to/migration-report.json \
+  /path/to/repository
+./scripts/ugs.sh migrate \
   --archive "../ugs-bootstrap-${tag}.tar.gz" \
   --backup-dir /path/to/ugs-backup-${tag} \
+  --report /path/to/migration-report.json \
   /path/to/repository
 ```
 
@@ -75,7 +79,10 @@ The dry run lists additions, updates, project-owned files that will be
 preserved, and filesystem conflicts. Existing README, policy, workflow, trust
 files, and CR history are preserved by default. A conflict stops the upgrade
 before any write; `--overwrite-project-files` is an explicit opt-in for
-replacing project-owned files. The command prints the exact rollback command.
+replacing project-owned files. The `ugs-migration/v1` report records the
+inventory, package identity, desired file digests, conflict status, and
+backup/rollback information. The command prints the exact rollback command.
+The backup contains `BACKUP.json` with pre-migration file digests and modes.
 
 The active profile remains unchanged even though all profile components are
 installed. Activate a profile only as a separate step:
@@ -90,8 +97,12 @@ script and the backup directory printed by the upgrade:
 
 ```bash
 ./scripts/ugs.sh rollback \
-  --backup-dir /path/to/ugs-backup-${tag} /path/to/repository
+  --backup-dir /path/to/ugs-backup-${tag} \
+  --report /path/to/rollback-report.json \
+  /path/to/repository
 ```
+Rollback verifies restored files, permissions, and `core.hooksPath`; the
+machine-readable result is written as `ROLLBACK-REPORT.json` by default.
 
 The installer supports normal `.git` directories, linked-worktree `.git`
 files, and managed worktrees with `.git-worktree`. It detects bare Git
