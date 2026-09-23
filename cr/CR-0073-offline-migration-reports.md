@@ -1,17 +1,17 @@
 # CR-0073: Add offline migration reports and verified rollback
 
 Base: main
-Head or Range: chore/v0-4-migration-rollback / 40d31ead8fe5f008ed2011df29243b3cfee55e31
+Head or Range: chore/v0-4-migration-rollback / abea026e06c91c50df837a86f2c0794f696ded38..bff3bf8d11b5b524e5030a31d58948ee25781e66
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: feat(bootstrap): add offline migration reports and verified rollback
-Revision: 2
-Status: accepted
+Revision: 3
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: abea026e06c91c50df837a86f2c0794f696ded38
-Head OID: 40d31ead8fe5f008ed2011df29243b3cfee55e31
-Integrated Result: pending
+Head OID: bff3bf8d11b5b524e5030a31d58948ee25781e66
+Integrated Result: main@bff3bf8d11b5b524e5030a31d58948ee25781e66
 
 ## Summary
 
