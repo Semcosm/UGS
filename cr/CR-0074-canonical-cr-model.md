@@ -8,13 +8,13 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Add the canonical UGS change request model
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 6e60dbcc98f9d8eb2ec57e9c389c7304e1977f66
 Head OID: 1158349418bea64bfe5f12359386f967c5e58396
-Integrated Result: pending
+Integrated Result: main@1158349418bea64bfe5f12359386f967c5e58396
 Coverage OIDs: none
 Extensions: {}
 
