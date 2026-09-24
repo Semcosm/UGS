@@ -10,6 +10,27 @@ Use cases:
 - a patch-series or request-pull flow needs the same minimum fields as a PR
 
 Use `cr/TEMPLATE.md` for new records.
+Use `cr/EX-*.md` for bootstrap or emergency exceptions; those records carry
+their own authorization, time-window, event, and post-event-review fields.
+
+## Canonical v1 records
+
+New portable CR records use the [UGS Canonical Change Request Contract
+v1](../docs/git/ugs-cr-contract.md). A v1 Markdown record begins with
+`Format: ugs-cr/v1` and `Schema Version: 1`, uses the fixed metadata and
+seven-section layout in `cr/TEMPLATE.md`, and is the authoritative source for
+its parsed model and `binding.sha256`.
+
+The reference parser is `scripts/cr_model.py`, and the projection constraints
+are published at `.ugs/schema/cr.schema.json`. A v1 record must retain its
+canonical rendering exactly; use the parser rather than manually reformatting
+metadata or `Extensions` JSON.
+
+Historical records without `Format:` are `ugs-cr/legacy-v0`. They remain
+append-only historical evidence and must not be rewritten merely to claim v1.
+
+`Coverage OIDs` is `none` when empty, or a lexically sorted, ASCII-space-
+delimited list of distinct full lowercase SHA-1 OIDs.
 
 Every non-trivial integration must retain a persisted CR record. The
 `scripts/create_pr_from_cr.sh` and `scripts/validate_pr_cr.sh` commands are

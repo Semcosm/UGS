@@ -131,9 +131,11 @@ the destination is UGS-owned or project-owned. Keep the archive, `.sha256`,
 The release archive includes the UGS guidance needed to use the package
 without opening the project website. Start with
 [`OFFLINE-QUICKSTART.md`](OFFLINE-QUICKSTART.md) and
-`docs/git/ugs-bootstrap.md`, then use the local Core, v0.3 profile,
-conformance-level, commit, review, and release policy documents under
-`docs/git/`. `CONTRIBUTING.md` and `RELEASE.md` are included as local
-operational guides. These documents are copied from the same tagged source as
-the package and are listed with checksums in `MANIFEST.json`. When available,
-`RELEASE-NOTES.md` is the release packet for the archive's version.
+`docs/git/ugs-bootstrap.md`, then use the local Core, v0.3 profile, v0.4
+compatibility, canonical CR contract, conformance-level, commit, review, and
+release policy documents under `docs/git/`. The CR schema, template, and
+`scripts/cr_model.py` are available locally for portable CR inspection.
+`CONTRIBUTING.md` and `RELEASE.md` are included as local operational guides.
+These documents are copied from the same tagged source as the package and are
+listed with checksums in `MANIFEST.json`. When available, `RELEASE-NOTES.md`
+is the release packet for the archive's version.

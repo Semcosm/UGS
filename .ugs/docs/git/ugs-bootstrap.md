@@ -69,11 +69,13 @@ repository shape. Consumers should verify
 the signed release tag and checksum before extracting the package.
 
 The archive also includes `OFFLINE-QUICKSTART.md` at its root, plus offline
-copies of the applicable UGS Core, v0.3 profile, conformance, commit, review,
-release, and bootstrap guidance under `docs/git/`, together with
-`CONTRIBUTING.md` and `RELEASE.md`. Start with the Quick Start and then use
-the local documents. When the tagged source contains a matching release
-packet, the archive also includes it as `RELEASE-NOTES.md`; a downloaded
+copies of the applicable UGS Core, v0.3 profile, v0.4 compatibility, canonical
+CR contract, conformance, commit, review, release, and bootstrap guidance
+under `docs/git/`, together with `CONTRIBUTING.md` and `RELEASE.md`. It also
+ships the CR schema, canonical CR template, and `scripts/cr_model.py` so a
+consumer can inspect portable CR bindings offline. Start with the Quick Start
+and then use the local documents. When the tagged source contains a matching
+release packet, the archive also includes it as `RELEASE-NOTES.md`; a downloaded
 release remains usable without web access.
 
 ## Full-Component Upgrade

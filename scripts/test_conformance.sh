@@ -45,6 +45,39 @@ while IFS=$'\t' read -r id kind path expected code; do
   assert_equivalent_fixture "$id" "$kind" "$path" "$expected" "$code"
 done < <(jq -r '.fixtures[] | [.id, .kind, .path, .expected, (.code // "UGS-0000")] | @tsv' "$root_dir/tests/conformance/manifest.json")
 
+assert_cr_fixture() {
+  local id="$1" path="$2" expected="$3" expected_code="$4" projection="$5"
+  local ref_status independent_status ref_code independent_code
+  set +e
+  UGS_ERROR_FORMAT=json "$root_dir/scripts/cr_model.py" --json "$root_dir/$path" >"$temp_dir/$id.reference.json" 2>"$temp_dir/$id.reference.err"
+  ref_status=$?
+  PYTHONDONTWRITEBYTECODE=1 python3 "$root_dir/scripts/conformance.py" --cr-json "$root_dir/$path" >"$temp_dir/$id.independent.json" 2>"$temp_dir/$id.independent.err"
+  independent_status=$?
+  set -e
+  if [ "$expected" = pass ]; then
+    [ "$ref_status" -eq 0 ] || { echo "reference CR parser unexpectedly failed: $id" >&2; cat "$temp_dir/$id.reference.err" >&2; return 1; }
+    [ "$independent_status" -eq 0 ] || { echo "independent CR parser unexpectedly failed: $id" >&2; cat "$temp_dir/$id.independent.err" >&2; return 1; }
+  else
+    [ "$ref_status" -ne 0 ] || { echo "reference CR parser unexpectedly passed: $id" >&2; return 1; }
+    [ "$independent_status" -ne 0 ] || { echo "independent CR parser unexpectedly passed: $id" >&2; return 1; }
+    ref_code="$(jq -r '.code // empty' "$temp_dir/$id.reference.err")"
+    independent_code="$(sed -n 's/^\([^:]*\):.*/\1/p' "$temp_dir/$id.independent.err" | head -n 1)"
+    [ "$ref_code" = "$expected_code" ] || { echo "reference CR error code mismatch for $id: $ref_code != $expected_code" >&2; return 1; }
+    [ "$independent_code" = "$expected_code" ] || { echo "independent CR error code mismatch for $id: $independent_code != $expected_code" >&2; return 1; }
+  fi
+  if [ -n "$projection" ]; then
+    cmp -s "$temp_dir/$id.reference.json" "$root_dir/$projection" || { echo "reference CR projection mismatch: $id" >&2; return 1; }
+    cmp -s "$temp_dir/$id.independent.json" "$root_dir/$projection" || { echo "independent CR projection mismatch: $id" >&2; return 1; }
+  fi
+  if [ "$expected" = pass ]; then
+    cmp -s "$temp_dir/$id.reference.json" "$temp_dir/$id.independent.json" || { echo "reference/independent CR projection mismatch: $id" >&2; return 1; }
+  fi
+}
+
+while IFS=$'\t' read -r id path expected code projection; do
+  assert_cr_fixture "$id" "$path" "$expected" "$code" "$projection"
+done < <(jq -r '.fixtures[] | select(.kind == "cr") | [.id, .path, .expected, (.code // "UGS-0000"), (.projection // "")] | @tsv' "$root_dir/tests/conformance/manifest.json")
+
 run_expected() {
   local expected="$1"; shift
   if "$@" >/dev/null 2>&1; then
@@ -86,11 +119,14 @@ sed "s/{{BASE_OID}}/$base_oid/g; s/{{HEAD_OID}}/$head_oid/g" "$fixtures/cr/valid
 run_expected pass bash -c "cd '$repo' && '$root_dir/scripts/validate_cr_record.sh' valid-cr.md"
 sed '/^## Risk$/,/^## Rollback$/d' "$repo/valid-cr.md" > "$repo/invalid-cr.md"
 run_expected fail bash -c "cd '$repo' && '$root_dir/scripts/validate_cr_record.sh' invalid-cr.md"
-PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="$root_dir/scripts" python3 - "$repo/valid-cr.md" "$repo/invalid-cr.md" <<'PY'
+awk '{ print; if ($0 == "## Summary") { print ""; print "Format: legacy prose" } }' "$repo/valid-cr.md" > "$repo/legacy-format-body.md"
+run_expected pass bash -c "cd '$repo' && '$root_dir/scripts/validate_cr_record.sh' legacy-format-body.md"
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="$root_dir/scripts" python3 - "$repo/valid-cr.md" "$repo/invalid-cr.md" "$repo/legacy-format-body.md" <<'PY'
 import sys
 from conformance import cr
 assert cr(open(sys.argv[1]).read())[0] == "pass"
 assert cr(open(sys.argv[2]).read())[0] == "fail"
+assert cr(open(sys.argv[3]).read())[0] == "pass"
 PY
 
 echo "independent conformance fixtures passed (Python + Bash)"

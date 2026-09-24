@@ -148,6 +148,8 @@ The release archive includes the applicable UGS guidance under `docs/git/`:
 - `docs/git/ugs-bootstrap.md` — package behavior and profile selection
 - `docs/git/ugs-core.md` — Git-native governance primitives
 - `docs/git/ugs-v0.3-profile.md` — adopted policy and conformance profile
+- `docs/git/ugs-v0-4-contract.md` — vocabulary and compatibility rules
+- `docs/git/ugs-cr-contract.md` — canonical CR Markdown, projection, and binding
 - `docs/git/ugs-conformance-levels.md` — profile matrix and levels
 - `docs/git/ugs-branch-profiles.md` — branch behavior
 - `docs/git/commit-convention.md` — commit message format
@@ -163,6 +165,12 @@ The release archive includes the applicable UGS guidance under `docs/git/`:
 Commands in those two files that refer to files outside this bootstrap bundle
 are maintainer workflows for a full UGS source checkout; the consumer steps in
 this guide are self-contained in the downloaded archive.
+
+The archive also contains `bootstrap/templates/cr.schema.json`; initialization
+installs it as `.ugs/schema/cr.schema.json` alongside the `cr/TEMPLATE.md`
+starter and `scripts/cr_model.py`. These let an offline consumer inspect the
+canonical v1 CR projection and derived `binding.sha256`; historical records
+without `Format: ugs-cr/v1` remain legacy evidence.
 
 The optional GitHub adapter can contact GitHub and therefore may require
 network access and credentials. Initialization, Core validation, profile

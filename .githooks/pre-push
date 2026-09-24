@@ -38,7 +38,7 @@ require_matching_cr_record() {
 
   for file in cr/CR-*.md; do
     [ -e "$file" ] || break
-    head_or_range="$(sed -n 's/^Head or Range: //p' "$file")"
+    head_or_range="$(scripts/cr_model.py --field source.head_or_range "$file")"
 
     printf '%s\n' "$head_or_range" | grep -Fq "$local_sha" && return 0
     printf '%s\n' "$head_or_range" | grep -Fq "$short_local_sha" && return 0

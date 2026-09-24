@@ -20,6 +20,7 @@ primitives:
   - [UGS Core（UGS 核心）](docs/git/ugs-core.md)
   - [UGS v0.3 Policy And Conformance Profile（UGS v0.3 政策与合规性配置文件）](docs/git/ugs-v0.3-profile.md)
   - [UGS v0.4 Contract And Compatibility Guide（UGS v0.4 合同与兼容性指南）](docs/git/ugs-v0-4-contract.md)
+  - [UGS Canonical Change Request Contract v1（UGS 规范变更请求合同 v1）](docs/git/ugs-cr-contract.md)
   - [UGS Conformance Levels And Profile Matrix（UGS 一致性等级与配置文件矩阵）](docs/git/ugs-conformance-levels.md)
   - [UGS Quality Profile（UGS 质量标准）](docs/git/ugs-quality-profile.md)
   - [UGS Supply-Chain Profile（UGS 供应链配置文件）](docs/git/ugs-supply-chain-profile.md)

@@ -11,7 +11,15 @@
     {"id": "build-valid", "kind": "build", "path": "tests/fixtures/build-record/valid.json", "expected": "pass"},
     {"id": "build-invalid-digest", "kind": "build", "path": "tests/fixtures/build-record/invalid-digest.json", "expected": "fail", "reason": "invalid artifact digest", "code": "UGS-BUILD-007"},
     {"id": "attestation-valid", "kind": "attestation", "path": "tests/fixtures/attestation/valid.json", "expected": "pass"},
-    {"id": "attestation-invalid-digest", "kind": "attestation", "path": "tests/fixtures/attestation/invalid-digest.json", "expected": "fail", "reason": "invalid artifact digest", "code": "UGS-ATTEST-009"}
+    {"id": "attestation-invalid-digest", "kind": "attestation", "path": "tests/fixtures/attestation/invalid-digest.json", "expected": "fail", "reason": "invalid artifact digest", "code": "UGS-ATTEST-009"},
+    {"id": "cr-model-valid-v1", "kind": "cr", "path": "tests/fixtures/cr-model/valid-v1.md", "expected": "pass", "projection": "tests/fixtures/cr-model/valid-v1.expected.json"},
+    {"id": "cr-model-valid-v1-integrated-target", "kind": "cr", "path": "tests/fixtures/cr-model/valid-v1-integrated-target.md", "expected": "pass"},
+    {"id": "cr-model-invalid-legacy-status", "kind": "cr", "path": "tests/fixtures/cr/invalid-legacy-status.md", "expected": "fail", "reason": "Status is invalid", "code": "UGS-CR-017"},
+    {"id": "cr-model-invalid-duplicate-field", "kind": "cr", "path": "tests/fixtures/cr-model/invalid-duplicate-field.md", "expected": "fail", "reason": "duplicate metadata field", "code": "UGS-CR-016"},
+    {"id": "cr-model-invalid-lifecycle", "kind": "cr", "path": "tests/fixtures/cr-model/invalid-lifecycle.md", "expected": "fail", "reason": "Status, Decision, and Integrated Result", "code": "UGS-CR-022"},
+    {"id": "cr-model-invalid-unknown-metadata", "kind": "cr", "path": "tests/fixtures/cr-model/invalid-unknown-metadata.md", "expected": "fail", "reason": "unknown v1 metadata", "code": "UGS-CR-018"},
+    {"id": "cr-model-invalid-noncanonical-extensions", "kind": "cr", "path": "tests/fixtures/cr-model/invalid-noncanonical-extensions.md", "expected": "fail", "reason": "canonical Markdown rendering", "code": "UGS-CR-021"},
+    {"id": "cr-model-invalid-nonstandard-json", "kind": "cr", "path": "tests/fixtures/cr-model/invalid-nonstandard-json.md", "expected": "fail", "reason": "Extensions must be a JSON object", "code": "UGS-CR-019"}
   ],
   "generated": {
     "cr-valid": {"kind": "cr", "expected": "pass"},

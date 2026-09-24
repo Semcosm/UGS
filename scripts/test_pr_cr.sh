@@ -12,7 +12,7 @@ cp "$cr_file" "$body"
 printf '\n' >> "$body"
 jq -n --rawfile body "$body" '{pull_request: {body: $body}}' > "$event"
 
-base="$(sed -n 's/^Base OID: //p' "$cr_file")"
-head="$(sed -n 's/^Head OID: //p' "$cr_file")"
+base="$("$root_dir/scripts/cr_model.py" --field source.base_oid "$cr_file")"
+head="$("$root_dir/scripts/cr_model.py" --field source.head_oid "$cr_file")"
 (cd "$root_dir" && adapters/github/validate_pr.sh "$base" "$head" "$event" >/dev/null)
 echo "PR body normalization fixture passed"

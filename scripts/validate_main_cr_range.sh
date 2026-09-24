@@ -16,7 +16,7 @@ for record in "${records[@]}"; do
   trap 'rm -f "$record_file"' EXIT
   git show "$new:$record" > "$record_file" || fail "cannot read persisted CR from new commit: $record"
   "$repo_root/scripts/validate_cr_record.sh" "$record_file" >/dev/null
-  record_head="$(sed -n 's/^Head OID: //p' "$record_file")"
+  record_head="$("$repo_root/scripts/cr_model.py" --field source.head_oid "$record_file")"
   rm -f "$record_file"
   trap - EXIT
   git merge-base --is-ancestor "$record_head" "$new" || fail "$record Head OID is not reachable from new main"

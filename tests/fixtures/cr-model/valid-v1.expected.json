@@ -1,0 +1,43 @@
+{
+  "$schema": "schema/cr.schema.json",
+  "binding": {
+    "format": "ugs-cr-binding/v1",
+    "sha256": "sha256:61fa40b0caa08ba80a526c81812de08f9ba598427484c6cc13b4455d9f62d5c8"
+  },
+  "coverage_oids": [],
+  "decision": "accepted",
+  "extensions": {
+    "x-fixture": {
+      "name": "canonical"
+    }
+  },
+  "format": "ugs-cr/v1",
+  "id": "CR-9002",
+  "integration": {
+    "result_oid": null,
+    "result_ref": null,
+    "review_evidence": "trailers",
+    "strategy": "rebase-ff",
+    "target_ref": "main"
+  },
+  "policy_version": "v0.3",
+  "revision": 1,
+  "schema_version": 1,
+  "sections": {
+    "Backport Target": "None.",
+    "Breaking Change": "No.",
+    "Motivation": "Ensure offline consumers share one unambiguous CR reader.",
+    "Risk": "Fixture-only behavior.",
+    "Rollback": "Remove the fixture with the feature that introduced it.",
+    "Summary": "Exercise a canonical Markdown CR record and its JSON projection.",
+    "Test Evidence": "The parser renders this fixture byte-for-byte."
+  },
+  "source": {
+    "base_oid": "1111111111111111111111111111111111111111",
+    "base_ref": "main",
+    "head_oid": "2222222222222222222222222222222222222222",
+    "head_or_range": "test/cr-model / 1111111111111111111111111111111111111111..2222222222222222222222222222222222222222"
+  },
+  "status": "accepted",
+  "title": "Canonical CR model fixture"
+}

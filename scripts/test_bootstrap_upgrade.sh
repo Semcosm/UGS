@@ -111,6 +111,8 @@ jq -e --arg backup "$backup" '.format == "ugs-migration/v1" and .schema_version 
 [ "$(jq -r '.active_profile' "$repo/.ugs/installation.json")" = "baseline" ]
 [ -x "$repo/adapters/github/validate_pr.sh" ]
 [ -x "$repo/scripts/ugs_upgrade.sh" ]
+[ -x "$repo/scripts/cr_model.py" ]
+[ -f "$repo/.ugs/schema/cr.schema.json" ]
 [ -f "$repo/.ugs/docs/git/ugs-core.md" ]
 [ -f "$repo/.ugs/docs/OFFLINE-QUICKSTART.md" ]
 [ -f "$repo/.ugs/docs/LICENSE" ]

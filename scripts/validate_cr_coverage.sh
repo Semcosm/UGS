@@ -12,7 +12,9 @@ missing_file="$(mktemp)"
 trap 'rm -f "$covered_file" "$missing_file"' EXIT
 for file in "$repo_root"/cr/CR-*.md; do
   [ -f "$file" ] || continue
-  sed -n -E 's/^(Head OID|Integrated Result): (main@)?([0-9a-f]{40})$/\3/p; s/^Coverage OIDs: (.*)$/\1/p' "$file" | tr ' ' '\n' | grep -E '^[0-9a-f]{40}$' >> "$covered_file" || true
+  "$repo_root/scripts/cr_model.py" --field source.head_oid "$file" >> "$covered_file"
+  "$repo_root/scripts/cr_model.py" --field integration.result_oid "$file" >> "$covered_file"
+  "$repo_root/scripts/cr_model.py" --coverage-oids "$file" >> "$covered_file"
 done
 sort -u "$covered_file" -o "$covered_file"
 while IFS=$'\t' read -r oid subject; do

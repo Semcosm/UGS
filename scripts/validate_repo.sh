@@ -14,6 +14,7 @@ required_files=(
   "docs/git/ugs-core.md"
   "docs/git/ugs-branch-profiles.md"
   "docs/git/ugs-v0-4-contract.md"
+  "docs/git/ugs-cr-contract.md"
   "docs/git/ugs-quality-profile.md"
   "docs/git/ugs-supply-chain-profile.md"
   "docs/git/ugs-repository-shapes.md"
@@ -23,6 +24,7 @@ required_files=(
   "REPOSITORY_POLICY.md"
   ".ugs/policy.json"
   ".ugs/schema/policy.schema.json"
+  ".ugs/schema/cr.schema.json"
   ".ugs/document-map.json"
   ".ugs/schema/document-map.schema.json"
   "CONTRIBUTING.md"
@@ -45,6 +47,8 @@ required_files=(
   "scripts/validate_commit_range.sh"
   "scripts/validate_commit_signatures.sh"
   "scripts/validate_cr_record.sh"
+  "scripts/cr_model.py"
+  "scripts/test_cr_model.sh"
   "scripts/validate_cr_review.sh"
   "scripts/test_core_bare_repository.sh"
   "scripts/test_bare_git_update.sh"
@@ -110,6 +114,7 @@ required_files=(
   "bootstrap/templates/SUPPORT.md"
   "bootstrap/templates/cr/README.md"
   "bootstrap/templates/cr/TEMPLATE.md"
+  "bootstrap/templates/cr.schema.json"
   "bootstrap/templates/githooks/README.md"
   "bootstrap/templates/githooks/commit-msg"
   "bootstrap/templates/repository-policy.md"
@@ -144,6 +149,8 @@ executable_files=(
   "scripts/validate_commit_range.sh"
   "scripts/validate_commit_signatures.sh"
   "scripts/validate_cr_record.sh"
+  "scripts/cr_model.py"
+  "scripts/test_cr_model.sh"
   "scripts/validate_cr_review.sh"
   "scripts/test_core_bare_repository.sh"
   "scripts/test_bare_git_update.sh"
@@ -233,6 +240,7 @@ grep -Fq "docs/git/ugs-v0-4-contract.md" README.md || fail "README must document
 scripts/validate_document_map.py
 scripts/test_document_map.sh
 scripts/test_pr_cr.sh
+scripts/test_cr_model.sh
 scripts/validate_policy_manifest.sh
 scripts/test_policy_manifest.sh
 scripts/validate_quality_profile.sh
