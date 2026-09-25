@@ -8,13 +8,13 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Define signed CR reviewer and test attestations
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 64d1315953419e06fb9c2ba9ef56f29a28c3d727
 Head OID: 26dd8447d6b51e059543a02441cc56e47e962f11
-Integrated Result: pending
+Integrated Result: main@26dd8447d6b51e059543a02441cc56e47e962f11
 Coverage OIDs: none
 Extensions: {}
 
