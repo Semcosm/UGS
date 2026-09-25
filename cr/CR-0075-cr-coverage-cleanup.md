@@ -3,18 +3,18 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: chore/cr-coverage-cleanup / 58f4e7bcc7851a3ec9476384af42e54963874005
+Head or Range: chore/cr-coverage-cleanup / 50f3ed7a10db9de91dd783ae7fa970b18e56fe24
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Restore first-parent CR coverage after the v0.4 governance sequence
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 58f4e7bcc7851a3ec9476384af42e54963874005
-Head OID: 58f4e7bcc7851a3ec9476384af42e54963874005
-Integrated Result: pending
+Head OID: 50f3ed7a10db9de91dd783ae7fa970b18e56fe24
+Integrated Result: main@50f3ed7a10db9de91dd783ae7fa970b18e56fe24
 Coverage OIDs: 40d31ead8fe5f008ed2011df29243b3cfee55e31 94aa56b7154ab5c86ab4b2e960a41a04fd0f3af7 ac78a13251e2978d0e1f519ae3acf601788f91d7 ebca89f2cee03a1300ad3de1a4a6f8ea6eab4f00
 Extensions: {}
 
@@ -42,9 +42,11 @@ Before this record, `scripts/validate_cr_coverage.sh HEAD` reported exactly four
 uncovered commits: `40d31ead`, `ac78a132`, `94aa56b`, and `ebca89f`. The OIDs in
 this record are full lowercase SHA-1 values in lexical order and each resolves
 to a first-parent commit after the coverage anchor. Focused validation after
-the record commit will run `scripts/cr_model.py --json`,
+the record and integration passed `scripts/cr_model.py --json`,
 `scripts/validate_cr_record.sh`, `scripts/test_cr_model.sh`,
-`scripts/test_conformance.sh`, and `scripts/validate_cr_coverage.sh HEAD`.
+`scripts/test_conformance.sh`, `scripts/validate_commit_signatures.sh main..HEAD`,
+and `scripts/validate_cr_coverage.sh HEAD`; the pushed topic branch and main
+fast-forward also passed the GitHub `ugs-validate` workflow.
 
 ## Risk
 
