@@ -49,6 +49,7 @@ docs/git/ugs-conformance-levels.md	docs/git/ugs-conformance-levels.md
 docs/git/ugs-core.md	docs/git/ugs-core.md
 docs/git/ugs-document-map.md	docs/git/ugs-document-map.md
 docs/git/ugs-cr-contract.md	docs/git/ugs-cr-contract.md
+docs/git/ugs-cr-attestation.md	docs/git/ugs-cr-attestation.md
 docs/git/ugs-v0-4-contract.md	docs/git/ugs-v0-4-contract.md
 docs/git/ugs-quality-profile.md	docs/git/ugs-quality-profile.md
 docs/git/ugs-repository-shapes.md	docs/git/ugs-repository-shapes.md
@@ -71,6 +72,7 @@ bootstrap/templates/repository-policy.md	bootstrap/templates/repository-policy.m
 bootstrap/templates/supply-chain-README.md	bootstrap/templates/supply-chain-README.md
 .ugs/schema/policy.schema.json	bootstrap/templates/policy.schema.json
 .ugs/schema/cr.schema.json	bootstrap/templates/cr.schema.json
+.ugs/schema/cr-attestation.schema.json	bootstrap/templates/cr-attestation.schema.json
 bootstrap/templates/document-map.json	bootstrap/templates/document-map.json
 .ugs/schema/document-map.schema.json	bootstrap/templates/document-map.schema.json
 bootstrap/templates/standard-workflow.yml	bootstrap/templates/standard-workflow.yml
@@ -83,7 +85,9 @@ scripts/ugs_upgrade.py	scripts/ugs_upgrade.py
 scripts/ugs_upgrade.sh	scripts/ugs_upgrade.sh
 scripts/validate_policy_manifest.sh	scripts/validate_policy_manifest.sh
 scripts/cr_model.py	scripts/cr_model.py
+scripts/cr_attestation.py	scripts/cr_attestation.py
 scripts/validate_cr_record.sh	scripts/validate_cr_record.sh
+scripts/validate_cr_attestation.sh	scripts/validate_cr_attestation.sh
 scripts/validate_cr_review.sh	scripts/validate_cr_review.sh
 scripts/validate_pr_cr.sh	scripts/validate_pr_cr.sh
 scripts/create_pr_from_cr.sh	scripts/create_pr_from_cr.sh

@@ -121,6 +121,7 @@ for document in \
   docs/git/ugs-conformance-levels.md \
   docs/git/ugs-core.md \
   docs/git/ugs-document-map.md \
+  docs/git/ugs-cr-attestation.md \
   docs/git/ugs-v0-4-contract.md \
   docs/git/ugs-quality-profile.md \
   docs/git/ugs-repository-shapes.md \
@@ -149,6 +150,9 @@ package_target="$temp_dir/package-repo"
 [ -f "$package_target/.ugs/docs/LICENSE" ]
 [ -f "$package_target/.ugs/docs/LICENSES/Apache-2.0.txt" ]
 [ -f "$package_target/.ugs/docs/LICENSES/CC-BY-4.0.txt" ]
+[ -f "$package_target/.ugs/schema/cr-attestation.schema.json" ]
+[ -x "$package_target/scripts/cr_attestation.py" ]
+[ -x "$package_target/scripts/validate_cr_attestation.sh" ]
 (cd "$package_target" && ./adapters/bare-git/update refs/heads/main "$zeros" "$first_object" >/dev/null)
 package_standard="$temp_dir/package-standard-repo"
 "$package_root/scripts/ugs_init.sh" --profile standard --no-commit "$package_standard" >/dev/null

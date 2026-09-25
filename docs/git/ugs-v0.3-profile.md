@@ -67,7 +67,8 @@ without this field remain valid as grandfathered records.
 The repository's declared review model and sensitive-path acknowledgment
 requirements apply to every v0.3 change. Final review and test conclusions
 should be represented by commit trailers when the integration path supports
-them.
+them. The optional `ugs-cr-attestation/v1` contract adds signed, portable
+review and test evidence; it does not weaken or replace this trailer gate.
 
 New v0.3 CRs that declare `Review Evidence: trailers` **MUST** have both
 `Reviewed-by` and `Tested-by` on the final integrated commit. For rebase-ff this
@@ -99,10 +100,13 @@ trusted-signing boundary, protected refs, and rollback path. The legacy
 and warning reporting.
 
 Signer lifecycle metadata **MUST** identify each principal's role, key
-fingerprint, effective start date, status, and (when revoked) effective end
-date. Active lifecycle entries **MUST** correspond to `keys/allowed_signers`.
-Reviewer trailers are attestations bound to the final signed commit; v0.3 does
-not define a separate reviewer-signature wire format.
+fingerprint, effective start date, status, and (when closed or revoked) an
+exclusive `effective_until` date. Active lifecycle entries **MUST** correspond
+to `keys/allowed_signers`.
+Reviewer trailers remain attestations bound to the final signed commit. Signed
+reviewer and test attestations use the separate, additive
+`ugs-cr-attestation/v1` contract; they do not change the v0.3 CR or commit
+trailer wire values.
 
 Exception records under `cr/EX-*.md` **MUST** identify the exception type,
 authorizer, reason, start and expiry timestamps, event commit, and post-event
@@ -119,9 +123,11 @@ invalidate an otherwise conforming v0.3 repository and this profile does not
 silently make them mandatory.
 
 Further work remains for stronger cross-binding of production evidence,
-portable adapter capability reporting, reviewer attestations, and the v1.0
-compatibility contract. Those changes require a future profile or versioned
-extension and are not implied by the v0.3 profile.
+portable adapter capability reporting, and the v1.0 compatibility contract.
+The signed CR reviewer/test attestation model is specified separately in
+`ugs-cr-attestation/v1`; adoption remains opt-in and is not implied by the
+v0.3 profile. Supply-chain release attestations continue to use their existing
+`ugs-attestation` contract.
 
 ## 8. v0.4 compatibility contract
 

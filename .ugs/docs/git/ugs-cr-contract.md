@@ -209,17 +209,26 @@ history remains append-only.
 
 ## 8. Attestation boundary
 
-This contract prepares a stable object for later signed reviewer and test
-attestations. It does not define signer namespaces, role validity windows,
-revocation semantics, attestation payloads, or behavior after a rebase, merge,
-or squash beyond the existing CR provenance rules. A later CR must define those
-rules and bind any attestation to this contract's derived `binding.sha256`, CR
-revision, and relevant integration result.
+Signed reviewer and test attestations are defined by the companion
+[`ugs-cr-attestation/v1` contract](ugs-cr-attestation.md). An attestation MUST
+bind this record's derived `binding.sha256`, CR revision, and the exact source
+or integrated-result identity it claims. The attestation contract defines the
+payload, SSH namespaces, role and validity-window checks, revocation and
+rotation handling, and stale-evidence behavior after a rebase, merge, or
+squash.
+
+Attestations are additive evidence. They do not replace the declared
+`Review Evidence: trailers` gate, the required `Reviewed-by` and `Tested-by`
+trailers on an integrated object, or any supply-chain release-attestation
+requirements. A repository may continue to use the CR model without publishing
+attestations.
 
 ## 9. Distribution requirements
 
 The bootstrap distribution includes this document, the CR schema, the canonical
-CR template, and the reference parser. Offline consumers can therefore create
-and inspect v1 records without a hosting service or network access. The
-portable fixture corpus must include valid and invalid v1 records and compare
-their projection and binding across implementations.
+CR template, and the reference parser. The optional CR attestation contract
+and its schema are distributed alongside these documents when the evidence
+capability is installed. Offline consumers can therefore create and inspect v1
+records and verify detached evidence without a hosting service or network
+access. The portable fixture corpus must include valid and invalid v1 records
+and compare their projection and binding across implementations.

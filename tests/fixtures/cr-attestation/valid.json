@@ -1,0 +1,14 @@
+{
+  "attester": {"principal": "fixture@example.invalid", "role": "reviewer"},
+  "checks": [{"evidence": ["scripts/test_cr_attestation.sh"], "name": "cr-model", "status": "passed"}],
+  "conclusion": "approved",
+  "format": "ugs-cr-attestation/v1",
+  "issued_at": "2026-09-25T00:00:00Z",
+  "schema_version": 1,
+  "signature": {"format": "ssh", "namespace": "ugs-cr-review", "principal": "fixture@example.invalid", "value": "AA=="},
+  "subject": {"binding_sha256": "sha256:afbb23ae170df9a126f760ae2555ced844a506dbd95b3c3c500973c60c28d360", "cr_id": "CR-0075", "result_oid": "50f3ed7a10db9de91dd783ae7fa970b18e56fe24", "revision": 2, "scope": "integrated-result", "strategy": "rebase-ff", "target_ref": "main"},
+  "type": "review",
+  "valid_from": "2026-09-25T00:00:00Z",
+  "valid_until": null,
+  "repository": "Semcosm/UGS"
+}

@@ -49,7 +49,9 @@ def component_manifest(stage, version, source_commit):
         "scripts/ugs_init.sh",
         "scripts/validate_policy_manifest.sh",
         "scripts/cr_model.py",
+        "scripts/cr_attestation.py",
         "scripts/validate_cr_record.sh",
+        "scripts/validate_cr_attestation.sh",
         "scripts/validate_cr_review.sh",
         "scripts/validate_pr_cr.sh",
         "scripts/create_pr_from_cr.sh",
@@ -66,6 +68,7 @@ def component_manifest(stage, version, source_commit):
     add("bootstrap/templates/cr/TEMPLATE.md", "cr/TEMPLATE.md", "core", "core", ownership="project")
     add("bootstrap/templates/policy.schema.json", ".ugs/schema/policy.schema.json", "template", "templates")
     add("bootstrap/templates/cr.schema.json", ".ugs/schema/cr.schema.json", "template", "templates")
+    add("bootstrap/templates/cr-attestation.schema.json", ".ugs/schema/cr-attestation.schema.json", "template", "templates")
     add("bootstrap/templates/document-map.schema.json", ".ugs/schema/document-map.schema.json", "template", "templates")
 
     for name in (
@@ -170,7 +173,7 @@ def main():
             shutil.copy2(root / "LICENSES" / name, stage / "LICENSES" / name)
         shutil.copy2(root / "scripts/ugs_init.py", stage / "scripts/ugs_init.py")
         shutil.copy2(root / "scripts/ugs_init.sh", stage / "scripts/ugs_init.sh")
-        for name in ("ugs.sh", "ugs_errors.sh", "ugs_upgrade.py", "ugs_upgrade.sh", "validate_policy_manifest.sh", "cr_model.py", "validate_cr_record.sh", "validate_cr_review.sh", "validate_pr_cr.sh", "create_pr_from_cr.sh", "validate_main_cr_range.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):
+        for name in ("ugs.sh", "ugs_errors.sh", "ugs_upgrade.py", "ugs_upgrade.sh", "validate_policy_manifest.sh", "cr_model.py", "cr_attestation.py", "validate_cr_record.sh", "validate_cr_attestation.sh", "validate_cr_review.sh", "validate_pr_cr.sh", "create_pr_from_cr.sh", "validate_main_cr_range.sh", "validate_ref_update.sh", "test_profile_conformance.sh"):
             shutil.copy2(root / "scripts" / name, stage / "scripts" / name)
         for name in ("validate_pr.sh", "create_pr_from_cr.sh", "validate_adapter.sh", "validate_action_pinning.sh", "download_release.sh", "publish_release.sh"):
             shutil.copy2(root / "adapters/github" / name, stage / "adapters/github" / name)
@@ -194,6 +197,7 @@ def main():
         shutil.copy2(root / ".github/workflows/ugs-validate.yml", stage / ".github/workflows/ugs-validate.yml")
         shutil.copy2(root / ".ugs/schema/policy.schema.json", stage / "bootstrap/templates/policy.schema.json")
         shutil.copy2(root / ".ugs/schema/cr.schema.json", stage / "bootstrap/templates/cr.schema.json")
+        shutil.copy2(root / ".ugs/schema/cr-attestation.schema.json", stage / "bootstrap/templates/cr-attestation.schema.json")
         for name in ("validate_quality_profile.sh", "validate_supply_chain_profile.sh", "validate_supply_chain_evidence.sh", "validate_action_pinning.sh", "validate_repository_shape.sh", "generate_document_map.py", "validate_document_map.py"):
             shutil.copy2(root / "scripts" / name, stage / "scripts" / name)
         for relative in ("keys/README.md", "keys/allowed_signers", "keys/revoked_signers", "keys/signer_roles.json", ".ugs/schema/signer-roles.schema.json"):
