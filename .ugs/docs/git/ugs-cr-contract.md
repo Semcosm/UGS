@@ -4,13 +4,14 @@
 
 This document defines the portable UGS Change Request (CR) representation for
 the v0.5 interoperability work. It gives a CR one canonical Markdown form, a
-deterministic data projection, and a digest that can later be bound by review
-or test attestations.
+deterministic data projection, and a digest that can be bound by optional
+review or test attestations.
 
-The contract does not change the active policy manifest wire format. It also
-does not introduce a reviewer-signature format, a hosting-platform API
-dependency, or a replacement for the existing Git commit trailers. Those are
-separate Phase B capabilities.
+The contract does not change the active policy manifest wire format or replace
+the existing Git commit trailers. Signed reviewer and test evidence is defined
+by the optional companion `ugs-cr-attestation/v1` contract; that contract is
+independent of hosting APIs and does not make attestation publication
+mandatory for a v1 CR.
 
 ## 2. Persistent representation
 
