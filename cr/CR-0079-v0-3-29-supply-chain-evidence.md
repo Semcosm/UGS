@@ -21,9 +21,10 @@ Extensions: {}
 ## Summary
 
 Publish the real v0.3.29 release evidence after the immutable signed tag was
-created. Add the SPDX SBOM, deterministic build record, and signed
-`ugs-attestation` for the published bootstrap archive; restore the active
-policy to `high-trust`; and close the staging release record CR-0078.
+created. Add the SPDX SBOM and deterministic build record plus a signed
+`ugs-attestation` for the published bootstrap archive, and restore the active
+policy to `high-trust`. CR-0078 remains an accepted staging record until its
+separate closure metadata is recorded after this evidence integration.
 
 ## Motivation
 
@@ -50,7 +51,7 @@ bind that commit, tag, and digest:
 - `.ugs/supply-chain/v0.3.29.attestation.json`
 
 The SBOM, build record, SSH attestation, high-trust policy/evidence paths,
-CR-0078 closure, repository validation, bootstrap equivalence, and explicit
+repository validation, bootstrap equivalence, and explicit
 `scripts/validate_supply_chain_release.sh v0.3.29 .ugs/policy.json
 Semcosm/UGS` check all pass. The attestation is signed by the trusted
 `chenzhipeng.main@gmail.com` signer in the `ugs-attestation` namespace.

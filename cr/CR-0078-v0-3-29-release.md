@@ -8,13 +8,13 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Prepare the v0.3.29 governance release
-Revision: 2
-Status: integrated
+Revision: 1
+Status: accepted
 Decision: accepted
 Policy Version: v0.3
 Base OID: ee8527d95facce0c22e932dc0cb2dc4ec50f6b87
 Head OID: c9c3f0529e321838655f90ce393846ffadeb8c0d
-Integrated Result: main@c9c3f0529e321838655f90ce393846ffadeb8c0d
+Integrated Result: pending
 Coverage OIDs: none
 Extensions: {}
 
