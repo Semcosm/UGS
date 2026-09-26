@@ -51,22 +51,11 @@
     "test_entrypoints": ["scripts/validate_repo.sh", "scripts/ugs_check.sh"]
   },
   "supply_chain": {
-    "profile": "high-trust",
+    "profile": "basic",
     "action_pinning": "full_sha",
     "sbom": "release",
     "reproducible_builds": "verified",
-    "release_attestations": "signed",
-    "evidence": {
-      "sbom_paths": [
-        ".ugs/supply-chain/v0.3.28.spdx.json"
-      ],
-      "build_record_paths": [
-        ".ugs/supply-chain/v0.3.28.build.json"
-      ],
-      "attestation_paths": [
-        ".ugs/supply-chain/v0.3.28.attestation.json"
-      ]
-    }
+    "release_attestations": "signed"
   },
   "repository_shape": {
     "model": "single",
