@@ -73,6 +73,7 @@ primitives:
     - [v0.3.26 Release Packet（v0.3.26 版本发布说明）](releases/v0.3.26.md)
     - [v0.3.27 Release Packet（v0.3.27 版本发布说明）](releases/v0.3.27.md)
     - [v0.3.28 Release Packet（v0.3.28 版本发布说明）](releases/v0.3.28.md)
+    - [v0.3.29 Release Packet（v0.3.29 版本发布说明）](releases/v0.3.29.md)
   - [UGS Bootstrap Package（UGS Bootstrap 包）](docs/git/ugs-bootstrap.md)
   - [Portable Conformance Fixtures（便携式一致性测试夹具）](docs/git/ugs-conformance-fixtures.md)
 

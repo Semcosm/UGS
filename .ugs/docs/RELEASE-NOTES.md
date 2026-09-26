@@ -1,32 +1,34 @@
-# UGS v0.3.28
+# UGS v0.3.29
 
-This standalone patch release establishes the UGS layered licensing policy and
-ships the complete official license texts with the bootstrap distribution.
+This governance patch release records the current UGS v0.3 documentation and
+attestation status and publishes the repository state needed for the next
+post-tag supply-chain evidence update.
 
 ## Summary
 
-UGS-authored implementation, configuration, hooks, adapters, and test
-components are covered by Apache License 2.0. UGS-authored specifications,
-guides, release packets, and change-request records are covered by Creative
-Commons Attribution 4.0 International.
+The release includes the reconciled roadmap and canonical CR-contract wording
+for the delivered `ugs-cr-attestation/v1` capability. It also carries the
+release packet for the two-phase v0.3.29 supply-chain publication.
 
-The repository includes the official source texts at:
+The signed tag target intentionally uses `supply_chain.profile: basic` and
+does not carry evidence paths. This is a staging state required by the
+current evidence contract: an evidence file that names the tag target commit
+cannot be committed into that same commit without a hash cycle. The tag is
+therefore not a claim that the tag checkout is high-trust evidence-complete.
 
-- `LICENSES/Apache-2.0.txt`
-- `LICENSES/CC-BY-4.0.txt`
-
-The bootstrap archive carries the same files and installs copies under
-`.ugs/docs/` for offline consumers. The consumer repository's root `LICENSE`
-remains a project-owned starting template and does not select a license for
-the consumer's own work.
+After the immutable tag is published, a separate signed CR will build the
+bootstrap archive twice with `SOURCE_DATE_EPOCH=0`, record the matching
+artifact digest, generate an SPDX SBOM and build record, create a signed
+`ugs-attestation`, and restore the main branch to `high-trust` with v0.3.29
+evidence paths.
 
 ## Compatibility
 
-This is an additive, non-breaking patch release. The active UGS v0.3 policy,
-high-trust profile, continuous branch profile, `rebase-ff` integration
-strategy, and existing release tags are unchanged. Explicit file-level,
-third-party, trademark, and attribution terms continue to take precedence
-where applicable.
+This is an additive, non-breaking governance release. The branch, review,
+commit-signing, release-tag, and bootstrap contracts remain unchanged. The
+temporary basic profile applies only to the immutable v0.3.29 tag target and
+is explicitly superseded by the post-tag evidence CR on `main`. Existing
+v0.3.28 evidence and tag objects are not modified.
 
 ## Verification
 
@@ -42,35 +44,36 @@ scripts/test_profile_conformance.sh
 scripts/test_conformance.sh
 scripts/test_git_fixtures.sh
 scripts/validate_document_map.py
-scripts/validate_commit_range.sh v0.3.27..HEAD
-scripts/validate_commit_signatures.sh v0.3.27..HEAD
+scripts/validate_commit_range.sh v0.3.28..HEAD
+scripts/validate_commit_signatures.sh v0.3.28..HEAD
 scripts/validate_cr_coverage.sh HEAD
 ```
 
-After publication, verify the signed release object and downloaded package:
+After publication and the evidence CR, verify:
 
 ```bash
-scripts/validate_release_tag.sh v0.3.28
-sha256sum -c ugs-bootstrap-v0.3.28.tar.gz.sha256
-scripts/test_bootstrap_release.sh v0.3.28
+scripts/validate_release_tag.sh v0.3.29
+scripts/test_bootstrap_release.sh v0.3.29
+scripts/validate_supply_chain_release.sh v0.3.29 .ugs/policy.json Semcosm/UGS
 ```
 
-The Apache source hash is
-`cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30`; the CC
-BY source hash is
-`9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411`.
+The post-tag CR must record the tag target commit, both deterministic build
+runs, the final archive digest, all evidence paths, and the signed attestation
+verification result.
 
 ## Rollback
 
-Do not delete, replace, or force-update `v0.3.27` or `v0.3.28`. If the release
-package or notice is defective, preserve the immutable tag and publish a later
-superseding patch release through a new signed CR. Consumers can restore a
-previous bootstrap installation using the backup created by `scripts/ugs.sh`.
+Release tags are append-only. Do not delete, replace, or force-update
+`v0.3.28` or `v0.3.29`. If the staging tag, archive, or evidence is
+defective, leave the immutable objects in place and publish a later signed
+superseding patch through a new CR. If the post-tag policy update is rejected,
+revert it through a reviewed CR while retaining the audit records and tag.
 
 ## Breaking Change
 
-No. This release changes licensing notices and distribution contents only; it
-does not change UGS branch governance or select a license for consumer work.
+No. This release adds documentation and an explicitly documented, temporary
+release staging step; it does not change runtime behavior or consumer branch
+governance.
 
 ## Backport Target
 

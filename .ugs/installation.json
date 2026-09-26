@@ -12,7 +12,7 @@
     "tests"
   ],
   "layout": "normal",
-  "package_version": "v0.3.28",
+  "package_version": "v0.3.29",
   "profile_activation": "separate",
-  "source_commit": "ded9bc0f6b9dd519473ba5e33367e3ee80fd62f6"
+  "source_commit": "0a0278dd20394efcaf77b6f79859c5de8b0b38c7"
 }

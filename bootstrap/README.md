@@ -50,13 +50,13 @@ compatibility alias.
 
 ```bash
 ./scripts/ugs.sh migrate \
-  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
+  --archive ./ugs-bootstrap-v0.3.29.tar.gz \
   --dry-run \
   --report /path/to/migration-report.json \
   /path/to/existing-repository
 ./scripts/ugs.sh migrate \
-  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
-  --backup-dir /path/to/ugs-backup-v0.3.28 \
+  --archive ./ugs-bootstrap-v0.3.29.tar.gz \
+  --backup-dir /path/to/ugs-backup-v0.3.29 \
   --report /path/to/migration-report.json \
   /path/to/existing-repository
 ```
@@ -75,7 +75,7 @@ From the extracted release directory, first inspect the plan:
 
 ```bash
 ./scripts/ugs.sh upgrade \
-  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
+  --archive ./ugs-bootstrap-v0.3.29.tar.gz \
   --dry-run /path/to/existing-repository
 ```
 
@@ -83,8 +83,8 @@ Then install with a backup outside the target repository:
 
 ```bash
 ./scripts/ugs.sh upgrade \
-  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
-  --backup-dir /path/to/ugs-backup-v0.3.28 \
+  --archive ./ugs-bootstrap-v0.3.29.tar.gz \
+  --backup-dir /path/to/ugs-backup-v0.3.29 \
   /path/to/existing-repository
 ```
 
@@ -101,7 +101,7 @@ ROLLBACK-REPORT.json result:
 
 ```bash
 ./scripts/ugs.sh rollback \
-  --backup-dir /path/to/ugs-backup-v0.3.28 \
+  --backup-dir /path/to/ugs-backup-v0.3.29 \
   --report /path/to/rollback-report.json \
   /path/to/existing-repository
 ```
@@ -110,7 +110,7 @@ After the full component set is installed, activate a profile explicitly:
 
 ```bash
 ./scripts/ugs.sh activate --profile standard \
-  --archive ./ugs-bootstrap-v0.3.28.tar.gz \
+  --archive ./ugs-bootstrap-v0.3.29.tar.gz \
   /path/to/existing-repository
 ```
 

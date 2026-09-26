@@ -7,7 +7,7 @@ trap 'rm -rf "$temp_dir"' EXIT
 zeros="0000000000000000000000000000000000000000"
 first_object="1111111111111111111111111111111111111111"
 
-version="${UGS_BOOTSTRAP_TEST_VERSION:-v0.3.28}"
+version="${UGS_BOOTSTRAP_TEST_VERSION:-v0.3.29}"
 dist_dir="$temp_dir/dist"
 SOURCE_DATE_EPOCH=0 "$root_dir/scripts/build_bootstrap_package.sh" "$version" --output-dir "$dist_dir" >/dev/null
 archive="$dist_dir/ugs-bootstrap-$version.tar.gz"
