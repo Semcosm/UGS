@@ -8,13 +8,13 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Reconcile roadmap and CR attestation status
-Revision: 1
-Status: pending
-Decision: pending
+Revision: 2
+Status: integrated
+Decision: accepted
 Policy Version: v0.3
 Base OID: 77f2bc329a62cf71ae3a204addaa939c4acd929a
 Head OID: 7e2f66d72b96bcbc94930ee57ff196e3a8b8b416
-Integrated Result: pending
+Integrated Result: main@7e2f66d72b96bcbc94930ee57ff196e3a8b8b416
 Coverage OIDs: none
 Extensions: {}
 
@@ -36,10 +36,13 @@ of the earlier change and is not rewritten.
 
 ## Test Evidence
 
-The topic changes pass `git diff --check`, keep `docs/git/ugs-cr-contract.md`
-byte-for-byte identical to `.ugs/docs/git/ugs-cr-contract.md`, and are scoped
-to non-normative roadmap text plus the matching offline contract mirror. Full
-repository, CR, document-map, and bootstrap checks will run before integration.
+The topic changes passed `git diff --check`, kept
+`docs/git/ugs-cr-contract.md` byte-for-byte identical to
+`.ugs/docs/git/ugs-cr-contract.md`, and passed `scripts/validate_repo.sh`,
+`scripts/ugs_check.sh --format json`, document-map validation, bootstrap
+equivalence/package/upgrade fixtures, CR model and attestation fixtures,
+commit-range/signature checks, and the two GitHub `ugs-validate` Actions on PR
+#53.
 
 ## Risk
 
