@@ -42,6 +42,7 @@ primitives:
 - **Roadmap, releases, and implementation（路线图、发布与实现）**
   - [v0.3 Roadmap（v0.3 路线图）](docs/roadmap/v0.3.md)
   - [v1.0 And Beyond Roadmap（v1.0 及长期路线图）](docs/roadmap/v1.0-and-beyond.md)
+  - [Post-v0.3.29 Tag Distribution Audit（v0.3.29 之后的 Tag 分布审计）](docs/roadmap/post-v0.3.29-tag-audit.md)
   - [v0.2.0 Release Packet（v0.2.0 发布包）](releases/v0.2.0.md)
   - [v0.3.0 Release Packet（v0.3.0 发布包）](releases/v0.3.0.md)
   - **Release packets（发布包）**
@@ -86,6 +87,12 @@ primitives:
 - **v0.3:** active policy and conformance profile. Pre-1.0 releases do not
   promise compatibility with v0.2 schemas, commands, reports, or validator
   behavior; each change must document migration and rollback impact.
+- **Latest formal tag:** v0.3.29. Commits after that tag close its
+  supply-chain evidence and self-bootstrap records; they do not create a new
+  release line.
+- **Future tags:** the v0.4-to-v1.0 grouping is a non-normative historical
+  planning draft from CR-0070. Candidate tag allocation is listed separately
+  for manual review and is not yet approved.
 
 ## Scope
 
