@@ -3,19 +3,19 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: chore/self-bootstrap-v0-3-31 / 5919bedd0721ae8460826dee9f68a516b1c13970..e188d94830127fc242b03154611e30fb6e5f2a0a
+Head or Range: chore/self-bootstrap-v0-3-31 / 5919bedd0721ae8460826dee9f68a516b1c13970..59d5dec1caa8c8bd93b59a1f4b809921a7cd7818
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Self-bootstrap the repository with v0.3.31
-Revision: 3
-Status: accepted
+Revision: 4
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 5919bedd0721ae8460826dee9f68a516b1c13970
-Head OID: e188d94830127fc242b03154611e30fb6e5f2a0a
-Integrated Result: pending
-Coverage OIDs: none
+Head OID: 59d5dec1caa8c8bd93b59a1f4b809921a7cd7818
+Integrated Result: main@59d5dec1caa8c8bd93b59a1f4b809921a7cd7818
+Coverage OIDs: e188d94830127fc242b03154611e30fb6e5f2a0a
 Extensions: {}
 
 ## Summary
