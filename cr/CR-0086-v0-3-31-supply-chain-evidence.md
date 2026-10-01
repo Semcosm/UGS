@@ -3,18 +3,18 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: chore/supply-chain-v0-3-31 / 92f8de3daf286dd06ac87017f9c95126460dd6e0..c9d3716cc01dae8f8be392ffaea474d4c42f7953
+Head or Range: docs/cr-0086-integration / 77ceb4ce46a1e23e2c769fc32c29f7f8fc924b6e..77ceb4ce46a1e23e2c769fc32c29f7f8fc924b6e
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Publish v0.3.31 supply-chain evidence
 Revision: 1
-Status: accepted
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
-Base OID: 92f8de3daf286dd06ac87017f9c95126460dd6e0
-Head OID: c9d3716cc01dae8f8be392ffaea474d4c42f7953
-Integrated Result: pending
+Base OID: 77ceb4ce46a1e23e2c769fc32c29f7f8fc924b6e
+Head OID: 77ceb4ce46a1e23e2c769fc32c29f7f8fc924b6e
+Integrated Result: main@77ceb4ce46a1e23e2c769fc32c29f7f8fc924b6e
 Coverage OIDs: c9d3716cc01dae8f8be392ffaea474d4c42f7953
 Extensions: {}
 
