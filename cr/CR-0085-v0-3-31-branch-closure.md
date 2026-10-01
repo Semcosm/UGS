@@ -15,7 +15,7 @@ Policy Version: v0.3
 Base OID: 58c616e95be8abb71ebe755c4805164fcb36a781
 Head OID: 5742953208b9d648df755752a672cf458e023189
 Integrated Result: pending
-Coverage OIDs: none
+Coverage OIDs: 8b9b2a3f9fe2a47bc6aa840e39dc78cb0760207e
 Extensions: {}
 
 ## Summary
