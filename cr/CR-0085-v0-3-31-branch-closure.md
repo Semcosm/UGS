@@ -3,18 +3,18 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: docs/cr-0085-integration / d3a3c9c5ce1d2502d0219d00bbf6a9de64ecda64..d3a3c9c5ce1d2502d0219d00bbf6a9de64ecda64
+Head or Range: chore/cr-0085-coverage / 31e75627467d34b45b5a1c7d7c0cbd76f11d1188..31e75627467d34b45b5a1c7d7c0cbd76f11d1188
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Implement v0.3.31 branch closure
-Revision: 1
+Revision: 2
 Status: integrated
 Decision: accepted
 Policy Version: v0.3
-Base OID: d3a3c9c5ce1d2502d0219d00bbf6a9de64ecda64
-Head OID: d3a3c9c5ce1d2502d0219d00bbf6a9de64ecda64
-Integrated Result: main@d3a3c9c5ce1d2502d0219d00bbf6a9de64ecda64
+Base OID: 31e75627467d34b45b5a1c7d7c0cbd76f11d1188
+Head OID: 31e75627467d34b45b5a1c7d7c0cbd76f11d1188
+Integrated Result: main@31e75627467d34b45b5a1c7d7c0cbd76f11d1188
 Coverage OIDs: 5742953208b9d648df755752a672cf458e023189 8b9b2a3f9fe2a47bc6aa840e39dc78cb0760207e
 Extensions: {}
 
