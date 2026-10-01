@@ -9,12 +9,12 @@ Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Implement v0.3.31 branch closure
 Revision: 1
-Status: integrated
+Status: accepted
 Decision: accepted
 Policy Version: v0.3
 Base OID: 58c616e95be8abb71ebe755c4805164fcb36a781
 Head OID: 8282762d22e69d663301df5c2ed6a6ab9faf976d
-Integrated Result: main@8282762d22e69d663301df5c2ed6a6ab9faf976d
+Integrated Result: pending
 Coverage OIDs: 8b9b2a3f9fe2a47bc6aa840e39dc78cb0760207e
 Extensions: {}
 
