@@ -16,21 +16,12 @@ primitives:
 
 ## Document Map（文档映射）
 
-- **Normative specifications（规范性文档）**
+- **Current standard（当前标准）**
+  - [UGS Current Standard（UGS 当前标准入口）](docs/git/README.md)
   - [UGS Core（UGS 核心）](docs/git/ugs-core.md)
   - [UGS v0.3 Policy And Conformance Profile（UGS v0.3 政策与合规性配置文件）](docs/git/ugs-v0.3-profile.md)
-  - [UGS v0.4 Contract And Compatibility Guide（UGS v0.4 合同与兼容性指南）](docs/git/ugs-v0-4-contract.md)
-  - [UGS Canonical Change Request Contract v1（UGS 规范变更请求合同 v1）](docs/git/ugs-cr-contract.md)
-  - [UGS CR Reviewer And Test Attestation Contract v1（UGS CR 审查与测试证明合同 v1）](docs/git/ugs-cr-attestation.md)
-  - [UGS Conformance Levels And Profile Matrix（UGS 一致性等级与配置文件矩阵）](docs/git/ugs-conformance-levels.md)
-  - [UGS Quality Profile（UGS 质量标准）](docs/git/ugs-quality-profile.md)
-  - [UGS Supply-Chain Profile（UGS 供应链配置文件）](docs/git/ugs-supply-chain-profile.md)
-  - [UGS Repository Shape Capabilities（UGS 仓库形态能力）](docs/git/ugs-repository-shapes.md)
-  - [UGS Document Map（UGS 文档映射）](docs/git/ugs-document-map.md)
-  - [Branch Profiles（分支配置文件）](docs/git/ugs-branch-profiles.md)
-  - [Commit Convention（提交约定）](docs/git/commit-convention.md)
-  - [Review Policy（审查政策）](docs/git/review-policy.md)
-  - [Release Policy（发布政策）](docs/git/release-policy.md)
+  - [UGS v0.3.31 Release Packet（UGS v0.3.31 发布包）](releases/v0.3.31.md)
+  - [UGS Bootstrap Package（UGS Bootstrap 包）](docs/git/ugs-bootstrap.md)
 - **Repository governance（仓库治理）**
   - [Repository Policy（仓库政策）](REPOSITORY_POLICY.md)
   - [Contributing（贡献指南）](CONTRIBUTING.md)
@@ -39,47 +30,11 @@ primitives:
   - [Trusted Signers（可信签名者）](keys/README.md)
   - [Change Requests（变更请求）](cr/README.md)
   - [Adapters（适配器）](adapters/README.md)
-- **Roadmap, releases, and implementation（路线图、发布与实现）**
-  - [v0.3 Roadmap（v0.3 路线图）](docs/roadmap/v0.3.md)
-  - [v1.0 And Beyond Roadmap（v1.0 及长期路线图）](docs/roadmap/v1.0-and-beyond.md)
-  - [Post-v0.3.29 Tag Distribution Audit（v0.3.29 之后的 Tag 分布审计）](docs/roadmap/post-v0.3.29-tag-audit.md)
-  - [v0.3.31 Branch Closure Design（v0.3.31 分支关闭功能设计）](docs/roadmap/v0.3.31-branch-closure.md)
-  - [v0.3.31 Release Packet（v0.3.31 发布包）](releases/v0.3.31.md)
-  - [v0.3.30 Release Packet（v0.3.30 发布包）](releases/v0.3.30.md)
-  - [v0.2.0 Release Packet（v0.2.0 发布包）](releases/v0.2.0.md)
-  - [v0.3.0 Release Packet（v0.3.0 发布包）](releases/v0.3.0.md)
-  - **Release packets（发布包）**
-    - [v0.3.1 Release Packet（v0.3.1 版本发布说明）](releases/v0.3.1.md)
-    - [v0.3.2 Release Packet（v0.3.2 版本发布说明）](releases/v0.3.2.md)
-    - [v0.3.3 Release Packet（v0.3.3 版本发布说明）](releases/v0.3.3.md)
-    - [v0.3.4 Release Packet（v0.3.4 版本发布说明）](releases/v0.3.4.md)
-    - [v0.3.5 Release Packet（v0.3.5 版本发布说明）](releases/v0.3.5.md)
-    - [v0.3.6 Release Packet（v0.3.6 版本发布说明）](releases/v0.3.6.md)
-    - [v0.3.7 Release Packet（v0.3.7 版本发布说明）](releases/v0.3.7.md)
-    - [v0.3.8 Release Packet（v0.3.8 版本发布说明）](releases/v0.3.8.md)
-    - [v0.3.9 Release Packet（v0.3.9 版本发布说明）](releases/v0.3.9.md)
-    - [v0.3.10 Release Packet（v0.3.10 版本发布说明）](releases/v0.3.10.md)
-    - [v0.3.11 Release Packet（v0.3.11 版本发布说明）](releases/v0.3.11.md)
-    - [v0.3.12 Release Packet（v0.3.12 版本发布说明）](releases/v0.3.12.md)
-    - [v0.3.13 Release Packet（v0.3.13 版本发布说明）](releases/v0.3.13.md)
-    - [v0.3.14 Release Packet（v0.3.14 版本发布说明）](releases/v0.3.14.md)
-    - [v0.3.15 Release Packet（v0.3.15 版本发布说明）](releases/v0.3.15.md)
-    - [v0.3.16 Release Packet（v0.3.16 版本发布说明）](releases/v0.3.16.md)
-    - [v0.3.17 Release Packet（v0.3.17 版本发布说明）](releases/v0.3.17.md)
-    - [v0.3.18 Release Packet（v0.3.18 版本发布说明）](releases/v0.3.18.md)
-    - [v0.3.19 Release Packet（v0.3.19 版本发布说明）](releases/v0.3.19.md)
-    - [v0.3.20 Release Packet（v0.3.20 版本发布说明）](releases/v0.3.20.md)
-    - [v0.3.21 Release Packet（v0.3.21 版本发布说明）](releases/v0.3.21.md)
-    - [v0.3.22 Release Packet（v0.3.22 版本发布说明）](releases/v0.3.22.md)
-    - [v0.3.23 Release Packet（v0.3.23 版本发布说明）](releases/v0.3.23.md)
-    - [v0.3.24 Release Packet（v0.3.24 版本发布说明）](releases/v0.3.24.md)
-    - [v0.3.25 Release Packet（v0.3.25 版本发布说明）](releases/v0.3.25.md)
-    - [v0.3.26 Release Packet（v0.3.26 版本发布说明）](releases/v0.3.26.md)
-    - [v0.3.27 Release Packet（v0.3.27 版本发布说明）](releases/v0.3.27.md)
-    - [v0.3.28 Release Packet（v0.3.28 版本发布说明）](releases/v0.3.28.md)
-    - [v0.3.29 Release Packet（v0.3.29 版本发布说明）](releases/v0.3.29.md)
-  - [UGS Bootstrap Package（UGS Bootstrap 包）](docs/git/ugs-bootstrap.md)
-  - [Portable Conformance Fixtures（便携式一致性测试夹具）](docs/git/ugs-conformance-fixtures.md)
+- **Future planning（未来规划）**
+  - [UGS Roadmap（UGS 路线图入口）](docs/roadmap/README.md)
+- **Historical archive（历史归档）**
+  - [Release Archive（发布包归档）](releases/README.md)
+  - [UGS Document Map（UGS 文档映射）](docs/git/ugs-document-map.md)
 
 ## Version Status
 
@@ -90,14 +45,12 @@ primitives:
 - **v0.3:** active policy and conformance profile. Pre-1.0 releases do not
   promise compatibility with v0.2 schemas, commands, reports, or validator
   behavior; each change must document migration and rollback impact.
-- **Latest formal tag:** v0.3.29. Commits after that tag close its
-  supply-chain evidence and self-bootstrap records; they do not create a new
-  release line.
-- **Future tags:** the v0.4-to-v1.0 grouping is a non-normative historical
-  planning draft from CR-0070. Candidate tag allocation is listed separately
-  for manual review and is not yet approved.
-- **Next planned packets:** v0.3.30 closes the current governance audit;
-  v0.3.31 is reserved for the branch-closure feature design and implementation.
+- **Latest stable distribution:** v0.3.31. Its signed release packet,
+  bootstrap asset, and post-tag supply-chain evidence are indexed from the
+  [release archive](releases/README.md).
+- **Future planning:** all proposed work and release-boundary decisions now
+  enter through the [roadmap](docs/roadmap/README.md). The v0.4 contract is
+  still a draft and does not change `policy_version: 0.3`.
 
 ## Scope
 
@@ -136,13 +89,13 @@ Repository-local governance is declared in:
 ## Repository Layout
 
 ```text
-docs/git/     core and adopted profile specification documents
-docs/roadmap/ non-normative version and migration plans
+docs/git/     current standard and adopted profile specification documents
+docs/roadmap/ single entry point for future and historical planning
 .githooks/    managed hooks directory for repository enforcement
 .github/      hosting-platform workflow and PR template mapping
 cr/           equivalent change request records for off-platform review flows
 keys/         trusted SSH signer registry and revocation data
-releases/     release packets and verification notes
+releases/     release packets and the historical release archive index
 scripts/      reusable repository validation scripts
 adapters/     platform mappings kept outside UGS Core
 ```
