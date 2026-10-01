@@ -8,14 +8,14 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Self-bootstrap the repository with v0.3.31
-Revision: 1
-Status: accepted
+Revision: 2
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 5919bedd0721ae8460826dee9f68a516b1c13970
 Head OID: e188d94830127fc242b03154611e30fb6e5f2a0a
-Integrated Result: pending
-Coverage OIDs: none
+Integrated Result: main@e188d94830127fc242b03154611e30fb6e5f2a0a
+Coverage OIDs: e188d94830127fc242b03154611e30fb6e5f2a0a
 Extensions: {}
 
 ## Summary
@@ -51,9 +51,13 @@ the hooks path with `verified: true`; the v0.3.31 upgrade was applied again
 with a final external backup at `/tmp/ugs-self-bootstrap-v0.3.31-final-backup.ZjclrB`
 and report `/tmp/ugs-self-bootstrap-v0.3.31.Y3qvPm/final-upgrade-report.json`.
 
-The final validation record will include repository, conformance, profile,
-document-map, bootstrap, branch-close, release-consumer, CR-coverage, commit
-range, and signature checks.
+Repository validation, JSON conformance, independent conformance, Git and
+branch-close fixtures, bootstrap package and upgrade fixtures, v0.3.31 source
+package equivalence, all three profile fixtures, Document Map validation, CR
+coverage, commit range, and commit signature checks all passed. The v0.3.31
+release tag, SBOM, build record, attestation, and supply-chain release checks
+also passed. The published archive was consumed successfully in disposable
+baseline, standard, high-trust, and Document Map repositories.
 
 ## Risk
 
