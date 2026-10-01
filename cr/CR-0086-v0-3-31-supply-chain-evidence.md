@@ -3,7 +3,7 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: main / 92f8de3daf286dd06ac87017f9c95126460dd6e0..c9d3716cc01dae8f8be392ffaea474d4c42f7953
+Head or Range: chore/supply-chain-v0-3-31 / 92f8de3daf286dd06ac87017f9c95126460dd6e0..c9d3716cc01dae8f8be392ffaea474d4c42f7953
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
