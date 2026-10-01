@@ -43,6 +43,8 @@ primitives:
   - [v0.3 Roadmap（v0.3 路线图）](docs/roadmap/v0.3.md)
   - [v1.0 And Beyond Roadmap（v1.0 及长期路线图）](docs/roadmap/v1.0-and-beyond.md)
   - [Post-v0.3.29 Tag Distribution Audit（v0.3.29 之后的 Tag 分布审计）](docs/roadmap/post-v0.3.29-tag-audit.md)
+  - [v0.3.31 Branch Closure Design（v0.3.31 分支关闭功能设计）](docs/roadmap/v0.3.31-branch-closure.md)
+  - [v0.3.30 Release Packet（v0.3.30 发布包）](releases/v0.3.30.md)
   - [v0.2.0 Release Packet（v0.2.0 发布包）](releases/v0.2.0.md)
   - [v0.3.0 Release Packet（v0.3.0 发布包）](releases/v0.3.0.md)
   - **Release packets（发布包）**
@@ -93,6 +95,8 @@ primitives:
 - **Future tags:** the v0.4-to-v1.0 grouping is a non-normative historical
   planning draft from CR-0070. Candidate tag allocation is listed separately
   for manual review and is not yet approved.
+- **Next planned packets:** v0.3.30 closes the current governance audit;
+  v0.3.31 is reserved for the branch-closure feature design and implementation.
 
 ## Scope
 

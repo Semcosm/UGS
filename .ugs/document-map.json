@@ -46,6 +46,8 @@
         {"title": "v0.3 Roadmap", "title_zh": "v0.3 路线图", "path": "docs/roadmap/v0.3.md"},
         {"title": "v1.0 And Beyond Roadmap", "title_zh": "v1.0 及长期路线图", "path": "docs/roadmap/v1.0-and-beyond.md"},
         {"title": "Post-v0.3.29 Tag Distribution Audit", "title_zh": "v0.3.29 之后的 Tag 分布审计", "path": "docs/roadmap/post-v0.3.29-tag-audit.md"},
+        {"title": "v0.3.31 Branch Closure Design", "title_zh": "v0.3.31 分支关闭功能设计", "path": "docs/roadmap/v0.3.31-branch-closure.md"},
+        {"title": "v0.3.30 Release Packet", "title_zh": "v0.3.30 发布包", "path": "releases/v0.3.30.md"},
         {"title": "v0.2.0 Release Packet", "title_zh": "v0.2.0 发布包", "path": "releases/v0.2.0.md"},
         {"title": "v0.3.0 Release Packet", "title_zh": "v0.3.0 发布包", "path": "releases/v0.3.0.md"},
         {"title": "Release packets", "title_zh": "发布包", "children": [
