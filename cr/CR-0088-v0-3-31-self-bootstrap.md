@@ -8,14 +8,14 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Self-bootstrap the repository with v0.3.31
-Revision: 2
-Status: integrated
+Revision: 3
+Status: accepted
 Decision: accepted
 Policy Version: v0.3
 Base OID: 5919bedd0721ae8460826dee9f68a516b1c13970
 Head OID: e188d94830127fc242b03154611e30fb6e5f2a0a
-Integrated Result: main@e188d94830127fc242b03154611e30fb6e5f2a0a
-Coverage OIDs: e188d94830127fc242b03154611e30fb6e5f2a0a
+Integrated Result: pending
+Coverage OIDs: none
 Extensions: {}
 
 ## Summary
