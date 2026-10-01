@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "type": "ugs-build-record",
+  "release_tag": "v0.3.31",
+  "commit": "92f8de3daf286dd06ac87017f9c95126460dd6e0",
+  "artifact": {
+    "name": "ugs-bootstrap-v0.3.31.tar.gz",
+    "digest": "sha256:9e0d0a1c93f77cfa36126cc1f2c2d83e8ae620e241cf7438940744b9c1ec3e04"
+  },
+  "builder": {
+    "id": "local/chenzhipeng.main@gmail.com"
+  },
+  "built_at": "2026-10-01T11:15:23Z",
+  "source_date_epoch": 0,
+  "command": "SOURCE_DATE_EPOCH=0 scripts/build_bootstrap_package.sh v0.3.31 --output-dir dist",
+  "reproducibility": {
+    "runs": 2,
+    "digests": [
+      "sha256:9e0d0a1c93f77cfa36126cc1f2c2d83e8ae620e241cf7438940744b9c1ec3e04",
+      "sha256:9e0d0a1c93f77cfa36126cc1f2c2d83e8ae620e241cf7438940744b9c1ec3e04"
+    ],
+    "verified": true
+  }
+}
