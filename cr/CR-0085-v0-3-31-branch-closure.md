@@ -3,18 +3,18 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: feat/v0-3-31-branch-close / 58c616e95be8abb71ebe755c4805164fcb36a781..5742953208b9d648df755752a672cf458e023189
+Head or Range: feat/v0-3-31-branch-close / 58c616e95be8abb71ebe755c4805164fcb36a781..8282762d22e69d663301df5c2ed6a6ab9faf976d
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Implement v0.3.31 branch closure
 Revision: 1
-Status: accepted
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: 58c616e95be8abb71ebe755c4805164fcb36a781
-Head OID: 5742953208b9d648df755752a672cf458e023189
-Integrated Result: pending
+Head OID: 8282762d22e69d663301df5c2ed6a6ab9faf976d
+Integrated Result: main@8282762d22e69d663301df5c2ed6a6ab9faf976d
 Coverage OIDs: 8b9b2a3f9fe2a47bc6aa840e39dc78cb0760207e
 Extensions: {}
 
