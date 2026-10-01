@@ -13,6 +13,6 @@
   ],
   "profile": "high-trust",
   "profile_activation": "separate",
-  "source_commit": "0a0278dd20394efcaf77b6f79859c5de8b0b38c7",
-  "version": "v0.3.29"
+  "source_commit": "92f8de3daf286dd06ac87017f9c95126460dd6e0",
+  "version": "v0.3.31"
 }

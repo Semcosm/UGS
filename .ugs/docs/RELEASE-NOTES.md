@@ -1,79 +1,68 @@
-# UGS v0.3.29
+# UGS v0.3.31
 
-This governance patch release records the current UGS v0.3 documentation and
-attestation status and publishes the repository state needed for the next
-post-tag supply-chain evidence update.
+This release adds safe, auditable branch closure for short-lived topic
+branches and publishes the command in the bootstrap package.
 
 ## Summary
 
-The release includes the reconciled roadmap and canonical CR-contract wording
-for the delivered `ugs-cr-attestation/v1` capability. It also carries the
-release packet for the two-phase v0.3.29 supply-chain publication.
+The new scripts/ugs.sh branch close command validates policy-protected refs,
+declared topic prefixes, target reachability, integrated CR evidence, worktree
+use, and remote OID leases before deleting a branch. Archive mode preserves an
+abandoned branch tip under refs/ugs/archive/<branch> with an explicit reason.
+Dry-run and ugs-branch-close/v1 JSON reports support review and automation.
 
-The signed tag target intentionally uses `supply_chain.profile: basic` and
-does not carry evidence paths. This is a staging state required by the
-current evidence contract: an evidence file that names the tag target commit
-cannot be committed into that same commit without a hash cycle. The tag is
-therefore not a claim that the tag checkout is high-trust evidence-complete.
+The disposable branch-close fixtures cover merged and unmerged branches,
+archive mode, protected refs, linked worktrees, remote OID mismatch,
+idempotence, dry-run side effects, and report shape. The bootstrap component
+manifest includes scripts/branch_close.py for all profiles.
 
-After the immutable tag is published, a separate signed CR will build the
-bootstrap archive twice with `SOURCE_DATE_EPOCH=0`, record the matching
-artifact digest, generate an SPDX SBOM and build record, create a signed
-`ugs-attestation`, and restore the main branch to `high-trust` with v0.3.29
-evidence paths.
+## Included scope
+
+- add the branch close and archive command to scripts/ugs.sh;
+- enforce policy, CR, worktree, target, and remote OID safety checks;
+- add idempotent local close markers and archive refs;
+- add disposable branch-close fixtures and documentation; and
+- publish the v0.3.31 bootstrap component and release packet.
 
 ## Compatibility
 
-This is an additive, non-breaking governance release. The branch, review,
-commit-signing, release-tag, and bootstrap contracts remain unchanged. The
-temporary basic profile applies only to the immutable v0.3.29 tag target and
-is explicitly superseded by the post-tag evidence CR on `main`. Existing
-v0.3.28 evidence and tag objects are not modified.
+The policy schema and policy_version 0.3 remain unchanged. The command is
+opt-in. Existing bootstrap commands and active profiles continue to work.
 
 ## Verification
 
-Before tagging, run:
+The release candidate must pass:
 
-```bash
-scripts/validate_repo.sh
-scripts/ugs_check.sh --format json
-scripts/test_bootstrap_package.sh
-scripts/test_bootstrap_upgrade.sh
-scripts/test_bootstrap_equivalence.sh
-scripts/test_profile_conformance.sh
-scripts/test_conformance.sh
-scripts/test_git_fixtures.sh
-scripts/validate_document_map.py
-scripts/validate_commit_range.sh v0.3.28..HEAD
-scripts/validate_commit_signatures.sh v0.3.28..HEAD
-scripts/validate_cr_coverage.sh HEAD
-```
+    scripts/validate_repo.sh
+    scripts/ugs_check.sh --format json
+    scripts/test_conformance.sh
+    scripts/test_git_fixtures.sh
+    scripts/test_branch_close.sh
+    scripts/test_bootstrap_package.sh
+    scripts/test_bootstrap_upgrade.sh
+    scripts/test_bootstrap_equivalence.sh
+    scripts/test_profile_conformance.sh
+    scripts/validate_document_map.py
+    scripts/validate_cr_coverage.sh HEAD
+    scripts/validate_commit_range.sh v0.3.30..HEAD
+    scripts/validate_commit_signatures.sh v0.3.30..HEAD
 
-After publication and the evidence CR, verify:
-
-```bash
-scripts/validate_release_tag.sh v0.3.29
-scripts/test_bootstrap_release.sh v0.3.29
-scripts/validate_supply_chain_release.sh v0.3.29 .ugs/policy.json Semcosm/UGS
-```
-
-The post-tag CR must record the tag target commit, both deterministic build
-runs, the final archive digest, all evidence paths, and the signed attestation
-verification result.
+The tag target uses the validated basic supply-chain staging profile because
+post-tag evidence must bind the immutable target commit. After publication,
+CR-0086 adds the v0.3.31 SPDX SBOM, deterministic build record, signed
+attestation, and high-trust evidence paths on main.
 
 ## Rollback
 
-Release tags are append-only. Do not delete, replace, or force-update
-`v0.3.28` or `v0.3.29`. If the staging tag, archive, or evidence is
-defective, leave the immutable objects in place and publish a later signed
-superseding patch through a new CR. If the post-tag policy update is rejected,
-revert it through a reviewed CR while retaining the audit records and tag.
+Release tags are append-only. Do not delete, replace, or force-update v0.3.30
+or v0.3.31. If the command, archive, or evidence is defective, retain the
+immutable objects and publish a later signed superseding patch through a new
+CR. A normal branch close can be recovered from its recorded source OID.
 
 ## Breaking Change
 
-No. This release adds documentation and an explicitly documented, temporary
-release staging step; it does not change runtime behavior or consumer branch
-governance.
+No. This release adds an opt-in branch management command and its bootstrap
+component.
 
 ## Backport Target
 

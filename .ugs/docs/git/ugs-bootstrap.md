@@ -145,6 +145,17 @@ result with:
   /path/to/repository
 ```
 
+Branch closure is included in the bootstrap package. After upgrading a
+repository, retire an integrated topic branch with:
+
+    ./scripts/ugs.sh branch close feat/example --target main --remote origin
+    ./scripts/ugs.sh branch close feat/example --dry-run --format json
+    ./scripts/ugs.sh branch close feat/abandoned --archive --reason "superseded"
+
+The command reads the consumer repository policy and CR records. It refuses
+protected, undeclared, unmerged, worktree-used, or unreviewed branches before
+changing refs.
+
 Profile activation is explicit and separate:
 
 ```bash
