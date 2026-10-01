@@ -66,6 +66,7 @@ required_files=(
   "scripts/test_pr_cr.sh"
   "scripts/ugs_check.sh"
   "scripts/test_git_fixtures.sh"
+  "scripts/test_branch_close.sh"
   "scripts/validate_review_trailers.sh"
   "scripts/test_review_trailers.sh"
   "scripts/validate_release_tag.sh"
@@ -128,6 +129,7 @@ required_files=(
   "scripts/ugs_init.py"
   "scripts/ugs_init.sh"
   "scripts/ugs.sh"
+  "scripts/branch_close.py"
   "scripts/ugs_upgrade.py"
   "scripts/ugs_upgrade.sh"
   "scripts/build_bootstrap_package.py"
@@ -172,6 +174,7 @@ executable_files=(
   "scripts/test_pr_cr.sh"
   "scripts/ugs_check.sh"
   "scripts/test_git_fixtures.sh"
+  "scripts/test_branch_close.sh"
   "scripts/validate_review_trailers.sh"
   "scripts/test_review_trailers.sh"
   "scripts/validate_release_tag.sh"
@@ -204,6 +207,7 @@ executable_files=(
   "scripts/ugs_init.py"
   "scripts/ugs_init.sh"
   "scripts/ugs.sh"
+  "scripts/branch_close.py"
   "scripts/ugs_upgrade.py"
   "scripts/ugs_upgrade.sh"
   "scripts/build_bootstrap_package.py"
@@ -250,6 +254,7 @@ grep -Fq "docs/git/ugs-cr-attestation.md" README.md || fail "README must documen
 scripts/validate_document_map.py
 scripts/test_document_map.sh
 scripts/test_pr_cr.sh
+scripts/test_branch_close.sh
 scripts/test_cr_model.sh
 scripts/validate_policy_manifest.sh
 scripts/test_policy_manifest.sh
