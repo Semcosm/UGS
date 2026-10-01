@@ -3,16 +3,16 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: docs/cr-0087-integration / 9fa261348efa74f507c6052cc647eebb7165c233..dd8f42577cc8d70a4d22375c9b743d5ee5c1dd5b
+Head or Range: docs/cr-0087-integration / dd8f42577cc8d70a4d22375c9b743d5ee5c1dd5b..dd8f42577cc8d70a4d22375c9b743d5ee5c1dd5b
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Centralize UGS document entry points
-Revision: 2
+Revision: 3
 Status: integrated
 Decision: accepted
 Policy Version: v0.3
-Base OID: 9fa261348efa74f507c6052cc647eebb7165c233
+Base OID: dd8f42577cc8d70a4d22375c9b743d5ee5c1dd5b
 Head OID: dd8f42577cc8d70a4d22375c9b743d5ee5c1dd5b
 Integrated Result: main@dd8f42577cc8d70a4d22375c9b743d5ee5c1dd5b
 Coverage OIDs: e763fabfcda3ea0327c208465636d1057f58f886
