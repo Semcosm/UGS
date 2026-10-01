@@ -11,12 +11,35 @@
   "branching": {
     "profile": "continuous",
     "merge_strategy": "rebase-ff",
-    "protected_refs": ["main"],
-    "topic_prefixes": ["feat/", "fix/", "docs/", "chore/", "refactor/", "test/", "build/", "ci/", "perf/"]
+    "protected_refs": [
+      "main"
+    ],
+    "topic_prefixes": [
+      "feat/",
+      "fix/",
+      "docs/",
+      "chore/",
+      "refactor/",
+      "test/",
+      "build/",
+      "ci/",
+      "perf/"
+    ]
   },
   "commits": {
     "signing_level": "high-trust-commits-signed",
-    "core_types": ["feat", "fix", "refactor", "docs", "test", "build", "ci", "chore", "perf", "revert"],
+    "core_types": [
+      "feat",
+      "fix",
+      "refactor",
+      "docs",
+      "test",
+      "build",
+      "ci",
+      "chore",
+      "perf",
+      "revert"
+    ],
     "extended_types": [],
     "trailers_required": true
   },
@@ -31,7 +54,9 @@
     "conclusion_storage": "trailers"
   },
   "automation": {
-    "required_checks": ["ugs-validate"],
+    "required_checks": [
+      "ugs-validate"
+    ],
     "hooks_path": ".githooks"
   },
   "releases": {
@@ -47,15 +72,33 @@
   },
   "quality": {
     "profile": "basic",
-    "required_documents": ["README.md", "CONTRIBUTING.md", "RELEASE.md"],
-    "test_entrypoints": ["scripts/validate_repo.sh", "scripts/ugs_check.sh"]
+    "required_documents": [
+      "README.md",
+      "CONTRIBUTING.md",
+      "RELEASE.md"
+    ],
+    "test_entrypoints": [
+      "scripts/validate_repo.sh",
+      "scripts/ugs_check.sh"
+    ]
   },
   "supply_chain": {
-    "profile": "basic",
+    "profile": "high-trust",
     "action_pinning": "full_sha",
     "sbom": "release",
     "reproducible_builds": "verified",
-    "release_attestations": "signed"
+    "release_attestations": "signed",
+    "evidence": {
+      "sbom_paths": [
+        ".ugs/supply-chain/v0.3.30.spdx.json"
+      ],
+      "build_record_paths": [
+        ".ugs/supply-chain/v0.3.30.build.json"
+      ],
+      "attestation_paths": [
+        ".ugs/supply-chain/v0.3.30.attestation.json"
+      ]
+    }
   },
   "repository_shape": {
     "model": "single",

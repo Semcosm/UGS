@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "type": "ugs-release-attestation",
+  "repository": "Semcosm/UGS",
+  "release_tag": "v0.3.30",
+  "commit": "6e1663d29f19ff8780d7e16ef41346a0fd303423",
+  "artifact": {
+    "name": "ugs-bootstrap-v0.3.30.tar.gz",
+    "digest": "sha256:8fd6ce87b060be3d9fce7448340226d4634db0189f97ae0c41dcede312c60ff3"
+  },
+  "builder": {
+    "id": "local/chenzhipeng.main@gmail.com"
+  },
+  "built_at": "2026-10-01T06:23:42Z",
+  "source_date_epoch": 0,
+  "reproducibility": {
+    "runs": 2,
+    "verified": true
+  },
+  "signature": {
+    "format": "ssh",
+    "namespace": "ugs-attestation",
+    "principal": "chenzhipeng.main@gmail.com",
+    "value": "LS0tLS1CRUdJTiBTU0ggU0lHTkFUVVJFLS0tLS0KVTFOSVUwbEhBQUFBQVFBQUFETUFBQUFMYzNOb0xXVmtNalUxTVRrQUFBQWc4QkU3MjdEaHFzL0MzZlkyVWhhVHM1VzNhRApsWTE2aUFkbWg3c2NFdUVaNEFBQUFQZFdkekxXRjBkR1Z6ZEdGMGFXOXVBQUFBQUFBQUFBWnphR0UxTVRJQUFBQlRBQUFBCkMzTnphQzFsWkRJMU5URTVBQUFBUUpsMFptSUkxL3d2bXR3bUZNWlVKNHE4OTlnR3p5UzY5QXR5ZEF1VnBuaHNBNXB2ekcKb3VmZGw1d29JUm9xTXQ2NFgrUFhVTzBPcjRTTno3b29PbUhRRT0KLS0tLS1FTkQgU1NIIFNJR05BVFVSRS0tLS0tCg=="
+  }
+}
