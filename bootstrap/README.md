@@ -11,8 +11,10 @@ a project-owned starting point that consumers should replace or extend for
 their own work.
 
 Start with [OFFLINE-QUICKSTART.md](OFFLINE-QUICKSTART.md) for a complete,
-offline consumer walkthrough. Run `scripts/ugs_init.sh --help` for the local
+offline consumer walkthrough. Run scripts/ugs_init.sh --help for the local
 development entry point.
+Use [docs/git/ugs-cli.md](docs/git/ugs-cli.md) as the task-oriented command
+reference after extracting the package.
 The generated package supports `baseline`, `standard`, and `high-trust`
 profiles. High-trust output contains public trust metadata only; private keys
 remain with the operator.
@@ -50,13 +52,13 @@ compatibility alias.
 
 ```bash
 ./scripts/ugs.sh migrate \
-  --archive ./ugs-bootstrap-v0.3.31.tar.gz \
+  --archive ./ugs-bootstrap-v0.3.32.tar.gz \
   --dry-run \
   --report /path/to/migration-report.json \
   /path/to/existing-repository
 ./scripts/ugs.sh migrate \
-  --archive ./ugs-bootstrap-v0.3.31.tar.gz \
-  --backup-dir /path/to/ugs-backup-v0.3.31 \
+  --archive ./ugs-bootstrap-v0.3.32.tar.gz \
+  --backup-dir /path/to/ugs-backup-v0.3.32 \
   --report /path/to/migration-report.json \
   /path/to/existing-repository
 ```
@@ -75,7 +77,7 @@ From the extracted release directory, first inspect the plan:
 
 ```bash
 ./scripts/ugs.sh upgrade \
-  --archive ./ugs-bootstrap-v0.3.31.tar.gz \
+  --archive ./ugs-bootstrap-v0.3.32.tar.gz \
   --dry-run /path/to/existing-repository
 ```
 
@@ -83,8 +85,8 @@ Then install with a backup outside the target repository:
 
 ```bash
 ./scripts/ugs.sh upgrade \
-  --archive ./ugs-bootstrap-v0.3.31.tar.gz \
-  --backup-dir /path/to/ugs-backup-v0.3.31 \
+  --archive ./ugs-bootstrap-v0.3.32.tar.gz \
+  --backup-dir /path/to/ugs-backup-v0.3.32 \
   /path/to/existing-repository
 ```
 
@@ -101,7 +103,7 @@ ROLLBACK-REPORT.json result:
 
 ```bash
 ./scripts/ugs.sh rollback \
-  --backup-dir /path/to/ugs-backup-v0.3.31 \
+  --backup-dir /path/to/ugs-backup-v0.3.32 \
   --report /path/to/rollback-report.json \
   /path/to/existing-repository
 ```
@@ -110,7 +112,7 @@ After the full component set is installed, activate a profile explicitly:
 
 ```bash
 ./scripts/ugs.sh activate --profile standard \
-  --archive ./ugs-bootstrap-v0.3.31.tar.gz \
+  --archive ./ugs-bootstrap-v0.3.32.tar.gz \
   /path/to/existing-repository
 ```
 

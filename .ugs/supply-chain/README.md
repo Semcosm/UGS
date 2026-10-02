@@ -1,20 +1,24 @@
 # Supply-chain evidence
 
-The active high-trust declaration is backed by the v0.3.31 release evidence:
+The v0.3.32 tag target is a documented basic supply-chain staging point. The
+active high-trust declaration on main still names the post-tag v0.3.31 evidence
+until the v0.3.32 tag and bootstrap digest are immutable.
 
-- v0.3.31.spdx.json is the SPDX SBOM for the published bootstrap archive.
-- v0.3.31.build.json records two deterministic local builds and their matching digest.
-- v0.3.31.attestation.json binds the release, tag target commit, artifact digest, and builder identity with an SSH signature in the ugs-attestation namespace.
+After the signed v0.3.32 tag exists, a separate evidence CR will add:
 
-The immutable v0.3.31 tag itself was intentionally a documented basic staging
-point because evidence that names a tag target cannot be committed into that
-same commit without a hash cycle. The post-tag evidence CR restored high-trust
-on main; the tag checkout must not be described as evidence-complete high-trust.
-Historical v0.3.28, v0.3.29, and v0.3.30 evidence files remain retained but
-are not active paths.
+- the v0.3.32 SPDX SBOM;
+- the deterministic v0.3.32 build record; and
+- the signed v0.3.32 release attestation.
 
-Validate the declaration and evidence with:
+That post-tag change will restore the high-trust evidence paths in
+.ugs/policy.json. Historical evidence files remain retained and are not active
+paths during staging.
+
+Validate the staged declaration with:
 
     scripts/validate_supply_chain_profile.sh .ugs/policy.json
     scripts/validate_supply_chain_evidence.sh .ugs/policy.json
-    scripts/validate_supply_chain_release.sh v0.3.31 .ugs/policy.json Semcosm/UGS
+
+Validate the completed release after the evidence CR is integrated with:
+
+    scripts/validate_supply_chain_release.sh v0.3.32 .ugs/policy.json Semcosm/UGS

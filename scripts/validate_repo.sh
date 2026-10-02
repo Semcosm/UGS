@@ -13,6 +13,7 @@ required_files=(
   "LICENSES/Apache-2.0.txt"
   "LICENSES/CC-BY-4.0.txt"
   "docs/git/ugs-core.md"
+  "docs/git/ugs-cli.md"
   "docs/git/ugs-branch-profiles.md"
   "docs/git/ugs-v0-4-contract.md"
   "docs/git/ugs-cr-contract.md"

@@ -3,6 +3,10 @@
 The bootstrap package is generated from the UGS source tree. It is not a
 second hand-maintained repository skeleton.
 
+For task-oriented command usage, start with [UGS CLI Usage](ugs-cli.md). This
+document defines the package, component, migration, and release semantics that
+the command reference applies.
+
 The package also carries the UGS license overview and complete Apache-2.0 and
 CC BY 4.0 texts at its root. Initialized repositories receive copies under
 `.ugs/docs/`; the root `LICENSE` generated for the standard profiles remains

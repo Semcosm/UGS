@@ -11,7 +11,7 @@ Run these commands in the directory containing the downloaded archive and its
 checksum file. Replace the tag when using another release:
 
 ```bash
-tag=v0.3.31
+tag=v0.3.32
 sha256sum -c "ugs-bootstrap-${tag}.tar.gz.sha256"
 tar -xzf "ugs-bootstrap-${tag}.tar.gz"
 cd "ugs-bootstrap-${tag}"
@@ -143,9 +143,13 @@ high-trust profile when GitHub PR integration is required.
 
 ## 4. Read the local reference
 
-The release archive includes the applicable UGS guidance under `docs/git/`:
+The release archive includes the applicable UGS guidance under docs/git/.
 
-- `docs/git/ugs-bootstrap.md` — package behavior and profile selection
+Start with [docs/git/ugs-cli.md](docs/git/ugs-cli.md) for the complete command
+workflow and safety rules. The documents below provide the normative contracts
+and package details behind those commands.
+
+- docs/git/ugs-bootstrap.md — package behavior and profile selection
 - `docs/git/ugs-core.md` — Git-native governance primitives
 - `docs/git/ugs-v0.3-profile.md` — adopted policy and conformance profile
 - `docs/git/ugs-v0-4-contract.md` — vocabulary and compatibility rules

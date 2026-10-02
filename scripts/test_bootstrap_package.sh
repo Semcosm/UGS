@@ -116,6 +116,7 @@ for document in \
   docs/git/release-policy.md \
   docs/git/review-policy.md \
   docs/git/ugs-bootstrap.md \
+  docs/git/ugs-cli.md \
   docs/git/ugs-branch-profiles.md \
   docs/git/ugs-conformance-fixtures.md \
   docs/git/ugs-conformance-levels.md \

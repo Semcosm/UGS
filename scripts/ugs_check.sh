@@ -76,6 +76,7 @@ run_check() {
 run_check "policy manifest" scripts/validate_policy_manifest.sh
 run_check "policy manifest fixtures" scripts/test_policy_manifest.sh
 run_check "repository policy" scripts/validate_repo.sh
+run_check "CLI help fixtures" scripts/test_cli_help.sh
 run_check "Git evidence fixtures" scripts/test_git_fixtures.sh
 run_check "independent conformance fixtures" scripts/test_conformance.sh
 run_check "profile conformance" scripts/test_profile_conformance.sh

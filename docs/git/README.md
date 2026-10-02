@@ -2,7 +2,7 @@
 
 This directory contains the current UGS specifications and adopted profile
 contracts. The active repository policy is `policy_version: 0.3`, distributed
-in the stable `v0.3.31` release.
+in the stable `v0.3.32` release.
 
 ## Core and adopted v0.3 contracts
 
@@ -24,6 +24,7 @@ in the stable `v0.3.31` release.
 
 ## Tooling and compatibility
 
+- [CLI Usage](ugs-cli.md)
 - [Bootstrap Package](ugs-bootstrap.md)
 - [Conformance Fixtures](ugs-conformance-fixtures.md)
 - [Document Map](ugs-document-map.md)
