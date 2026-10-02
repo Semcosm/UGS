@@ -8,13 +8,13 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Consolidate UGS CLI usage and prepare v0.3.32
-Revision: 1
-Status: pending
-Decision: pending
+Revision: 2
+Status: integrated
+Decision: accepted
 Policy Version: v0.3
 Base OID: 1d3658ff363f4fbca15147bea62e63907418c471
 Head OID: f1ee93d2787043d06c2cbfe120e01da4fbcd9f8d
-Integrated Result: pending
+Integrated Result: main@f1ee93d
 Coverage OIDs: f1ee93d2787043d06c2cbfe120e01da4fbcd9f8d
 Extensions: {}
 
