@@ -1,0 +1,29 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "name": "ugs-bootstrap-v0.3.32",
+  "documentNamespace": "https://github.com/Semcosm/UGS/releases/v0.3.32",
+  "creationInfo": {
+    "created": "2026-10-02T05:51:37Z",
+    "creators": [
+      "Tool: UGS deterministic bootstrap builder",
+      "Organization: Semcosm"
+    ]
+  },
+  "documentComment": "ugs:sourceCommit=5e64de215dc6d61206763c7ff83d4b4c1a435124;ugs:release=v0.3.32;ugs:artifactDigest=sha256:f336e16ca0d92e491ea7e22c319def153d86461748b7fc88a96a026b595ce0d0",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package-UGS-Bootstrap",
+      "name": "ugs-bootstrap-v0.3.32",
+      "versionInfo": "v0.3.32",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f336e16ca0d92e491ea7e22c319def153d86461748b7fc88a96a026b595ce0d0"
+        }
+      ]
+    }
+  ]
+}\n
