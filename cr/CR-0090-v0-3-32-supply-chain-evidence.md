@@ -3,19 +3,19 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: build/supply-chain-v0-3-32 / 5e64de215dc6d61206763c7ff83d4b4c1a435124..5e64de215dc6d61206763c7ff83d4b4c1a435124
+Head or Range: build/supply-chain-v0-3-32 / 5e64de215dc6d61206763c7ff83d4b4c1a435124..494f10c275046959e7028c91e04ed86c98ce77b4
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Publish v0.3.32 supply-chain evidence
-Revision: 1
+Revision: 2
 Status: pending
 Decision: pending
 Policy Version: v0.3
 Base OID: 5e64de215dc6d61206763c7ff83d4b4c1a435124
-Head OID: 5e64de215dc6d61206763c7ff83d4b4c1a435124
+Head OID: 494f10c275046959e7028c91e04ed86c98ce77b4
 Integrated Result: pending
-Coverage OIDs: none
+Coverage OIDs: 6cd5c25b9e3555be8a3db815a3f0b40b29fbb72e, 494f10c275046959e7028c91e04ed86c98ce77b4
 Extensions: {}
 
 ## Summary
@@ -36,7 +36,7 @@ archive digest, then restores high-trust evidence paths on main.
 The signed annotated `v0.3.32` tag resolves to `5e64de215dc6d61206763c7ff83d4b4c1a435124`. Two independent
 `SOURCE_DATE_EPOCH=0` builds produced the identical published bootstrap archive
 digest `sha256:f336e16ca0d92e491ea7e22c319def153d86461748b7fc88a96a026b595ce0d0`.
-The evidence files will bind that tag, commit, and digest:
+The evidence files bind that tag, commit, and digest:
 
 - `.ugs/supply-chain/v0.3.32.spdx.json`
 - `.ugs/supply-chain/v0.3.32.build.json`
@@ -45,7 +45,7 @@ The evidence files will bind that tag, commit, and digest:
 The SBOM, build record, SSH attestation, high-trust policy declaration,
 repository validation, and explicit
 `scripts/validate_supply_chain_release.sh v0.3.32 .ugs/policy.json Semcosm/UGS`
-checks are required before integration. The attestation is signed by the
+checks pass on the evidence topic before integration. The attestation is signed by the
 trusted `chenzhipeng.main@gmail.com` signer in the `ugs-attestation` namespace.
 
 ## Risk
