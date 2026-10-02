@@ -14,7 +14,7 @@ Decision: accepted
 Policy Version: v0.3
 Base OID: 1d3658ff363f4fbca15147bea62e63907418c471
 Head OID: f1ee93d2787043d06c2cbfe120e01da4fbcd9f8d
-Integrated Result: main@f1ee93d
+Integrated Result: main@f1ee93d2787043d06c2cbfe120e01da4fbcd9f8d
 Coverage OIDs: f1ee93d2787043d06c2cbfe120e01da4fbcd9f8d
 Extensions: {}
 
