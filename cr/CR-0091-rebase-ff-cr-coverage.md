@@ -3,7 +3,7 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: fix/cr-rebase-coverage / c1b23935d2089ecfa00d8accf778b7b1a07ca8a6
+Head or Range: fix/cr-rebase-coverage / c1b23930bf5dd7c2b35d288fa0f284a8169c2f39
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
@@ -13,7 +13,7 @@ Status: pending
 Decision: pending
 Policy Version: v0.3
 Base OID: f4248044f320c7c49ad0089f751fcec43fbd3f92
-Head OID: c1b23935d2089ecfa00d8accf778b7b1a07ca8a6
+Head OID: c1b23930bf5dd7c2b35d288fa0f284a8169c2f39
 Integrated Result: pending
 Coverage OIDs: none
 Extensions: {}
