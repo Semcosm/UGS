@@ -64,6 +64,16 @@ a merge commit containing the source head; and a squash result is a distinct
 commit that does not contain the source head as an ancestor. Historical CRs
 without this field remain valid as grandfathered records.
 
+During the first post-integration main-range check, a `rebase-ff` CR may still
+have `Integrated Result: pending` when a hosting platform rewrites the source
+commits. The main-range validator may accept this case only when the recorded
+`Base OID` equals the previous main tip, the source `Head OID` descends from
+that base, and the source and resulting ranges have the same canonical tree
+diff after excluding persisted `cr/CR-*.md` metadata. The rewritten range must
+contain one CR record; unrelated records or content changes remain failures.
+This is provenance evidence for the first check and does not replace commit
+signature or review-trailer validation.
+
 The repository's declared review model and sensitive-path acknowledgment
 requirements apply to every v0.3 change. Final review and test conclusions
 should be represented by commit trailers when the integration path supports

@@ -35,6 +35,12 @@ When trailer review evidence is claimed, the final integration object must
 carry both the review and test conclusions; source-only trailers are
 insufficient after rewrite or squash.
 
+For a hosted `rebase-ff` integration, a main-range validator may recognize a
+rewritten commit series through the bounded provenance rule in the v0.3
+profile. The check compares the canonical non-CR tree diff, requires the
+previous main tip as the CR base, and accepts only a single pending CR record;
+it does not weaken signature, review, or protected-ref requirements.
+
 ## 3. Current repository declaration
 
 UGS declares `continuous`, `rebase-ff`, and `high-trust`. This combination is

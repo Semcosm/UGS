@@ -128,6 +128,15 @@ integration, or records `<target-ref>@<OID>`. The selected integration strategy
 describes the relationship between the source and final object under the
 existing rebase-fast-forward, merge, or squash rules.
 
+When a hosting platform rewrites a `rebase-ff` source series, the first main
+range check may use a bounded provenance comparison while the CR remains
+pending. The comparison requires the recorded base to equal the previous main
+tip and compares the canonical tree diff of the source and resulting ranges;
+persisted `cr/CR-*.md` metadata is excluded from that diff because the CR may
+be updated after the source Head OID is recorded. The check accepts only one
+CR record in the rewritten range and does not close the CR or replace final
+signature and trailer checks.
+
 The current review declaration remains compatible with v0.3. If `Review
 Evidence: trailers` is claimed, the final integrated object carries the
 required review and test trailers under the repository policy. The CR model
