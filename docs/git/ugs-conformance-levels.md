@@ -38,8 +38,11 @@ insufficient after rewrite or squash.
 For a hosted `rebase-ff` integration, a main-range validator may recognize a
 rewritten commit series through the bounded provenance rule in the v0.3
 profile. The check compares the canonical non-CR tree diff, requires the
-previous main tip as the CR base, and accepts only a single pending CR record;
-it does not weaken signature, review, or protected-ref requirements.
+previous main tip as the CR base, and accepts only a single pending CR record.
+A later metadata-only closure can bind the equivalent result, but it must
+advance the CR revision and point to a result already reachable from the
+previous main tip. These checks do not weaken signature, review, or
+protected-ref requirements.
 
 ## 3. Current repository declaration
 

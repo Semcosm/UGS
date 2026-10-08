@@ -82,8 +82,14 @@ else
   case "$strategy" in
     "") ;;
     rebase-ff)
-      [ "$result_oid" = "$head_oid" ] \
-        || fail "rebase-ff integrated result must equal Head OID"
+      if [ "$result_oid" != "$head_oid" ]; then
+        source_digest="$(git diff --no-ext-diff --no-textconv --binary --full-index --no-renames \
+          "$base_oid" "$head_oid" -- . ':(exclude)cr/CR-*.md' | sha256sum | awk '{print $1}')"
+        result_digest="$(git diff --no-ext-diff --no-textconv --binary --full-index --no-renames \
+          "$base_oid" "$result_oid" -- . ':(exclude)cr/CR-*.md' | sha256sum | awk '{print $1}')"
+        [ "$source_digest" = "$result_digest" ] \
+          || fail "Integrated Result must match Head OID or be patch-equivalent to Head OID for rebase-ff"
+      fi
       ;;
     merge)
       [ "$(git cat-file commit "$result_oid" | sed -n '/^$/q; /^parent /p' | wc -l)" -ge 2 ] \

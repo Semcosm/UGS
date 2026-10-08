@@ -140,7 +140,9 @@ rewritten_case() {
   git -C "$case_dir" switch -q -C main "$old_oid"
   printf '%s\n' "$result_text" > "$case_dir/change.txt"
   git -C "$case_dir" add change.txt
-  git -C "$case_dir" commit -qm "feat(fixture): hosted rebase copy"
+  git -C "$case_dir" commit -qm "feat(fixture): hosted rebase copy" \
+    -m "Reviewed-by: Fixture Reviewer <reviewer@example.invalid>" \
+    -m "Tested-by: scripts/test_main_cr_range.sh"
   mkdir -p "$case_dir/cr"
   cp "$case_dir/record.md" "$case_dir/cr/CR-0001-rewritten.md"
   git -C "$case_dir" add cr/CR-0001-rewritten.md
@@ -152,6 +154,41 @@ rewritten_success_case() {
   rewritten_case rewritten source source old rebase-ff
   output="$(expect_success "$old_oid" "$new_oid")"
   grep -Fq "rewritten rebase" <<<"$output" || fail "rewritten result was not reported"
+}
+
+rewritten_closure_case() {
+  rewritten_case rewritten-closure source source old rebase-ff
+  phase1_oid="$new_oid"
+  result_oid="$(git -C "$case_dir" rev-parse "$phase1_oid^1")"
+  sed -i \
+    -e 's/^Revision: 1$/Revision: 2/' \
+    -e 's/^Status: pending$/Status: integrated/' \
+    -e 's/^Decision: pending$/Decision: accepted/' \
+    -e "s/^Integrated Result: pending$/Integrated Result: main@$result_oid/" \
+    "$case_dir/cr/CR-0001-rewritten.md"
+  git -C "$case_dir" add cr/CR-0001-rewritten.md
+  git -C "$case_dir" commit -qm "docs(cr): close rewritten fixture"
+  closure_oid="$(git -C "$case_dir" rev-parse HEAD)"
+  output="$(expect_success "$phase1_oid" "$closure_oid")"
+  grep -Fq "rewritten closure" <<<"$output" || fail "rewritten closure was not reported"
+}
+
+rewritten_closure_code_change_case() {
+  rewritten_case rewritten-closure-change source source old rebase-ff
+  phase1_oid="$new_oid"
+  result_oid="$(git -C "$case_dir" rev-parse "$phase1_oid^1")"
+  sed -i \
+    -e 's/^Revision: 1$/Revision: 2/' \
+    -e 's/^Status: pending$/Status: integrated/' \
+    -e 's/^Decision: pending$/Decision: accepted/' \
+    -e "s/^Integrated Result: pending$/Integrated Result: main@$result_oid/" \
+    "$case_dir/cr/CR-0001-rewritten.md"
+  printf 'unexpected code change\n' > "$case_dir/extra.txt"
+  git -C "$case_dir" add cr/CR-0001-rewritten.md extra.txt
+  git -C "$case_dir" commit -qm "docs(cr): close rewritten fixture with code change"
+  closure_oid="$(git -C "$case_dir" rev-parse HEAD)"
+  output="$(expect_failure "$phase1_oid" "$closure_oid")"
+  grep -Fq "only CR metadata changes" <<<"$output" || fail "closure code change failure was not reported"
 }
 
 changed_patch_case() {
@@ -185,6 +222,8 @@ unrelated_cr_case() {
 
 literal_case
 rewritten_success_case
+rewritten_closure_case
+rewritten_closure_code_change_case
 changed_patch_case
 stale_base_case
 wrong_strategy_case

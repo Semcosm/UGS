@@ -19,6 +19,7 @@ tree_diff_digest() {
 }
 literal_count=0
 rewritten_count=0
+closure_count=0
 for record in "${records[@]}"; do
   record_file="$(mktemp)"
   model_file="$(mktemp)"
@@ -28,6 +29,9 @@ for record in "${records[@]}"; do
   "$repo_root/scripts/cr_model.py" --json "$record_file" > "$model_file"
   record_base="$(jq -r '.source.base_oid' "$model_file")"
   record_head="$(jq -r '.source.head_oid' "$model_file")"
+  record_status="$(jq -r '.status' "$model_file")"
+  record_revision="$(jq -r '.revision' "$model_file")"
+  record_target="$(jq -r '.integration.target_ref' "$model_file")"
   strategy="$(jq -r '.integration.strategy // empty' "$model_file")"
   result_oid="$(jq -r '.integration.result_oid // empty' "$model_file")"
 
@@ -35,6 +39,52 @@ for record in "${records[@]}"; do
     literal_count=$((literal_count + 1))
     rm -f "$record_file" "$model_file"
     trap - EXIT
+    continue
+  fi
+
+  if [ -n "$result_oid" ]; then
+    [ "$strategy" = "rebase-ff" ] \
+      || fail "$record closed rewritten rebase must use integration strategy rebase-ff"
+    [ "$record_target" = "main" ] \
+      || fail "$record closed rewritten rebase must target main"
+    [ "${#records[@]}" -eq 1 ] \
+      || fail "rewritten rebase closure contains unrelated persisted CR records"
+    git diff --quiet --no-ext-diff --no-textconv --binary --full-index --no-renames \
+      "$old_oid" "$new_oid" -- . ':(exclude)cr/CR-*.md' \
+      || fail "$record closure commit must contain only CR metadata changes"
+    git merge-base --is-ancestor "$result_oid" "$old_oid" \
+      || fail "$record closed rewritten result must be reachable before the closure commit"
+
+    previous_record_file="$(mktemp)"
+    previous_model_file="$(mktemp)"
+    if ! git show "$old_oid:$record" > "$previous_record_file"; then
+      rm -f "$previous_record_file" "$previous_model_file"
+      trap - EXIT
+      fail "$record closure has no previous pending CR record"
+    fi
+    "$repo_root/scripts/validate_cr_record.sh" "$previous_record_file" >/dev/null \
+      || fail "$record closure previous CR record is invalid"
+    "$repo_root/scripts/cr_model.py" --json "$previous_record_file" > "$previous_model_file"
+    previous_base="$(jq -r '.source.base_oid' "$previous_model_file")"
+    previous_head="$(jq -r '.source.head_oid' "$previous_model_file")"
+    previous_status="$(jq -r '.status' "$previous_model_file")"
+    previous_result="$(jq -r '.integration.result_oid // empty' "$previous_model_file")"
+    previous_revision="$(jq -r '.revision' "$previous_model_file")"
+    [ "$previous_base" = "$record_base" ] \
+      || fail "$record closure changed Base OID"
+    [ "$previous_head" = "$record_head" ] \
+      || fail "$record closure changed Head OID"
+    [ "$previous_status" = "pending" ] || [ "$previous_status" = "accepted" ] \
+      || fail "$record closure previous CR must be pending or accepted"
+    [ -z "$previous_result" ] \
+      || fail "$record closure previous CR already has an integrated result"
+    [ "$record_status" = "integrated" ] \
+      || fail "$record closure must set Status: integrated"
+    [ "$record_revision" -gt "$previous_revision" ] \
+      || fail "$record closure must advance CR Revision"
+    rm -f "$previous_record_file" "$previous_model_file"
+    trap - EXIT
+    closure_count=$((closure_count + 1))
     continue
   fi
 
@@ -57,4 +107,4 @@ for record in "${records[@]}"; do
   rm -f "$record_file" "$model_file"
   trap - EXIT
 done
-echo "main CR range validation passed (${#records[@]} record(s); $literal_count literal fast-forward, $rewritten_count rewritten rebase)"
+echo "main CR range validation passed (${#records[@]} record(s); $literal_count literal fast-forward, $rewritten_count rewritten rebase, $closure_count rewritten closure)"

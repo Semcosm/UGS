@@ -55,14 +55,17 @@ mutable hosting-platform state.
 When `Integrated Result` is present, its `main@<commit OID>` **MUST** identify
 an existing commit reachable from `main`, and that commit **MUST** descend from
 the CR's `Base OID`. The CR's `Head OID` need not be an ancestor of the
-integrated result: squash and merge integrations may create a different result
-object. Rebase-fast-forward integrations normally use the head object itself.
+integrated result: hosted rebase, squash, and merge integrations may create a
+different result object. A hosted rebase result must retain the same canonical
+non-CR tree diff from the CR's `Base OID`.
 
 New v0.3 CRs **MUST** declare `Integration Strategy` as `rebase-ff`, `merge`,
-or `squash`. A rebase-fast-forward result equals `Head OID`; a merge result is
-a merge commit containing the source head; and a squash result is a distinct
-commit that does not contain the source head as an ancestor. Historical CRs
-without this field remain valid as grandfathered records.
+or `squash`. A literal rebase-fast-forward result equals `Head OID`; a hosted
+rebase result may use a different commit when its canonical non-CR tree diff
+from `Base OID` exactly matches the reviewed `Base OID..Head OID` range. A merge
+result is a merge commit containing the source head; and a squash result is a
+distinct commit that does not contain the source head as an ancestor.
+Historical CRs without this field remain valid as grandfathered records.
 
 During the first post-integration main-range check, a `rebase-ff` CR may still
 have `Integrated Result: pending` when a hosting platform rewrites the source
@@ -70,9 +73,12 @@ commits. The main-range validator may accept this case only when the recorded
 `Base OID` equals the previous main tip, the source `Head OID` descends from
 that base, and the source and resulting ranges have the same canonical tree
 diff after excluding persisted `cr/CR-*.md` metadata. The rewritten range must
-contain one CR record; unrelated records or content changes remain failures.
-This is provenance evidence for the first check and does not replace commit
-signature or review-trailer validation.
+contain one pending CR record; unrelated records or content changes remain
+failures. A subsequent closure commit may contain only metadata changes to that
+CR, advance its revision, set `Status: integrated`, and name the rewritten
+result. The named result must already be reachable from the previous main tip.
+This is provenance evidence and does not replace commit signature or
+review-trailer validation.
 
 The repository's declared review model and sensitive-path acknowledgment
 requirements apply to every v0.3 change. Final review and test conclusions

@@ -124,18 +124,23 @@ The v1 projection contains these Core groups:
 `Integration Target` names the target ref. The canonical UGS template and this
 repository use `main`. `Base OID` and `Head OID` are full lowercase
 40-character Git object IDs. `Integrated Result` remains `pending` until
-integration, or records `<target-ref>@<OID>`. The selected integration strategy
-describes the relationship between the source and final object under the
-existing rebase-fast-forward, merge, or squash rules.
+integration, or records `<target-ref>@<OID>`. For `rebase-ff`, the result
+normally equals `Head OID`; a hosted rebase may record a different result only
+when its non-CR tree diff from `Base OID` is exactly equivalent to the reviewed
+source range. The selected integration strategy describes the relationship
+between the source and final object under the existing rebase-fast-forward,
+merge, or squash rules.
 
 When a hosting platform rewrites a `rebase-ff` source series, the first main
 range check may use a bounded provenance comparison while the CR remains
 pending. The comparison requires the recorded base to equal the previous main
 tip and compares the canonical tree diff of the source and resulting ranges;
 persisted `cr/CR-*.md` metadata is excluded from that diff because the CR may
-be updated after the source Head OID is recorded. The check accepts only one
-CR record in the rewritten range and does not close the CR or replace final
-signature and trailer checks.
+be updated after the source Head OID is recorded. The first rewritten range
+must contain one pending CR record. A later closure commit may update only that
+record, set a higher `Revision`, set `Status: integrated`, and bind the result
+to a commit already reachable from the previous main tip. The closure check
+does not replace final signature and trailer checks.
 
 The current review declaration remains compatible with v0.3. If `Review
 Evidence: trailers` is claimed, the final integrated object carries the
