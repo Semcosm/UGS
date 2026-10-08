@@ -8,13 +8,13 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Prepare the v0.3.33 hosted rebase provenance release
-Revision: 3
-Status: accepted
+Revision: 4
+Status: integrated
 Decision: accepted
 Policy Version: v0.3
 Base OID: f4248044f320c7c49ad0089f751fcec43fbd3f92
 Head OID: 753ee0bae2856c8a3f6da5480b7f835621e3c5ad
-Integrated Result: pending
+Integrated Result: main@753ee0bae2856c8a3f6da5480b7f835621e3c5ad
 Coverage OIDs: none
 Extensions: {}
 
