@@ -3,19 +3,19 @@
 Format: ugs-cr/v1
 Schema Version: 1
 Base: main
-Head or Range: build/supply-chain-v0-3-33 / 06e334d019d498f5d9f6423233d1aaf9ab169387..06e334d019d498f5d9f6423233d1aaf9ab169387
+Head or Range: build/supply-chain-v0-3-33 / 06e334d019d498f5d9f6423233d1aaf9ab169387..5a15f33b155f240e1f23a5d8cdf20c2c9da2ca1a
 Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Publish v0.3.33 supply-chain evidence
-Revision: 1
+Revision: 2
 Status: pending
 Decision: pending
 Policy Version: v0.3
 Base OID: 06e334d019d498f5d9f6423233d1aaf9ab169387
-Head OID: 06e334d019d498f5d9f6423233d1aaf9ab169387
+Head OID: 5a15f33b155f240e1f23a5d8cdf20c2c9da2ca1a
 Integrated Result: pending
-Coverage OIDs: none
+Coverage OIDs: 5a15f33b155f240e1f23a5d8cdf20c2c9da2ca1a
 Extensions: {}
 
 ## Summary
