@@ -13,7 +13,7 @@
         {"title": "UGS Current Standard", "title_zh": "UGS 当前标准入口", "path": "docs/git/README.md"},
         {"title": "UGS Core", "title_zh": "UGS 核心", "path": "docs/git/ugs-core.md"},
         {"title": "UGS v0.3 Policy And Conformance Profile", "title_zh": "UGS v0.3 政策与合规性配置文件", "path": "docs/git/ugs-v0.3-profile.md"},
-        {"title": "UGS v0.3.32 Release Packet", "title_zh": "UGS v0.3.32 发布包", "path": "releases/v0.3.32.md"},
+        {"title": "UGS v0.3.33 Release Packet", "title_zh": "UGS v0.3.33 发布包", "path": "releases/v0.3.33.md"},
         {"title": "UGS CLI Usage", "title_zh": "UGS 命令行用法", "path": "docs/git/ugs-cli.md"},
         {"title": "UGS Bootstrap Package", "title_zh": "UGS Bootstrap 包", "path": "docs/git/ugs-bootstrap.md"}
       ]

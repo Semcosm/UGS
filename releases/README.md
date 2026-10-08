@@ -1,19 +1,21 @@
 # UGS Release Archive
 
 This directory is the immutable release-packet archive. The active policy is
-`policy_version: 0.3`; the latest stable distribution is [v0.3.31](v0.3.31.md).
+`policy_version: 0.3`; the latest stable distribution is [v0.3.33](v0.3.33.md).
 Release tags and packet files are append-only. A later packet may supersede a
 release, but it does not rewrite or delete its history.
 
 ## Current release
 
-- [v0.3.31](v0.3.31.md) — safe branch closure, bootstrap distribution, and
-  signed supply-chain evidence.
+- [v0.3.33](v0.3.33.md) — hosted rebase CR provenance and metadata-only
+  closure validation.
 
 ## Release lines
 
 ### v0.3
 
+- [v0.3.32](v0.3.32.md)
+- [v0.3.31](v0.3.31.md)
 - [v0.3.30](v0.3.30.md)
 - [v0.3.29](v0.3.29.md)
 - [v0.3.28](v0.3.28.md)

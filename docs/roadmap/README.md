@@ -8,7 +8,7 @@ change request and the evidence required by the current release policy.
 ## Current state
 
 - Active policy: `policy_version: 0.3`
-- Latest stable distribution: `v0.3.31`
+- Latest stable distribution: `v0.3.33`
 - Next decision boundary: whether the v0.4 compatibility work is ready for a
   policy-version change, a distribution-only release, or both.
 

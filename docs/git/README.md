@@ -2,7 +2,7 @@
 
 This directory contains the current UGS specifications and adopted profile
 contracts. The active repository policy is `policy_version: 0.3`, distributed
-in the stable `v0.3.32` release.
+in the stable `v0.3.33` release.
 
 ## Core and adopted v0.3 contracts
 

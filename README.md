@@ -20,7 +20,7 @@ primitives:
   - [UGS Current Standard（UGS 当前标准入口）](docs/git/README.md)
   - [UGS Core（UGS 核心）](docs/git/ugs-core.md)
   - [UGS v0.3 Policy And Conformance Profile（UGS v0.3 政策与合规性配置文件）](docs/git/ugs-v0.3-profile.md)
-  - [UGS v0.3.32 Release Packet（UGS v0.3.32 发布包）](releases/v0.3.32.md)
+  - [UGS v0.3.33 Release Packet（UGS v0.3.33 发布包）](releases/v0.3.33.md)
   - [UGS CLI Usage（UGS 命令行用法）](docs/git/ugs-cli.md)
   - [UGS Bootstrap Package（UGS Bootstrap 包）](docs/git/ugs-bootstrap.md)
 - **Repository governance（仓库治理）**
@@ -46,7 +46,7 @@ primitives:
 - **v0.3:** active policy and conformance profile. Pre-1.0 releases do not
   promise compatibility with v0.2 schemas, commands, reports, or validator
   behavior; each change must document migration and rollback impact.
-- **Latest stable distribution:** v0.3.32. Its signed release packet,
+- **Latest stable distribution:** v0.3.33. Its signed release packet,
   bootstrap asset, and post-tag supply-chain evidence are indexed from the
   [release archive](releases/README.md).
 - **Future planning:** all proposed work and release-boundary decisions now
