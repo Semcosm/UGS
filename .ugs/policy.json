@@ -90,13 +90,13 @@
     "release_attestations": "signed",
     "evidence": {
       "sbom_paths": [
-        ".ugs/supply-chain/v0.3.32.spdx.json"
+        ".ugs/supply-chain/v0.3.33.spdx.json"
       ],
       "build_record_paths": [
-        ".ugs/supply-chain/v0.3.32.build.json"
+        ".ugs/supply-chain/v0.3.33.build.json"
       ],
       "attestation_paths": [
-        ".ugs/supply-chain/v0.3.32.attestation.json"
+        ".ugs/supply-chain/v0.3.33.attestation.json"
       ]
     }
   },
