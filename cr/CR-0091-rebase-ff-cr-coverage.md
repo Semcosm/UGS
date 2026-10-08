@@ -8,13 +8,13 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Accept patch-equivalent hosted rebase integrations
-Revision: 4
-Status: integrated
+Revision: 5
+Status: accepted
 Decision: accepted
 Policy Version: v0.3
 Base OID: f4248044f320c7c49ad0089f751fcec43fbd3f92
 Head OID: 51c884cfe11e09484c1769085e3fd2d2f38a6c22
-Integrated Result: main@ff1def1547804df0475a78b02285e68577c4961f
+Integrated Result: pending
 Coverage OIDs: c1b23930bf5dd7c2b35d288fa0f284a8169c2f39
 Extensions: {}
 
