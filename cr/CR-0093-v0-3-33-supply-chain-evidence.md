@@ -8,13 +8,13 @@ Integration Target: main
 Integration Strategy: rebase-ff
 Review Evidence: trailers
 Title: Publish v0.3.33 supply-chain evidence
-Revision: 2
-Status: pending
-Decision: pending
+Revision: 3
+Status: integrated
+Decision: accepted
 Policy Version: v0.3
 Base OID: 06e334d019d498f5d9f6423233d1aaf9ab169387
 Head OID: 5a15f33b155f240e1f23a5d8cdf20c2c9da2ca1a
-Integrated Result: pending
+Integrated Result: main@d67ba3507332141fc828a433beb8abd73fed0d7c
 Coverage OIDs: 5a15f33b155f240e1f23a5d8cdf20c2c9da2ca1a
 Extensions: {}
 
